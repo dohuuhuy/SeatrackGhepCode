@@ -2282,6 +2282,7 @@
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -2315,9 +2316,7 @@
     <Content Include="Areas\Admin\Views\Agency\Device.cshtml" />
     <Content Include="Areas\Admin\Views\Agency\DeviceDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Agency\User.cshtml" />
-    <Content Include="Areas\Admin\Views\Device\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Device\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Device\Show.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Customer.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
