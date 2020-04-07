@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "ThongTinTaiKhoan";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+    <div id="list-admin" class="main">
+        <div class="wrapper">
+            <div id="sidebar4" class=" si-sidebar s-sidebar">
+                <div class="sidebar-header s-flexible s-just-center">
+                    <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
+                </div>
+                <hr>
+            </div>
+            <div class="content">
+                <div id="signupbox" class="mainbox">
+                    <div class="panel panel-primary">
+                        <div class="jumbotron ">
+                            <h2>THÔNG TIN NGƯỜI DÙNG</h2>
+                        </div>
+                        <div class="panel-body container">
+                            <div class="col-sm-3">
+                                <div class="text-center">
+                                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                                    <h6>Chọn hình...</h6>
+                                    <input type="file" class="text-center center-block file-upload" placeholder="abc">
+                                </div></hr><br>
+                            </div>
+                            <div class="col-sm-9">
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li class="active"><a class="nav-link active" data-toggle="pill" href="#change_info">Thông tin tài khoản</a></li>
+                                    <li><a class="nav-link" data-toggle="pill" href="#change_password">Thay đổi mật khẩu</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="change_info">
+                                        <form class="form" action="##" method="post" id="registrationForm">
+                                            <div class="col-xs-6">
+                                                <label for="tb_name">Họ và tên</label>
+                                                <div class="form-group row ">
+                                                    <input type="text" class="form-control" id="tb_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="tb_address">Địa chỉ</label>
+                                                <div class="form-group row ">
+                                                    <input type="text" class="form-control" id="tb_address">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="tb_email">Email</label>
+                                                <div class="form-group row ">
+                                                    <input type="text" class="form-control" id="tb_email">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="tb_phone">Số điện thoại</label>
+                                                <div class="form-group row ">
+                                                    <input type="text" class="form-control" id="tb_phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="form-group row ">
+                                                    <button id="show_admin_reload" class="btn pull-right m-l-5" type="button">
+                                                        <i class="glyphicon glyphicon-repeat"></i>
+                                                        Tải lại trang
+                                                    </button>
+                                                    <button class="btn btn-success pull-right" type="button" onclick="Update_info();">
+                                                        <i class="glyphicon glyphicon-ok-sign"></i>
+                                                        Lưu
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <hr>
+                                    </div>
+                                    <div class="tab-pane" id="change_password">
+                                        <form class="form" action="##" method="post" id="change_password">
+                                            <div class="col-xs-12">
+                                                <div class="form-group row ">
+                                                    <label for="pw_old">Mật khẩu cũ</label>
+                                                    <input type="password" class="form-control" id="pw_old">
+                                                    @*<span toggle="#pw_old" class="fa fa-fw fa-2x fa-eye field-icon toggle-password"></span>*@
+                                                </div>
+                                                <div class="form-group row  m-t-5">
+                                                    <label for="pw_new">Mật khẩu mới</label>
+                                                    <input type="password" class="form-control" id="pw_new" required>
+                                                    @*<span toggle="#pw_new" class="fa fa-fw fa-2x fa-eye field-icon toggle-password"></span>*@
+                                                </div>
+                                                <div class="form-group row  m-t-5">
+                                                    <label for="pw_confirm">Nhập lại mật khẩu mới</label>
+                                                    <input type="password" class="form-control" id="pw_confirm" required>
+                                                    @*<span toggle="#pw_confirm" class="fa fa-fw fa-2x fa-eye field-icon toggle-password"></span>*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group row ">
+                                                <div class="col-xs-12">
+                                                    <br>
+                                                    <button class="btn btn-success pull-right" type="button" onclick="UpdatePassword();"><i class="glyphicon glyphicon-ok-sign"></i>Lưu</button>
+                                                    <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

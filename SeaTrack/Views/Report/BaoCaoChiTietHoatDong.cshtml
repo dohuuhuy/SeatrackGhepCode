@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoChiTietHoatDong";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<div class="main" id="list_business">
+    <div class="wrapper">
+        @Html.Partial("_MenuBaoCaoChoDoanhNghiep");
+
+        <div id="content-dn-chitiet" class="content">
+            <div id="signupbox" class="mainbox">
+                <div class="panel panel-primary">
+                    <div class="jumbotron ">
+                        <h2>BÁO CÁO CHI TIẾT HOẠT ĐỘNG</h2>
+                    </div>
+                    <div class="panel-body container">
+                        <form method="post" action=".">
+                            <div id="" class="form-group row  required">
+                                <div class="col-md-3 clearfix text-right">
+                                    <label for="id_password1" class="control-label  requiredField">Chọn ngày</label>
+                                </div>
+                                <div class="controls col-md-7 clearfix">
+                                    <div class="input-group date m-b-5">
+                                        <input id="datefilter" class="form-control" type="text" name="datefilter" value="" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row ">
+                                <div class="col-md-3 clearfix text-right">
+                                    <label class="control-label "> Số hiệu <span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-md-5 clearfix">
+                                    <select id="listDeviceNo" class="form-control select2 fl" style="width:100%"></select>
+                                </div>
+                                <div class="col-md-4 clearfix">
+                                    <input type="button" name="Signup" value="Xem" class="btn btn-primary btn" style="width:135px;" onclick="Report_BGT_TocDoXeChay();" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="p-10">
+                        <table id="table_dn_chitiet" class="table  table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="headerAlignCenter">Thời gian bắt đầu</th>
+                                    <th class="headerAlignCenter">Thời gian kết thúc</th>
+                                    <th class="headerAlignCenter">Phạm vi hoạt động</th>
+                                    <th class="headerAlignCenter">Tốc độ tối đa</th>
+                                    <th class="headerAlignCenter">Địa điểm bắt đầu</th>
+                                    <th class="headerAlignCenter">Địa điểm kết thúc</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_dn_chitiet"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
