@@ -200,6 +200,16 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
+
+        public static bool UpdateAvatar(int UserID, string Image)
+        {
+            int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "UpdateAvatar", UserID, Image);
+            if (res == 0)
+            {
+                return false;
+            }
+            return true;
+        }
         #region
         public static int CreateDevice(Device device)
         {

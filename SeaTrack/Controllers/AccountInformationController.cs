@@ -3,6 +3,7 @@ using SeaTrack.Lib.DTO.Admin;
 using SeaTrack.Lib.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -49,8 +50,19 @@ namespace SeaTrack.Controllers
             }
             return RedirectToAction("Login", "Home", new { area = "" });
         }
-
-        public ActionResult Upload()
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                Users user = (Users)Session["User"];
+                var filename = user.Username + ".jpg";
+                var path = Path.Combine(Server.MapPath("~/Content/images/UserAvatar"), filename);
+                file.SaveAs(path);
+                AdminService.UpdateAvatar(user.UserID, filename);
+            }
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ExpiredDevice()
         {
             if (Session["User"] == null)

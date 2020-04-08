@@ -132,10 +132,12 @@
                     </div>
                     <hr>
                     <div class="card-text text-sm-center">
-                        <input type="file" class="btn btn-light" />
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="fa fa-dot-circle-o"></i> Lưu
-                        </button>
+                        <form action="Upload" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="file" class="btn btn-light" />
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Lưu
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
