@@ -25,16 +25,16 @@
                 </div>
                 <br />
                 @*<div class="input-group ">
-                    <label for="radio1" class="form-check-label col-md-4 ">
-                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
-                    </label>
-                    <label for="radio2" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
-                    </label>
-                    <label for="radio3" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
-                    </label>
-                </div>*@
+                        <label for="radio1" class="form-check-label col-md-4 ">
+                            <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                        </label>
+                        <label for="radio2" class="form-check-label col-md-4  ">
+                            <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                        </label>
+                        <label for="radio3" class="form-check-label col-md-4  ">
+                            <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
+                        </label>
+                    </div>*@
             </div>
         </div>
     </div>
@@ -86,9 +86,6 @@
                 <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
                     <div class="text-center">
                         <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
-                        @*<div class="range-label">Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}</div>
-                        <a href="" title="Previous page" ng-class="{ disabled : pagination.current == 1 }" ng-click="setCurrent(pagination.current - 1)">&lsaquo;</a>
-                        <a href="" title="Next page" ng-class="{ disabled : pagination.current == pagination.last }" ng-click="setCurrent(pagination.current + 1)">&rsaquo;</a>*@
                     </div>
                 </div>
             </div>
@@ -248,8 +245,8 @@
                                         <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,6)">Gia hạn 6 tháng</button>
                                     </div>
                                     @*<div class="form-group col-md-6">
-                            <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,12)">Gia hạn 12 tháng</button>
-                        </div>*@
+                                            <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,12)">Gia hạn 12 tháng</button>
+                                        </div>*@
 
                                 </div>
 
@@ -267,6 +264,7 @@
 </div>
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Areas/Admin/AngularJS/Device/DeviceApp.js"></script>
+<script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
 <script>
     var today = new Date();
     var dd = today.getDate();

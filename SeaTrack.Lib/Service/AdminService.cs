@@ -13,7 +13,8 @@ namespace SeaTrack.Lib.Service
         public static int CreateUser(UserInfoDTO user, int RoleID)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CreateUser",
-                 user.Username.Trim(), user.Password, user.Fullname.Trim(), user.Phone, user.Address.Trim(), user.CreateBy, user.CreateDate, RoleID, user.ManageBy, user.Status);
+                 user.Username.Trim(), user.Password, user.Fullname.Trim(), user.Phone,
+                 user.Address.Trim(), user.CreateBy, user.CreateDate, RoleID, user.ManageBy, user.Status);
         }
         public static int UpdateUser(UserInfoDTO user)
         {

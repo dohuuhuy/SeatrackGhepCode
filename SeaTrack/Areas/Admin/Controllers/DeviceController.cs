@@ -26,21 +26,7 @@ namespace SeaTrack.Areas.Admin.Controllers
 
             return View();
         }
-        //public ActionResult Detail(int id)
-        //{
-        //    if (CheckRole(1) == -1)
-        //    {
-        //        if (CheckRole(1) == 0)
-        //        {
-        //            return RedirectToAction("Login", "Home", new { area = "" });
-        //        }
-        //        return RedirectToAction("ErrorView", "Home", new { area = "" });
-        //    }
-
-        //    var device = AdminService.GetDeviceByID(id);
-        //    return View(device);
-        //}
-
+     
         [HttpPost]
         public ActionResult Update(DeviceViewModel device)
         {
