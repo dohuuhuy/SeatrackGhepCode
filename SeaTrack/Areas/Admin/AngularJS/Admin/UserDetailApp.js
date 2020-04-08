@@ -10,7 +10,7 @@ app.controller("Controller", function ($scope, $http) {
     }
     $scope.AddDevice = function (Username, id) {
         if($scope.role == 2){
-        GetListDeviceNotUsedByUser(); //lấy danh sách thiết bị chưa được sử dụng
+        GetListDeviceNotUsedByUser(""); //lấy danh sách thiết bị chưa được sử dụng
         }
         if($scope.role == 3){
         GetListDeviceNotUsedByUser(Username);//Lấy danh sách thiết bị của đại lý chưa được sử dụng
