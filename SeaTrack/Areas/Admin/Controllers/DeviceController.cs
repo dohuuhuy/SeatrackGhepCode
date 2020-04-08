@@ -170,8 +170,17 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
+            List<DeviceViewModel> data = new List<DeviceViewModel>();
+            if (Username != "")
+            {
+                data = AdminService.GetListDeviceNotUsedByUser(Username);
 
-            var data = AdminService.GetListDeviceNotUsedByUser(Username);
+            }
+            else
+            {
+                data = AdminService.GetListDeviceNotUsedByUser(null);
+
+            }
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

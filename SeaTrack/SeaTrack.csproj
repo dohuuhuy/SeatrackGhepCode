@@ -273,7 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\AngularJS\Admin\AdminController.js" />
-    <Content Include="Areas\Admin\AngularJS\Admin\AdminFilter.js" />
     <Content Include="Areas\Admin\AngularJS\Admin\AdminModule.js" />
     <Content Include="Areas\Admin\AngularJS\Admin\AdminService.js" />
     <Content Include="Areas\Admin\AngularJS\Admin\UserDetailApp.js" />
