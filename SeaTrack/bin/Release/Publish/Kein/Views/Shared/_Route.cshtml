@@ -17,18 +17,8 @@
     <script src="~/Content/public/js/Datetimepicker/bootstrap-datetimepicker.js"></script>
     <script src="~/Content/public/js/Datetimepicker/bootstrap-datetimepicker.fr.js"></script>
     <link href="~/Lib/css/_Route.css" rel="stylesheet" />
-    <!-- <link href="~/Content/public/css/rate.css" rel="stylesheet" /> -->
-    <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous" async></script>
-    <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous" async></script>
-
-
-
-    <!-- <script src="/Content/public/js/Gmap/v3_epoly.js"></script> -->
-    <!-- <script src="/Content/public/js/markerwithlabel.js"></script> -->
-    <!-- <script src="/Content/public/js/Gmap/markerclusterer.js"></script> -->
-    <!-- <script src="/Content/public/js/Gmap/markerclusterer_compiled.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
-
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous" async=""></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous" async=""></script>
 </head>
 <body id="body" class="class_body_t">
     <div class="body-content">
@@ -101,14 +91,13 @@
                             </div>
                         </div>
                         <div class="dropdown s-div-btn">
-                            <button type="button" class="btn btn-outline-success">
+                            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
                                 <i class="fas fa-user"></i>
                                 Tài khoản
                             </button>
-                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
                             <div class="dropdown-menu">
                                 <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item" @*href="~/AccountInformation/ExpiredDevice"*@>Dịch vụ hết hạn</a>
+                                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
                             </div>
                         </div>
                         <button onclick="ActionMenu(1);" type="button" class="btn btn-outline-dark" title="Đăng xuất">
@@ -171,6 +160,8 @@
             </div>
         </div>
     </div>
+
+    @Html.Partial("../_Waiting");
     <style>
         html {
             font-family: sans-serif;
@@ -201,31 +192,23 @@
 
 
 
-
+    @*css của ngày và của giao diện*@
     <script src="/Content/public/js/moment.min.js"></script>
     <script src="/Content/public/js/daterangepicker.min.js"></script>
-
-    <!-- <script src="/Content/public/js/jquery.dataTables.min.js"></script> -->
+    @*load map online*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <!-- <script src="/Content/public/js/dataTables.bootstrap.min.js"></script> -->
-    <!-- <script src="/Content/public/js/lightgallery.min.js"></script> -->
-    <!-- <script src="/Content/public/js/jquery.mousewheel.min.js"></script> -->
-    <!-- <script src="/Content/public/js/lg-thumbnail.min.js"></script> -->
-    <!-- <script src="/Content/public/js/lg-fullscreen.min.js"></script> -->
-    <!-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script> -->
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1P2dXHGBESLKUTuDqyeEi6MEKkOFtlec&libraries=places,geometry,drawing&callback=initMap" type="text/javascript" async defer></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1P2dXHGBESLKUTuDqyeEi6MEKkOFtlec&libraries=places,geometry,drawing" type="text/javascript"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1P2dXHGBESLKUTuDqyeEi6MEKkOFtlec&callback=initMap" type="text/javascript" async defer></script> -->
+    @*giao diện map*@
     <script src="/Content/public/js/Gmap/v3_epoly.js"></script>
     <script src="/Content/public/js/markerwithlabel.js"></script>
     <script src="/Content/public/js/Gmap/markerclusterer.js"></script>
     <script src="/Content/public/js/Gmap/markerclusterer_compiled.js"></script>
-
-
+    @*giao diện route và các chức năng của route*@
     <script src="~/Lib/js/_Route/controllerRoute.js"></script>
     <script src="~/Lib/js/_Route/defaultRoute.js"></script>
     <script src="~/Lib/js/_Route/globalRoute.js"></script>
+
+
 </body>
 </html>

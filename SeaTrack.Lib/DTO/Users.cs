@@ -20,7 +20,7 @@ namespace SeaTrack.Lib.DTO
         public string UpdateBy { get; set; }
         public DateTime LastUpdateDate { get; set; }
         public int RoleID { get; set; }
-
+        public string ManageBy { get; set; }
 
 
     }

@@ -1,4 +1,4 @@
-﻿var app = angular.module("App", []);
+﻿var app = angular.module("App", ['angularUtils.directives.dirPagination']);
 
 app.controller("Controller", function ($scope, $http) {
     $scope.UserID = function (id, role, managey) {

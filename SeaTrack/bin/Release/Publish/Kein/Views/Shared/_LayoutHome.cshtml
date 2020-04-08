@@ -13,15 +13,12 @@
     <link href="~/Content/public/css/daterangepicker.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script src="~/Content/public/js/Datetimepicker/bootstrap-datetimepicker.js"></script>
     <script src="~/Content/public/js/Datetimepicker/bootstrap-datetimepicker.fr.js"></script>
     <link href="~/Content/public/css/style-s.css" rel="stylesheet" />
     <link href="~/Content/public/css/rate.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous" async></script>
     <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous" async></script>
-
-
 
 
 </head>
@@ -92,18 +89,17 @@
                                 Hướng dẫn
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" @*href="~/UserGuide"*@ data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
                             </div>
                         </div>
                         <div class="dropdown s-div-btn">
-                            <button type="button" class="btn btn-outline-success">
+                            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
                                 <i class="fas fa-user"></i>
                                 Tài khoản
                             </button>
-                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
                             <div class="dropdown-menu">
                                 <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item" @*href="~/AccountInformation/ExpiredDevice"*@>Dịch vụ hết hạn</a>
+                                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
                             </div>
                         </div>
                         <button onclick="ActionMenu(1);" type="button" class="btn btn-outline-dark" title="Đăng xuất">
@@ -166,6 +162,7 @@
             </div>
         </div>
     </div>
+    @Html.Partial("../_Waiting");
     <style>
         html {
             font-family: sans-serif;
@@ -194,8 +191,10 @@
         }
     </style>
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/Content/public/js/moment.min.js"></script>
     <script src="/Content/public/js/daterangepicker.min.js"></script>
+    s
     <script src="~/Content/public/js/main/controller.js"></script>
     <script src="~/Content/public/js/main/default.js"></script>
     <script src="~/Content/public/js/main/global.js"></script>

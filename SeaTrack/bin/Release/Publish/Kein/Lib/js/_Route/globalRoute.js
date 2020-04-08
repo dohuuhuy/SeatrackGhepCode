@@ -3,7 +3,7 @@ $(document).ready(function () {
 	setupMap(_def_Lat, _def_Lng, _def_zoom);
 	setup_DataTable();
 	setup_selectDataLine();
-	
+
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
@@ -31,7 +31,7 @@ $(document).ready(function () {
 	$('#s-info-button').on('click', function () {
 		$('#popUpBox_theMeaningOfIcon').toggleClass('d-none');
 	});
-	$("#closeMeaningOfIcon").on('click',function(){
+	$("#closeMeaningOfIcon").on('click', function () {
 		$('#s-info-button').trigger('click');
 	})
 	$('#sublefttab_1').mouseenter(function () {
@@ -57,7 +57,7 @@ $(document).ready(function () {
 		$(this).val('');
 	});
 	$('.form_datetime').datetimepicker({
-		language:  'vi',
+		language: 'vi',
 		weekStart: 1,
 		todayBtn: 1,
 		autoclose: 1,
