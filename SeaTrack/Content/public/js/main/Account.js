@@ -72,14 +72,14 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     $scope.update = function () {
         //nếu không trường nào bị null
         console.log('i am inside update funcr ' +
-            JSON.stringify($scope.Customer));
+            JSON.stringify($scope.Account));
         $http({
             method: 'POST',
-            url: '/Admin/Device/EditDevice',
-            data: JSON.stringify($scope.Device)
+            url: '/Management/EditUsers',
+            data: JSON.stringify($scope.Account)
         }).then(function successCallback(response) {
             $scope.namesData = null;
-            DeviceService.GetAllRecords().then(function (d) {
+            AccountService.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
                 alert('Unable to Get Data !!!');
@@ -94,18 +94,17 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     };
     $scope.Edit = function (data) {
         console.log('i am inside edit() ' + JSON.stringify($scope.Device));
-        $scope.Device = {
-            DeviceID: data.DeviceID,
-            DeviceNo: data.DeviceNo,
-            DeviceName: data.DeviceName,
-            DeviceImei: data.DeviceImei,
-            DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
-            DateExpired: data.DateExpired,
-            DeviceNote: data.DeviceNote,
-            ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
-
-
+        $scope.Account = {
+            UserID: data.UserID,
+            Username: data.Username,
+            Password: data.Password,
+            FullName: data.FullName,
+            Phone: data.Phone,
+            Address: data.Address,
+            ManageBy: data.ManageBy,
+            CreateBy: data.CreateBy,
+            Status: data.Status,
+            Image: data.Image
         };
     };
     $scope.Clear = function () {
@@ -125,25 +124,25 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         console.log('i am inside cancel func' + JSON.stringify($scope.Account));
     };
 
-    $scope.Delete = function (index) {
+    $scope.Lock = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Account));
+        console.log('i am inside khóa funcr' + JSON.stringify($scope.Account));
         $http({
             method: 'GET',
-            url: '/Admin/Device/DeleteDevice/' + $scope.namesData[index].UserID
+            url: '/Management/LockUsers/' + $scope.namesData[index].UserID  
         }).then(function (response) {
-            LoadDevice();
+            LoadAccounts();
             alert(response.data);
         });
     };
     $scope.Unlock = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Device));
+        console.log('i am inside mở khóa funcr' + JSON.stringify($scope.Account));
         $http({
             method: 'GET',
-            url: '/Admin/Device/UnlockDevice/' + $scope.namesData[index].DeviceID
+            url: '/Management/UnlockUsers/' + $scope.namesData[index].UserID
         }).then(function (response) {
-            LoadDevice();
+            LoadAccounts();
             alert(response.data);
         });
     };

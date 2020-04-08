@@ -399,6 +399,7 @@
     <Content Include="Content\public\js\main\datatables-init.js" />
     <Content Include="Content\public\js\main\default.js" />
     <Content Include="Content\public\js\main\Account.js" />
+    <Content Include="Content\public\js\main\DeviceAndDriver.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
     <Content Include="Content\public\js\main\controller.js" />
@@ -2327,7 +2328,7 @@
     <Content Include="Areas\Admin\Views\Agency\Device.cshtml" />
     <Content Include="Areas\Admin\Views\Agency\DeviceDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Agency\User.cshtml" />
-    <Content Include="Areas\Admin\Views\Device\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Device\DanhSachThietBi.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Customer.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
@@ -2968,7 +2969,7 @@
     <Content Include="Views\UserGuide\HuongDan.cshtml" />
     <Content Include="Views\Utilities\TienIchThietBi.cshtml" />
     <Content Include="Views\Management\ThongTinTaiKhoan.cshtml" />
-    <Content Include="Views\Management\ThietBiVaLaiTau.cshtml" />
+    <Content Include="Views\Management\ThietBi.cshtml" />
     <Content Include="Views\Report\HanhTrinhTauChay.cshtml" />
     <Content Include="Views\Report\TocDoCuaTau.cshtml" />
     <Content Include="Views\Report\VuotPhamViDanhBat.cshtml" />
@@ -2986,6 +2987,8 @@
     <Content Include="Views\_waiting.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_LoadingModal.cshtml" />
+    <Content Include="Views\Management\_MenuThietBiVaLaiTau.cshtml" />
+    <Content Include="Views\Management\LaiTau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

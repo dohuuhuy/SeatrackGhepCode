@@ -56,24 +56,17 @@
                                         <th>Số điện thoại</th>
                                         <th>Trạng thái</th>
                                     </tr>
-
-
-
-
                                 </thead>
                                 <tbody>
-
-
                                     <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                                        @*<tr ng-repeat="a in namesData">*@
                                         <td>{{$index+1}}</td>
                                         <td>
                                             <a ng-click="View(namesData[$index])" ng-model="$scope.Account" data-toggle="modal" data-target="#XemThongTin">
                                                 <i class="fa fa-eye" style="color:black"></i>
                                             </a>
                                             <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                            <a ng-click="Delete($index)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
-                                            <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
+                                            <a ng-click="Lock($index)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
+                                            <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i style="color:red" class="fa fa-unlock"></i></a>
                                         </td>
                                         <td>{{a.Username}}</td>
                                         <td>{{a.FullName}}</td>
@@ -181,7 +174,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal"  ng-click="Save()">Save</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                     </div>
                 </div>
@@ -224,7 +217,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid || NoCheck == Account.Name " ng-click="update()">Update</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                     </div>
                 </div>

@@ -25,142 +25,10 @@
 <body id="body" class="class_body_t">
     <div class="body-content">
         <div class="wrapper ">
-            <nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
-                <div class="container-fluid s-display-block">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Menu</span>
-                    </button>
-                    <button  type="button" id="giamsat_toggle" class="btn btn-danger d-none">
-                        <i class="fas fa-indent"></i>
-                        <span style="font-weight:bolder">Giám sát</span>
-                    </button>
-                    <img id="s-logo-menu" src="~/Content/public/img/logo-vinasia.png" class="s-logo-menu d-none">
-                    <div class="float-right">
-                        <div class="dropdown s-div-btn">
-                            <a id="linkmenu" href="~/Home/Route">
-                                <button onclick="win_reload();" type="button" class="btn btn-outline-primary">
-                                    <i class="fas fa-location-arrow"></i>
-                                    Giám sát
-                                </button>
-                            </a>
-                        </div>
-                        <div class="dropdown s-div-btn">
-                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-chart-bar"></i>
-                                Báo cáo
-                            </button>
-                            <div class="dropdown-menu">
-                                <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NT & PTNT</a>
-                                <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
-                            </div>
-                        </div>
-                        <div class="dropdown s-div-btn">
-                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-users-cog"></i>
-                                Quản trị
-                            </button>
-                            <div class="dropdown-menu">
-                                <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
-                                <a id="show_device" class="dropdown-item" href="~/Management/DeviceAndDriver">Thiết bị và Lái tàu</a>
-                            </div>
-                        </div>
-                        <div class="dropdown s-div-btn">
-                            <a id="linkmenu" href="~/Utilities/Index">
-                                <button id="show_tienich" type="button" class="btn btn-outline-info">
-                                    <i class="fas fa-tasks"></i>
-                                    Tiện ích
-
-                                </button>
-                            </a>
-                        </div>
-                        <div class="dropdown s-div-btn">
-                            <a id="linkmenu" href="~/FeedBack/Index">
-                                <button id="show_comment" type="button" class="btn btn-outline-info">
-                                    <i class="fas fa-comments"></i>
-                                    Phản hồi
-                                </button>
-                            </a>
-                        </div>
-                        <div class="dropdown s-div-btn">
-
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-question"></i>
-                                Hướng dẫn
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
-                            </div>
-                        </div>
-                        <div class="dropdown s-div-btn">
-                            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
-                                <i class="fas fa-user"></i>
-                                Tài khoản
-                            </button>
-                            <div class="dropdown-menu">
-                                <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
-                            </div>
-                        </div>
-                        <a id="linkmenu" href="~/Home/Logout">
-                            <button type="button" class="btn btn-outline-dark" title="Đăng xuất">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
-
-
-            </nav>
+            @Html.Partial("_Navbar");
             <div id="content" class="s-relative main show">
-
                 @RenderBody()
-
-
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Danh sách thiết bị đã và sắp hết hạn</h5>
-                                <button type="button" class="close" id="closeModal" data-dismiss="modal" aria-label="Close" style="display:none">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive-taikhoan-them table-scroll">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th class="headerAlignCenter">STT</th>
-                                                <th class="headerAlignCenter">Số hiệu</th>
-                                                <th class="headerAlignCenter">Ngày hết hạn</th>
-                                                <th class="headerAlignCenter">Ghi chú</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="body_dv_exp"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myModalLabel">Vui lòng chọn hình thức xem?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="/File/HDSD Website.docx" download><button type="button" class="btn btn-default">Tải xuống</button></a>
-                                <a href="/File/HDSD-Website.html" target="_blank"><button type="button" class="btn btn-primary">Xem trực tuyến</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @Html.Partial("_LoadingModal");
             </div>
         </div>
     </div>
@@ -196,7 +64,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/Content/public/js/moment.min.js"></script>
     <script src="/Content/public/js/daterangepicker.min.js"></script>
-
     <script src="~/Content/public/js/main/controller.js"></script>
     <script src="~/Content/public/js/main/default.js"></script>
     <script src="~/Content/public/js/main/global.js"></script>
