@@ -325,10 +325,20 @@
     <Content Include="Content\images\icon\waiting3.gif" />
     <Content Include="Content\images\icon\waiting4.gif" />
     <Content Include="Content\images\logo\logo-vinasia.png" />
+    <Content Include="Content\images\tau\tau-black.png" />
+    <Content Include="Content\images\tau\tau-green.png" />
+    <Content Include="Content\images\tau\tau-red.png" />
     <Content Include="Content\images\ThapCau\film.png" />
     <Content Include="Content\images\ThapCau\moto_tai_22.png" />
     <Content Include="Content\images\ThapCau\tatmo_khoadien_24.png" />
     <Content Include="Content\images\ThapCau\warning.png" />
+    <Content Include="Content\images\UserAvatar\1.jpg" />
+    <Content Include="Content\images\UserAvatar\2.jpg" />
+    <Content Include="Content\images\UserAvatar\3.jpg" />
+    <Content Include="Content\images\UserAvatar\4.jpg" />
+    <Content Include="Content\images\UserAvatar\5.jpg" />
+    <Content Include="Content\images\UserAvatar\6.jpg" />
+    <Content Include="Content\images\UserAvatar\daily01.jpg" />
     <Content Include="Content\images\Xe-khach\bus-black.png" />
     <Content Include="Content\images\Xe-khach\bus-green.png" />
     <Content Include="Content\images\Xe-khach\bus-red.png" />
@@ -385,6 +395,7 @@
     <Content Include="Content\public\js\lg-fullscreen.min.js" />
     <Content Include="Content\public\js\lg-thumbnail.min.js" />
     <Content Include="Content\public\js\lightgallery.min.js" />
+    <Content Include="Content\public\js\main\AccountApp.js" />
     <Content Include="Content\public\js\main\datatables-init.js" />
     <Content Include="Content\public\js\main\default.js" />
     <Content Include="Content\public\js\main\Account.js" />
@@ -2979,6 +2990,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\background\" />
+    <Folder Include="Content\images\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

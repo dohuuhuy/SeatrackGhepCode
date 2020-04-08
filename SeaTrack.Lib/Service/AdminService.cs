@@ -71,7 +71,8 @@ namespace SeaTrack.Lib.Service
                         UpdateBy = reader["UpdateBy"].ToString(),
                         LastUpdateDate = reader["LastUpdateDate"].ToString(),
                         RoleID = Convert.ToInt16(reader["RoleID"]),
-                        ManageBy = reader["ManageBy"].ToString()
+                        ManageBy = reader["ManageBy"].ToString(),
+                        Image = reader["Image"].ToString()
                     };
                     user = data;
                 }

@@ -30,7 +30,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Cài Đăt</a><a class="dropdown-item" href="#">Nhật Ký</a>
+                    <a class="dropdown-item" onclick="location.href='@Url.Action("AccountInfo","AccountInformation", new { area = "" })'">Cài Đăt</a><a class="dropdown-item" href="#">Nhật Ký</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" onclick="location.href='@Url.Action("logout","Home", new { area = "" })'">Đăng Xuất</a>
                 </div>
