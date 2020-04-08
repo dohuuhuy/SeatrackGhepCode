@@ -16,7 +16,7 @@ namespace SeaTrack.Controllers
 {
     public class HomeController : Controller
     {
-    
+
         public ActionResult Route()
         {
             if (Session["User"] == null)
@@ -41,9 +41,20 @@ namespace SeaTrack.Controllers
                 else if (user.RoleID == 2)
                 {
                     return RedirectToAction("Customer", "Agency", new { area = "Admin" });
-                }    
+                }
             }
-           
+            if (TempData["statusLogin"] != null)
+            {
+                if ((int)TempData["statusLogin"] == 0)
+                {
+                    ViewBag.StatusLogin = 0;
+                }
+                else
+                {
+                    ViewBag.StatusLogin = -1;
+
+                }
+            }
             return View("Login");
         }
         [HttpPost]
@@ -69,33 +80,33 @@ namespace SeaTrack.Controllers
             if (!String.IsNullOrEmpty(username_) || !String.IsNullOrEmpty(password_))
             {
                 Users useritem = UsersService.CheckUsers(username_, password_);
-
-                if (useritem != null && useritem.RoleID != 1 && useritem.RoleID != 2)
+                if (useritem != null)
                 {
-                    FormsAuthentication.SetAuthCookie(useritem.Username, true);
-                    Session.Add("User", useritem);
-                    return RedirectToAction("Route", "Home");
-                }
-                else
-                {
-                    if (useritem != null && useritem.RoleID == 1 || useritem.RoleID == 2)
+                    if (useritem.Status == 1)
                     {
                         Session.Add("User", useritem);
-                        if (useritem.RoleID == 1)
+                        if (useritem.RoleID != 1 && useritem.RoleID != 2)
                         {
-                            return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                            //FormsAuthentication.SetAuthCookie(useritem.Username, true);
+                            return RedirectToAction("Route", "Home");
                         }
-                        return RedirectToAction("Customer", "Agency", new { area = "Admin" });
+                        else
+                        {
+                            if (useritem.RoleID == 1)
+                            {
+                                return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                            }
+                            return RedirectToAction("Customer", "Agency", new { area = "Admin" });
+                        }
                     }
-                    Session["statusLogin"] = "0";
+                    TempData["statusLogin"] = -1;
                     return RedirectToAction("Login");
                 }
-            }
-            else
-            {
-                Session["statusLogin"] = "0";
+                TempData["statusLogin"] = 0;
                 return RedirectToAction("Login");
             }
+            TempData["statusLogin"] = 0;
+            return RedirectToAction("Login");
         }
 
         [AllowAnonymous]
@@ -156,7 +167,7 @@ namespace SeaTrack.Controllers
             {
                 var name = Request.Cookies["userName"].Value;
                 var pass = Request.Cookies["pass"].Value;
-                uitem = UsersService.CheckUsers(name,pass);
+                uitem = UsersService.CheckUsers(name, pass);
             }
             if (uitem != null)
             {

@@ -4,23 +4,20 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
     LoadUser();
     $scope.ChangePassword = function(){
     $scope.Status = !$scope.Status;
+    $scope.User.CreateDate = new Date(ParseInt($scope.User.CreateDate.substr(6)));
 }
 
-      $scope.update = function () {
+    $scope.update = function () {
         //nếu không trường nào bị null
+        
             console.log('i am inside update funcr ' +
-                JSON.stringify($scope.Customer));
+                JSON.stringify($scope.User));
             $http({
                 method: 'POST',
-                url: '/Admin/Device/EditDevice',
-                data: JSON.stringify($scope.Device)
+                url: '/AccountInformation/UpdateUser',
+                data: JSON.stringify($scope.User)
             }).then(function successCallback(response) {
-                $scope.namesData = null;
-                DeviceService.GetAllRecords().then(function (d) {
-                    $scope.namesData = d.data;
-                }, function () {
-                    alert('Unable to Get Data !!!');
-                });
+                LoadUser();
                 $scope.Clear();
                 alert(response.data);
             }, function errorCallback(response) {
@@ -29,7 +26,12 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
         
 
     };
+    $scope.Clear = function(){
+        $scope.OldPassword = null;
+        $scope.NewPassword = null;
+        $scope.ConfirmPassword = null;
 
+    }
     function LoadUser(){
     Service.GetAllRecords().then(function (d) {
         $scope.User = d.data;
