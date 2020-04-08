@@ -15,7 +15,7 @@ namespace SeaTrack.Controllers
             {
                 return RedirectToAction("Login");
             }
-            return View("ThongTinTaiKhoan");
+            return View("ThongTinCaNhan");
         }
         public ActionResult ExpiredDevice()
         {
