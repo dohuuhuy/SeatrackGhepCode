@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" style="height:100%;">
 @{
-Layout = null;
+    Layout = null;
 
 }
 <head>
@@ -11,28 +11,28 @@ Layout = null;
     <title>Trang đăng nhập Vinasia</title>
     <link href="~/Content/login-css/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/login-css/vinasia.css" rel="stylesheet" />
-    
+
     <script type="text/javascript">
-       
+
         var countload = 0;
         function ajaxGetdata(idlang) {
-        //deviceID
-        // var idlang = document.getElementById('idlang').value;
-        if (countload == 0) {
-            countload += 1;
-            window.location = "Home/Change?languageFlag=" + idlang;
-        }
-        else {
-            window.location = "Change?languageFlag=" + idlang;
-        }
+            //deviceID
+            // var idlang = document.getElementById('idlang').value;
+            if (countload == 0) {
+                countload += 1;
+                window.location = "Home/Change?languageFlag=" + idlang;
+            }
+            else {
+                window.location = "Change?languageFlag=" + idlang;
+            }
 
-    };
-    function SubmitForm() {
-        setInterval(function () {
-            document.getElementById("loginform").submit();
-        }, 3000);
-    }
-</script>
+        };
+        function SubmitForm() {
+            setInterval(function () {
+                document.getElementById("loginform").submit();
+            }, 3000);
+        }
+    </script>
 </head>
 <body id="login">
     <div class="s-conten container">
@@ -41,13 +41,26 @@ Layout = null;
                 <div id="loginBackground" class="s-container">
                     <div id="loginPanel">
                         <form id="loginform" action="~/Home/ValidateUser" method="post" autocomplete="on">
+                            @if (ViewBag.StatusLogin == 0)
+                            {
+                                <script>
+                                    alert("Đăng nhập thất bại. Tên mật khẩu hoặc tài khoản không đúng");
+                                </script>
+                            }
+                            else if (ViewBag.StatusLogin == -1)
+                            {
+                                <script>
+                                    alert("Đăng nhập thất bại. Tài khoản này đã bị khóa");
+                                </script>
+                            }
+
                             <input type="hidden" name="sticky" value="false" />
                             <div class="form-group">
-                                <label for="username" class="s-label-a" >Tên đăng nhập: </label>
+                                <label for="username" class="s-label-a">Tên đăng nhập: </label>
                                 <input type="text" name="username" tabindex="1" id="username" value="" required /><br clear="all" />
                             </div>
                             <div class="form-group">
-                                <label for="password" class="s-label-a" >Mật khẩu: </label>
+                                <label for="password" class="s-label-a">Mật khẩu: </label>
                                 <input type="password" name="password" tabindex="2" id="password" required />&nbsp;&nbsp;
                                 <input name="Submit" class="btn s-bton-subm" type="submit" onclick="SubmitForm();" tabindex="4" value="Đăng nhập" />
                             </div>
@@ -72,6 +85,7 @@ Layout = null;
             </div>
         </div>
     </div>
+
 
 </body>
 </html>
