@@ -2967,7 +2967,7 @@
     <Content Include="Views\Report\BaoCaoChiTietHoatDong.cshtml" />
     <Content Include="Views\Report\BaoCaoTongHopPhamViHoatDong.cshtml" />
     <Content Include="Views\Home\Route.cshtml" />
-    <Content Include="Views\AccountInformation\ThongTinTaiKhoan.cshtml" />
+    <Content Include="Views\AccountInformation\ThongTinCaNhan.cshtml" />
     <Content Include="Views\AccountInformation\DichVuHetHan.cshtml" />
     <Content Include="Views\Shared\_Route.cshtml" />
     <Content Include="Views\Report\_MenuBaoCaoChoBo.cshtml" />
