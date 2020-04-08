@@ -14,7 +14,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             return View("ThongTinTaiKhoan");
         }
@@ -38,7 +38,7 @@ namespace SeaTrack.Controllers
             us.LastUpdateDate = DateTime.Now;
             us.ManageBy = user.Username;
             us.Status = 1;
-         
+            us.Password = "123456";
             var data = AdminService.CreateUser(us, 4);
             return Json(new { success = true });
 
@@ -54,7 +54,7 @@ namespace SeaTrack.Controllers
             us.LastUpdateDate = DateTime.Now;
             us.ManageBy = user.Username;
             us.Status = 1;
-           
+            us.Password = "123456";
             var data = AdminService.EditUser(us);
             return Json(new { success = true });
 
@@ -78,7 +78,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             return View("ThietBi");
         }
@@ -94,9 +94,16 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             return View("LaiTau");
+        }
+        public ActionResult GetListDriverByUserID()
+        {
+            var user = (Users)Session["User"];
+
+            var data = UsersService.GetListDriverByUserID(user.UserID);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
     }

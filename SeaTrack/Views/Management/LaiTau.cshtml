@@ -24,13 +24,13 @@
                                 <table id="dataTable" class="table table-bordered table-striped text-center">
                                     <thead>
                                         <tr>
-                                            <th width="5%">#</th>
-                                            <th>Thao tác</th>
-                                            <th>Số hiệu</th>
-                                            <th>Tên thiết bị</th>
-                                            <th> Phiên bản</th>
-                                            <th> Imei</th>
-                                            <th> Ngày hết hạn</th>
+                                            <th width="5%"> #</th>
+                                            <th> Thao tác</th>
+                                            <th> Tên lái tàu</th>
+                                            <th> Số điện thoại</th>
+                                            <th> Giấy Phép Lái Tàu </th>
+                                            <th> Hạng</th>
+                                            <th> Nơi Cấp</th>
                                             <th> Trạng thái</th>
                                         </tr>
                                     </thead>
@@ -38,22 +38,21 @@
                                         <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
                                             <td>{{$index+1}}</td>
                                             <td>
-                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
+                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThietBi">
                                                     <i class="fa fa-eye" style="color:black"></i>
                                                 </a>
                                                 <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                                <a ng-click="Delete($index)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
-                                                <a ng-click="Unlock($index)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
+                                                <a ng-click="Delete($index)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
+                                                <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
                                             </td>
-                                            <td>{{a.DeviceNo}}</td>
-                                            <td>{{a.DeviceName}}</td>
-                                            <td>{{a.DeviceVersion}}</td>
-                                            <td>{{a.DeviceImei}}</td>
-                                            <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired}}</p></td>
-                                            <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
+                                            <td>{{a.DriverName}}</td>
+                                            <td>{{a.Phone}}</td>
+                                            <td>{{a.GPLT}}</td>
+                                            <td>{{a.Rank}}</td>
+                                            <td>{{a.IssuedBy}}</td>
                                             <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                                             <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
-                                            <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
+
 
                                         </tr>
                                     </tbody>

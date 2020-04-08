@@ -13,7 +13,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("HuongDan");
         }

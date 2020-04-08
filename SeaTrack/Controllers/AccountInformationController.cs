@@ -50,12 +50,12 @@ namespace SeaTrack.Controllers
             return RedirectToAction("Login", "Home", new { area = "" });
         }
 
-        public ActionResult Upload()
+
         public ActionResult ExpiredDevice()
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("DichVuHetHan");
         }

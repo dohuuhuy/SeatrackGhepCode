@@ -374,12 +374,6 @@
     <Content Include="Content\public\img\tau\tau-green.png" />
     <Content Include="Content\public\img\tau\tau-red.png" />
     <Content Include="Content\public\img\Vinasia.png" />
-    <Content Include="Content\public\img\Xe-khach\bus-black.png" />
-    <Content Include="Content\public\img\Xe-khach\bus-green.png" />
-    <Content Include="Content\public\img\Xe-khach\bus-red.png" />
-    <Content Include="Content\public\img\Xe-tai\truck-black.png" />
-    <Content Include="Content\public\img\Xe-tai\truck-green.png" />
-    <Content Include="Content\public\img\Xe-tai\truck-red.png" />
     <Content Include="Content\public\js\bootstrap.min.js" />
     <Content Include="Content\public\js\dataTables.bootstrap.min.js" />
     <Content Include="Content\public\js\daterangepicker.min.js" />
@@ -2989,6 +2983,7 @@
     <Content Include="Views\Shared\_LoadingModal.cshtml" />
     <Content Include="Views\Management\_MenuThietBiVaLaiTau.cshtml" />
     <Content Include="Views\Management\LaiTau.cshtml" />
+    <Content Include="Views\Shared\_LayoutInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

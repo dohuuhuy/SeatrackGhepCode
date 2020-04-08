@@ -47,11 +47,10 @@ namespace SeaTrack.Lib.Service
 
         public static List<Users> GetListUserOfCustomers(String name)
         {
-          
             var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListUserOfCustomer", name);
             if (reader.HasRows)
             {
-                List<Users> user = new List<Users> ();
+                List<Users> user = new List<Users>();
                 while (reader.Read())
                 {
                     var data = new Users()
@@ -76,6 +75,35 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
+        public static List<Driver> GetListDriverByUserID(int userid)
+        {
+            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListDriverByUserIdOfCustomer", userid);
+            if (reader.HasRows)
+            {
+                List<Driver> user = new List<Driver>();
+                while (reader.Read())
+                {
+                    var data = new Driver()
+                    {
+                        DriverID = Convert.ToInt16(reader["DriverID"]),
+                        DriverName = reader["DriverName"].ToString(),
+                        Phone = reader["Phone"].ToString(),
+                        Address = reader["Address"].ToString(),
+                        GPLT = reader["GPLT"].ToString(),
+                        CMND = reader["CMND"].ToString(),
+                        Rank = reader["Rank"].ToString(),
+                        IssuedBy = reader["IssuedBy"].ToString(),
+                        //CreateBy = reader["CreateBy"].ToString(),
+                        CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
+                        ManageBy = reader["ManageBy"].ToString(),
+                        Status = Convert.ToInt16(reader["Status"]),
 
+                    };
+                    user.Add(data);
+                }
+                return user;
+            }
+            return null;
+        }
     }
 }

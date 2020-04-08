@@ -139,8 +139,62 @@
                                         </button>
                                     </div>
                                 </div>
+                                <div class="input-group mb-3 ">
+                                    <div class="slidecontainer">              
+                                        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="myRange">
+                                        <p>Lộ trình: <span id="demo"></span></p>
+                                    </div>
+                                </div>
                             </div>
+                            <script>
+                                var slider = document.getElementById("myRange");
+                                var output = document.getElementById("demo");
+                                output.innerHTML = slider.value;
+                                slider.oninput = function () {
+                                    output.innerHTML = this.value;
+                                }
+                            </script>
+                            <style>
+                                .slidecontainer {
+                                    width: 100%;
+                                }
+
+                                .slider {
+                                    -webkit-appearance: none;
+                                    width: 100%;
+                                    height: 10px;
+                                    border-radius: 5px;
+                                    background: #ffc107;
+                                    outline: none;
+                                    opacity: 0.7;
+                                    -webkit-transition: .2s;
+                                    transition: opacity .2s;
+                                }
+
+                                    .slider:hover {
+                                        opacity: 1;
+                                    }
+
+                                    .slider::-webkit-slider-thumb {
+                                        -webkit-appearance: none;
+                                        appearance: none;
+                                        width: 23px;
+                                        height: 24px;
+                                        border: 0;
+                                        background-image: url('Content/images/icon/speed vin.png');
+                                        cursor: pointer;
+                                    }
+
+                                    .slider::-moz-range-thumb {
+                                        width: 23px;
+                                        height: 24px;
+                                        border: 0;
+                                        background-image: url('Content/images/icon/speed vin.png');
+                                        cursor: pointer;
+                                    }
+                            </style>
                             <div id="sublefttab_4" class="s-sub-left-tab">
+
                                 <table id="tbldataline" class="table-bordered table table-sm text-center">
                                     <thead style="white-space:nowrap;">
                                         <tr>

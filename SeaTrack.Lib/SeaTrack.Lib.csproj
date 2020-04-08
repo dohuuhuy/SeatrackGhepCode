@@ -52,6 +52,7 @@
     <Compile Include="DTO\InfoDTO.cs" />
     <Compile Include="DTO\SOSDTO.cs" />
     <Compile Include="DTO\TrackData.cs" />
+    <Compile Include="DTO\Driver.cs" />
     <Compile Include="DTO\Users.cs" />
     <Compile Include="DTO\User_Device.cs" />
     <Compile Include="Job\JobInfo.cs" />

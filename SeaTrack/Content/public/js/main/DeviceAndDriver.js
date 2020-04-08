@@ -196,7 +196,7 @@ App.controller('Controller', function ($scope, $http, Service) {
 App.factory('Service', function ($http) {
     var fac = {};
     fac.GetAllRecords = function () {
-        return $http.get('/Management/GetListDeviceByUserID');
+        return $http.get('/Management/GetListDriverByUserID');
     };
 
     console.log('i am inside Service ');
