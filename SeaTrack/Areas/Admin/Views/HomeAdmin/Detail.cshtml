@@ -165,32 +165,34 @@
 
     </div>
 </div>
-
-
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Content/public/js/jquery.min.js"></script>
+@*<script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>*@
+<script src="~/Areas/Admin/AngularJS/Admin/UserDetailApp.js"></script>
 <script>
     function InvalidMsg(textbox) {
 
         if (textbox.value === '') {
             textbox.setCustomValidity
-                  ('Không để trống mật khẩu!');
+                ('Không để trống mật khẩu!');
         } else if (textbox.validity.patternMismatch) {
             textbox.setCustomValidity
-                  ('Mật khẩu không được chứa ký tự đặc biệt!');
+                ('Mật khẩu không được chứa ký tự đặc biệt!');
         } else if (textbox.validity.tooShort) {
             textbox.setCustomValidity
-                  ('Mật khẩu từ 5 đến 30 ký tự')
-        }else {
+                ('Mật khẩu từ 5 đến 30 ký tự')
+        } else {
             textbox.setCustomValidity('');
         }
         return true;
     }
-    function InvalidPhone(textbox){
+    function InvalidPhone(textbox) {
         if (textbox.validity.valueMissing) {
             textbox.setCustomValidity('Không để trống số điện thoại');
-        } else if(textbox.validity.patternMismatch) {
+        } else if (textbox.validity.patternMismatch) {
             textbox.setCustomValidity('Số điện thoại không hợp lệ');
         } else {
             textbox.setCustomValidity('');
-}
+        }
     }
 </script>

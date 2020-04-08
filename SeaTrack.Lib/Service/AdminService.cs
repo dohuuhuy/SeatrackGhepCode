@@ -80,6 +80,7 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         } //Lấy đối tượng user theo UserID
+  
         public static List<UserViewModel> GetListUserByUserID(string Username, int RoleID) //Lấy danh sách user được quản lý bởi Username
         {
             List<UserViewModel> lst = null;
