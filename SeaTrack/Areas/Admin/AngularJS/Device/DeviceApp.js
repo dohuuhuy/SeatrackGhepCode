@@ -6,15 +6,11 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     $scope.namesData = [];
     LoadDevice();
     $scope.loadMessage = updateInfo();
-
-    function updateInfo() {
+        function updateInfo() {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
     };
-
-    $scope.total = function () {
-
-
+        $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
             total++;
@@ -28,7 +24,6 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     $scope.Device.ExpireDate = new Date(dateExpire);
     $scope.Device.DateExpired = new Date(dateExpire);
     }
-
     $scope.ClearSearch = function(){
     $scope.SearchKey = "";
     $scope.Status = null;

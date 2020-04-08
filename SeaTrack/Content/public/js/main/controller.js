@@ -1,120 +1,10 @@
 ﻿var _listDeviceStatus = [];
-updateListDeviceStatus();
-setInterval(function () { updateListDeviceStatus(); }, 10000);
 function win_reload() {
     window.location.reload();
 }
-function ActionMenu(index) {
-    switch (index) {
-        case 1:
-            location.href = "/Home/Logout";
-            break;
-        default:
-            break;
-    }
-};
 function toHaily(a) {
-    return a * 0.53996;
-}
-function updateListDeviceStatus() {
-    $.ajax({
-        type: 'GET',
-        url: '/Home/GetListDeviceStatus',
-        data: {},
-        success: function (data, txtStatus, XMLHttpRequest) {
-            _listDeviceStatus = data.Result;
-        }
-    }, "json");
-}
-function attachInforwindows(marker, string_) {
-    var infowin = new google.maps.InfoWindow({
-        content: 'Đang cập nhật dữ liệu!',
-    });
-    infowin.setContent(string_);
-    marker.addListener('click', function () {
-        infowin.open(map, marker);
-    });
 
-    _armarker.push(marker);
-    _infowins.push(infowin);
-}
-function drawingLinePoint(listStop, id, a) {
-    cleanMap(0);
-    var flightPath = new google.maps.Polyline({
-        path: listStop,
-        geodesic: true,
-        strokeColor: '#14a84e',
-        strokeOpacity: 1.0,
-        strokeWeight: 1
-    });
-    flightPath.setMap(map);
-
-    _flightPath.push(flightPath);
-
-    var i = listStop.length - 1;
-    for (i; i > 0; i--) {
-        var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
-        var marker = new MarkerWithLabel({
-            position: point,
-            icon: "/Content/public/img/icon/marker_ef.png",
-            //labelContent: i + " lat: " + listStop[i].lat,
-        });
-        marker.setMap(map);
-
-        var content_ = '<div class="">Tọa độ: <hr>' + listStop[i].lat + ' - ' + listStop[i].lng + '</div>';
-        attachInforwindows(marker, content_);
-
-    }
-
-    _device = checkDevice(id);
-    var point = new google.maps.LatLng(listStop[0].lat, listStop[0].lng);
-    var marker = new MarkerWithLabel({
-        position: point,
-        icon: "/Content/public/img/icon/marker_ex.png",
-    });
-    marker.setMap(map);
-    var infowin = new google.maps.InfoWindow({
-        content: 'Đang cập nhật dữ liệu!',
-    });
-    infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
-    marker.addListener('click', function () {
-        infowin.open(map, marker);
-    });
-    _armarker.push(marker);
-    _infowins.push(infowin);
-
-    if (a == 1) {
-        map.panTo(point);
-        map.setZoom(6);
-    }
-
-    console.log("Again");
-
-}
-function newPointToLine(point) {
-    var path = flightPath.getPath();
-    path.push(point);
-    flightPath.setPath(path);
-
-    var markerLB = new MarkerWithLabel({
-        position: point,
-        icon: "/Content/public/img/icon/marker_ex.png",
-        map: map
-    });
-}
-function getInfoWindow(_dv) {
-    var strStatus = '';
-    var dt = new Date(parseInt(_dv.TransmitTime.substr(6)));
-    var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-        + ' ' + dt.getHours() + ':' + dt.getMinutes();
-    strStatus += 'Tên thiết bị: <b>' + _dv.DeviceName + '</b><br>'
-        + 'Thời gian: <b>' + dte + '</b><br>';
-    strStatus += 'Trạng thái: <b>' + status + '</b><br>';
-    strStatus += 'Toạ độ: <b>' + _dv.Latitude
-        + ' (' + _dv.DirectionSN + ')</b> - <b>'
-        + _dv.Longitude + ' (' + _dv.DirectionEW + ')</b><br>';
-    strStatus += 'Tốc độ: <b>' + toHaily(_dv.Speed) + '</b> Hải lý / giờ <br>';
-    return strStatus;
+    return (Math.round((a * 0.53996) * 10) / 10);
 }
 function checkDevice(id) {
     i = 0;
@@ -124,118 +14,9 @@ function checkDevice(id) {
     }
     return 0;
 }
-function makePoint(id, icon = "") {
-    if (icon == "") icon = "/Content/public/img/icon/marker_ex.png";
-    cleanMap(1);
-    var i = 0;
-    var lasted;
-    var _device;
-    _device = checkDevice(id);
-    console.log(_device);
-    if (_device != 0) {
-        point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
 
-        marker = new MarkerWithLabel({
-            position: point,
-            icon: "/Content/public/img/icon/marker_ex.png",
-        });
-        var infowin = new google.maps.InfoWindow({
-            content: 'Đang cập nhật dữ liệu!',
-        });
-
-        infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
-        google.maps.event.addListener(marker, 'click', function () {
-            infowin.open(map, marker);
-        });
-        _infowins.push(infowin);
-        map.panTo(point);
-        map.setZoom(6);
-        _armarker.push(marker);
-        marker.setMap(map);
-    }
-    else alert("Chưa có dữ liệu, vui lòng thử lại sau");
-}
-function makeListStop(list) {
-    var re = [];
-    for (var i = 0; i < list.length; i++) {
-        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude };
-    }
-    return re;
-}
-function setdrawingLinePoint(a = 0) {
-    var id = $("#list_xelotrinh").val();
-    var from = $("#date_form_d").val() + " " + $("#date_form_h").val() ;
-    var to = $("#date_t_d").val() + " " + $("#date_t_h").val();
-    var list;
-    $.ajax({
-        type: 'GET',
-        url: '/Home/GetRoadmapByDateTime',
-        data: { deviceID:id,From:from,To:to  },
-        success: function (data, txtStatus, XMLHttpRequest) {
-            list = data.Result;
-            if (list == null) {
-                alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
-            } else {
-                //console.log(list);
-                var listStop = makeListStop(list);
-                drawingLinePoint(listStop, id, a);
-                if (list.length > 0) {
-                    var _tbl = "";
-                    for (var i = 0; i < list.length; i++) {
-                        var dt = new Date(parseInt(list[i]["TransmitTime"].substr(6)));
-                        var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
-                        _tbl += '<tr id="tr' + list[i]["DeviceID"] + i + '"><td>'
-                            + list[i]["Latitude"] + '.' + list[i]["DirectionEW"] + '  '
-                            + list[i]["Longitude"] + '.' + list[i]["DirectionSN"]
-                            + '</td><td>' + toHaily(list[i]["Speed"]) + '</td><td>' + dte + '</td></tr>';
-                    }
-                    $("#tblbodydataline").append(_tbl);
-                }
-            }
-        },
-    }, "json");
-}
-function interval_draw() {
-    //_interval = setInterval(function () { setdrawingLinePoint() }, 50000);
-}
-function setup_DataTable() {
-    var dad = [];
-    $.ajax({
-        type: 'GET',
-        url: '/Home/GetListDeviceStatus',
-        data: {},
-        success: function (data, txtStatus, XMLHttpRequest) {
-            dad = data.Result;
-            //console.log(data);
-            if (dad.length > 0) {
-
-                var _tb = "";
-                for (var i = 0; i < dad.length; i++) {
-                    var dt = new Date(parseInt(dad[i]["TransmitTime"].substr(6)));
-                    var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                        + ' ' + dt.getHours() + ':' + dt.getMinutes();
-
-                    _tb += '<tr id="tr' + dad[i]["DeviceID"]
-                        + '" classname="groupXe" onclick="makePoint('+ dad[i]["DeviceID"]
-                        + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
-                        + '<td class="alignCenter">'
-                        + (i + 1) + '</td><td>'
-                        + '<img src="/Content/public/img/Xe-khach/' + _stt_cmd[1]["img"] + '">  '
-                        + dad[i]["DeviceName"]
-                        + '</td><td>' + toHaily(dad[i]["Speed"])
-                        + '</td><td>' + dte + '</td><td>'
-                        + dad[i]["Latitude"] + "." + dad[i]["DirectionSN"] + " - "
-                        + dad[i]["Longitude"] + "." + dad[i]["DirectionEW"] 
-                        + '</td></tr>';
-                }
-                $("#tblbodydata").append(_tb);
-            }
-        }
-    }, "json");
-   
-}
-function setup_selectDataLine() {
+// lấy danh sách tàu 
+function setup_selectDeviceNo() {
     var dad = [];
     $.ajax({
         type: 'GET',
@@ -244,144 +25,316 @@ function setup_selectDataLine() {
         success: function (data, txtStatus, XMLHttpRequest) {
             dad = data.Result;
             if (dad.length > 0) {
-                var _tb = '<option value="0">Tất cả</option>';
-                
+                var _tb = '';
+
                 for (var i = 0; i < dad.length; i++) {
                     _tb += '<option value="' + dad[i]["DeviceID"] + '">' + dad[i]["DeviceName"] + '</option>';
                 }
-                $("#list_xelotrinh").append(_tb);
+                $("#listDeviceNo").append(_tb);
+
+
             }
         }
     });
 }
-function setupMap(lat, lng, mapZoom) {
-    var mapLatlng = new google.maps.LatLng(lat, lng);
-    var myOptions = {
-        zoom: mapZoom,
-        center: mapLatlng,
-        mapTypeControl: false,
-        streetViewControl: true,
-        streetViewControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_BOTTOM
-        },
-        fullscreenControl: false,
-        fullscreenControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_BOTTOM
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.LARGE,
-            position: google.maps.ControlPosition.RIGHT_CENTER
-        },
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-    var styles = {
-        default: null,
-        night: [
-            { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-            { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-            { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-            {
-                featureType: 'administrative.locality',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#d59563' }]
-            },
-            {
-                featureType: 'poi',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: 'off' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{ color: '#38414e' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry.stroke',
-                stylers: [{ color: '#212a37' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#9ca5b3' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry',
-                stylers: [{ color: '#746855' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry.stroke',
-                stylers: [{ color: '#1f2835' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#f3d19c' }]
-            },
-            {
-                featureType: 'transit',
-                elementType: 'geometry',
-                stylers: [{ color: '#2f3948' }]
-            },
-            {
-                featureType: 'transit.station',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#d59563' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{ color: '#17263c' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#515c6d' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.stroke',
-                stylers: [{ color: '#17263c' }]
+// tốc độ của tàu chạy 
+function TocDoCuaTau() {
+    var id = $("#listDeviceNo").val();
+    var date = $("#datefilter").val();
+    var datetime = date.split(" - ");
+    var from = datetime[0].replace('/', '-');
+    var from = from.replace('/', '-');
+    var from = from + ' 00:00';
+    var to = datetime[1].replace('/', '-');
+    var to = to.replace('/', '-');
+    var to = to + ' 23:00';
+    var DS_tong = [];
+    var DS_diemtheotocdo = [];
+    var DS_diemnammotcho = [];
+    var ki = 0;
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetRoadmapByDateTime',
+        data: { deviceID: id, From: from, To: to },
+        success: function (data, txtStatus, XMLHttpRequest) {
+            DS_diem = data.Result;
+            if (DS_diem == null) {
+                alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+            } else {
+                if (DS_diem.length > 0) {
+                    var speed = toHaily(DS_diem[0]["Speed"]);
+                    var k = 0; var i = 0; var test = true;
+                    if (speed <= 3) test = false; else test = true;
+                    while (i < DS_diem.length) {
+                        speed = toHaily(DS_diem[i]["Speed"]);
+                        if (test) {
+                            if (speed >= 3) {
+                                DS_diemtheotocdo.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemtheotocdo;
+                                ki++;
+                                DS_diemtheotocdo = [];
+                                test = false;
+                            }
+                        } else {
+                            if (speed < 3) {
+                                DS_diemnammotcho.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemnammotcho;
+                                ki++;
+                                DS_diemnammotcho = [];
+                                test = true;
+                            }
+                        }
+                    }
+                }
+                ShowTable_BaoCaoTocDo(DS_tong);
             }
-        ],
-    };
-
-    var styleSelector = document.getElementById('style-selector');
-    map.setOptions({
-        styles: styles[styleSelector.value]
-    });
-
-    styleSelector.addEventListener('change', function () {
-        if (styleSelector.value === "satellite") { map.setMapTypeId('hybrid'); }
-        else {
-            map.setMapTypeId('roadmap');
-            map.setOptions({ styles: styles[styleSelector.value] });
         }
     });
-};
-function cleanMap(a = 0) {
-    if (a == 1) {
-        clearInterval(_interval);
-    }
-    if (_armarker.length > 0) {
-        for (i = 0; i < _armarker.length; i++) {
-            _armarker[i].setMap(null);
+}
+
+function TongHopTheoTau() {
+    var id = $("#listDeviceNo").val();
+    var date = $("#datefilter").val();
+    var datetime = date.split(" - ");
+    var from = datetime[0].replace('/', '-');
+    var from = from.replace('/', '-');
+    var from = from + ' 00:00';
+    var to = datetime[1].replace('/', '-');
+    var to = to.replace('/', '-');
+    var to = to + ' 23:00';
+    var DS_tong = [];
+    var DS_diemtheotocdo = [];
+    var DS_diemnammotcho = [];
+    var ki = 0;
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetRoadmapByDateTime',
+        data: { deviceID: id, From: from, To: to },
+        success: function (data, txtStatus, XMLHttpRequest) {
+            DS_diem = data.Result;
+            if (DS_diem == null) {
+                alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+            } else {
+                if (DS_diem.length > 0) {
+                    var speed = toHaily(DS_diem[0]["Speed"]);
+                    var k = 0; var i = 0; var test = true;
+                    if (speed <= 3) test = false; else test = true;
+                    while (i < DS_diem.length) {
+                        speed = toHaily(DS_diem[i]["Speed"]);
+                        if (test) {
+                            if (speed >= 3) {
+                                DS_diemtheotocdo.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemtheotocdo;
+                                ki++;
+                                DS_diemtheotocdo = [];
+                                test = false;
+                            }
+                        } else {
+                            if (speed < 3) {
+                                DS_diemnammotcho.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemnammotcho;
+                                ki++;
+                                DS_diemnammotcho = [];
+                                test = true;
+                            }
+                        }
+                    }
+                }
+                ShowTable_TongHopTheoTau(DS_tong);
+            }
         }
-        if (a == 0) _armarker = [];
+    });
+}
+function ShowTable_BaoCaoTocDo(list) {
+    var _tbl = "";
+    for (var i = 0; i < list.length; i++) {
+        var startdate = new Date(parseInt(list[i][0]["TransmitTime"].substr(6)));
+        var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
+        var fishdate = new Date(parseInt(list[i][list[i].length - 1]["TransmitTime"].substr(6)));
+        var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
+        var tocdotrungbinh = TinhVanTocTrungBinh(list[i]);
+        var tocdotoida = TinhVanTocToiDa(list[i]);
+        var quangduong = TinhQuangDuong(list[i]);
+        _tbl +=
+            '<tr>' +
+            '<td>' + (i) + '</td>' + // số thứ tự
+            '<td>' + TuNgay + '</td>' + // từ ngày
+            '<td>' + DenNgay + '</td>' + // đến ngày 
+            '<td>' + tocdotrungbinh + '</td>' + // tốc độ trung bình
+            '<td>' + tocdotoida + '</td>' + // tốc độ tối đa
+            '<td>' + quangduong + '</td>' + // quảng đường
+            '</tr>';
+        $("#tbody_tocdocuatau").html(_tbl);
     }
-    if (_flightPath.length > 0) {
-        for (j = 0; j < _flightPath.length; j++) {
-            _flightPath[j].setMap(null);
-        }
-        if (a == 0) _flightPath = [];
+}
+function ShowTable_TongHopTheoTau(list) {
+    var _tbl = "";
+    for (var i = 0; i < list.length; i++) {
+        var startdate = new Date(parseInt(list[i][0]["TransmitTime"].substr(6)));
+        var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
+        var fishdate = new Date(parseInt(list[i][list[i].length - 1]["TransmitTime"].substr(6)));
+        var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
+        var tocdotrungbinh = TinhVanTocTrungBinh(list[i]);
+        var tocdotoida = TinhVanTocToiDa(list[i]);
+        var quangduong = TinhQuangDuong(list[i]);
+        _tbl +=
+            '<tr>' +
+            '<td>' + (i) + '</td>' + // số thứ tự
+            '<td>' + TuNgay + '</td>' + // từ ngày
+            '<td>' + DenNgay + '</td>' + // đến ngày 
+            '<td>' + quangduong + '</td>' + // quảng đường
+            '<td>' + tocdotrungbinh + '</td>' + // tốc độ trung bình
+            '<td>' + tocdotoida + '</td>' + // tốc độ tối đa
+
+            '</tr>';
+        $("#tonghoptheotau").html(_tbl);
     }
+}
+
+// tính quảng đường trong 1 khoảng thời gian
+function TinhQuangDuong(list) {
+    var d = 0;
+
+    for (var i = 1; i < list.length; i++) {
+
+
+
+        var la2 = list[i]["Latitude"];
+
+        var la1 = list[i - 1]["Latitude"];
+
+        var lo2 = list[i]["Longitude"];
+        var lo1 = list[i - 1]["Longitude"];
+
+        var R = 6371;
+        var dLat = (la2 - la1) * (Math.PI / 180);
+        var dLon = (lo2 - lo1) * (Math.PI / 180);
+        var la1ToRad = la1 * (Math.PI / 180);
+        var la2ToRad = la2 * (Math.PI / 180);
+
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(la1ToRad) * Math.cos(la2ToRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        d += R * c;
+
+
+    }
+    return toHaily(d);
 
 }
+
+
+
+
+// tính vận tốc tối đa trong 1 khoảng thời gian
+function TinhVanTocToiDa(list) {
+
+    var max = toHaily(list[0]['Speed']);
+    for (var i = 0; i < list.length; i++) {
+
+        var vantoc = toHaily(list[i]["Speed"]);
+        var latitude = list[i]["Latitude"]
+
+
+        if (max < vantoc) {
+            max = vantoc;
+        }
+
+    }
+    if (max < 3) {
+        return max = 0;
+    }
+    return max;
+}
+
+// tính vận tốc trung bình trong 1 khoảng thời gian
+function TinhVanTocTrungBinh(list) {
+
+    var Tong = 0;
+    var l = 0;
+    for (var i = 0; i < list.length; i++) {
+
+        var vantoc = toHaily(list[i]["Speed"]);
+        if (vantoc >= 3) {
+            Tong += vantoc;
+            l++;
+        }
+
+    }
+    if (l == 0) {
+        return (Math.round((Tong) * 10) / 10)
+    }
+    return (Math.round((Tong / l) * 10) / 10)
+}
+// báo cáo hành trình tàu chạy
+function BaoCaoHanhTrinhTauChay() {
+    var id = $("#listDeviceNo").val();
+    var date = $("#datefilter").val();
+    var datetime = date.split(" - ");
+    var from = datetime[0].replace('/', '-');
+    var from = from.replace('/', '-');
+    var from = from + ' 00:00';
+    var to = datetime[1].replace('/', '-');
+    var to = to.replace('/', '-');
+    var to = to + ' 23:00';
+    var list_lin = [];
+
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetRoadmapByDateTime',
+        data: { deviceID: id, From: from, To: to },
+        success: function (data, txtStatus, XMLHttpRequest) {
+            console.log(data);
+            list_lin = data.Result;
+            if (list_lin == null) {
+                alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+            } else {
+
+
+                if (list_lin.length > 0) {
+                    var _tbl = "";
+                    for (var i = 0; i < list_lin.length; i++) {
+                        var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
+                        var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
+                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
+                        var speed = toHaily(list_lin[i]["Speed"]);
+                        var status = "";
+                        if (speed <= 2.5) {
+                            status = "Tàu dừng";
+                        }
+                        else {
+                            status = "Tàu chạy";
+                        };
+                        _tbl +=
+                            '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
+                            + dte + '</td><td>' + speed + '</td ><td>' + status + '</td ><td>'
+                            + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
+                            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
+                            + '</td></tr>';
+
+                    }
+                    $("#tbody_bgt_hanhtrinh").html(_tbl);
+                }
+            }
+        },
+    }, "json");
+}
+// danh sách tìm kiếm thiết bị 
 function ListDeviceSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
@@ -398,10 +351,7 @@ function ListDeviceSearch(id_search, list_result) {
         }
     }
 };
-
-
-
-
+// cài đặt định dạng cho ngày theo Short date
 function setDate() {
     if (positionView == 0) {
         positionView = 1;
@@ -426,9 +376,6 @@ function setDate() {
     var curentMinute = currentdate.getMinutes() < 10 ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
     var curentSecond = currentdate.getSeconds() < 10 ? "0" + currentdate.getSeconds() : currentdate.getSeconds();
     var datetimeF = curentdate + "-" + +curentMonth + "-" + currentdate.getFullYear();
-    // var datetimeF = currentdate.getFullYear() + "-" + curentMonth + "-" + curentdate + "T00:" + "00:00";
-    //var datetimeF = currentdate.getFullYear() + "-" + curentMonth + "-" + curentdate;
-    // var datetimeE = currentdate.getFullYear() + "-" + curentMonth + "-" + curentdate + "T" + curentHour + ":" + curentMinute + ":" + curentSecond;
 
     document.getElementById("date_form_h").value = "00:00";
     document.getElementById("date_form_d").value = datetimeF;
@@ -436,6 +383,7 @@ function setDate() {
     document.getElementById("date_t_d").value = datetimeF;
 };
 
+// lấy thông tin của người dùng 
 // USER
 function GetInfo_User() {
     //var obj = document.querySelector('.preloader'), inner = document.querySelector('.preloader_inner'), page = document.querySelector('.main');
@@ -490,7 +438,7 @@ function GetInfo_User() {
                 console.log(6);
                 $("#thongtin_diachi").val(data["Address"]);
                 console.log(7);
-                
+
 
             } else { alert("Không có dữ liệu thông tin tài khoản"); }
 
