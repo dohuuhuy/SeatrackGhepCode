@@ -14,7 +14,7 @@ namespace SeaTrack.Lib.Service
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CreateUser",
                  user.Username.Trim(), user.Password, user.Fullname.Trim(), user.Phone,
-                 user.Address.Trim(), user.CreateBy, user.CreateDate, RoleID, user.ManageBy, user.Status);
+                 user.Address.Trim(), user.CreateBy, user.CreateDate, user.UpdateBy, RoleID, user.ManageBy, user.Status, user.LastUpdateDate);
         }
         public static int UpdateUser(UserInfoDTO user)
         {
@@ -72,7 +72,8 @@ namespace SeaTrack.Lib.Service
                         UpdateBy = reader["UpdateBy"].ToString(),
                         LastUpdateDate = reader["LastUpdateDate"].ToString(),
                         RoleID = Convert.ToInt16(reader["RoleID"]),
-                        ManageBy = reader["ManageBy"].ToString()
+                        ManageBy = reader["ManageBy"].ToString(),
+                        Image = reader["Image"].ToString()
                     };
                     user = data;
                 }

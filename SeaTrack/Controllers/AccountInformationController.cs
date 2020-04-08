@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SeaTrack.Lib.DTO;
+using SeaTrack.Lib.DTO.Admin;
+using SeaTrack.Lib.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,10 +16,16 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login","Home", new {area = "" });
             }
             return View("ThongTinCaNhan");
         }
+        public ActionResult GetUserInfo()
+        {
+            Users user = (Users)Session["User"];
+            return Json(user, JsonRequestBehavior.AllowGet); 
+        }
+
         public ActionResult ExpiredDevice()
         {
             if (Session["User"] == null)

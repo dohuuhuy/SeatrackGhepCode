@@ -36,6 +36,8 @@ namespace SeaTrack.Controllers
             var user = (Users)Session["User"];
             us.CreateBy = user.Username;
             us.CreateDate = DateTime.Now;
+            us.UpdateBy = user.Username;
+            us.LastUpdateDate = DateTime.Now;
             us.ManageBy = user.Username;
             us.Status = 1;
             us.Password = "123";
