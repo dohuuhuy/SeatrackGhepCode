@@ -392,7 +392,8 @@
     <Content Include="Content\public\js\main\datatables-init.js" />
     <Content Include="Content\public\js\main\default.js" />
     <Content Include="Content\public\js\main\Account.js" />
-    <Content Include="Content\public\js\main\DeviceAndDriver.js" />
+    <Content Include="Content\public\js\main\DriverApp.js" />
+    <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
     <Content Include="Content\public\js\main\controller.js" />

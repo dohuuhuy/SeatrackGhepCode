@@ -1,10 +1,10 @@
-﻿var App = angular.module("ThietBiVaLaiTauApp", ['angularUtils.directives.dirPagination']);
+﻿var App = angular.module("LaiTauApp", ['angularUtils.directives.dirPagination']);
 
 App.controller('Controller', function ($scope, $http, Service) {
     $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 5;
     $scope.namesData = [];
-    LoadDevice();
+    LoadDriver();
     $scope.loadMessage = updateInfo();
         function updateInfo() {
         var today = new Date();
@@ -29,33 +29,37 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.Status = null;
     }
 
-    $scope.Device = {
-        DeviceID: '',
-        DeviceNo: '',
-        DeviceName: '',
-        DeviceImei: '',
-        DeviceVersion: '',
-        DeviceGroup: '',
-        DateExpired: '',
-        DeviceNote: ''
+    $scope.Driver = {
+        DriverID: '',
+        DriverName: '',
+        Phone: '',
+        Address: '',
+        GPLT: '',
+        CMND: '',
+        Rank: '',
+        IssuedBy: '',
+        Note: '',
+        ManageBy: '',
+        Status: '',
 
     };
 
     $scope.View = function (data) {
         console.log('i am inside view() + ');
-        $scope.Device = {
-            DeviceID: data.DeviceID,
-            DeviceNo: data.DeviceNo,
-            DeviceName: data.DeviceName,
-            DeviceImei: data.DeviceImei,
-            DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
-            DateExpired: data.DateExpired,
-            DeviceNote: data.DeviceNote
+        $scope.Driver = {
+            DriverID: data.DriverID,
+            DriverName: data.DriverName,
+            Phone: data.Phone,
+            Address: data.Address,
+            GPLT: data.GPLT,
+            CMND: data.CMND,
+            Note: data.Note,
+            ManageBy: data.ManageBy,
+            Status: data.Status
 
         };
     };
-    $scope.NoDeviceExist = function (No) {
+    $scope.NoDriverExist = function (No) {
         $scope.NoCheck = "alo";
         device = { DeviceNo: No };
         $http({
@@ -68,29 +72,16 @@ App.controller('Controller', function ($scope, $http, Service) {
             $scope.NoCheck = response.data.DeviceNo;
         })
     }
-    $scope.ImeiDeviceExist = function (Imei) {
-        $scope.ImeiCheck = "alo";
-        device = { DeviceImei: Imei };
-        $http({
-            method: 'POST',
-            url: '/Admin/Device/CheckDeviceExist',
-            data: device
-        }).then(function successCallback(response) {
-            console.log("Imei: " + $scope.Device.DeviceImei);
-            console.log("Check: " + response.data.DeviceImei);
-            $scope.ImeiCheck = response.data.DeviceImei;
-        })
-    }
 
     $scope.Save = function () {
-        if ($scope.Device.DeviceName != "") {
-            console.log('i am inside save func' + JSON.stringify($scope.Device));
+        if ($scope.Driver.DriverName != "") {
+            console.log('i am inside save func' + JSON.stringify($scope.Driver));
             $http({
                 method: 'POST',
                 url: '/Admin/Device/CreateDevice',
-                data: JSON.stringify($scope.Device)
+                data: JSON.stringify($scope.Driver)
             }).then(function successCallback(response) {
-                LoadDevice();
+                LoadDriver();
                 //$scope.namesData.push(response.data);
                 $scope.Clear();
                 alert(" Added Successfully !!!");
@@ -104,12 +95,12 @@ App.controller('Controller', function ($scope, $http, Service) {
     };
     $scope.update = function () {
         //nếu không trường nào bị null
-            console.log('i am inside update funcr ' +
-                JSON.stringify($scope.Customer));
+        console.log('i am inside update funcr ' +
+            JSON.stringify($scope.Driver));
             $http({
                 method: 'POST',
                 url: '/Admin/Device/EditDevice',
-                data: JSON.stringify($scope.Device)
+                data: JSON.stringify($scope.Driver)
             }).then(function successCallback(response) {
                 $scope.namesData = null;
                 Service.GetAllRecords().then(function (d) {
@@ -127,61 +118,61 @@ App.controller('Controller', function ($scope, $http, Service) {
     };
     $scope.Edit = function (data) {
         console.log('i am inside edit() ' + JSON.stringify($scope.Device));
-        $scope.Device = {
-            DeviceID: data.DeviceID,
-            DeviceNo: data.DeviceNo,
-            DeviceName: data.DeviceName,
-            DeviceImei: data.DeviceImei,
-            DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
-            DateExpired: data.DateExpired,
-            DeviceNote: data.DeviceNote,
-            ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
-
+        $scope.Driver = {
+            DriverID: data.DriverID,
+            DriverName: data.DriverName,
+            Phone: data.Phone,
+            Address: data.Address,
+            GPLT: data.GPLT,
+            CMND: data.CMND,
+            Note: data.Note,
+            ManageBy: data.ManageBy,
+            Status: data.Status
 
         };
     };
     $scope.Clear = function () {
-        $scope.Device.DeviceID = '',
-        $scope.Device.DeviceNo = '',
-        $scope.Device.DeviceName = '',
-        $scope.Device.DeviceImei = '',
-        $scope.Device.DeviceVersion = '',
-        $scope.Device.DeviceGroup = '',
-        $scope.Device.DateExpired = '',
-        $scope.Device.DeviceNote = ''
+        $scope.Driver.DriverID = '',
+            $scope.Driver.DriverName = '',
+            $scope.Driver.Phone = '',
+            $scope.Driver.Address = '',
+            $scope.Driver.GPLT = '',
+            $scope.Driver.CMND = '',
+            $scope.Driver.Note = '',
+            $scope.Driver.ManageBy = '',
+            $scope.Driver.Status = ''
 
     };
     $scope.Cancel = function () {
         $scope.clear();
 
-        console.log('i am inside cancel func' + JSON.stringify($scope.Device));
+        console.log('i am inside cancel func' + JSON.stringify($scope.Driver));
     };
 
     $scope.Delete = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Device));
+        console.log('i am inside delete funcr' + JSON.stringify($scope.Driver));
         $http({
             method: 'GET',
-            url: '/Admin/Device/DeleteDevice/' + $scope.namesData[index].DeviceID
+            url: '/Admin/Device/DeleteDevice/' + $scope.namesData[index].DriverID
         }).then(function (response) {
-            LoadDevice();
+            LoadDriver();
             alert(response.data);
         });
     };
     $scope.Unlock = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Device));
+        console.log('i am inside delete funcr' + JSON.stringify($scope.Driver));
         $http({
             method: 'GET',
-            url: '/Admin/Device/UnlockDevice/' + $scope.namesData[index].DeviceID
+            url: '/Admin/Device/UnlockDevice/' + $scope.namesData[index].DriverID
         }).then(function (response) {
-            LoadDevice();
+            LoadDriver();
             alert(response.data);
         });
     };
 
-    function LoadDevice() {
+    function LoadDriver() {
         Service.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
         }, function () {

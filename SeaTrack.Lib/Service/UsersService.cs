@@ -75,12 +75,12 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
-        public static List<Driver> GetListDriverByUserID(int userid)
+        public static List<Driver> GetListDriverByUserID(String name)
         {
-            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListDriverByUserIdOfCustomer", userid);
+            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListUserDriverByManageOfCustomer", name);
             if (reader.HasRows)
             {
-                List<Driver> user = new List<Driver>();
+                List<Driver> drivers = new List<Driver>();
                 while (reader.Read())
                 {
                     var data = new Driver()
@@ -99,9 +99,9 @@ namespace SeaTrack.Lib.Service
                         Status = Convert.ToInt16(reader["Status"]),
 
                     };
-                    user.Add(data);
+                    drivers.Add(data);
                 }
-                return user;
+                return drivers;
             }
             return null;
         }
