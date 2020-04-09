@@ -4,11 +4,11 @@
             <i class="fas fa-align-left"></i>
             <span>Menu</span>
         </button>
-        <a href="http://sea.gpsvin.vn/" type="button" id="giamsat_toggle" class="btn btn-danger d-none">
+        <button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
             <i class="fas fa-indent"></i>
             <span style="font-weight:bolder">Giám sát</span>
-        </a>
-        <img id="s-logo-menu" src="~/Content/public/img/logo-vinasia.png" class="s-logo-menu d-none">
+        </button>
+        <img id="s-logo-menu" src="~/Content/images/logo/logo-vinasia.png" class="s-logo-menu d-none">
         <div class="float-right">
             <div class="dropdown s-div-btn">
                 <a id="linkmenu" href="~/Home/Route">
@@ -35,7 +35,7 @@
                 </button>
                 <div class="dropdown-menu">
                     <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
-                    <a id="show_device" class="dropdown-item" href="~/Management/DeviceAndDriver">Thiết bị và Lái tàu</a>
+                    <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị và Lái tàu</a>
                 </div>
             </div>
             <div class="dropdown s-div-btn">
@@ -62,7 +62,7 @@
                     Hướng dẫn
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" @*href="~/UserGuide"*@ data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
                 </div>
             </div>
             <div class="dropdown s-div-btn">
@@ -75,9 +75,13 @@
                     <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
                 </div>
             </div>
-            <button onclick="ActionMenu(1);" type="button" class="btn btn-outline-dark" title="Đăng xuất">
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
+            <a id="linkmenu" href="~/Home/Logout">
+                <button type="button" class="btn btn-outline-dark" title="Đăng xuất">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </a>
         </div>
     </div>
+
+
 </nav>

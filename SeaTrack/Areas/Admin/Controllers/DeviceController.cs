@@ -24,7 +24,7 @@ namespace SeaTrack.Areas.Admin.Controllers
                 return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
 
-            return View();
+            return View("DanhSachThietBi");
         }
      
         [HttpPost]

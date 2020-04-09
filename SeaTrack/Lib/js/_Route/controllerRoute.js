@@ -18,9 +18,6 @@
     });
 }
 
-
-
-
 var _listDeviceStatus = [];
 updateListDeviceStatus();
 setInterval(function () { updateListDeviceStatus(); }, 30000);
@@ -31,15 +28,6 @@ function redirectRoute(){
     window.location = "/Home/Route";
 }
 
-function ActionMenu(index) {
-    switch (index) {
-        case 1:
-            location.href = "/Home/Logout";
-            break;
-        default:
-            break;
-    }
-};
 function toHaily(a) {
     return (Math.round((a * 0.53996) * 10) / 10);
 }
@@ -66,60 +54,29 @@ function attachInforwindows(marker, string_) {
     _armarker.push(marker);
     _infowins.push(infowin);
 }
-function drawingLinePoint(listStop, id, a) {
-    cleanMap(0);
-    var flightPath = new google.maps.Polyline({
-        path: listStop,
-        geodesic: true,
-        strokeColor: '#14a84e',
-        strokeOpacity: 1.0,
-        strokeWeight: 1
-    });
-    flightPath.setMap(map);
+function getInfoWindow(_dv) { // hiển thị table thông tin tại tọa độ hiện tại của tàu
+    var strStatus = '';
 
-    _flightPath.push(flightPath);
+    var dt = new Date(parseInt(_dv.TransmitTime.substr(6)));
 
-    var iml = listStop.length - 1;
-    var i = 0;
-    for (i; i < iml; i++) {
-        var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
-        var marker = new MarkerWithLabel({
-            position: point,
-            icon: "/Content/public/img/icon/marker_ef.png",
-            //labelContent: i + " lat: " + listStop[i].lat,
-        });
-        marker.setMap(map);
+    var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
+        + ' ' + dt.getHours() + ':' + dt.getMinutes();
 
-        var content_ = '<div class="">Tọa độ: <hr>' + listStop[i].lat + ' - ' + listStop[i].lng + '</div>';
-        attachInforwindows(marker, content_);
+    strStatus += 'Tên thiết bị: <b>' + _dv.DeviceName + '</b><br>'
+        + 'Thời gian: <b>' + dte + '</b><br>';
 
-    }
+    strStatus += 'Trạng thái: <b>' + status + '</b><br>';
 
-    _device = checkDevice(id);
-    var point = new google.maps.LatLng(listStop[iml].lat, listStop[iml].lng);
-    var marker = new MarkerWithLabel({
-        position: point,
-        icon: "/Content/public/img/icon/marker_ex.png",
-    });
-    marker.setMap(map);
-    var infowin = new google.maps.InfoWindow({
-        content: 'Đang cập nhật dữ liệu!',
-    });
-    infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
-    marker.addListener('click', function () {
-        infowin.open(map, marker);
-    });
-    _armarker.push(marker);
-    _infowins.push(infowin);
+    strStatus += 'Toạ độ: <b>' + _dv.Latitude
+        + ' (' + _dv.DirectionSN + ')</b> - <b>'
+        + _dv.Longitude + ' (' + _dv.DirectionEW + ')</b><br>';
 
-    if (a == 1) {
-        map.panTo(point);
-        map.setZoom(6);
-    }
+    strStatus += 'Tốc độ: <b>' + toHaily(_dv.Speed) + '</b> Hải lý / giờ <br>';
 
-    console.log("Again");
-
+    return strStatus;
 }
+
+
 function newPointToLine(point) {
     var path = flightPath.getPath();
     path.push(point);
@@ -131,24 +88,12 @@ function newPointToLine(point) {
         map: map
     });
 }
-function getInfoWindow(_dv) {
-    var strStatus = '';
-    var dt = new Date(parseInt(_dv.TransmitTime.substr(6)));
-    var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-        + ' ' + dt.getHours() + ':' + dt.getMinutes();
-    strStatus += 'Tên thiết bị: <b>' + _dv.DeviceName + '</b><br>'
-        + 'Thời gian: <b>' + dte + '</b><br>';
-    strStatus += 'Trạng thái: <b>' + status + '</b><br>';
-    strStatus += 'Toạ độ: <b>' + _dv.Latitude
-        + ' (' + _dv.DirectionSN + ')</b> - <b>'
-        + _dv.Longitude + ' (' + _dv.DirectionEW + ')</b><br>';
-    strStatus += 'Tốc độ: <b>' + toHaily(_dv.Speed) + '</b> Hải lý / giờ <br>';
-    return strStatus;
-}
+
 function checkDevice(id) {
     i = 0;
     while (i < _listDeviceStatus.length) {
-        if (_listDeviceStatus[i].DeviceID == id) return _listDeviceStatus[i];
+        if (_listDeviceStatus[i].DeviceID == id)
+            return _listDeviceStatus[i];
         i++;
     }
     return 0;
@@ -187,11 +132,17 @@ function makePoint(id, icon = "") {
 function makeListStop(list) {
     var re = [];
     for (var i = 0; i < list.length; i++) {
-        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude };
+
+        var sp = toHaily(list[i].Speed);
+        var dt = new Date(parseInt(list[i].TransmitTime.substr(6)));
+        var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
+            + ' ' + dt.getHours() + ':' + dt.getMinutes();
+
+        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dte , speed: sp };
     }
     return re;
 }
-function setdrawingLinePoint(a = 0) {
+function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm hiển tại của tàu 
     var id = $("#list_xelotrinh").val();
     var from = $("#date_form_d").val() + " " + $("#date_form_h").val();
     var to = $("#date_t_d").val() + " " + $("#date_t_h").val();
@@ -207,8 +158,8 @@ function setdrawingLinePoint(a = 0) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
             } else {
                 //console.log(list_lin);
-                var listStop = makeListStop(list_lin);
-                drawingLinePoint(listStop, id, a);
+                var listStop = makeListStop(list_lin); // gọi tới hàm makeListStop lấy 2 giá trị kinh độ và vĩ độ
+                drawingLinePoint(listStop, id, a); // gọi tới hàm drawingLinePoint truyền listStop hiển thị thông tin vĩ và kinh độ
                 if (list_lin.length > 0) {
                     var _tbl = "";
                     for (var i = 0; i < list_lin.length; i++) {
@@ -225,6 +176,64 @@ function setdrawingLinePoint(a = 0) {
             }
         },
     }, "json");
+}
+function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint tạo ra listStop 
+    cleanMap(0);
+    var flightPath = new google.maps.Polyline({
+        path: listStop,
+        geodesic: true,
+        strokeColor: '#14a84e',
+        strokeOpacity: 1.0,
+        strokeWeight: 1
+    });
+    flightPath.setMap(map);
+    _flightPath.push(flightPath);
+    var iml = listStop.length - 1;
+    var i = 0;
+    for (i; i < iml; i++) {
+        var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
+        var marker = new MarkerWithLabel({
+            position: point,
+            icon: "/Content/public/img/icon/marker_ef.png",
+            //labelContent: i + " lat: " + listStop[i].lat,
+        });
+        marker.setMap(map);
+
+        var content_ =
+            '<div class="">Tọa độ: '
+            + listStop[i].lat   + ' - '
+            + listStop[i].lng   + '<br/> ' + 'Thời gian: ' 
+            + listStop[i].time  + '<br/> ' + 'Vận tốc: '
+            + listStop[i].speed +
+            '</div>';
+        attachInforwindows(marker, content_);
+
+    }
+
+    _device = checkDevice(id);
+    var point = new google.maps.LatLng(listStop[iml].lat, listStop[iml].lng);
+    var marker = new MarkerWithLabel({
+        position: point,
+        icon: "/Content/public/img/icon/marker_ex.png",
+    });
+    marker.setMap(map);
+    var infowin = new google.maps.InfoWindow({
+        content: 'Đang cập nhật dữ liệu!',
+    });
+    infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
+    marker.addListener('click', function () {
+        infowin.open(map, marker);
+    });
+    _armarker.push(marker);
+    _infowins.push(infowin);
+
+    if (a == 1) {
+        map.panTo(point);
+        map.setZoom(6);
+    }
+
+    console.log("Again");
+
 }
 function interval_draw() {
     if (_interval != null) clearInterval(_interval);

@@ -1,10 +1,8 @@
-﻿using SeaTrack.Lib.DTO;
+﻿using DotNetNuke.Entities.Users;
+using SeaTrack.Lib.DTO;
 using SeaTrack.Lib.DTO.Admin;
 using SeaTrack.Lib.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SeaTrack.Controllers
@@ -16,7 +14,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             return View("ThongTinTaiKhoan");
         }
@@ -32,7 +30,7 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult CreateUser(UserInfoDTO us)
         {
-          
+
             var user = (Users)Session["User"];
             us.CreateBy = user.Username;
             us.CreateDate = DateTime.Now;
@@ -40,98 +38,73 @@ namespace SeaTrack.Controllers
             us.LastUpdateDate = DateTime.Now;
             us.ManageBy = user.Username;
             us.Status = 1;
-            us.Password = "123";
-            var data = AdminService.CreateUser(us,4);
+            us.Password = "123456";
+            var data = AdminService.CreateUser(us, 4);
             return Json(new { success = true });
 
         }
-        //[HttpPost]
-        //public ActionResult EditUsers(Users Users)
-        //{
-        //    if (CheckRole(1) == -1 && CheckRole(2) == -1)
-        //    {
-        //        if (CheckRole(1) == 0 && CheckRole(2) == 0)
-        //        {
-        //            return RedirectToAction("Login", "Home", new { area = "" });
-        //        }
-        //        return RedirectToAction("ErrorView", "Home", new { area = "" });
-        //    }
-        //    var user = (Users)Session["User"];
-        //    if (user.RoleID != 1)
-        //    {
-        //        var res = AdminService.CheckUserUsers(user.UserID, Users.UsersID);
-        //        if (res)
-        //        {
-        //            AdminService.UpdateUsers(Users);
-        //            return Json("Đã cập nhật", JsonRequestBehavior.AllowGet);
-        //        }
-        //        return Json("Không tìm thấy thiết bị", JsonRequestBehavior.AllowGet);
-        //    }
-        //    var data = AdminService.UpdateUsers(Users);
-        //    return Json("Đã cập nhật", JsonRequestBehavior.AllowGet);
+        [HttpPost]
+        public ActionResult EditUsers(UserInfoDTO us)
+        {
 
-        //}
+            var user = (Users)Session["User"];
+            us.CreateBy = user.Username;
+            us.CreateDate = DateTime.Now;
+            us.UpdateBy = user.Username;
+            us.LastUpdateDate = DateTime.Now;
+            us.ManageBy = user.Username;
+            us.Status = 1;
+            us.Password = "123456";
+            var data = AdminService.EditUser(us);
+            return Json(new { success = true });
 
-        //[HttpGet]
-        //public ActionResult DeleteUsers(int id)
-        //{
-        //    if (CheckRole(1) == -1 && CheckRole(2) == -1)
-        //    {
-        //        if (CheckRole(1) == 0 && CheckRole(2) == 0)
-        //        {
-        //            return RedirectToAction("Login", "Home", new { area = "" });
-        //        }
-        //        return RedirectToAction("ErrorView", "Home", new { area = "" });
-        //    }
+        }
 
-        //    var user = (Users)Session["User"];
-        //    if (user.RoleID != 1)
-        //    {
-        //        var res = AdminService.CheckUserUsers(user.UserID, id);
-        //        if (res)
-        //        {
-        //            AdminService.DeleteUsers(id);
-        //            return Json("Đã khóa", JsonRequestBehavior.AllowGet);
-        //        }
-        //        return Json("Không tìm thấy thiết bị", JsonRequestBehavior.AllowGet);
-        //    }
-        //    var data = AdminService.DeleteUsers(id);
-        //    return Json("đã khóa", JsonRequestBehavior.AllowGet);
-        //}
+        [HttpGet]
+        public ActionResult LockUsers(int id)
+  
+        {
+            var data = AdminService.UpdateStatusUser(id, -1);
+            return Json("đã khóa", JsonRequestBehavior.AllowGet);
+        }
 
-        //[HttpGet]
-        //public ActionResult UnlockUsers(int id)
-        //{
-        //    if (CheckRole(1) == -1 && CheckRole(2) == -1)
-        //    {
-        //        if (CheckRole(1) == 0 && CheckRole(2) == 0)
-        //        {
-        //            return RedirectToAction("Login", "Home", new { area = "" });
-        //        }
-        //        return RedirectToAction("ErrorView", "Home", new { area = "" });
-        //    }
+        [HttpGet]
+        public ActionResult UnlockUsers(int id)
+        {
+            var data = AdminService.UpdateStatusUser(id, 1);
+            return Json("đã mở khóa", JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Device()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("ThietBi");
+        }
 
-        //    var user = (Users)Session["User"];
-        //    if (user.RoleID != 1)
-        //    {
-        //        var res = AdminService.CheckUserUsers(user.UserID, id);
-        //        if (res)
-        //        {
-        //            AdminService.UnlockUsers(id);
-        //            return Json("Đã kích hoạt", JsonRequestBehavior.AllowGet);
-        //        }
-        //        return Json("Không tìm thấy thiết bị", JsonRequestBehavior.AllowGet);
-        //    }
-        //    var data = AdminService.DeleteUsers(id);
-        //    return Json("Đã kích hoạt", JsonRequestBehavior.AllowGet);
-        //}
-        //public ActionResult UsersAndDriver()
-        //{
-        //    if (Session["User"] == null)
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-        //    return View("ThietBiVaLaiTau");
-        //}
+        public ActionResult GetListDeviceByUserID()
+        {
+            var user = (Users)Session["User"];
+            
+            var data = AdminService.GetListDeviceByUserID(user.UserID);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Driver()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("LaiTau");
+        }
+        public ActionResult GetListDriverByUserID()
+        {
+            var user = (Users)Session["User"];
+
+            var data = UsersService.GetListDriverByUserID(user.UserID);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

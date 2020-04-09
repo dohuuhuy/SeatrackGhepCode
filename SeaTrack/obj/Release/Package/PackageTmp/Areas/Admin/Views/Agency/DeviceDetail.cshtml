@@ -1,0 +1,133 @@
+﻿@model SeaTrack.Lib.DTO.Admin.DeviceViewModel
+@{
+    ViewBag.Title = "DeviceDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAgency.cshtml";
+    
+}
+
+<div class="row" ng-app="App" ng-controller="Controller">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Thông Tin Thiết Bị </strong>
+            </div>
+            @using (Html.BeginForm("Update", "Agency"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="card-body card-block">
+                    @Html.HiddenFor(m => m.DeviceID)
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Số hiệu</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceNo, new { @required = "required", @class = "form-control", placeholder = "Số hiệu" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Tên thiết bị</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceName, new { @required = "required", @class = "form-control", placeholder = "Tên thiết bị" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Phiên bản</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceVersion, new { @required = "required", @class = "form-control", placeholder = "Phiên bản" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Imei</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceImei, new { @required = "required", @class = "form-control", placeholder = "Imei" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Nhóm thiết bị</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceGroup, new { @required = "required", @class = "form-control", placeholder = "Nhóm thiết bị" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Ghi chú</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.DeviceNote, new { @required = "required", @class = "form-control", placeholder = "Ghi chú" })</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Ngày hết hạn</label></div>
+                        <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.ExpireDate, "{0:yyyy-MM-dd}", new {@min = DateTime.Today.ToString("yyyy-MM-dd"), @required = "required", @class = "form-control", @type = "date", placeholder = "Ngày hết hạn" })</div>
+                    </div>   
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card">
+                <div class="card-header">
+                    <a href="#" ng-click="AddDevice(id, manageby)" data-target="#AddNew" data-toggle="modal"><i class="fa fa-plus-circle" style="color:black"></i></a>
+                    <strong class="card-title">Danh Sách Thiết Bị</strong>
+                </div>
+                <div class="card-body" style="height:400px; overflow-y:scroll; ">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tên thiết bị</th>
+                                <th scope="col">Ngày hết hạn</th>
+                                <th scope="col">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="d in Devices">
+                                <th>{{$index + 1}}</th>
+                                <td>{{d.DeviceName}}</td>
+                                <td>{{d.DateExpired}}</td>
+                                <td align="center">
+                                    <a ng-click="RemoveDeviceFromUser(id, $index)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="AddNew" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Danh sách thiết bị</h3>
+                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="LoadDevice(id)">x</button>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tên thiết bị</th>
+                                    <th scope="col">Ngày hết hạn</th>
+                                    <th scope="col">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="dv in DevicesNotUsed">
+                                    <th>{{$index + 1}}</th>
+                                    <td>{{dv.DeviceName}}</td>
+                                    <td>{{dv.DateExpired}}</td>
+                                    <td align="center">
+                                        <a ng-click="AddDeviceToUser(id, $index)"><i class="fa fa-plus-circle"></i></a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="LoadDevice(id)">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/angular.js"></script>
+@*<script src="~/Areas/Admin/AngularJS/Agency/DetailApp.js"></script>*@

@@ -13,7 +13,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("HanhTrinhTauChay");
         }
@@ -21,7 +21,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoTongHopHoatDong");
         }
@@ -29,7 +29,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("HanhTrinhTauChay");
         }
@@ -37,7 +37,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("TocDoCuaTau");
         }
@@ -45,7 +45,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("VuotPhamViDanhBat");
         }
@@ -53,7 +53,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoTongHopTheoTau");
         }
@@ -61,7 +61,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoTongHopTheoLaiTau");
         }
@@ -69,7 +69,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoTongHopHoatDong");
         }
@@ -77,7 +77,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoChiTietHoatDong");
         }
@@ -85,7 +85,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+               return RedirectToAction("Login", "Home");
             }
             return View("BaoCaoTongHopPhamViHoatDong");
         }

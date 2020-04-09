@@ -21,7 +21,7 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             return View("Route");
         }
@@ -100,13 +100,13 @@ namespace SeaTrack.Controllers
                         }
                     }
                     TempData["statusLogin"] = -1;
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Login", "Home");
                 }
                 TempData["statusLogin"] = 0;
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Home");
             }
             TempData["statusLogin"] = 0;
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Home");
         }
 
         [AllowAnonymous]
