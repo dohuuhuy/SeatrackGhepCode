@@ -102,7 +102,7 @@ namespace SeaTrack.Controllers
         {
             var user = (Users)Session["User"];
 
-            var data = UsersService.GetListDriverByUserID((String)user.Username);
+            var data = UsersService.GetListDriverByUserID(user.Username);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

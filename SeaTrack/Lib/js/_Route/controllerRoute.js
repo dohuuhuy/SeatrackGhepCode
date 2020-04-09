@@ -193,7 +193,9 @@ function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm h
                             if (speed < 3) {
 
                                 status = false;
+                                if(toHaily(list_lin[i+1]["Speed"]) > 3){
                                 list.push(list_lin[i])
+                                }  
                                 i++;
                             } else {
                                 list.push(list_lin[i])
@@ -207,6 +209,9 @@ function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm h
                                 i++;
                             }
                             else {
+                                if(toHaily(list_lin[i+1]["Speed"]) > 3){
+                                list.push(list_lin[i])
+                                }
                                 i++;
                             }
                         }
@@ -251,6 +256,61 @@ function ShowTableDataLine(list_lin) {
     }
     $("#tblbodydataline").html(_tbl);
 }
+
+function TimPhamVi(list){
+    var xmax = 0;
+    var xmin = 0;
+    var ymax = 0;
+    var ymin = 0;
+    var phamvi = [];
+    for(var i=0; i< list.length; i++)
+    {
+        if(list[i].lat > list[xmax].lat)
+        {
+            xmax = i;
+        }
+        if(list[i].lat < list[xmin].lat)
+        {
+            xmin = i;
+        }
+        if(list[i].lng > list[ymax].lng)
+        {
+            ymax = i;
+        }
+        if(list[i].lng < list[ymin].lng)
+        {
+            ymin = i;
+        }
+    }
+    //console.log(xmax);
+    //console.log(xmin);
+    //console.log(ymax);
+    //console.log(ymin);
+    phamvi.push(xmax);
+    phamvi.push(xmin);
+    phamvi.push(ymax);
+    phamvi.push(ymin);
+    return phamvi;
+
+
+}
+
+function TinhGoc(lat1, long1,  lat2, long2){
+    var dLon = (long2 - long1);
+
+    var y = Math.sin(dLon) * Math.cos(lat2);
+    var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1)
+            * Math.cos(lat2) * Math.cos(dLon);
+
+    var brng = Math.atan2(y, x);
+
+    brng = brng*(180/Math.PI)   ;
+    brng = (brng + 360) % 360;
+    brng = 360 - brng; // count degrees counter-clockwise - remove to make clockwise
+
+    return brng;
+}
+
 function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint tạo ra listStop 
     cleanMap(0);
     var flightPath = new google.maps.Polyline({
@@ -262,15 +322,44 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     });
     flightPath.setMap(map);
     _flightPath.push(flightPath);
+    var phamvi = [];
+    phamvi = TimPhamVi(listStop);
+    console.log(phamvi);
+    for (var h = 0; h < phamvi.length; h++)
+    {
+        var point = new google.maps.LatLng(listStop[phamvi[h]].lat, listStop[phamvi[h]].lng);
+        var marker = new MarkerWithLabel({
+            position: point,
+            icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 7,
+            strokeColor: 'red'
+        }});
+        marker.setMap(map);
+    }
     var iml = listStop.length - 1;
     var i = 0;
     for (i; i < iml; i++) {
         var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
+        var angle = TinhGoc(listStop[i].lat, listStop[i].lng, listStop[i+1].lat, listStop[i+1].lng)
+        var color = "";
+
+        if(listStop[i].status == "Tàu chạy")
+        {
+            color = '#70ad47';
+        }
+        if(listStop[i].status == "Tàu dừng")
+        {
+            color = 'black';
+        }
         var marker = new MarkerWithLabel({
             position: point,
-            icon: "/Content/public/img/icon/marker_ef.png",
-            //labelContent: i + " lat: " + listStop[i].lat,
-        });
+            icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 3,
+            rotation: angle,
+            strokeColor: color
+        }});
         marker.setMap(map);
 
         var content_ =
