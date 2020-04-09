@@ -2,7 +2,7 @@
 
 AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 3;
     $scope.namesData = [];
     //$scope.loadMessage = updateInfo();
     LoadAccounts();

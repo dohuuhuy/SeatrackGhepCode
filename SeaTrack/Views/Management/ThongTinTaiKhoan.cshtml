@@ -3,230 +3,260 @@
     ViewBag.Title = "ThongTinTaiKhoan";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-<div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl">
-    <div class="wrapper">
-        <div id="sidebar5" class="si-sidebar s-sidebar">
-            <div class="sidebar-header s-flexible s-just-center">
-                <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
+    <div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl">
+        <div class="wrapper">
+            <div id="sidebar5" class="si-sidebar s-sidebar">
+                <div class="sidebar-header s-flexible s-just-center">
+                    <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
+                </div>
+                <hr>
+
             </div>
-            <hr>
-
-        </div>
-        <div id="content-taikhoan-body" class="content">
-            <div class="container-fluid">
-                <h1 class="mt-4">Thông Tin Tài Khoản</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Quản trị</a></li>
-                    <li class="breadcrumb-item active">Tài khoản</li>
-                </ol>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <strong class="card-title">Vùng Tìm Kiếm</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="col col-md-12">
-                            <div class="input-group">
-                                <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary" ng-click="ClearSearch()">
-                                        <i class="fa fa-search"></i> Search
-                                    </button>
+            <div id="content-taikhoan-body" class="content">
+                <div class="container-fluid">
+                    <h1 class="mt-4">Thông Tin Tài Khoản</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="index.html">Quản trị</a></li>
+                        <li class="breadcrumb-item active">Tài khoản</li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <strong class="card-title">Vùng Tìm Kiếm</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" ng-click="ClearSearch()">
+                                            <i class="fa fa-search"></i> Search
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <br />
+                                <br />
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
+                                <i class="fa fa-plus"></i> Thêm mới
+                            </button>
+                            <label>Tổng: {{namesData.length}}</label>
+                            <div class="table-responsive">
+                                <table id="dataTable" class="table table-bordered table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">#</th>
+                                            <th>Thao tác</th>
+                                            <th>Tài khoản</th>
+                                            <th>Họ và tên</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
+                                            <td>{{$index+1}}</td>
+                                            <td>
+                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Account" data-toggle="modal" data-target="#XemThongTin">
+                                                    <i class="fa fa-eye" style="color:black"></i>
+                                                </a>
+                                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                                <a ng-click="Lock($index)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
+                                                <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i style="color:red" class="fa fa-unlock"></i></a>
+                                            </td>
+                                            <td>{{a.Username}}</td>
+                                            <td>{{a.FullName}}</td>
+                                            <td>{{a.Phone}}</td>
+
+
+
+                                            <td ng-if="a.Status == 1"><p style="color:forestgreen">Kích hoạt</p></td>
+                                            <td ng-if="a.Status == -1"><p style="color:red">Tạm khóa</p></td>
+                                            <td ng-if="a.Status == 0"><p style="color:red">Hết hạn</p></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
+                                    <div class="text-center">
+                                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="XemThongTin" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" ng-show="Account.AccountID != '' ">
+                        <div class="modal-header">
+                            <h3 class="text-info">Xem Thông Tin Chi Tiết </h3>
+                            <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                        </div>
+                        <div class="modal-body" style="margin-left:20px">
+                            <form class="form-horizontal row" name="XemThongTin">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label"> Tên tài khoản </label>
+                                        <input class="form-control" name="Username" ng-model="Account.Username" type="text" disabled maxlength="50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Họ và tên </label>
+                                        <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" disabled maxlength="30" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Số điện thoại </label>
+                                        <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" disabled maxlength="50" />
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label"> Địa chỉ </label>
+                                        <input class="form-control" name="Address" ng-model="Account.Address" type="text" disabled maxlength="10" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Người tạo </label>
+                                        <input class="form-control" name="CreatBy" ng-model="Account.CreateBy" type="text" disabled maxlength="200" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Người quản lý </label>
+                                        <input class="form-control" name="ManageBy" ng-model="Account.ManageBy" type="text" disabled maxlength="200" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
-                            <i class="fa fa-plus"></i> Thêm mới
-                        </button>
-                        <label>Tổng: {{namesData.length}}</label>
-                        <div class="table-responsive">
-                            <table id="dataTable" class="table table-bordered table-striped text-center">
-                                <thead>
-                                    <tr>
-                                        <th width="5%">#</th>
-                                        <th>Thao tác</th>
-                                        <th>Tài khoản</th>
-                                        <th>Họ và tên</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                                        <td>{{$index+1}}</td>
-                                        <td>
-                                            <a ng-click="View(namesData[$index])" ng-model="$scope.Account" data-toggle="modal" data-target="#XemThongTin">
-                                                <i class="fa fa-eye" style="color:black"></i>
-                                            </a>
-                                            <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                            <a ng-click="Lock($index)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
-                                            <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i style="color:red" class="fa fa-unlock"></i></a>
-                                        </td>
-                                        <td>{{a.Username}}</td>
-                                        <td>{{a.FullName}}</td>
-                                        <td>{{a.Phone}}</td>
-
-
-
-                                        <td ng-if="a.Status == 1"><p style="color:forestgreen">Kích hoạt</p></td>
-                                        <td ng-if="a.Status == -1"><p style="color:red">Tạm khóa</p></td>
-                                        <td ng-if="a.Status == 0"><p style="color:red">Hết hạn</p></td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
-                                <div class="text-center">
-                                    <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+            </div>
+            <div class="modal fade" id="ThemThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="text-info">Thêm tài khoản người dùng</h3>
+                            <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                        </div>
+                        <div class="modal-body" style="margin-left:20px">
+                            <form class="form-horizontal row" name="AddNewForm">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label"> Tên tài khoản </label>
+                                        <input class="form-control" name="Username" ng-model="Account.Username" type="text" placeholder="Tên tài khoản ..."
+                                               required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
+                                        <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Họ và tên </label>
+                                        <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" placeholder="Họ và tên ..." required maxlength="30" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Số điện thoại </label>
+                                        <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" placeholder="Số điện thoại ..." required maxlength="50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Địa chỉ </label>
+                                        <textarea class="form-control" name="Address" ng-model="Account.Address" type="text" required rows="3"></textarea>
+                                    </div>
                                 </div>
-                            </div>
 
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <div class="modal fade" id="XemThongTin" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content" ng-show="Account.AccountID != '' ">
-                    <div class="modal-header">
-                        <h3 class="text-info">Xem Thông Tin Chi Tiết </h3>
-                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
-                    </div>
-                    <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="XemThongTin">
-                            <div class="col col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text" disabled maxlength="50" />
+            <div class="modal fade" id="SuaThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="col-md-6"> <h3 class="text-info">Cập Nhật Thông Tin</h3></div>
+                            <div class="col-md-5"> <h3 class="text-info">Cấp Thiết Bị</h3> </div>
+                            <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                        </div>
+                        <div class="modal-body" style="margin-left:20px">
+
+                            <form class="form-horizontal row" name="UpdateForm">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label"> Tên tài khoản </label>
+                                        <input class="form-control" name="Username" ng-model="Account.Username" type="text"
+                                               required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
+                                        <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Họ và tên </label>
+                                        <input class="form-control" name="FullName" ng-model="Account.FullName" type="text"
+                                               required maxlength="30" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Số điện thoại </label>
+                                        <input class="form-control" name="Phone" ng-model="Account.Phone" type="text"
+                                               required maxlength="50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Địa chỉ </label>
+                                        <textarea class="form-control" name="Address" ng-model="Account.Address" type="text" required rows="3"></textarea>
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" disabled maxlength="30" />
+                                <div class="col col-md-6">
+                                    <label class="control-label"> Danh sách thiết bị </label>
+                                    <table class="table table-bordered text-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên thiết bị</th>
+                                                <th scope="col">Ngày hết hạn</th>
+                                                <th scope="col">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="dv in DevicesNotUsed">
+                                                <th>{{$index + 1}}</th>
+                                                <td>{{dv.DeviceName}}</td>
+                                                <td>{{dv.DateExpired}}</td>
+                                                <td align="center">
+                                                    <a ng-click="AddDeviceToUser(id, $index)"><i class="fa fa-plus-circle"></i></a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" disabled maxlength="50" />
-                                </div>
-                            </div>
-                            <div class="col col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Địa chỉ </label>
-                                    <input class="form-control" name="Address" ng-model="Account.Address" type="text" disabled maxlength="10" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Người tạo </label>
-                                    <input class="form-control" name="CreatBy" ng-model="Account.CreateBy" type="text" disabled maxlength="200" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Người quản lý </label>
-                                    <input class="form-control" name="ManageBy" ng-model="Account.ManageBy" type="text" disabled maxlength="200" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-        <div class="modal fade" id="ThemThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="text-info">Thêm tài khoản người dùng</h3>
-                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
-                    </div>
-                    <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="AddNewForm">
-                            <div class="col col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text" placeholder="Tên tài khoản ..." 
-                                           required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
-                                    <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" placeholder="Họ và tên ..." required maxlength="30" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Số điện thoại </label>              
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" placeholder="Số điện thoại ..." required maxlength="50" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Địa chỉ </label>
-                                    <textarea class="form-control" name="Address" ng-model="Account.Address" type="text" required rows="3"></textarea>
-                                </div>
-                            </div>
 
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="SuaThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="text-info">Cập Nhật Thông Tin</h3>
-                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
-                    </div>
-                    <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="UpdateForm">
-                            <div class="col col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text" 
-                                           required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
-                                    <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" 
-                                           required maxlength="30" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" 
-                                           required maxlength="50" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"> Địa chỉ </label>
-                                    <textarea class="form-control" name="Address" ng-model="Account.Address" type="text" required rows="3"></textarea>
-                                </div>
-
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
     </div>
-
-</div>
 <script src="~/Scripts/jquery.js"></script>
 @*<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>*@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

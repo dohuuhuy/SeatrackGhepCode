@@ -101,6 +101,12 @@ var _stt_cmd2 = {
 	3: { "img": "tau-red.png", },
 	4: { "img": "tau-black.png", }
 };
+var _stt_cmd3 = {
+	1: { "img": "tau-green.png", },
+	2: { "img": "tau-black.png", },
+	3: { "img": "tau-red.png", },
+	4: { "img": "tau-black.png", }
+};
 var _c_marker = 0;
 
 

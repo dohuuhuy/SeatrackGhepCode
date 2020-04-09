@@ -1,4 +1,20 @@
-﻿function loadSpeedLimit() {
+﻿function clearInfoWin() {
+    for (var i = 0; i < _infowins.length; i++) {
+        _infowins[i].close();
+    }
+}
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+slider.oninput = function () {
+    output.innerHTML = this.value;
+}
+
+function setRange(a) {
+    $("#myRange").attr("max", a);
+}
+function loadSpeedLimit() {
     var pathValues = [];
 
     var a = new google.maps.LatLng(10.834650, 106.667149);
@@ -13,9 +29,9 @@
         key: "AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk",
         path: pathValues.join('|'),
     },
-    function (data) {
-        console.log(data);
-    });
+        function (data) {
+            console.log(data);
+        });
 }
 
 var _listDeviceStatus = [];
@@ -24,7 +40,7 @@ setInterval(function () { updateListDeviceStatus(); }, 30000);
 function win_reload() {
     window.location.reload();
 }
-function redirectRoute(){
+function redirectRoute() {
     window.location = "/Home/Route";
 }
 
@@ -48,6 +64,7 @@ function attachInforwindows(marker, string_) {
     });
     infowin.setContent(string_);
     marker.addListener('click', function () {
+        clearInfoWin();
         infowin.open(map, marker);
     });
 
@@ -119,11 +136,12 @@ function makePoint(id, icon = "") {
 
         infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
         google.maps.event.addListener(marker, 'click', function () {
+            clearInfoWin();
             infowin.open(map, marker);
         });
         _infowins.push(infowin);
         map.panTo(point);
-        map.setZoom(6);
+        map.setZoom(12);
         _armarker.push(marker);
         marker.setMap(map);
     }
@@ -132,21 +150,25 @@ function makePoint(id, icon = "") {
 function makeListStop(list) {
     var re = [];
     for (var i = 0; i < list.length; i++) {
-
+        var status = '';
         var sp = toHaily(list[i].Speed);
+        if (sp < 3) { sp = 0; status = 'Tàu dừng' }
+        else { sp = toHaily(list[i].Speed); status = 'Tàu chạy' }
         var dt = new Date(parseInt(list[i].TransmitTime.substr(6)));
         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
             + ' ' + dt.getHours() + ':' + dt.getMinutes();
 
-        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dte , speed: sp };
+        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dte, speed: sp, status: status };
     }
     return re;
 }
+var list_lin = [];
 function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm hiển tại của tàu 
     var id = $("#list_xelotrinh").val();
     var from = $("#date_form_d").val() + " " + $("#date_form_h").val();
     var to = $("#date_t_d").val() + " " + $("#date_t_h").val();
-    var list_lin = [];
+
+    var list = [];
     $.ajax({
         type: 'GET',
         url: '/Home/GetRoadmapByDateTime',
@@ -157,25 +179,77 @@ function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm h
             if (list_lin == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
             } else {
-                //console.log(list_lin);
-                var listStop = makeListStop(list_lin); // gọi tới hàm makeListStop lấy 2 giá trị kinh độ và vĩ độ
-                drawingLinePoint(listStop, id, a); // gọi tới hàm drawingLinePoint truyền listStop hiển thị thông tin vĩ và kinh độ
+
+                var listStop = makeListStop(list_lin);
+                drawingLinePoint(listStop, id, a, list_lin);
+
                 if (list_lin.length > 0) {
-                    var _tbl = "";
-                    for (var i = 0; i < list_lin.length; i++) {
-                        var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
-                        var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
-                        _tbl += '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td>'
-                            + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
-                            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
-                            + '</td><td>' + toHaily(list_lin[i]["Speed"]) + '</td><td>' + dte + '</td></tr>';
+                    var speed = toHaily(list_lin[0]["Speed"]);
+                    var k = 0; var i = 0; var status = true;
+                    //  if (speed <= 3) status = false; else status = true;
+                    while (i < list_lin.length) {
+                        speed = toHaily(list_lin[i]["Speed"]);
+                        if (status) {
+                            if (speed < 3) {
+
+                                status = false;
+                                list.push(list_lin[i])
+                                i++;
+                            } else {
+                                list.push(list_lin[i])
+                                i++;
+                            }
+                        }
+                        else {
+                            if (speed > 3) {
+                                status = true;
+                                list.push(list_lin[i])
+                                i++;
+                            }
+                            else {
+                                i++;
+                            }
+                        }
+
                     }
-                    $("#tblbodydataline").html(_tbl);
+                    ShowTableDataLine(list);
                 }
+
             }
         },
     }, "json");
+}
+function nhaytoday(i) {
+    clearInfoWin();
+    var b = new google.maps.LatLng(list_lin[i].Latitude, list_lin[i].Longitude);
+    map.panTo(b);
+    _infowins[i].open(map, _armarker[i]);
+}
+function ShowTableDataLine(list_lin) {
+
+    var _tbl = "";
+    for (var i = 0; i < list_lin.length; i++) {
+        console.log('demo ' + list_lin[i])
+        var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
+        var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
+            + ' ' + dt.getHours() + ':' + dt.getMinutes();
+        var vantoc = toHaily(list_lin[i]["Speed"]);
+        var speed = 0;
+        if (vantoc < 3) {
+            speed = 0
+        }
+        else {
+            speed = toHaily(list_lin[i]["Speed"]);
+        }
+        _tbl +=
+            '<tr onclick="nhaytoday(' + i + ')" id="tr' + list_lin[i]["DeviceID"] + i + '">' +
+            '<td>' + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
+            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"] + '</td>' +
+            '<td>' + speed + '</td >' +
+            '<td>' + dte + '</td>' +
+            '</tr > ';
+    }
+    $("#tblbodydataline").html(_tbl);
 }
 function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint tạo ra listStop 
     cleanMap(0);
@@ -201,10 +275,11 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
 
         var content_ =
             '<div class="">Tọa độ: '
-            + listStop[i].lat   + ' - '
-            + listStop[i].lng   + '<br/> ' + 'Thời gian: ' 
-            + listStop[i].time  + '<br/> ' + 'Vận tốc: '
-            + listStop[i].speed +
+            + listStop[i].lat + ' - '
+            + listStop[i].lng + '<br/> ' + 'Thời gian: '
+            + listStop[i].time + '<br/> ' + 'Trạng thái: '
+            + listStop[i].status + '<br/> ' + 'Vận tốc: '
+            + listStop[i].speed + ' Hải lý/Giờ' +
             '</div>';
         attachInforwindows(marker, content_);
 
@@ -222,6 +297,7 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     });
     infowin.setContent('<div class="">' + getInfoWindow(_device) + '</div>');
     marker.addListener('click', function () {
+        clearInfoWin();
         infowin.open(map, marker);
     });
     _armarker.push(marker);
@@ -229,7 +305,7 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
 
     if (a == 1) {
         map.panTo(point);
-        map.setZoom(6);
+        map.setZoom(12);
     }
 
     console.log("Again");
@@ -255,13 +331,23 @@ function setup_DataTable() {
                     var dt = new Date(parseInt(dad[i]["TransmitTime"].substr(6)));
                     var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
                         + ' ' + dt.getHours() + ':' + dt.getMinutes();
+                    var today = new Date();
+                    var phut = Math.floor((today - dt) / 1000 * 60);
 
+
+                    var pic = 2;
+                    if (speed > 3) {
+                        pic = 1;
+                    }
+                    if (phut > 45) {
+                        pic = 3;
+                    }
                     _tb += '<tr id="tr' + dad[i]["DeviceID"]
                         + '" classname="groupXe" onclick="makePoint(' + dad[i]["DeviceID"]
                         + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
                         + '<td class="alignCenter">'
                         + (i + 1) + '</td><td>'
-                        + '<img src="/Content/public/img/tau/' + _stt_cmd2[1]["img"] + '">  '
+                        + '<img src="/Content/public/img/tau/' + _stt_cmd2[pic]["img"] + '">  '
                         + dad[i]["DeviceName"]
                         + '</td><td>' + toHaily(dad[i]["Speed"])
                         + '</td><td>' + dte + '</td><td>'
@@ -284,8 +370,8 @@ function setup_selectDataLine() {
         success: function (data, txtStatus, XMLHttpRequest) {
             dad = data.Result;
             if (dad.length > 0) {
-                var _tb = '<option value="0">Tất cả</option>';
-
+                //var _tb = '<option value="0">Tất cả</option>';
+                var _tb = '';
                 for (var i = 0; i < dad.length; i++) {
                     _tb += '<option value="' + dad[i]["DeviceID"] + '">' + dad[i]["DeviceName"] + '</option>';
                 }
