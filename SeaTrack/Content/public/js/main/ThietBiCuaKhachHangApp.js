@@ -42,7 +42,7 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
     };
 
     $scope.View = function (data) {
-        console.log('i am inside view() + ');
+        console.log('i am inside view() ' + JSON.stringify($scope.Device) );
         $scope.Device = {
             DeviceID: data.DeviceID,
             DeviceNo: data.DeviceNo,
