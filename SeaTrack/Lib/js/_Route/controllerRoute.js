@@ -1,4 +1,5 @@
-﻿function clearInfoWin() {
+﻿//import "/Work/git/SeatrackGhepCode/SeaTrack/Scripts/graham_scan.js";
+function clearInfoWin() {
     for (var i = 0; i < _infowins.length; i++) {
         _infowins[i].close();
     }
@@ -147,16 +148,30 @@ function makePoint(id, icon = "") {
     }
     else alert("Chưa có dữ liệu, vui lòng thử lại sau");
 }
+function makeListStopPlus(list) {
+    var re = [];
+    for (var i = 0; i < list.length; i++) {
+        re[i] = { lat: list[i].x, lng: list[i].y};
+    }
+    return re;
+}
 function makeListStop(list) {
     var re = [];
     for (var i = 0; i < list.length; i++) {
         var status = '';
-        var sp = toHaily(list[i].Speed);
-        if (sp < 3) { sp = 0; status = 'Tàu dừng' }
-        else { sp = toHaily(list[i].Speed); status = 'Tàu chạy' }
         var dt = new Date(parseInt(list[i].TransmitTime.substr(6)));
         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
             + ' ' + dt.getHours() + ':' + dt.getMinutes();
+        var today = new Date();
+        var phut = Math.floor((today - dt) / 1000 * 60);
+        
+        var sp = toHaily(list[i].Speed);
+        if(phut > 45){
+            status = 'Mất tín hiệu'
+        }else {
+            if (sp < 3) { sp = 0; status = 'Tàu dừng' }
+            else { sp = toHaily(list[i].Speed); status = 'Tàu chạy' }    
+        }
 
         re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dte, speed: sp, status: status };
     }
@@ -193,7 +208,9 @@ function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm h
                             if (speed < 3) {
 
                                 status = false;
+                                if(toHaily(list_lin[i+1]["Speed"]) > 3){
                                 list.push(list_lin[i])
+                                }  
                                 i++;
                             } else {
                                 list.push(list_lin[i])
@@ -207,6 +224,9 @@ function setdrawingLinePoint(a = 0) { // hiển thị thông tin tại điểm h
                                 i++;
                             }
                             else {
+                                if(toHaily(list_lin[i+1]["Speed"]) > 3){
+                                list.push(list_lin[i])
+                                }
                                 i++;
                             }
                         }
@@ -251,6 +271,65 @@ function ShowTableDataLine(list_lin) {
     }
     $("#tblbodydataline").html(_tbl);
 }
+
+function TimPhamVi(list){
+    //var xmax = 0;
+    //var xmin = 0;
+    //var ymax = 0;
+    //var ymin = 0;
+    //var phamvi = [];
+    //for(var i=0; i< list.length; i++)
+    //{
+    //    if(list[i].lat > list[xmax].lat)
+    //    {
+    //        xmax = i;
+    //    }
+    //    if(list[i].lat < list[xmin].lat)
+    //    {
+    //        xmin = i;
+    //    }
+    //    if(list[i].lng > list[ymax].lng)
+    //    {
+    //        ymax = i;
+    //    }
+    //    if(list[i].lng < list[ymin].lng)
+    //    {
+    //        ymin = i;
+    //    }
+    //}
+    //console.log(xmax);
+    //console.log(xmin);
+    //console.log(ymax);
+    //console.log(ymin);
+    // phamvi.push(xmax);
+    // phamvi.push(xmin);
+    // phamvi.push(ymax);
+    // phamvi.push(ymin);
+    var convexHull = new ConvexHullGrahamScan();
+    list.forEach(element => {
+        convexHull.addPoint(element.lat, element.lng);
+    });
+    var hullPoints = convexHull.getHull();
+    console.log(hullPoints)
+    return hullPoints;
+}
+
+function TinhGoc(lat1, long1,  lat2, long2){
+    var dLon = (long2 - long1);
+
+    var y = Math.sin(dLon) * Math.cos(lat2);
+    var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1)
+            * Math.cos(lat2) * Math.cos(dLon);
+
+    var brng = Math.atan2(y, x);
+
+    brng = brng*(180/Math.PI)   ;
+    brng = (brng + 360) % 360;
+    brng = 360 - brng; // count degrees counter-clockwise - remove to make clockwise
+
+    return brng;
+}
+
 function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint tạo ra listStop 
     cleanMap(0);
     var flightPath = new google.maps.Polyline({
@@ -262,15 +341,54 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     });
     flightPath.setMap(map);
     _flightPath.push(flightPath);
+    var phamvi = [];
+    phamvi = TimPhamVi(listStop);
+    console.log(phamvi);
+    for (var h = 0; h < phamvi.length; h++)
+    {
+        var point = new google.maps.LatLng(phamvi[h].x, phamvi[h].y);
+        var marker = new MarkerWithLabel({
+            position: point,
+            icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 7,
+            strokeColor: 'red'
+        }});
+        marker.setMap(map);
+    }
+    var hulllist = makeListStopPlus(phamvi);
+    var HullPath = new google.maps.Polyline({
+        path: hulllist,
+        geodesic: true,
+        strokeColor: 'red',
+        strokeOpacity: 1.0,
+        strokeWeight: 1
+    });
+    HullPath.setMap(map);
+    _flightPath.push(HullPath);
     var iml = listStop.length - 1;
     var i = 0;
     for (i; i < iml; i++) {
         var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
+        var angle = TinhGoc(listStop[i].lat, listStop[i].lng, listStop[i+1].lat, listStop[i+1].lng)
+        var color = "";
+
+        if(listStop[i].status == "Tàu chạy")
+        {
+            color = '#70ad47';
+        }
+        if(listStop[i].status == "Tàu dừng")
+        {
+            color = 'black';
+        }
         var marker = new MarkerWithLabel({
             position: point,
-            icon: "/Content/public/img/icon/marker_ef.png",
-            //labelContent: i + " lat: " + listStop[i].lat,
-        });
+            icon: {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 3,
+            rotation: angle,
+            strokeColor: color
+        }});
         marker.setMap(map);
 
         var content_ =
@@ -287,9 +405,19 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
 
     _device = checkDevice(id);
     var point = new google.maps.LatLng(listStop[iml].lat, listStop[iml].lng);
+    var icon = "";
+    if(listStop[iml].status == 'Tàu dừng'){
+        icon = "/Content/public/img/icon/tau_den.png"
+    }
+    if(listStop[iml].status == 'Tàu chạy'){
+        icon = "/Content/public/img/icon/tau_xanh.png"
+    } 
+    if(listStop[iml].status == 'Mất tín hiệu'){
+        icon =  "/Content/public/img/icon/tau_den.png"
+    } 
     var marker = new MarkerWithLabel({
         position: point,
-        icon: "/Content/public/img/icon/marker_ex.png",
+        icon: icon,
     });
     marker.setMap(map);
     var infowin = new google.maps.InfoWindow({

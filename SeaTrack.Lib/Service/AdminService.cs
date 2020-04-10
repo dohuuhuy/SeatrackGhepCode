@@ -78,12 +78,6 @@ namespace SeaTrack.Lib.Service
                  user.Username.Trim(), user.Password, user.Fullname.Trim(), user.Phone,
                  user.Address.Trim(), user.CreateBy, user.CreateDate, user.UpdateBy, RoleID, user.ManageBy, user.Status, user.LastUpdateDate);
         }
-        public static int UpdateUser(UserInfoDTO user)
-        {
-            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_UpdateUser",
-                user.UserID, user.Status);
-
-        }
         public static List<UserViewModel> GetListUser(int RoleID)
         {
             List<UserViewModel> lst = null;
@@ -299,7 +293,7 @@ namespace SeaTrack.Lib.Service
         public static List<DeviceViewModel> GetListDevice()
         {
             List<DeviceViewModel> lst = null;
-            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "View_GetListDevice");
+            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDevice");
             if (reader.HasRows)
             {
                 lst = new List<DeviceViewModel>();
@@ -386,7 +380,7 @@ namespace SeaTrack.Lib.Service
             return lst;
         }
 
-        //Username != null, Lấy danh sách thiết bị thuộc về UserID nhưng chưa được gán cho người dùng khác
+        //Username != null, Lấy danh sách thiết bị thuộc về Username nhưng chưa được gán cho người dùng khác
         //Username == null, lấy danh sách thiết bị chưa được gán cho bất kỳ người dùng
         public static List<DeviceViewModel> GetListDeviceNotUsedByUser(string Username)
         {
