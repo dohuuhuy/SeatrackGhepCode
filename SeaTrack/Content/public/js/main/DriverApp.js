@@ -1,4 +1,5 @@
-﻿var App = angular.module("LaiTauApp", ['angularUtils.directives.dirPagination']);
+﻿
+var App = angular.module("LaiTauApp", ['angularUtils.directives.dirPagination']);
 
 App.controller('Controller', function ($scope, $http, Service) {
     $scope.currentPage = 1;
@@ -6,27 +7,27 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.namesData = [];
     LoadDriver();
     $scope.loadMessage = updateInfo();
-        function updateInfo() {
+    function updateInfo() {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
     };
-        $scope.total = function () {
+    $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
             total++;
         });
         return total;
     };
-    $scope.DeviceExtension = function(dateExpire,time) {
-    console.log('date'+dateExpire);
-    dateExpire.setDate(dateExpire.getDate() + time*30); // Set now + 30 days as the new date
-    console.log('new date'+dateExpire);
-    $scope.Device.ExpireDate = new Date(dateExpire);
-    $scope.Device.DateExpired = new Date(dateExpire);
+    $scope.DeviceExtension = function (dateExpire, time) {
+        console.log('date' + dateExpire);
+        dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
+        console.log('new date' + dateExpire);
+        $scope.Device.ExpireDate = new Date(dateExpire);
+        $scope.Device.DateExpired = new Date(dateExpire);
     }
-    $scope.ClearSearch = function(){
-    $scope.SearchKey = "";
-    $scope.Status = null;
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
     }
 
     $scope.Driver = {
@@ -41,11 +42,17 @@ App.controller('Controller', function ($scope, $http, Service) {
         Note: '',
         ManageBy: '',
         Status: '',
+        CreateDateGPLT: '',
+        ExpriseDateGPLT: '',
+        CreateDate: ''
 
     };
 
+
     $scope.View = function (data) {
-        console.log('i am inside view() + ');
+
+        console.log('i am inside view()' + JSON.stringify($scope.Driver));
+
         $scope.Driver = {
             DriverID: data.DriverID,
             DriverName: data.DriverName,
@@ -53,9 +60,14 @@ App.controller('Controller', function ($scope, $http, Service) {
             Address: data.Address,
             GPLT: data.GPLT,
             CMND: data.CMND,
+            Rank: data.Rank,
             Note: data.Note,
             ManageBy: data.ManageBy,
-            Status: data.Status
+            Status: data.Status,
+            CreateDateGPLT: new Date(parseInt(data.CreateDateGPLT.substr(6))),
+            ExpriseDateGPLT: new Date(parseInt(data.ExpriseDateGPLT.substr(6))),
+            IssuedBy: data.IssuedBy,
+            CreateDate: new Date(parseInt(data.CreateDate.substr(6))),
 
         };
     };
@@ -78,13 +90,13 @@ App.controller('Controller', function ($scope, $http, Service) {
             console.log('i am inside save func' + JSON.stringify($scope.Driver));
             $http({
                 method: 'POST',
-                url: '/Admin/Device/CreateDevice',
+                url: '/Management/CreateDriver',
                 data: JSON.stringify($scope.Driver)
             }).then(function successCallback(response) {
                 LoadDriver();
                 //$scope.namesData.push(response.data);
                 $scope.Clear();
-                alert(" Added Successfully !!!");
+                alert(" Thêm thành công !");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
@@ -97,38 +109,38 @@ App.controller('Controller', function ($scope, $http, Service) {
         //nếu không trường nào bị null
         console.log('i am inside update funcr ' +
             JSON.stringify($scope.Driver));
-            $http({
-                method: 'POST',
-                url: '/Admin/Device/EditDevice',
-                data: JSON.stringify($scope.Driver)
-            }).then(function successCallback(response) {
-                $scope.namesData = null;
-                Service.GetAllRecords().then(function (d) {
-                    $scope.namesData = d.data;
-                }, function () {
-                    alert('Unable to Get Data !!!');
-                });
-                $scope.Clear();
-                alert(" Updated Successfully !!!");
-            }, function errorCallback(response) {
-                alert("Error : " + response.data.ExceptionMessage);
+        $http({
+            method: 'POST',
+            url: '/Management/EditDriver',
+            data: JSON.stringify($scope.Driver)
+        }).then(function successCallback(response) {
+            $scope.namesData = null;
+            Service.GetAllRecords().then(function (d) {
+                $scope.namesData = d.data;
+            }, function () {
+                alert('Unable to Get Data !!!');
             });
-        
+            $scope.Clear();
+            alert(" Updated Successfully !!!");
+        }, function errorCallback(response) {
+            alert("Error : " + response.data.ExceptionMessage);
+        });
+
 
     };
     $scope.Edit = function (data) {
-        console.log('i am inside edit() ' + JSON.stringify($scope.Device));
+        console.log('i am inside edit() ' + JSON.stringify($scope.Driver));
         $scope.Driver = {
-            DriverID: data.DriverID,
-            DriverName: data.DriverName,
-            Phone: data.Phone,
-            Address: data.Address,
-            GPLT: data.GPLT,
-            CMND: data.CMND,
-            Note: data.Note,
-            ManageBy: data.ManageBy,
-            Status: data.Status
-
+            DriverID: data.DriverID, 
+            DriverName: data.DriverName, 
+            Phone: data.Phone, 
+            Address: data.Address, 
+            GPLT: data.GPLT, 
+            CMND: data.CMND,  
+            Note: data.Note, 
+            CreateDateGPLT: new Date(parseInt(data.CreateDateGPLT.substr(6))),
+            ExpriseDateGPLT: new Date(parseInt(data.ExpriseDateGPLT.substr(6))),
+            IssuedBy: data.IssuedBy, 
         };
     };
     $scope.Clear = function () {
@@ -140,7 +152,9 @@ App.controller('Controller', function ($scope, $http, Service) {
             $scope.Driver.CMND = '',
             $scope.Driver.Note = '',
             $scope.Driver.ManageBy = '',
-            $scope.Driver.Status = ''
+            $scope.Driver.IssuedBy = '',
+            $scope.Driver.CreateDateGPLT = '',
+            $scope.Driver.ExpriseDateGPLT = ''
 
     };
     $scope.Cancel = function () {
@@ -149,12 +163,12 @@ App.controller('Controller', function ($scope, $http, Service) {
         console.log('i am inside cancel func' + JSON.stringify($scope.Driver));
     };
 
-    $scope.Delete = function (index) {
+    $scope.Lock = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Driver));
+        console.log('i am inside khóa funcr' + JSON.stringify($scope.Driver));
         $http({
             method: 'GET',
-            url: '/Admin/Device/DeleteDevice/' + $scope.namesData[index].DriverID
+            url: '/Management/LockDriver/' + $scope.namesData[index].DriverID
         }).then(function (response) {
             LoadDriver();
             alert(response.data);
@@ -162,10 +176,10 @@ App.controller('Controller', function ($scope, $http, Service) {
     };
     $scope.Unlock = function (index) {
 
-        console.log('i am inside delete funcr' + JSON.stringify($scope.Driver));
+        console.log('i am inside mở khóa funcr' + JSON.stringify($scope.Driver));
         $http({
             method: 'GET',
-            url: '/Admin/Device/UnlockDevice/' + $scope.namesData[index].DriverID
+            url: '/Management/UnlockDriver/' + $scope.namesData[index].DriverID
         }).then(function (response) {
             LoadDriver();
             alert(response.data);

@@ -17,5 +17,29 @@ namespace SeaTrack.Controllers
             }
             return View("TienIchThietBi");
         }
+        public ActionResult Registry()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("Dangkiem");
+        }
+        public ActionResult Update()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("Nangcap");
+        }
+        public ActionResult Maintenance()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("Baotri");
+        }
     }
 }

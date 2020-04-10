@@ -105,6 +105,43 @@ namespace SeaTrack.Controllers
             var data = UsersService.GetListDriverByUserID((String)user.Username);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult CreateDriver(Driver dr)
+        {
+
+            var user = (Users)Session["User"];
+            dr.ManageBy = user.Username;       
+            var data = AdminService.CreateDriver(dr);
+            return Json(new { success = true });
+
+        }
+        [HttpPost]
+        public ActionResult EditDriver(Driver dr)
+        {
+
+            var user = (Users)Session["User"];
+          
+            dr.ManageBy = user.Username;
+         
+            var data = AdminService.EditDriver(dr);
+            return Json(new { success = true });
+
+        }
+
+        [HttpGet]
+        public ActionResult LockDriver(int id)
+
+        {
+            var data = AdminService.UpdateStatusDriver(id, -1);
+            return Json("đã khóa", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult UnlockDriver(int id)
+        {
+            var data = AdminService.UpdateStatusDriver(id, 1);
+            return Json("đã mở khóa", JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

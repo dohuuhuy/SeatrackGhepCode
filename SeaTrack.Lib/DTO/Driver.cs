@@ -13,15 +13,23 @@ namespace SeaTrack.Lib.DTO
         public String Phone { get; set; }
         public String Address { get; set; }
         public String GPLT { get; set; }
-        public String IssuedBy { get; set; }
         public String CMND { get; set; }
         public String Rank { get; set; }
-        public DateTime CreateDate { get; set; }
+        public String IssuedBy { get; set; }
+
+        public String Note { get; set; }
         public string ManageBy { get; set; }
+        public DateTime CreateDate { get; set; }
         public int Status { get; set; }
+        public DateTime CreateDateGPLT { get; set; }
+        public DateTime ExpriseDateGPLT { get; set; }
+
+
+
 
     }
 }
+
 //public String CreateBy { get; set; }
 //public string UpdateBy { get; set; }
 //public DateTime LastUpdateDate { get; set; }

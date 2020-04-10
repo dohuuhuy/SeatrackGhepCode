@@ -27,23 +27,15 @@
         <div class="wrapper ">
             @Html.Partial("_Navbar");
             <div id="content" class="s-relative main show">
-                <div class="main" id="content_comment">
+                <div id="list-tienich" class="main">
                     <div class="wrapper">
-                        <div id="sidebar3" class=" si-sidebar s-sidebar">
-                            <div class="sidebar-header s-flexible s-just-center">
-                                <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="content">
-                            <div class="jumbotron ">
-                                <h2>THÔNG TIN CÁ NHÂN</h2>
-                            </div>
+                        @Html.Partial("_MenuTienIch")
+                        <div id="content-tienich-thongtinthietbi" class="content">
                             @RenderBody()
-
                         </div>
                     </div>
                 </div>
+
                 @Html.Partial("_LoadingModal");
             </div>
         </div>

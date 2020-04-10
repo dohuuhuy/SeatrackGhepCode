@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div id="list-tienich" class="main">
+<div id="list-tienich" class="main"  ng-app="LaiTauApp" ng-controller="Controller">
     <div class="wrapper">
         @Html.Partial("_MenuThietBiVaLaiTau");
         <div id="content-tienich-thongtinthietbi" class="content">
@@ -13,10 +13,43 @@
                     <div class="jumbotron ">
                         <h2>Thông Tin Lái Tàu</h2>
                     </div>
-                    <div ng-app="LaiTauApp" ng-controller="Controller">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <strong class="card-title">Vùng Tìm Kiếm</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="col col-md-12">
+                                <div class="input-group">
+                                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary" ng-click="ClearSearch()">
+                                            <i class="fa fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="input-group ">
+                                    <label for="radio1" class="form-check-label col-md-4 ">
+                                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                                        {{Status}}
+                                    </label>
+                                    <label for="radio2" class="form-check-label col-md-4  ">
+                                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                                        {{Status}}
+                                    </label>
+                                    <label for="radio3" class="form-check-label col-md-4  ">
+                                        <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
+                                        {{Status}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThongTinLaiTau">
                                 <i class="fa fa-plus"></i> Thêm mới
                             </button>
                             <label>Tổng: {{namesData.length}}</label>
@@ -38,11 +71,11 @@
                                         <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
                                             <td>{{$index+1}}</td>
                                             <td>
-                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThietBi">
+                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
                                                     <i class="fa fa-eye" style="color:black"></i>
                                                 </a>
-                                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                                <a ng-click="Lock($index)" ng-if="a.Status == 1"><i  class="fa fa-lock color-red"></i></a>
+                                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
+                                                <a ng-click="Lock($index)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
                                                 <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
                                             </td>
                                             <td>{{a.DriverName}}</td>
@@ -52,8 +85,6 @@
                                             <td>{{a.IssuedBy}}</td>
                                             <td ng-if="a.Status == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                                             <td ng-if="a.Status == -1"><p style="color:red">Tạm khóa</p></td>
-
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -68,8 +99,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="modal fade" id="XemThongTinLaiTau" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" ng-show="Driver.DriverID != '' ">
@@ -82,6 +111,7 @@
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên lái tàu </label>
+                                    {{Driver.DriverName}}
                                     <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" disabled maxlength="50" />
                                 </div>
                                 <div class="form-group">
@@ -90,29 +120,41 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>
-                                    <input class="form-control" name="DriverVersion" ng-model="Driver.DriverVersion" type="text" disabled maxlength="50" />
+                                    <textarea class="form-control" name="Address" ng-model="Driver.Address" type="text" disabled maxlength="50" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày cấp tài khoản</label>
+                                    <input class="form-control" name="CreateDate" value="{{Driver.CreateDate | date:'dd-MM-yyyy '}}" type="text" disabled />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ghi Chú </label>
-                                    <input class="form-control" name="DriverVersion" ng-model="Driver.DriverVersion" type="text" disabled maxlength="50" />
+                                    <textarea class="form-control" name="Note" ng-model="Driver.Note" type="text" disabled maxlength="50" rows="4"></textarea>
                                 </div>
                             </div>
                             <div class="col col-md-6">
                                 <div class="form-group">
+                                    <label class="control-label"> Chứng minh thư </label>
+                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" type="text" disabled maxlength="10" />
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label"> Giấy phép lái tàu </label>
-                                    <input class="form-control" name="DriverImei" ng-model="Driver.DriverImei" type="text" disabled maxlength="10" />
+                                    <input class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" disabled maxlength="10" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label"> Hàng </label>
-                                    <input class="form-control" name="DateExpired" ng-model="Driver.DateExpired" type="text" disabled maxlength="200" />
+                                    <label class="control-label"> Hạng </label>
+                                    <input class="form-control" name="Rank" ng-model="Driver.Rank" type="text" disabled maxlength="200" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label"> Ngày cấp </label>
-                                    <textarea class="form-control" name="DriverNote" ng-model="Driver.DriverNote" type="text" disabled rows="3"></textarea>
+                                    <label class="control-label"> Ngày cấp GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" value="{{Driver.CreateDateGPLT | date:'dd-MM-yyyy' }}" type="text" disabled rows="3">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày hêt hạn GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" value="{{Driver.ExpriseDateGPLT | date:'dd-MM-yyyy '}}" type="text" disabled rows="3">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Nơi cấp </label>
-                                    <textarea class="form-control" name="DriverNote" ng-model="Driver.DriverNote" type="text" disabled rows="3"></textarea>
+                                    <textarea class="form-control" name="IssuedBy" ng-model="Driver.IssuedBy" type="text" disabled rows="3"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -123,9 +165,161 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="ThemThongTinLaiTau" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Thêm tài khoản Lái Tàu</h3>
+                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        <form class="form-horizontal row" name="Xem">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Tên lái tàu </label>
+                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Số điện thoại </label>
+                                    <input class="form-control" name="Phone" ng-model="Driver.Phone" type="text" maxlength="30" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Chứng minh thư </label>
+                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" type="text" maxlength="10" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> địa chỉ </label>
+                                    <textarea class="form-control" name="Address" ng-model="Driver.Address" type="text" maxlength="50" rows="2"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"> Ghi Chú </label>
+                                    <textarea class="form-control" name="Note" ng-model="Driver.Note" type="text" maxlength="50" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+
+                                <div class="form-group">
+                                    <label class="control-label"> Giấy phép lái tàu </label>
+                                    <input class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" maxlength="10" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Hạng lái tàu </label>
+                                    <select class="form-control" name="Rank" ng-model="Driver.Rank">
+                                        <option value="1"> Hạng nhất </option>
+                                        <option value="2"> Hạng nhì </option>
+                                        <option value="3"> Hạng ba </option>
+                                        <option value="4"> Hạng tư </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày cấp GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT" type="date" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày hêt hạn GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Nơi cấp GPLT </label>
+                                    <textarea class="form-control" name="IssuedBy" ng-model="Driver.IssuedBy" type="text" rows="2"></textarea>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="SuaThongTinLaiTau" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" ng-show="Driver.DriverID != '' ">
+                    <div class="modal-header">
+                        <h3 class="text-info">Xem Thông Tin Chi Tiết Của Lái Tàu</h3>
+                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        <form class="form-horizontal row" name="Xem">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Tên lái tàu </label>
+                                    {{Driver.DriverName}}
+                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text"  maxlength="50" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Số điện thoại </label>
+                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text"  maxlength="30" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> địa chỉ </label>
+                                    <textarea class="form-control" name="Address" ng-model="Driver.Address" type="text"  maxlength="50" rows="3"></textarea>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label class="control-label"> Ghi Chú </label>
+                                    <textarea class="form-control" name="Note" ng-model="Driver.Note" type="text"  maxlength="50" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Chứng minh thư </label>
+                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" type="text"  maxlength="10" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Giấy phép lái tàu </label>
+                                    <input class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text"  maxlength="10" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Hạng lái tàu </label>
+                                    <select class="form-control" name="Rank" ng-model="Driver.Rank">
+                                        <option value="1" selected> Hạng nhất </option>
+                                        <option value="2"> Hạng nhì </option>
+                                        <option value="3"> Hạng ba </option>
+                                        <option value="4"> Hạng tư </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày cấp GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT " type="date" rows="3">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày hêt hạn GPLT </label>
+                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date"  rows="3">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Nơi cấp </label>
+                                    <textarea class="form-control" name="IssuedBy" ng-model="Driver.IssuedBy" type="text"  rows="3"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Content/public/js/main/DriverApp.js"></script>
 <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
+<style>
+    .table th {
+        background-color: #15b4c4;
+        color: white;
+        padding: 30px;
+    }
+
+    .table td {
+        vertical-align: inherit;
+    }
+</style>
