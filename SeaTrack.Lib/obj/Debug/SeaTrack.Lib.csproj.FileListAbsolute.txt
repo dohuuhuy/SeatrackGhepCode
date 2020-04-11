@@ -67,6 +67,5 @@ D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\Common.Logging.Core.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\Quartz.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\Quartz.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\RestSharp.xml
-D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.pdb
