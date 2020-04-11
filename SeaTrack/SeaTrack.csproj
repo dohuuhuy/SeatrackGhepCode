@@ -289,6 +289,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\background\bg_log.png" />
+    <Content Include="Content\images\background\bg_vin_01.jpg" />
+    <Content Include="Content\images\background\bg_vin_02.jpg" />
+    <Content Include="Content\images\background\bg_vin_03.jpg" />
+    <Content Include="Content\images\core_login.png" />
     <Content Include="Content\images\icon\Apps-Help-Info-icon.png" />
     <Content Include="Content\images\icon\Apps-preferences-desktop-user-password-icon.png" />
     <Content Include="Content\images\icon\bar-chart.png" />
@@ -385,6 +390,8 @@
     <Content Include="Content\public\js\main\default.js" />
     <Content Include="Content\public\js\main\Account.js" />
     <Content Include="Content\public\js\main\DriverApp.js" />
+    <Content Include="Content\public\js\main\FeedBackApp.js" />
+    <Content Include="Content\public\js\main\Map.js" />
     <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
@@ -560,10 +567,14 @@
     <Content Include="Views\Management\LaiTau.cshtml" />
     <Content Include="Views\Shared\_LayoutInfo.cshtml" />
     <Content Include="Views\Home\Map.cshtml" />
+    <Content Include="Views\Shared\_LayoutTienIch.cshtml" />
+    <Content Include="Views\Utilities\Baotri.cshtml" />
+    <Content Include="Views\Utilities\Dangkiem.cshtml" />
+    <Content Include="Views\Utilities\Nangcap.cshtml" />
+    <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\background\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

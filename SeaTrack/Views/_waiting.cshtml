@@ -1,24 +1,19 @@
 ﻿<div class="reloading">
-
-
     <div id="wait">
-
         Đang cập nhật dữ liệu, vui lòng chờ giây lát ... <br />
         <img src="~/Content/images/icon/waiting4.gif" width="64" height="64" />
     </div>
 </div>
 <style>
-    .reloading{
-        background-color:red;
-        width:100%;
-    }
+  
     #wait {
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
         display: none;
         text-align: center;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: 2px;
+       
     }
 </style>
 <script>
@@ -32,5 +27,5 @@
         });
       
     };
-    setTimeout(wait(), 4000);
+    setTimeout(wait(), 400000);
 </script>
