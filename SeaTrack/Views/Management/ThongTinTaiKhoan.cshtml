@@ -2,11 +2,13 @@
 @{
     ViewBag.Title = "ThongTinTaiKhoan";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    var user = Session["User"] as SeaTrack.Lib.DTO.Users;
+   
 }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl">
+<div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl" ng-init="UserID( '@user.UserID', '@user.RoleID', '@user.ManageBy', '@user.Username')" >
     <div class="wrapper">
         <div id="sidebar5" class="si-sidebar s-sidebar">
             <div class="sidebar-header s-flexible s-just-center">
@@ -241,7 +243,7 @@
 
                             </div>
                             <div class="col col-md-6">
-                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice(id, manageby)"><i class="fa fa-plus-circle" style="color:black"></i></a>
+                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice()"><i class="fa fa-plus-circle" style="color:black"></i></a>
                                 <label class="control-label"> Danh sách thiết bị </label>
                                 <table class="table table-bordered text-center">
                                     <thead>
@@ -253,12 +255,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="dv in DevicesNotUsed">
+                                        <tr ng-repeat="d in Devices">
                                             <th>{{$index + 1}}</th>
-                                            <td>{{dv.DeviceName}}</td>
-                                            <td>{{dv.DateExpired}}</td>
+                                            <td>{{d.DeviceName}}</td>
+                                            <td>{{d.DateExpired}}</td>
                                             <td align="center">
-                                                <a ng-click="AddDeviceToUser(id, $index)"><i class="fa fa-plus-circle"></i></a>
+                                                <a ng-click="RemoveDeviceFromUser(id, $index)"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -282,7 +284,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="text-info">Danh sách thiết bị</h3>
-                    <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="LoadDevice(id)">x</button>
+                    <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="">x</button>
                 </div>
                 <div class="modal-body" style="margin-left:20px">
                     <table class="table table-bordered text-center">
@@ -318,15 +320,15 @@
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Content/public/js/main/Account.js"></script>
 <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
-<script src="~/Areas/Admin/AngularJS/Agency/DetailApp.js"></script>
+<script src="~/Content/public/js/main/Capthietbi.js"></script>
 <style>
-        #dataTable th {
-            background-color: #15b4c4;
-            color: white;
-            padding: 30px;
-        }
+    #dataTable th {
+        background-color: #15b4c4;
+        color: white;
+        padding: 30px;
+    }
 
-        #dataTable td {
-            vertical-align: inherit;
-        }
-    </style>
+    #dataTable td {
+        vertical-align: inherit;
+    }
+</style>

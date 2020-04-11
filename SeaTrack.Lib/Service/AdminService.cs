@@ -10,6 +10,16 @@ namespace SeaTrack.Lib.Service
 {
     public class AdminService
     {
+        public static int SaveFeedBack(FeedBack fb)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_SaveFeedBack",
+                fb.Name.Trim(),
+                fb.Email.Trim(),
+                fb.Title.Trim(),
+                fb.Comment.Trim(),
+                fb.Quality
+                );
+        }
         public static int CreateDriver(Driver dr)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CreateDriver",
@@ -44,7 +54,7 @@ namespace SeaTrack.Lib.Service
                  dr.CreateDateGPLT,
                  dr.ExpriseDateGPLT
                  );
-                if (res == 0) 
+                if (res == 0)
                 {
                     return false;
                 }

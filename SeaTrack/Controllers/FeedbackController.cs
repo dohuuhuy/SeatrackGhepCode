@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeaTrack.Lib.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,12 @@ namespace SeaTrack.Controllers
                 return RedirectToAction("Login", "Home");
             }
             return View("PhanHoi");
+        }
+        [HttpPost]
+        public ActionResult Save(FeedBack fb)
+        {
+            var data = AdminService.SaveFeedBack(db);
+            return Json(new { success = true });
         }
     }
 }

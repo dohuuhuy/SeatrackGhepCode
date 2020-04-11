@@ -367,6 +367,10 @@
     <Content Include="Content\public\img\icon\marker_ef.png" />
     <Content Include="Content\public\img\icon\marker_ex.png" />
     <Content Include="Content\public\img\icon\marker_ex2.png" />
+    <Content Include="Content\public\img\icon\tau-cam.png" />
+    <Content Include="Content\public\img\icon\tau-den.png" />
+    <Content Include="Content\public\img\icon\tau-do.png" />
+    <Content Include="Content\public\img\icon\tau-xanh.png" />
     <Content Include="Content\public\img\logo-vinasia.png" />
     <Content Include="Content\public\img\logo.jpg" />
     <Content Include="Content\public\img\tau\tau-black.png" />
@@ -392,6 +396,7 @@
     <Content Include="Content\public\js\main\datatables-init.js" />
     <Content Include="Content\public\js\main\default.js" />
     <Content Include="Content\public\js\main\Account.js" />
+    <Content Include="Content\public\js\main\FeedBackApp.js" />
     <Content Include="Content\public\js\main\DriverApp.js" />
     <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />

@@ -199,7 +199,7 @@ DeviceApp.factory('DeviceService', function ($http) {
         return $http.get('/Management/GetListDeviceByUserID');
     };
 
-    console.log('i am inside Service ');
+    console.log('i am inside Service ' + fac);
 
     return fac;
 });
