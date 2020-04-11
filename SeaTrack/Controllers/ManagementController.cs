@@ -62,7 +62,7 @@ namespace SeaTrack.Controllers
 
         [HttpGet]
         public ActionResult LockUsers(int id)
-  
+
         {
             var data = AdminService.UpdateStatusUser(id, -1);
             return Json("đã khóa", JsonRequestBehavior.AllowGet);
@@ -83,12 +83,63 @@ namespace SeaTrack.Controllers
             return View("ThietBi");
         }
 
-        public ActionResult GetListDeviceByUserID()
+        public ActionResult GetListDeviceOfCustomer(int id)
         {
             var user = (Users)Session["User"];
-            
-            var data = AdminService.GetListDeviceByUserID(user.UserID);
+            var data = AdminService.GetListDeviceOfCustomer(user.Username, id );
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult RemoveDeviceFromUser(User_Device ud)
+        {
+            var rs = AdminService.RemoveDeviceFromUser(ud.UserID, ud.DeviceID);
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult AddDeviceToUser(User_Device ud)
+        {
+            var rs = AdminService.AddDeviceToUser(ud.UserID, ud.DeviceID, "Admin");
+            return Json(new { success = true });
+        }
+
+        public ActionResult GetListDeviceByUserID(int? id)
+        {
+            if (id == null)
+            {
+                var user = (Users)Session["User"];
+                var data = AdminService.GetListDeviceByUserID(user.UserID);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var data = AdminService.GetListDeviceByUserID((int)id);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+      
+        public JsonResult CheckDeviceExist(Device device)
+        {
+            Device d = new Device();
+            if (device.DeviceNo != null)
+            {
+                var res = AdminService.CheckDeviceExist(device.DeviceNo, device.DeviceImei);
+                d.DeviceNo = "OK";
+                d.DeviceNo = res;
+                return Json(d, JsonRequestBehavior.AllowGet);
+            }
+            if (device.DeviceImei != null)
+            {
+                var res = AdminService.CheckDeviceExist(device.DeviceNo, device.DeviceImei);
+                d.DeviceNo = "OK";
+                d.DeviceImei = res;
+                return Json(d, JsonRequestBehavior.AllowGet);
+            }
+            d.DeviceNo = "OK";
+            d.DeviceImei = "OK";
+            return Json(d, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Driver()
         {
@@ -104,6 +155,43 @@ namespace SeaTrack.Controllers
 
             var data = UsersService.GetListDriverByUserID(user.Username);
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateDriver(Driver dr)
+        {
+
+            var user = (Users)Session["User"];
+            dr.ManageBy = user.Username;
+            var data = AdminService.CreateDriver(dr);
+            return Json(new { success = true });
+
+        }
+        [HttpPost]
+        public ActionResult EditDriver(Driver dr)
+        {
+
+            var user = (Users)Session["User"];
+
+            dr.ManageBy = user.Username;
+
+            var data = AdminService.EditDriver(dr);
+            return Json(new { success = true });
+
+        }
+
+        [HttpGet]
+        public ActionResult LockDriver(int id)
+
+        {
+            var data = AdminService.UpdateStatusDriver(id, -1);
+            return Json("đã khóa", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult UnlockDriver(int id)
+        {
+            var data = AdminService.UpdateStatusDriver(id, 1);
+            return Json("đã mở khóa", JsonRequestBehavior.AllowGet);
         }
 
     }

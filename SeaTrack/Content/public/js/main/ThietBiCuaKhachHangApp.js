@@ -42,7 +42,7 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
     };
 
     $scope.View = function (data) {
-        console.log('i am inside view() + ');
+        console.log('i am inside view() ' + JSON.stringify($scope.Device) );
         $scope.Device = {
             DeviceID: data.DeviceID,
             DeviceNo: data.DeviceNo,
@@ -199,7 +199,7 @@ DeviceApp.factory('DeviceService', function ($http) {
         return $http.get('/Management/GetListDeviceByUserID');
     };
 
-    console.log('i am inside Service ');
+    console.log('i am inside Service ' + fac);
 
     return fac;
 });

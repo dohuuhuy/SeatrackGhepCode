@@ -10,6 +10,78 @@ namespace SeaTrack.Lib.Service
 {
     public class AdminService
     {
+        public static int SaveFeedBack(FeedBack fb)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_SaveFeedBack",
+                fb.Name.Trim(),
+                fb.Email.Trim(),
+                fb.Title.Trim(),
+                fb.Comment.Trim(),
+                fb.Quality
+                );
+        }
+        public static int CreateDriver(Driver dr)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CreateDriver",
+                 dr.DriverName.Trim(),
+                 dr.Phone,
+                 dr.Address.Trim(),
+                 dr.GPLT.Trim(),
+                 dr.CMND,
+                 dr.Rank,
+                 dr.IssuedBy,
+                 dr.Note,
+                 dr.ManageBy,
+                 dr.CreateDateGPLT,
+                 dr.ExpriseDateGPLT
+                );
+        }
+        public static bool EditDriver(Driver dr)
+        {
+            try
+            {
+                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_EditDriver",
+                 dr.DriverID,
+                 dr.DriverName.Trim(),
+                 dr.Phone,
+                 dr.Address.Trim(),
+                 dr.GPLT.Trim(),
+                 dr.CMND,
+                 dr.Rank,
+                 dr.IssuedBy,
+                 dr.Note,
+                 dr.ManageBy,
+                 dr.CreateDateGPLT,
+                 dr.ExpriseDateGPLT
+                 );
+                if (res == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static bool UpdateStatusDriver(int driverID, int Status)
+        {
+            try
+            {
+                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_UpdateDriver", driverID, Status);
+                if (res == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
         public static int CreateUser(UserInfoDTO user, int RoleID)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CreateUser",
@@ -76,7 +148,7 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         } //Lấy đối tượng user theo UserID
-  
+
         public static List<UserViewModel> GetListUserByUserID(string Username, int RoleID) //Lấy danh sách user được quản lý bởi Username
         {
             List<UserViewModel> lst = null;
@@ -457,7 +529,7 @@ namespace SeaTrack.Lib.Service
             return null;
         }
 
-        public static bool CheckUserDevice (int UserID, int DeviceID)
+        public static bool CheckUserDevice(int UserID, int DeviceID)
         {
             var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_CheckUserDevice", UserID, DeviceID);
             if (reader.HasRows)

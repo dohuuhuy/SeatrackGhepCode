@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div id="list-tienich" class="main">
+<div id="list-tienich" class="main" ng-app="ThietBiCuaKhachHangApp" ng-controller="Controller">
     <div class="wrapper">
         @Html.Partial("_MenuThietBiVaLaiTau");
         <div id="content-tienich-thongtinthietbi" class="content">
@@ -13,7 +13,7 @@
                     <div class="jumbotron ">
                         <h2>Thông Tin Thiết Bị</h2>
                     </div>
-                    <div ng-app="ThietBiCuaKhachHangApp" ng-controller="Controller">
+                    <div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <strong class="card-title">Vùng Tìm Kiếm</strong>
@@ -106,8 +106,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="modal fade" id="XemThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" ng-show="Device.DeviceID != '' ">
@@ -156,7 +154,6 @@
     </div>
 </div>
 <style>
-
     .table th {
         background-color: #15b4c4;
         color: white;

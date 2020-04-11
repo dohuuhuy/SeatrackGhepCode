@@ -4,13 +4,66 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div class="main" id="content_comment">
+<div class="main" id="content_comment" ng-app="App" ng-controller="Controller">
     <div class="wrapper">
         <div id="sidebar3" class=" si-sidebar s-sidebar">
             <div class="sidebar-header s-flexible s-just-center">
                 <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
             </div>
             <hr>
+
+            <div class="form-group">
+                <button class="btn"><i class="fa fa-phone"></i></button>
+                <strong> Gọi ngay 24/7:</strong> 0922 165 666 <br /><br />
+                <button class="btn"><i class="fa fa-map-marker"></i></button>
+                <strong>Liên hệ:</strong> Seatrackingvin@gmail.com <br /><br />
+                <button class="btn"><i class="fa fa-map-marker"></i></button>
+                <strong>Địa chỉ:</strong> Số 27 Đường số 12, Khu dân cư CityLand Park Hills,
+                Phường 10, Quận Gò Vấp, Hồ Chí Minh, Vietnam <br /><br />
+            </div>
+            <hr />
+            <div class="form-group">
+                <strong>Lưu ý: </strong>
+                Hãy chắc chắn rằng bạn đã đọc tài liệu hướng dẫn và chính sách bảo mật và chính sách quy định sử dụng thiết bị của công ty!
+                <br />
+                <ul>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
+                    </li>
+                    <li>
+                        <a  href="~/Utilities/Index">Thông tin tiện ích</a>
+                    </li>
+                    <li>
+                        <a href="#">Chính sách bảo mật</a>
+                    </li>
+                </ul>
+            </div>
+            <style>
+
+                #content_comment #sidebar3 {
+                  font-size:larger;
+                  padding-left: 15px ;
+                }
+
+                #content_comment .form-group ul li a {
+                    color: #007bff;
+                    font-weight: bolder;
+                }
+              
+                #content_comment .form-group button {
+                    border: 1px solid #15b4c4;
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                }
+
+                #content_comment .form-group strong {
+                    color: #15b4c4;
+                }
+                #feedback #feedback_chude {
+                    border-bottom: #15b4c4 solid 3px;
+                }
+            </style>
         </div>
         <div class="content">
             <div class="mainbox">
@@ -19,33 +72,42 @@
                         <h2>LẮNG NGHE ĐỂ PHÁT TRIỂN</h2>
                     </div>
                     <div class="panel-body container">
-                        <form method="post" action=".">
+                        <form method="post" action="." id="feedback">
                             <div class="form-group row ">
-                                <label class="control-label col-md-2 clearfix text-right vcenter">Chủ đề</label>
-                                <div class="col-md-10 clearfix">
-                                    <input id="feedback_chude" class="form-control m-b-5" maxlength="30" type="text">
+                                <div class="col-md-6 ">
+                                    <input ng-model="FeedBack.Name" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Tên của bạn">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <input ng-model="FeedBack.Email" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Email">
+                                </div>
+                            </div>
+         
+                          
+                            <div class="form-group row ">
+                                <div class="col-md-12 ">
+                                    <input ng-model="FeedBack.Title" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Chủ đề">
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label for="feedback_comment" class="col-md-2 clearfix text-right vcenter">Nội dung</label>
-                                <div class="col-md-10 clearfix m-b-5">
-                                    <textarea class="form-control" id="feedback_comment" rows="15" placeholder="Nội dung góp ý (*)"></textarea>
+                                <div class="col-md-12">
+                                    <textarea ng-model="FeedBack.Comment" class="form-control" id="feedback_comment" 
+                                              rows="10" placeholder="Nội dung góp ý (*)"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label class="control-label  vcenter col-md-2 clearfix text-right">Đánh giá chất lượng dịch vụ</label>
-                                <div class="col-md-10 clearfix">
+                                <label class="control-label vcenter ">Đánh giá chất lượng dịch vụ</label>
+                                <div class="col-md-12 ">
                                     <div class="feedback m-b-5">
                                         <div class="rating">
-                                            <input type="radio" name="rating" id="rating-5" onclick="danhgia_click(5);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="5" id="rating-5" >
                                             <label for="rating-5"></label>
-                                            <input type="radio" name="rating" id="rating-4" onclick="danhgia_click(4);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="4" id="rating-4" >
                                             <label for="rating-4"></label>
-                                            <input type="radio" name="rating" id="rating-3" onclick="danhgia_click(3);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="3" id="rating-3" >
                                             <label for="rating-3"></label>
-                                            <input type="radio" name="rating" id="rating-2" onclick="danhgia_click(2);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="2" id="rating-2" >
                                             <label for="rating-2"></label>
-                                            <input type="radio" name="rating" id="rating-1" onclick="danhgia_click(1);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="1" id="rating-1" >
                                             <label for="rating-1"></label>
                                             <div class="emoji-wrapper">
                                                 <div class="emoji">
@@ -139,9 +201,9 @@
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <div class="col-md-4 clearfix"></div>
-                                <div class="col-md-8 clearfix">
-                                    <input id="feedback_send" type="submit" name="Signup" value="Gửi phản hồi" class="btn btn-primary btn pull-right">
+
+                                <div class="col-md-12 text-lg-center clearfix">
+                                    <a ng-click="Save()" id="feedback_send" name="Signup" class="btn btn-primary btn pull-right">Gửi phản hồi</a>
                                 </div>
                             </div>
                         </form>
@@ -151,3 +213,8 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Content/public/js/main/FeedBackApp.js"></script>
+
+
+<input type="file" s/>

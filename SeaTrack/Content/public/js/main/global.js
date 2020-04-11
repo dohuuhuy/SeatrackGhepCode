@@ -86,29 +86,16 @@ $(document).ready(function () {
 		minView: 0,
 		maxView: 1,
 		forceParse: 0,
-		format: 'dd-mm-yyyy'
+		format: 'hh:ii'
 	});
 
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
 
-	$("#show_info_device_exp").click(function () {
-		$("#btn_modal_exp").click();
-	});
 
-	$("#item-doithongtin-thietbi").click(function () {
-		alert("Chức năng đang tạm khóa");
-	});
 
-	$("#feedback_send").click(function () {
-		var cm = $.trim($("#feedback_comment").val());
-		var _chude = $("#feedback_chude").val();
-		insertDB_Provider(cm, _danhgia, _chude);
-	});
-	$("#show_admin_reload").click(function () {
-		getinfoUser();
-		$("#list-admin").show()
-	})
+	
+
 
 
 });

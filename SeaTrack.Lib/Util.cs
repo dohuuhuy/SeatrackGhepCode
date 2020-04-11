@@ -33,7 +33,7 @@ namespace SeaTrack.Lib
                 byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
                 return Encoding.UTF8.GetString(plainText);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return string.Empty;
             }

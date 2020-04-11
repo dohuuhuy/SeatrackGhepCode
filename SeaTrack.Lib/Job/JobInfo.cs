@@ -17,7 +17,7 @@ namespace SeaTrack.Lib.Job
         {
             Console.WriteLine("Hello, JOb info");
 
-         
+
             var lstDevice = TrackDataService.GetListDeviceStatus(1); // 1 la gì 
             if (lstDevice != null)
             {

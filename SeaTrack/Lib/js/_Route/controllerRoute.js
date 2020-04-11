@@ -119,7 +119,16 @@ function makePoint(id, icon = "") {
     if (_device != 0) {
         point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
 
-        marker = new MarkerWithLabel({
+        //if (_device.status == 'Tàu dừng') {
+        //    icon = "/Content/public/img/icon/tau_den.png"
+        //}
+        //if (listStop[iml].status == 'Tàu chạy') {
+        //    icon = "/Content/public/img/icon/tau_xanh.png"
+        //}
+        //if (listStop[iml].status == 'Mất tín hiệu') {
+        //    icon = "/Content/public/img/icon/tau_den.png"
+        //}
+        var marker = new MarkerWithLabel({
             position: point,
             icon: icon,
         });

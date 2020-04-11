@@ -7,6 +7,6 @@ namespace SeaTrack.Models
 {
     public class UserRole : User
     {
-        public string RoleName { get; set; }
+        //public string RoleName { get; set; }
     }
 }
