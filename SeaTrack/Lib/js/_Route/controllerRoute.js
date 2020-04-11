@@ -344,12 +344,13 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     //     marker.setMap(map);
     // }
     var hulllist = makeListStopPlus(phamvi);
-    var HullPath = new google.maps.Polyline({
+    var HullPath = new google.maps.Polygon({
         path: hulllist,
-        geodesic: true,
-        strokeColor: 'red',
-        strokeOpacity: 1.0,
-        strokeWeight: 1
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
     });
     HullPath.setMap(map);
     _flightPath.push(HullPath);
@@ -360,10 +361,12 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
         if(listStop[i].speed>3){
             var angle = TinhGoc(listStop[i].lat, listStop[i].lng, listStop[i+1].lat, listStop[i+1].lng)
             var color = "";
-    
+            var path = "";
             if(listStop[i].status == "Tàu chạy")
             {
                 color = '#70ad47';
+                path = google.maps.SymbolPath.FORWARD_CLOSED_ARROW;
+
                 
             }
             // if(listStop[i].status == "Tàu dừng")
@@ -373,8 +376,9 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
             var marker = new MarkerWithLabel({
                 position: point,
                 icon: {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                 scale: 2,
+                path: path,
+                visible:false,
                 rotation: angle,
                 strokeColor: color,
                 fillColor : color,
