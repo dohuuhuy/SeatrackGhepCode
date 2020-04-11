@@ -5,15 +5,16 @@ App.controller('Controller', function ($scope, $http) {
 
 
     $scope.FeedBack = {
+        FeedID: '',
         Name: '',
         Email: '',
         Title: '',
-        Commnet: '',
+        Comment: '',
         Quality: ''
     };
 
     $scope.Save = function () {
-        if ($scope.FeedBack.name != "" && $scope.FeedBack.Title != "") {
+        if ($scope.FeedBack.Name != "" && $scope.FeedBack.Title != "") {
             console.log('i am inside save func' + JSON.stringify($scope.FeedBack));
             $http({
                 method: 'POST',
@@ -21,7 +22,7 @@ App.controller('Controller', function ($scope, $http) {
                 data: JSON.stringify($scope.FeedBack)
             }).then(function successCallback(response) {
                 $scope.Clear();
-                alert(" Cảm ơn bạn !");
+                alert(" Cảm ơn bạn ! Chúng tôi sẽ phản hồi lại sớm nhất có thể !");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
@@ -32,22 +33,15 @@ App.controller('Controller', function ($scope, $http) {
     };
    
     $scope.Clear = function () {
-        $scope.Driver.DriverID = '',
-            $scope.Driver.DriverName = '',
-            $scope.Driver.Phone = '',
-            $scope.Driver.Address = '',
-            $scope.Driver.GPLT = '',
-            $scope.Driver.CMND = '',
-            $scope.Driver.Note = '',
-            $scope.Driver.ManageBy = '',
-            $scope.Driver.IssuedBy = '',
-            $scope.Driver.CreateDateGPLT = '',
-            $scope.Driver.ExpriseDateGPLT = ''
+            $scope.FeedBack.FeedID = '',
+            $scope.FeedBack.Name = '',
+            $scope.FeedBack.Email = '',
+            $scope.FeedBack.Title = '',
+            $scope.FeedBack.Comment = '',
+            $scope.FeedBack.Quality = ''
+           
     };
-    $scope.Cancel = function () {
-        $scope.clear();
-        console.log('i am inside cancel func' + JSON.stringify($scope.FeedBack));
-    }; 
+   
 });
 
 

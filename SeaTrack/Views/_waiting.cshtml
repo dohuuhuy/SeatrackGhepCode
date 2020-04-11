@@ -1,10 +1,17 @@
-﻿
-<div id="wait">
+﻿<div class="reloading">
 
-    Đang cập nhật dữ liệu, vui lòng chờ giây lát ... <br />
-    <img src="~/Content/images/icon/waiting4.gif" width="64" height="64" />
+
+    <div id="wait">
+
+        Đang cập nhật dữ liệu, vui lòng chờ giây lát ... <br />
+        <img src="~/Content/images/icon/waiting4.gif" width="64" height="64" />
+    </div>
 </div>
 <style>
+    .reloading{
+        background-color:red;
+        width:100%;
+    }
     #wait {
         display: none;
         text-align: center;
@@ -23,12 +30,7 @@
         $(document).ajaxComplete(function () {
             $("#wait").css("display", "none");
         });
-        //$("button").click(function () {
-        //    $("#txt").load();
-        //});
-        //$("button").click(function () {
-        //    $("#txt").load("../Route.cshtml");
-        //});
+      
     };
-    setTimeout(wait(), 2000);
+    setTimeout(wait(), 4000);
 </script>

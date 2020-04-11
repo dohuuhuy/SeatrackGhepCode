@@ -18,6 +18,7 @@ namespace SeaTrack
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Route", id = UrlParameter.Optional }
             );
+           
         }
     }
 }

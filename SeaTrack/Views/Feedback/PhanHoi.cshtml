@@ -75,22 +75,22 @@
                         <form method="post" action="." id="feedback">
                             <div class="form-group row ">
                                 <div class="col-md-6 ">
-                                    <input id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Tên của bạn">
+                                    <input ng-model="FeedBack.Name" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Tên của bạn">
                                 </div>
                                 <div class="col-md-6 ">
-                                    <input id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Email">
+                                    <input ng-model="FeedBack.Email" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Email">
                                 </div>
                             </div>
          
                           
                             <div class="form-group row ">
                                 <div class="col-md-12 ">
-                                    <input id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Chủ đề">
+                                    <input ng-model="FeedBack.Title" id="feedback_chude" class="form-control" maxlength="30" type="text" placeholder="Chủ đề">
                                 </div>
                             </div>
                             <div class="form-group row ">
                                 <div class="col-md-12">
-                                    <textarea class="form-control" id="feedback_comment" 
+                                    <textarea ng-model="FeedBack.Comment" class="form-control" id="feedback_comment" 
                                               rows="10" placeholder="Nội dung góp ý (*)"></textarea>
                                 </div>
                             </div>
@@ -99,15 +99,15 @@
                                 <div class="col-md-12 ">
                                     <div class="feedback m-b-5">
                                         <div class="rating">
-                                            <input type="radio" name="rating" id="rating-5" onclick="danhgia_click(5);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="5" id="rating-5" >
                                             <label for="rating-5"></label>
-                                            <input type="radio" name="rating" id="rating-4" onclick="danhgia_click(4);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="4" id="rating-4" >
                                             <label for="rating-4"></label>
-                                            <input type="radio" name="rating" id="rating-3" onclick="danhgia_click(3);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="3" id="rating-3" >
                                             <label for="rating-3"></label>
-                                            <input type="radio" name="rating" id="rating-2" onclick="danhgia_click(2);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="2" id="rating-2" >
                                             <label for="rating-2"></label>
-                                            <input type="radio" name="rating" id="rating-1" onclick="danhgia_click(1);">
+                                            <input type="radio" name="rating" ng-model="FeedBack.Quality" value="1" id="rating-1" >
                                             <label for="rating-1"></label>
                                             <div class="emoji-wrapper">
                                                 <div class="emoji">
@@ -203,7 +203,7 @@
                             <div class="form-group row ">
 
                                 <div class="col-md-12 text-lg-center clearfix">
-                                    <input id="feedback_send" type="submit" name="Signup" value="Gửi phản hồi" class="btn btn-primary btn pull-right">
+                                    <a ng-click="Save()" id="feedback_send" name="Signup" class="btn btn-primary btn pull-right">Gửi phản hồi</a>
                                 </div>
                             </div>
                         </form>
@@ -213,3 +213,8 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Content/public/js/main/FeedBackApp.js"></script>
+
+
+<input type="file" s/>

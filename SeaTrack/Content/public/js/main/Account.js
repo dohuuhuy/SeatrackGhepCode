@@ -158,16 +158,17 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
 
     }
     // -------------------------- Cấp thiết bị   ------------------------------------------------//
-    $scope.UserID = function ( id, role, manageby, Username) {
+    $scope.UserID = function (id, role, manageby, name) {
+        console.log(name);
         $scope.role = role;
         $scope.id = id;
         $scope.manageby = manageby;
-        $scope.Username = Username;
+        $scope.name = name;
 
     }
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
-    $scope.AddDevice = function (Username) {
-        GetListDeviceNotUsedByUser(Username);
+    $scope.AddDevice = function () {
+        GetListDeviceNotUsedByUser($scope.name);
     }
     // xóa thiết bị được cấp và thêm vào list thiết bị không sử dụng
     $scope.RemoveDeviceFromUser = function (UserID, index) {
@@ -205,7 +206,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     function GetListDeviceNotUsedByUser(Username) {
         $http({
             method: "GET",
-            url: '/Management/GetListDeviceNotUsedByUser/' + Username
+            url: '/Management/GetListDeviceNotUsedByUser?Username=' + Username
         }).then(function (response) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;

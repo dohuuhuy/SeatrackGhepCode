@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaTrack.Lib.DTO
 {
-    class FeedBack
+    public class FeedBack
     {
         public int FeedID { get; set; }
         public String Name { get; set; }
