@@ -319,7 +319,7 @@ namespace SeaTrack.Lib.Service
                         DeviceVersion = reader["DeviceVersion"].ToString(),
                         DeviceGroup = reader["DeviceGroup"].ToString(),
                         DeviceNote = reader["DeviceNote"].ToString(),
-                        DateExpired = (reader["DateExpired"].ToString().Substring(0, 9)),
+                        DateExpired = (reader["DateExpired"].ToString().Substring(0, 10)),
                         StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
                         ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
                         ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())

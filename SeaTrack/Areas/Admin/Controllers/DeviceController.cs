@@ -328,7 +328,7 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 return Json("Không tìm thấy thiết bị", JsonRequestBehavior.AllowGet);
             }
-            var data = AdminService.DeleteDevice(id);
+            var data = AdminService.UnlockDevice(id);
             return Json("Đã kích hoạt", JsonRequestBehavior.AllowGet);
         }
 

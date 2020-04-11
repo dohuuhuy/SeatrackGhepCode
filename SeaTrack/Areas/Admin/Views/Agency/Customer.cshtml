@@ -60,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
+                        <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
                             <td width="5%">{{$index+1}}</td>
                             <td width="10%">
                                 <a href="#" data-ng-href="@Url.Action("Detail", "Agency")/{{c.UserID}}" title="Chi tiết khách hàng"><i class="fa fa-eye" style="color:black"></i></a>

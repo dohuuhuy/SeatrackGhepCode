@@ -104,6 +104,7 @@ function makePoint(id, icon = "") {
     var lasted;
     var _device;
     _device = checkDevice(id);
+    
     console.log(_device);
     var dt = new Date(parseInt(_device.TransmitTime.substr(6)));
     var today = new Date();
