@@ -83,10 +83,10 @@ namespace SeaTrack.Controllers
             return View("ThietBi");
         }
 
-        public ActionResult GetListDeviceNotUsedByUser(string Username)
+        public ActionResult GetListDeviceOfCustomer(int id)
         {
-
-            var data = AdminService.GetListDeviceNotUsedByUser(Username);
+            var user = (Users)Session["User"];
+            var data = AdminService.GetListDeviceOfCustomer(user.Username, id );
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

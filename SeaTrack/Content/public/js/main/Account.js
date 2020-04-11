@@ -158,55 +158,56 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
 
     }
     // -------------------------- Cấp thiết bị   ------------------------------------------------//
-    $scope.UserID = function (id, role, manageby, name) {
-        console.log(name);
-        $scope.role = role;
-        $scope.id = id;
-        $scope.manageby = manageby;
+    $scope.UserID = function (name) {
+   
         $scope.name = name;
 
     }
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
     $scope.AddDevice = function () {
-        GetListDeviceNotUsedByUser($scope.name);
+        GetListDeviceOfCustomer($scope.Account.UserID);
     }
     // xóa thiết bị được cấp và thêm vào list thiết bị không sử dụng
-    $scope.RemoveDeviceFromUser = function (UserID, index) {
-        DeviceToRemove = $scope.DevicesNotUsed[index];
-        var RemoveModel = { Us, DeviceID: DeviceToRemove.DeviceID };
+    $scope.RemoveDeviceFromUser = function (index) {
+        DeviceToRemove = $scope.Devices[index];
+        id = $scope.Account.UserID;
+        var RemoveModel = { UserID: id, DeviceID: DeviceToRemove.DeviceID };
         $http({
             method: "POST",
             url: '/Management/RemoveDeviceFromUser/',
             data: RemoveModel
         }).then(function (response) {
-            console.log(response, 'res');
+            console.log(response, 'Bỏ cấp thiết bị cho người dùng' + $scope.Account.FullName);
 
         });
 
         $scope.Devices.splice(index, 1);
         $scope.DevicesNotUsed.push(DeviceToRemove);
+        fetchData(id);
     }
     // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
-    $scope.AddDeviceToUser = function (UserID, index) {
+    $scope.AddDeviceToUser = function(index) {
         DeviceToAdd = $scope.DevicesNotUsed[index];
-        var Model = { UserID: UserID, DeviceID: DeviceToAdd.DeviceID };
+        id = $scope.Account.UserID;
+        var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
         $http({
             method: "POST",
             url: '/Management/AddDeviceToUser/',
             data: Model
         }).then(function (response) {
-            console.log(response, 'res');
+            console.log(response, 'Đã cấp thiết bị cho người dùng' + $scope.Account.FullName);
 
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
+        fetchData(id);
     }
 
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
-    function GetListDeviceNotUsedByUser(Username) {
+    function GetListDeviceOfCustomer(id) {
         $http({
             method: "GET",
-            url: '/Management/GetListDeviceNotUsedByUser?Username=' + Username
+            url: '/Management/GetListDeviceOfCustomer/' + id
         }).then(function (response) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;
