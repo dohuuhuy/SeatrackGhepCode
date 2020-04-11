@@ -367,11 +367,16 @@
     <Content Include="Content\public\img\icon\marker_ef.png" />
     <Content Include="Content\public\img\icon\marker_ex.png" />
     <Content Include="Content\public\img\icon\marker_ex2.png" />
+    <Content Include="Content\public\img\icon\tau-cam.png" />
+    <Content Include="Content\public\img\icon\tau-den.png" />
+    <Content Include="Content\public\img\icon\tau-do.png" />
+    <Content Include="Content\public\img\icon\tau-xanh.png" />
     <Content Include="Content\public\img\logo-vinasia.png" />
     <Content Include="Content\public\img\logo.jpg" />
     <Content Include="Content\public\img\tau\tau-black.png" />
     <Content Include="Content\public\img\tau\tau-green.png" />
     <Content Include="Content\public\img\tau\tau-red.png" />
+    <Content Include="Content\public\img\tau\tau-yellow.png" />
     <Content Include="Content\public\img\Vinasia.png" />
     <Content Include="Content\public\js\bootstrap.min.js" />
     <Content Include="Content\public\js\dataTables.bootstrap.min.js" />
@@ -2985,6 +2990,7 @@
     <Content Include="Views\Management\_MenuThietBiVaLaiTau.cshtml" />
     <Content Include="Views\Management\LaiTau.cshtml" />
     <Content Include="Views\Shared\_LayoutInfo.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

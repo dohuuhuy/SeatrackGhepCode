@@ -1,0 +1,233 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+      function initMap(){
+            CreatePoly();
+
+      }
+      var vungbo;
+      var vunglong;
+      function CreatePoly(){
+      var bo = [
+        {
+          lat:23.280141, lng:105.347008
+        },
+        {
+            lat: 21.29722222,
+            lng: 108.2861
+        },
+        {
+            lat: 20.72222222,
+            lng: 107.5111
+        },
+        {
+            lat: 20.74444444,
+            lng: 107.2694
+        },
+        {
+            lat: 19.475,
+            lng: 105.9389
+        },
+        {
+            lat: 18.87777778,
+            lng: 106.1139
+        },
+        {
+            lat: 18.03888889,
+            lng: 106.7250
+        },
+        {
+            lat: 17.25833333,
+            lng: 107.4306
+        },
+        {
+            lat: 15.47777778,
+            lng: 109.1972
+        },
+        {
+            lat: 12.7,
+            lng: 109.5944
+        },
+        {
+            lat: 11.29722222,
+            lng: 109.2222
+        },
+        {
+            lat: 10.10555556,
+            lng: 107.0889
+        },
+        {
+            lat: 9.425,
+            lng: 106.7194
+        },
+        {
+            lat: 9.041666667,
+            lng: 105.8806
+        },
+        {
+            lat: 8.430555556,
+            lng: 105.3028
+        },
+        {
+            lat: 8.488888889,
+            lng: 104.5694
+        },
+        {
+            lat: 10,
+            lng: 104.5667
+        },
+        {
+            lat: 10,
+            lng: 104.05
+        },
+        {
+            lat: 10.43888889,
+            lng: 103.8417
+        },
+        {
+            lat: 10.421051,
+            lng: 104.438897
+        }];
+
+      var long = [
+        {
+            lat:23.280141, 
+            lng:105.347008
+        },
+        {
+            lat: 21.29722222,
+            lng: 108.2861
+        },
+        {
+            lat: 20.83333333,
+            lng: 108.3944444
+        },
+        {
+            lat: 20,
+            lng: 107.2305556
+        },
+        {
+            lat: 19.56944444,
+            lng: 106.6638889
+        },
+        {
+            lat: 18.66666667,
+            lng: 106.6638889
+        },
+        {
+            lat: 18.46111111,
+            lng: 106.9055556
+        },
+        {
+            lat: 18,
+            lng: 107.1694444
+        },
+        {
+            lat: 17.48888889,
+            lng: 107.7
+        },
+        {
+            lat: 15.66111111,
+            lng: 109.6944444
+        },
+        {
+            lat: 12.7444444,
+            lng: 110.1472222
+        },
+        {
+            lat: 10.86666667,
+            lng: 109.6611111
+        },
+        {
+            lat: 9.636111111,
+            lng: 107.3666667
+        },
+        {
+            lat: 8.986111111,
+            lng: 107.1694444
+        },
+        {
+            lat: 8.583333333,
+            lng: 106.1638889
+        },
+        {
+            lat: 7.933333333,
+            lng: 105.6111111
+        },
+        {
+            lat: 8.038888889,
+            lng: 104.1805556
+        },
+        {
+            lat: 9.5,
+            lng: 104.1555556
+        },
+        {
+            lat: 9.5,
+            lng: 103.7944444
+        },
+        {
+            lat: 10.08333333,
+            lng: 103.4944444
+        },
+        {
+            lat: 10.43888889,
+            lng: 103.8417
+        },
+        {
+            lat: 10.421051,
+            lng: 104.438897
+        }];
+      vungbo = new google.maps.Polygon({
+          paths: bo
+      });
+      vunglong = new google.maps.Polygon({
+          paths: long
+      });
+      }
+
+      function checkArea(lat, lng){
+        var checkpoint = new google.maps.LatLng(lat, lng);
+        if(google.maps.geometry.poly.containsLocation(checkpoint, vunglong) == false){
+          console.log('Vùng khơi');
+          return 3;
+        }
+
+        else{
+          if(google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == false){
+            console.log('Vùng lộng');
+            return 2;
+          }
+          console.log('Vùng bộ');
+          return 1;
+        }  
+      }
+        
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk&libraries=geometry&callback=initMap"
+            async defer></script>
+</body>
+</html>

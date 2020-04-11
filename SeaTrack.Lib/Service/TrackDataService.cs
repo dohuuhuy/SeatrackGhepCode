@@ -41,6 +41,7 @@ namespace SeaTrack.Lib.Service
                             DirectionEW = reader["DirectionEW"].ToString(),
                             TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
                             Speed = Convert.ToInt16(reader["Speed"]),
+                            
                         };
                         lst.Add(data);
                     }

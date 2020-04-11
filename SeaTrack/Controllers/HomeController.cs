@@ -25,6 +25,11 @@ namespace SeaTrack.Controllers
             }
             return View("Route");
         }
+
+        public ActionResult Map()
+        {
+            return View();
+        }
         public ActionResult Login()
         {
             var user = (Users)Session["User"];

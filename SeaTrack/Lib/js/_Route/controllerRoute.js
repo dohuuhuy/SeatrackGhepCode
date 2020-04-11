@@ -15,25 +15,6 @@ slider.oninput = function () {
 function setRange(a) {
     $("#myRange").attr("max", a);
 }
-function loadSpeedLimit() {
-    var pathValues = [];
-
-    var a = new google.maps.LatLng(10.834650, 106.667149);
-    var b = new google.maps.LatLng(10.833454, 106.670258);
-    var c = new google.maps.LatLng(10.832250, 106.673723);
-
-    pathValues.push(a.toUrlValue());
-    pathValues.push(b.toUrlValue());
-    pathValues.push(c.toUrlValue());
-    $.get("https://roads.googleapis.com/v1/speedLimits", {
-        //key: "AIzaSyARovOsZKZ1v0BQwAtcmoCNjT39z15exuI",
-        key: "AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk",
-        path: pathValues.join('|'),
-    },
-        function (data) {
-            console.log(data);
-        });
-}
 
 var _listDeviceStatus = [];
 updateListDeviceStatus();
@@ -117,19 +98,30 @@ function checkDevice(id) {
     return 0;
 }
 function makePoint(id, icon = "") {
-    if (icon == "") icon = "/Content/public/img/icon/marker_ex.png";
+    //if (icon == "") icon = "/Content/public/img/icon/marker_ex.png";
     cleanMap(1);
     var i = 0;
     var lasted;
     var _device;
     _device = checkDevice(id);
     console.log(_device);
+    var dt = new Date(parseInt(_device.TransmitTime.substr(6)));
+    var today = new Date();
+    var phut = Math.floor((today - dt) / 1000 / 60);
+
+    if(phut>45){
+        icon = "/Content/public/img/icon/tau-do.png";
+    }else if(_device.speed>3){
+        icon = "/Content/public/img/icon/tau-xanh.png";
+    }else{       
+         icon = "/Content/public/img/icon/tau-den.png";
+    }
     if (_device != 0) {
         point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
 
         marker = new MarkerWithLabel({
             position: point,
-            icon: "/Content/public/img/icon/marker_ex.png",
+            icon: icon,
         });
         var infowin = new google.maps.InfoWindow({
             content: 'Đang cập nhật dữ liệu!',
@@ -162,18 +154,14 @@ function makeListStop(list) {
         var dt = new Date(parseInt(list[i].TransmitTime.substr(6)));
         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
             + ' ' + dt.getHours() + ':' + dt.getMinutes();
-        var today = new Date();
-        var phut = Math.floor((today - dt) / 1000 * 60);
         
         var sp = toHaily(list[i].Speed);
-        if(phut > 45){
-            status = 'Mất tín hiệu'
-        }else {
+
             if (sp < 3) { sp = 0; status = 'Tàu dừng' }
             else { sp = toHaily(list[i].Speed); status = 'Tàu chạy' }    
-        }
 
-        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dte, speed: sp, status: status };
+
+        re[i] = { lat: list[i].Latitude, lng: list[i].Longitude, time: dt, speed: sp, status: status };
     }
     return re;
 }
@@ -249,7 +237,6 @@ function ShowTableDataLine(list_lin) {
 
     var _tbl = "";
     for (var i = 0; i < list_lin.length; i++) {
-        console.log('demo ' + list_lin[i])
         var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
             + ' ' + dt.getHours() + ':' + dt.getMinutes();
@@ -309,7 +296,7 @@ function TimPhamVi(list){
     list.forEach(element => {
         convexHull.addPoint(element.lat, element.lng);
     });
-    var hullPoints = convexHull.getHull();
+    var hullPoints = convexHull.getHull();  //Lấy danh sách point bao lồi
     console.log(hullPoints)
     return hullPoints;
 }
@@ -335,27 +322,27 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     var flightPath = new google.maps.Polyline({
         path: listStop,
         geodesic: true,
-        strokeColor: '#14a84e',
+        strokeColor: '#6610f2',
         strokeOpacity: 1.0,
-        strokeWeight: 1
+        strokeWeight: 2
     });
     flightPath.setMap(map);
     _flightPath.push(flightPath);
     var phamvi = [];
     phamvi = TimPhamVi(listStop);
     console.log(phamvi);
-    for (var h = 0; h < phamvi.length; h++)
-    {
-        var point = new google.maps.LatLng(phamvi[h].x, phamvi[h].y);
-        var marker = new MarkerWithLabel({
-            position: point,
-            icon: {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            scale: 7,
-            strokeColor: 'red'
-        }});
-        marker.setMap(map);
-    }
+    // for (var h = 0; h < phamvi.length; h++)
+    // {
+    //     var point = new google.maps.LatLng(phamvi[h].x, phamvi[h].y);
+    //     var marker = new MarkerWithLabel({
+    //         position: point,
+    //         icon: {
+    //         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+    //         scale: 7,
+    //         strokeColor: 'red'
+    //     }});
+    //     marker.setMap(map);
+    // }
     var hulllist = makeListStopPlus(phamvi);
     var HullPath = new google.maps.Polyline({
         path: hulllist,
@@ -370,32 +357,38 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     var i = 0;
     for (i; i < iml; i++) {
         var point = new google.maps.LatLng(listStop[i].lat, listStop[i].lng);
-        var angle = TinhGoc(listStop[i].lat, listStop[i].lng, listStop[i+1].lat, listStop[i+1].lng)
-        var color = "";
-
-        if(listStop[i].status == "Tàu chạy")
-        {
-            color = '#70ad47';
+        if(listStop[i].speed>3){
+            var angle = TinhGoc(listStop[i].lat, listStop[i].lng, listStop[i+1].lat, listStop[i+1].lng)
+            var color = "";
+    
+            if(listStop[i].status == "Tàu chạy")
+            {
+                color = '#70ad47';
+                
+            }
+            // if(listStop[i].status == "Tàu dừng")
+            // {
+            //     color = 'black';
+            // }
+            var marker = new MarkerWithLabel({
+                position: point,
+                icon: {
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                scale: 2,
+                rotation: angle,
+                strokeColor: color,
+                fillColor : color,
+            }});
+            marker.setMap(map);
+    
         }
-        if(listStop[i].status == "Tàu dừng")
-        {
-            color = 'black';
-        }
-        var marker = new MarkerWithLabel({
-            position: point,
-            icon: {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            scale: 3,
-            rotation: angle,
-            strokeColor: color
-        }});
-        marker.setMap(map);
+        var dte = listStop[i].time.getDate() + '/' + (listStop[i].time.getMonth() + 1) + '/' + listStop[i].time.getFullYear()
 
         var content_ =
             '<div class="">Tọa độ: '
             + listStop[i].lat + ' - '
             + listStop[i].lng + '<br/> ' + 'Thời gian: '
-            + listStop[i].time + '<br/> ' + 'Trạng thái: '
+            + dte + '<br/> ' + 'Trạng thái: '
             + listStop[i].status + '<br/> ' + 'Vận tốc: '
             + listStop[i].speed + ' Hải lý/Giờ' +
             '</div>';
@@ -406,14 +399,16 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
     _device = checkDevice(id);
     var point = new google.maps.LatLng(listStop[iml].lat, listStop[iml].lng);
     var icon = "";
-    if(listStop[iml].status == 'Tàu dừng'){
-        icon = "/Content/public/img/icon/tau_den.png"
+    if(listStop[iml].speed<3){
+        icon = "/Content/public/img/icon/tau-den.png"
     }
-    if(listStop[iml].status == 'Tàu chạy'){
-        icon = "/Content/public/img/icon/tau_xanh.png"
-    } 
-    if(listStop[iml].status == 'Mất tín hiệu'){
-        icon =  "/Content/public/img/icon/tau_den.png"
+    if(listStop[iml].speed>3){
+        icon = "/Content/public/img/icon/tau-xanh.png"
+    }
+    var today = new Date();
+    var phut = Math.floor((today - listStop[iml].time) / 1000 * 60);
+    if(phut>45){
+        icon =  "/Content/public/img/icon/tau-do.png"
     } 
     var marker = new MarkerWithLabel({
         position: point,
