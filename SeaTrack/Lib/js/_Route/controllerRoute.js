@@ -377,7 +377,7 @@ function cleanMap(a = 0) {
                         + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
                         + '<td class="alignCenter">'
                         + (i + 1) + '</td><td>'
-                        + '<img src="/Content/public/img/tau/' + _stt_[_listDeviceStatus[i]["Status"]]["menucon"] + '">  '
+                        + '<img src="/Content/images/tau/' + _stt_[_listDeviceStatus[i]["Status"]]["menucon"] + '">  '
                         + _listDeviceStatus[i]["DeviceName"]
                         + '</td><td>' + _listDeviceStatus[i]["Speed"]
                         + '</td><td>' + dte + '</td><td>'
