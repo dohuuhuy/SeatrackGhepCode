@@ -89,6 +89,12 @@ namespace SeaTrack.Controllers
             var data = AdminService.GetListDeviceOfCustomer(user.Username, id );
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetListDeviceOfCustomerWithDriver()
+        {
+            var user = (Users)Session["User"];
+            var data = AdminService.GetListDeviceOfCustomerWithDriver(user.Username);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
 
         [HttpPost]
@@ -102,6 +108,19 @@ namespace SeaTrack.Controllers
         public ActionResult AddDeviceToUser(User_Device ud)
         {
             var rs = AdminService.AddDeviceToUser(ud.UserID, ud.DeviceID, "Admin");
+            return Json(new { success = true });
+        }
+        [HttpPost]
+        public ActionResult RemoveDeviceFromUserWithDriver(User_Device ud)
+        {
+            var rs = AdminService.RemoveDeviceFromUserWithDriver(ud.UserID, ud.DeviceID);
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult AddDeviceToUserWithDriver(User_Device ud)
+        {
+            var rs = AdminService.AddDeviceToUserWithDriver(ud.UserID, ud.DeviceID, "Admin");
             return Json(new { success = true });
         }
 
@@ -119,7 +138,22 @@ namespace SeaTrack.Controllers
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
-      
+
+        public ActionResult GetListDeviceByDriverID(int? id)
+        {
+            if (id == null)
+            {
+                var user = (Users)Session["User"];
+                var data = AdminService.GetListDeviceByDriverID(user.UserID);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var data = AdminService.GetListDeviceByDriverID((int)id);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult CheckDeviceExist(Device device)
         {
             Device d = new Device();
