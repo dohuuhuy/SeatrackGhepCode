@@ -14,32 +14,6 @@ $(document).ready(function () {
 		$("#sidebarCollapse").addClass("d-none");
 		$("#giamsat_toggle").removeClass("d-none");
 	});
-	$('#giamsat_toggle').on('click', function () {
-		//$( "#sidebarCollapse" ).trigger( "click" );
-		$('#s-sidebar').toggleClass('active');
-		$('.s-sidebar').toggleClass('active');
-		$('#menubar').toggleClass('active');
-		$('#s-logo-menu').toggleClass('d-none');
-		$("#sidebarCollapse").removeClass("d-none");
-		$("#giamsat_toggle").addClass("d-none");
-	});
-
-
-
-	$('#s-info-button').on('click', function () {
-		$('#popUpBox_theMeaningOfIcon').toggleClass('d-none');
-	});
-	$("#closeMeaningOfIcon").on('click', function () {
-		$('#s-info-button').trigger('click');
-	})
-	$('#sublefttab_1').mouseenter(function () {
-		$('#sublefttab_1').addClass('s-over-width');
-	});
-	$('#sublefttab_1').mouseleave(function () {
-		$('#sublefttab_1').removeClass('s-over-width');
-	});
-
-
 
 	$('input[name="datefilter"]').daterangepicker({
 		autoUpdateInput: true,
