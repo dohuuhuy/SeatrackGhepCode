@@ -135,9 +135,9 @@
                 </div>
                 <hr>
                 <div class="card-text text-sm-center">
-                    <form action="Upload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" id="file" class="btn btn-light" />
-                        <button type="submit" class="btn btn-primary btn-sm">
+                    <form action="Upload" method="post" enctype="multipart/form-data" name="UpLoad">
+                        <input type="file" name="file" id="file" accept="image/*" onchange="validateAndUpload(this);" class="btn btn-light" />
+                        <button type="submit" class="btn btn-primary btn-sm" ng-if="UpLoad.file.$invalid">
                             <i class="fa fa-dot-circle-o"></i> Lưu
                         </button>
                     </form>

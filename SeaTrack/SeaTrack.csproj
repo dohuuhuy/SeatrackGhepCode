@@ -251,6 +251,7 @@
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SOSController.cs" />
     <Compile Include="Controllers\TrackDataController.cs" />
     <Compile Include="Controllers\UserGuideController.cs" />
     <Compile Include="Controllers\UtilitiesController.cs" />
@@ -309,8 +310,13 @@
     <Content Include="Content\images\icon\waiting4.gif" />
     <Content Include="Content\images\logo\logo-vinasia.png" />
     <Content Include="Content\images\tau\tau-black.png" />
+    <Content Include="Content\images\tau\tau-cam.png" />
+    <Content Include="Content\images\tau\tau-den.png" />
+    <Content Include="Content\images\tau\tau-do.png" />
     <Content Include="Content\images\tau\tau-green.png" />
     <Content Include="Content\images\tau\tau-red.png" />
+    <Content Include="Content\images\tau\tau-xanh.png" />
+    <Content Include="Content\images\tau\tau-yellow.png" />
     <Content Include="Content\images\UserAvatar\1.jpg" />
     <Content Include="Content\images\UserAvatar\2.jpg" />
     <Content Include="Content\images\UserAvatar\3.jpg" />
@@ -557,6 +563,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SOS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

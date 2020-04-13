@@ -54,7 +54,7 @@ namespace SeaTrack.Controllers
         public ActionResult Upload(HttpPostedFileBase file)
         {
             
-            if (file.ContentLength > 0 )
+            if (file != null && file.ContentLength > 0 )
             {
 
                 Users user = (Users)Session["User"];

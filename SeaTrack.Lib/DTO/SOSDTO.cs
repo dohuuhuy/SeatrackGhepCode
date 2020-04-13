@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaTrack.Lib.DTO
 {
-    class SOSDTO
+    public class SOSDTO
     {
         public Int64 SOSID { get; set; }
         public Int64 DeviceID { get; set; }
