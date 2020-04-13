@@ -60,15 +60,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                            <td>{{$index+1}}</td>
+                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10 track by $index" current-page="currentPage">
+                            <td>{{$index + (currentPage-1)*10+1}}</td>
                             <td>
-                                <a ng-click="View(namesData[$index])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
+                                <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
                                     <i class="fa fa-eye" style="color:black"></i>
                                 </a>
-                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                <a ng-click="Delete($index)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
-                                <a ng-click="Unlock($index)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
+                                <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                <a ng-click="Delete($index + (currentPage-1)*10)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
+                                <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
                             </td>
                             <td>{{a.DeviceNo}}</td>
                             <td>{{a.DeviceName}}</td>
@@ -231,8 +231,8 @@
 
                             <div class="form-group">
                                 <label class="control-label"> Ngày hết hạn </label>
-                                <input class="form-control" id="datefield1" name="DateExpired" ng-model="Device.ExpireDate" type="date" data-date-format="dd-MM-yyyy HH:mm:ss" />
-                                <span ng-if="UpdateForm.DateExpired.$invalid">Error</span>
+                                <input class="form-control" id="DateExpired" name="ExpireDate" ng-model="Device.ExpireDate" type="date" />
+                                <span ng-if="UpdateForm.ExpireDate.$invalid">Error</span>
                                 <br />
                                 <div class="row text-center">
                                     <div class="form-group col-md-6">
@@ -255,7 +255,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid || NoCheck == Device.DeviceNo || ImeiCheck == Device.DeviceImei" ng-click="update()">Update</button>
+                    <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="UpdateForm.$invalid || NoCheck == Device.DeviceNo || ImeiCheck == Device.DeviceImei" ng-click="update()">Update</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                 </div>
             </div>

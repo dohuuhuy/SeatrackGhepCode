@@ -104,6 +104,7 @@ function makePoint(id, icon = "") {
     var lasted;
     var _device;
     _device = checkDevice(id);
+    
     console.log(_device);
     var dt = new Date(parseInt(_device.TransmitTime.substr(6)));
     var today = new Date();
@@ -419,7 +420,7 @@ function drawingLinePoint(listStop, id, a) { // gọi tới setdrawingLinePoint 
         icon = "/Content/public/img/icon/tau-xanh.png"
     }
     var today = new Date();
-    var phut = Math.floor((today - listStop[iml].time) / 1000 * 60);
+    var phut = Math.floor((today - listStop[iml].time) / 1000 / 60);
     if(phut>45){
         icon =  "/Content/public/img/icon/tau-do.png"
     } 
@@ -468,7 +469,7 @@ function setup_DataTable() {
                     var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
                         + ' ' + dt.getHours() + ':' + dt.getMinutes();
                     var today = new Date();
-                    var phut = Math.floor((today - dt) / 1000 * 60);
+                    var phut = Math.floor((today - dt) / 1000 / 60);
 
 
                     var pic = 2;

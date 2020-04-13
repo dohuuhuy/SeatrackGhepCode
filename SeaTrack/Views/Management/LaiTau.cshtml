@@ -69,15 +69,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                                            <td>{{$index+1}}</td>
+                                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                                            <td>{{$index + (currentPage-1)*10+1}}</td>
                                             <td>
-                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
+                                                <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
                                                     <i class="fa fa-eye" style="color:black"></i>
                                                 </a>
-                                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
-                                                <a ng-click="Lock($index)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
-                                                <a ng-click="Unlock($index)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
+                                                <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
+                                                <a ng-click="Lock($index + (currentPage-1)*10)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
+                                                <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
                                             </td>
                                             <td>{{a.DriverName}}</td>
                                             <td>{{a.Phone}}</td>
