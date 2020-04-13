@@ -389,7 +389,35 @@ namespace SeaTrack.Lib.Service
             }
             return lst;
         }
+        public static List<DeviceViewModel> GetListDeviceByDriverID(int UserID)
+        {
+            List<DeviceViewModel> lst = null;
+            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceByDriverID", UserID);
+            if (reader.HasRows)
+            {
+                lst = new List<DeviceViewModel>();
 
+                while (reader.Read())
+                {
+                    var data = new DeviceViewModel()
+                    {
+                        DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                        DeviceNo = reader["DeviceNo"].ToString(),
+                        DeviceName = reader["DeviceName"].ToString(),
+                        DeviceImei = reader["DeviceImei"].ToString(),
+                        DeviceVersion = reader["DeviceVersion"].ToString(),
+                        DeviceGroup = reader["DeviceGroup"].ToString(),
+                        DeviceNote = reader["DeviceNote"].ToString(),
+                        DateExpired = (reader["DateExpired"].ToString()),
+                        StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
+                        ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
+                        ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1
+                    };
+                    lst.Add(data);
+                }
+            }
+            return lst;
+        }
         //Username != null, Lấy danh sách thiết bị thuộc về Username nhưng chưa được gán cho người dùng khác
         //Username == null, lấy danh sách thiết bị chưa được gán cho bất kỳ người dùng
         public static List<DeviceViewModel> GetListDeviceNotUsedByUser(string Username)
@@ -463,6 +491,30 @@ namespace SeaTrack.Lib.Service
             return null;
 
         }
+        public static List<DeviceViewModel> GetListDeviceOfCustomerWithDriver(string Username)
+        {
+            List<DeviceViewModel> lst = null;
+            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceOfCustomerWithDriver", Username);
+            if (reader.HasRows)
+            {
+                lst = new List<DeviceViewModel>();
+                while (reader.Read())
+                {
+                    var data = new DeviceViewModel()
+                    {
+                        DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                        DeviceNo = reader["DeviceNo"].ToString(),
+                        DeviceName = reader["DeviceName"].ToString(),
+                        DateExpired = reader["DateExpired"].ToString()
+                    };
+                    lst.Add(data);
+                }
+                return lst;
+
+            }
+            return null;
+
+        }
         public static int RemoveDeviceFromUser(int UserID, int DeviceID)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_RemoveDeviceFromUser", UserID, DeviceID);
@@ -471,6 +523,15 @@ namespace SeaTrack.Lib.Service
         public static int AddDeviceToUser(int UserID, int DeviceID, string CreateBy)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_AddDeviceToUser", UserID, DeviceID, CreateBy);
+        }
+        public static int RemoveDeviceFromUserWithDriver(int UserID, int DeviceID)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_RemoveDeviceFromUserWithDriver", UserID, DeviceID);
+        }
+
+        public static int AddDeviceToUserWithDriver(int UserID, int DeviceID, string CreateBy)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_AddDeviceToUserWithDriver", UserID, DeviceID, CreateBy);
         }
 
         public static bool DeleteDevice(int DeviceID)

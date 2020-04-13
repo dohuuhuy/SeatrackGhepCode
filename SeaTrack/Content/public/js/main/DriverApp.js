@@ -70,6 +70,8 @@ App.controller('Controller', function ($scope, $http, Service) {
             CreateDate: new Date(parseInt(data.CreateDate.substr(6))),
 
         };
+        fetchData($scope.Driver.DriverID);
+
     };
     $scope.NoDriverExist = function (No) {
         $scope.NoCheck = "alo";
@@ -194,6 +196,77 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
 
     }
+
+    // -------------------------- Cấp thiết bị   ------------------------------------------------//
+    $scope.UserID = function (name) {
+
+        $scope.name = name;
+
+    }
+    //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
+    $scope.AddDevice = function () {
+        GetListDeviceOfCustomer();
+    }
+    // xóa thiết bị được cấp và thêm vào list thiết bị không sử dụng
+    $scope.RemoveDeviceFromUser = function (index) {
+        DeviceToRemove = $scope.Devices[index];
+        id = $scope.Driver.DriverID;
+        var RemoveModel = { UserID: id, DeviceID: DeviceToRemove.DeviceID };
+        $http({
+            method: "POST",
+            url: '/Management/RemoveDeviceFromUserWithDriver/',
+            data: RemoveModel
+        }).then(function (response) {
+
+        });
+
+        $scope.Devices.splice(index, 1);
+        $scope.DevicesNotUsed.push(DeviceToRemove);
+        fetchData(id);
+    }
+    // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
+    $scope.AddDeviceToUser = function (index) {
+        DeviceToAdd = $scope.DevicesNotUsed[index];
+        id = $scope.Driver.DriverID;
+        var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
+        $http({
+            method: "POST",
+            url: '/Management/AddDeviceToUserWithDriver/',
+            data: Model
+        }).then(function (response) {
+
+        });
+        $scope.DevicesNotUsed.splice(index, 1);
+        $scope.Devices.push(DeviceToAdd);
+        fetchData(id);
+    }
+
+    // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
+    function GetListDeviceOfCustomer() {
+        $http({
+            method: "GET",
+            url: '/Management/GetListDeviceOfCustomerWithDriver'
+        }).then(function (response) {
+            console.log(response, 'res');
+            $scope.DevicesNotUsed = response.data;
+        }, function (error) {
+            console.log(error, 'can not get data.');
+        });
+    };
+
+    // lấy danh sach thiết bị của người dùng theo id trong list của khách hàng
+    // oke chạy
+    function fetchData(DriverID) {
+        $http({
+            method: "GET",
+            url: '/Management/GetListDeviceByDriverID/' + DriverID
+        }).then(function (response) {
+            console.log(response, 'res');
+            $scope.Devices = response.data;
+        }, function (error) {
+            console.log(error, 'can not get data.');
+        });
+    };
 });
 
 
@@ -203,7 +276,6 @@ App.factory('Service', function ($http) {
     fac.GetAllRecords = function () {
         return $http.get('/Management/GetListDriverByUserID');
     };
-
     console.log('i am inside Service ');
 
     return fac;
