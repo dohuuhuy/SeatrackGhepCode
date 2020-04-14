@@ -3,6 +3,7 @@
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="/Content/public/img/logo.jpg" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Language" content="vi" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Test</title>
@@ -25,15 +26,11 @@
         <div class="wrapper ">
             @Html.Partial("_Navbar")
             <div id="content" class="s-relative main show">
-
                 @RenderBody()
-
-
                 @Html.Partial("_LoadingModal")
             </div>
         </div>
     </div>
-
     @Html.Partial("../_Waiting")
     <style>
         html {
