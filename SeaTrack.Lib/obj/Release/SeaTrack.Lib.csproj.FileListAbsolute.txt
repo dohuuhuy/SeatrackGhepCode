@@ -60,3 +60,22 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\o
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Release\SeaTrack.Lib.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Release\SeaTrack.Lib.pdb
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Release\SeaTrack.Lib.csprojAssemblyReference.cache
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\SeaTrack.Lib.dll.config
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\SeaTrack.Lib.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\SeaTrack.Lib.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.Core.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\DotNetNuke.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Quartz.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\RestSharp.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.Core.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Common.Logging.Core.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Quartz.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Quartz.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\RestSharp.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.csprojResolveAssemblyReference.cache
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.pdb

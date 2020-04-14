@@ -66,15 +66,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                            <td>{{$index+1}}</td>
+                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                            <td>{{$index + (currentPage-1)*10 +1}}</td>
                             <td>
-                                <a ng-click="View(namesData[$index])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
+                                <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
                                     <i class="fa fa-eye" style="color:black"></i>
                                 </a>
-                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                <a ng-click="Delete($index)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock" style="color:red"></i></a>
-                                <a ng-click="Unlock($index)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock" style="color:black"></i></a>
+                                <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                <a ng-click="Delete($index + (currentPage-1)*10)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock" style="color:red"></i></a>
+                                <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock" style="color:black"></i></a>
 
                             </td>
                             <td>{{a.DeviceNo}}</td>

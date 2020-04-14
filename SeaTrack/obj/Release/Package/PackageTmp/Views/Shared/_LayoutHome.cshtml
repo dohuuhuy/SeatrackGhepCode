@@ -25,14 +25,14 @@
 <body id="body" class="class_body_t">
     <div class="body-content">
         <div class="wrapper ">
-            @Html.Partial("_Navbar");
+            @Html.Partial("_Navbar")
             <div id="content" class="s-relative main show">
                 @RenderBody()
-                @Html.Partial("_LoadingModal");
+                @Html.Partial("_LoadingModal")
             </div>
         </div>
     </div>
-    @Html.Partial("../_Waiting");
+    @Html.Partial("../_Waiting")
     <style>
         html {
             font-family: sans-serif;
@@ -67,6 +67,9 @@
     <script src="~/Content/public/js/main/controller.js"></script>
     <script src="~/Content/public/js/main/default.js"></script>
     <script src="~/Content/public/js/main/global.js"></script>
+    <script src="~/Scripts/graham_scan.js"></script>
+    <script src="~/Content/public/js/main/SOS.js"></script>
+    <script src="~/Handlers/keepAlive.js"></script>
 </body>
 </html>
 

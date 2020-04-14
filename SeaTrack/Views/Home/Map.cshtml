@@ -30,17 +30,19 @@
       }
       var vungbo;
       var vunglong;
+      var map;
       function CreatePoly(){
       var bo = [
         {
-          lat:23.280141, lng:105.347008
+            lat:23.280141,
+            lng:105.347008
         },
         {
             lat: 21.29722222,
             lng: 108.2861
         },
         {
-            lat: 20.72222222,
+            lat: 20.73888889,
             lng: 107.5111
         },
         {
@@ -201,12 +203,53 @@
             lat: 10.421051,
             lng: 104.438897
         }];
-      vungbo = new google.maps.Polygon({
-          paths: bo
-      });
-      vunglong = new google.maps.Polygon({
-          paths: long
-      });
+      //vungbo = new google.maps.Polygon({
+       //   paths: bo
+      //});
+      //vunglong = new google.maps.Polygon({
+       //   paths: long
+     // });
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 20.72222222, lng: 107.5111},
+          zoom: 8
+        });
+        for(var i = 0; i< bo.length; i++){
+            console.log(bo[i]["lat"],bo[i]["lng"]);
+            var p = new google.maps.LatLng(bo[i]["lat"],bo[i]["lng"]);
+            var marker = new google.maps.Marker({
+                position: p,
+                label: "B",
+                title: "Bộ "+ i
+            });
+            marker.setMap(map);
+        }
+        var VungBo = new google.maps.Polyline({
+            path: bo,
+            geodesic: true,
+            strokeColor: '#14a84e',
+            strokeOpacity: 1.0,
+            strokeWeight: 1.3
+        });
+        VungBo.setMap(map);
+
+        for(var i = 0; i< long.length; i++){
+            console.log(long[i]["lat"],long[i]["lng"]);
+            var p = new google.maps.LatLng(long[i]["lat"],long[i]["lng"]);
+            var marker = new google.maps.Marker({
+                position: p,
+                label: "L",
+                title: "Lộng "+ i
+            });
+            marker.setMap(map);
+        }
+        var VungLong = new google.maps.Polyline({
+            path: long,
+            geodesic: true,
+            strokeColor: 'red',
+            strokeOpacity: 1.0,
+            strokeWeight: 1.3
+        });
+        VungLong.setMap(map);        
       }
 
       function checkArea(lat, lng){

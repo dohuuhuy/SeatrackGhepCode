@@ -19,6 +19,8 @@
 
 
 var _listDeviceStatus = [];
+var _listSOS = [];
+var _SOSInfo = [];
 var _drawingLinePoint = [];
 var _infowins = [];
 var _drawingMarker = [];
@@ -90,6 +92,7 @@ function toHaily(a) {return (Math.round((a * 0.53996) * 10) / 10);}
 function clearInfoWin() {
     for (var i = 0; i < _infowins.length; i++) {
         _infowins[i].close();
+        _SOSInfo[i].close();
     }
 }
 function updateListDeviceStatus() {
@@ -138,46 +141,88 @@ function cleanMap(a = 0) {
         }
         if (a == 0) _infowins = [];
     }
+    // if (_arSOS.length > 0) {
+    //     for (i = 0; i < _arSOS.length; i++) {
+    //         console.log(_arSOS)[i];
+    //         _arSOS[i].close();
+    //     }
+    //     if (a == 0) _SOSInfo = [];
+    // }
 }
-    function checkDevice(id) {
+    function checkDevice(id, n) {
         i = 0;
-        while (i < _listDeviceStatus.length) {
-            if (_listDeviceStatus[i].DeviceID == id)
-                return _listDeviceStatus[i];
-            i++;
+        if(n==1){
+            console.log("1,"+id);
+            while (i < _listDeviceStatus.length) {
+                if (_listDeviceStatus[i].DeviceID == id){
+                    console.log(_listDeviceStatus[i]);
+                    return _listDeviceStatus[i];
+                }
+
+                i++;
+            }    
+        }
+        if(n==2){
+            return _listSOS[id];
         }
         return 0;
     }
-    function makePoint(id, icon = "") {
+    function makePoint(id, n) {
         cleanMap(1);
         var i = 0;
         var lasted;
         var _device;
-        _device = checkDevice(id);
-        if (icon == "") icon = "/Content/images/tau/" + _stt_[_device.Status]["polycon"];
-        if (_device != 0) {
-            point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
-
-            marker = new google.maps.Marker({
-                position: point,
-                icon: icon,
-            });
-            var infowin = new google.maps.InfoWindow({
-                content: 'Đang cập nhật dữ liệu!',
-            });
-
-            infowin.setContent(getInfoWindow(_device));
-            google.maps.event.addListener(marker, 'click', function () {
-                clearInfoWin();
-                infowin.open(map, marker);
-            });
-            _infowins.push(infowin);
-            map.panTo(point);
-            map.setZoom(13);
-            _armarker.push(marker);
-            marker.setMap(map);
+        _device = checkDevice(id,n);
+        if(n==1){
+            icon = "/Content/images/tau/" + _stt_[_device.Status]["polycon"];
+            if (_device != 0) {
+                point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
+                marker = new google.maps.Marker({
+                    position: point,
+                    icon: icon,
+                });
+                var infowin = new google.maps.InfoWindow({
+                    content: 'Đang cập nhật dữ liệu!',
+                });
+                console.log(_device);
+                infowin.setContent(getInfoWindow(_device,1));
+                google.maps.event.addListener(marker, 'click', function () {
+                    clearInfoWin();
+                    infowin.open(map, marker);
+                });
+                _infowins.push(infowin);
+                map.panTo(point);
+                map.setZoom(10);
+                _armarker.push(marker);
+                marker.setMap(map);
+            }
         }
-        else alert("Chưa có dữ liệu, vui lòng thử lại sau");
+        if(n==2){
+            icon = "/Content/images/tau/tau-do.png";
+            if (_device != 0) {
+                point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
+                // marker = new google.maps.Marker({
+                //     position: point,
+                //     icon: icon,
+                // });
+                // var infowin = new google.maps.InfoWindow({
+                //     content: 'Đang cập nhật dữ liệu!',
+                // });
+                // console.log(_device);
+                // infowin.setContent(getInfoWindow(_device,2));
+                // google.maps.event.addListener(marker, 'click', function () {
+                //     clearInfoWin();
+                //     infowin.open(map, marker);
+                // });
+                // _infowins.push(infowin);
+                map.panTo(point);
+                map.setZoom(6);
+                //_arSOS.push(marker);
+                //marker.setMap(map);
+            }
+        }
+
+        //else alert("Chưa có dữ liệu, vui lòng thử lại sau");
     }
         function makeListStop() {
             for (var i = 0; i < _drawingLinePoint.length; i++) {
@@ -209,7 +254,7 @@ function cleanMap(a = 0) {
                 data: { deviceID: id, From: from, To: to },
                 success: function (data, txtStatus, XMLHttpRequest) {
                     _drawingLinePoint = data.Result;
-                    console.log(_drawingLinePoint.length);
+                    //console.log(_drawingLinePoint.length);
                     if (_drawingLinePoint == null) {
                         alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
                     } else {
@@ -262,13 +307,14 @@ function cleanMap(a = 0) {
                     + _stt_[_drawingLinePoint[i].Status].name + '<br/> ' + 'Vận tốc: '
                     + _drawingLinePoint[i].speed + ' Hải lý/Giờ' +
                     '</div>';
-                    content_ = getInfoWindow(_drawingLinePoint[i]);
+                    content_ = getInfoWindow(_drawingLinePoint[i],1);
                     attachInforwindows(marker, content_);
                 }
                 //var markerCluster = new MarkerClusterer(map, _drawingMarker,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
                 //var markerCluster = new MarkerClusterer(map, _drawingMarker,{imagePath: 'https://test.gpsvin.vn/Content/images/tau/tau-den'});
 
-                _device = checkDevice(id);
+                _device = checkDevice(id,1);
+                console.log(_device);
                 var point = new google.maps.LatLng(_drawingLinePoint[_drawingLinePoint.length - 1].Latitude, _drawingLinePoint[_drawingLinePoint.length - 1].Longitude);
                 var marker = new google.maps.Marker({
                     position: point,
@@ -278,10 +324,15 @@ function cleanMap(a = 0) {
                 var infowin = new google.maps.InfoWindow({
                     content: 'Đang cập nhật dữ liệu!',
                 });
-                content_ = getInfoWindow(_device);
-                attachInforwindows(marker,content_);
-
                 if (a == 1) {
+                    content_ = getInfoWindow(_device,1);
+                    attachInforwindows(marker,content_);
+                    map.panTo(point);
+                    map.setZoom(13);
+                }
+                if (a == 2) {
+                    content_ = getInfoWindow(_device,2);
+                    attachInforwindows(marker,content_);
                     map.panTo(point);
                     map.setZoom(13);
                 }
@@ -306,25 +357,44 @@ function cleanMap(a = 0) {
                     _armarker.push(marker);
                     _infowins.push(infowin);
                 }
-                function getInfoWindow(_dv) {
-                    var strStatus = '';
-
-                    var dte = _dv["TransmitTime"].getDate() + '/' + (_dv["TransmitTime"].getMonth() + 1) + '/' + _dv["TransmitTime"].getFullYear()
-                    + ' ' + _dv["TransmitTime"].getHours() + ':' + _dv["TransmitTime"].getMinutes();
-
-                    strStatus += '<div class="">';
-                    if(_dv["DeviceName"] != null)
+                function getInfoWindow(_dv, n) {
+                    if(n==1){
+                        console.log(_dv)
+                        var strStatus = '';
+                        var dte = _dv["TransmitTime"].getDate() + '/' + (_dv["TransmitTime"].getMonth() + 1) + '/' + _dv["TransmitTime"].getFullYear()
+                        + ' ' + _dv["TransmitTime"].getHours() + ':' + _dv["TransmitTime"].getMinutes();
+                        
+                        strStatus += '<div class="">';
+                        if(_dv["DeviceName"] != null)
                         strStatus += 'Tên thiết bị: <b>' + _dv["DeviceName"] + '</b><br>';
+                        
+                        strStatus += 'Thời gian: <b>' + dte + '</b><br>'
+                        + 'Trạng thái: <b>' + _stt_[_dv["Status"]]["name"] + '</b><br>'
+                        + 'Toạ độ: <b>' + _dv["Latitude"] + ' (' + _dv["DirectionSN"]
+                        + ')</b> - <b>' + _dv["Longitude"] + ' (' + _dv["DirectionEW"] + ')</b><br>'
+                        + 'Tốc độ: <b>' + _dv["Speed"] + '</b> Hải lý / giờ <br>' + '</div>';
+                        return strStatus;
+                    }
+                    if(n==2){
+                        var strStatus = '';
+                        var time = new Date(parseInt(_dv["DateRequest"].substr(6)));
+                        var dte = time.getDate() + '/' + (time.getMonth() + 1) + '/' + time.getFullYear()
+                        + ' ' + time.getHours() + ':' + time.getMinutes();
+                        
+                        strStatus += '<div class="">';
+                        if(_dv["DeviceName"] != null)
+                        strStatus += 'Tên thiết bị: <b>' + _dv["DeviceName"] + '</b><br>';
+                        
+                        strStatus += 'Thời gian: <b>' + dte + '</b><br>'
+                        + 'Trạng thái: <b>' + _stt_[_dv["Status"]]["name"] + '</b><br>'
+                        + 'Toạ độ: <b>' + _dv["Latitude"] + ' (' + _dv["DirectionSN"]
+                        + ')</b> - <b>' + _dv["Longitude"] + ' (' + _dv["DirectionEW"] + ')</b><br>'
+                        + '</div>';
+                        return strStatus;
 
-                    strStatus += 'Thời gian: <b>' + dte + '</b><br>'
-                    + 'Trạng thái: <b>' + _stt_[_dv["Status"]]["name"] + '</b><br>'
-                    + 'Toạ độ: <b>' + _dv["Latitude"] + ' (' + _dv["DirectionSN"]
-                    + ')</b> - <b>' + _dv["Longitude"] + ' (' + _dv["DirectionEW"] + ')</b><br>'
-                    + 'Tốc độ: <b>' + _dv["Speed"] + '</b> Hải lý / giờ <br>' + '</div>';
-
-                    return strStatus;
-                }
-                function ShowTableDataLine() {
+                    }
+                }                
+                    function ShowTableDataLine() {
                     var _tbl = "";
                     for (var i = 0; i < _drawingLinePoint.length; i++) {
                         var dte = _drawingLinePoint[i]["TransmitTime"].getDate() + '/' + (_drawingLinePoint[i]["TransmitTime"].getMonth() + 1) + '/'
@@ -363,6 +433,76 @@ function cleanMap(a = 0) {
                     if (_interval != null) clearInterval(_interval);
                     _interval = setInterval(function () { setdrawingLinePoint() }, 120000);
                 }
+                
+                function interval_SOS(){
+                    
+                    _SOS = setInterval(function () { SOS() }, 60000);
+                }
+                function SOS(){
+                    for (var i = 0; i< _arSOS.length; i++){
+                        _arSOS[i].setMap(null);
+                    }
+                    // for(var i = 0; i < markerSOS.length; I++){
+                    //     markerSOS[i].setMap(null);
+                    // }
+                    _arSOS = [];
+                    $.ajax({
+                        type: 'GET',
+                        url: '/SOS/GetSOS',
+                        data: {},
+                        success: function (data, txtStatus, XMLHttpRequest) {
+                            _listSOS = data;
+                            var _tb = "";
+                            if(_listSOS == null){
+                                document.getElementById("SOSData").style.display="none";
+                            }
+                            for(var i = 0; i< _listSOS.length; i++){
+                                var p = new google.maps.LatLng(_listSOS[i]["Latitude"],_listSOS[i]["Longitude"]);
+                                
+                                var marker = new google.maps.Marker({
+                                    position: p,
+                                    icon: "/Content/images/tau/tau-do.png",
+                                });
+                                
+                                
+                                var SOSInfo = new google.maps.InfoWindow({
+                                    content: 'Đang cập nhật dữ liệu!',
+                                });
+                                 
+                                SOSInfo.setContent(getInfoWindow(_listSOS[i],2));
+                                
+                                marker.addListener('click', function () {
+                                    //clearInfoWin();
+                                console.log(SOSInfo);
+                                console.log(marker);
+                                SOSInfo.open(map, marker);
+                                });
+                                marker.setMap(map);
+                                _SOSInfo.push(SOSInfo); 
+                                _arSOS.push(marker);              
+                                
+                                var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
+                                //console.log(date);
+                                var dte = date.getDate() + '/' + (date.getMonth() + 1) + '/'
+                                + date.getFullYear() + ' ' + date.getHours() + ':'
+                                + date.getMinutes();
+        
+                                _tb += '<tr id="SOS' + _listSOS[i]["DeviceID"]
+                                + '" classname="groupXe" onclick="makePoint(' + i + ',2'
+                                + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
+                                + '<td class="alignCenter">'
+                                + (i + 1) + '</td><td>'
+                                + '<img src="/Content/images/tau/tau-red.png">  '
+                                + _listSOS[i]["DeviceName"]
+                                + '</td><td>' + dte + '</td><td>'
+                                + _listSOS[i]["Latitude"] + "." + _listSOS[i]["DirectionSN"] + " - "
+                                + _listSOS[i]["Longitude"] + "." + _listSOS[i]["DirectionEW"]
+                                + '</td></tr>';
+                            }$("#SOSData").html(_tb);
+                        }
+                    });
+                    console.log("done");
+                }
                 function setup_DataTable() {
                     //if(_listDeviceStatus.length <= 0) updateListDeviceStatus();
                     var _tb = "";
@@ -373,7 +513,7 @@ function cleanMap(a = 0) {
                         + _listDeviceStatus[i]["TransmitTime"].getMinutes();
 
                         _tb += '<tr id="tr' + _listDeviceStatus[i]["DeviceID"]
-                        + '" classname="groupXe" onclick="makePoint(' + _listDeviceStatus[i]["DeviceID"]
+                        + '" classname="groupXe" onclick="makePoint(' + _listDeviceStatus[i]["DeviceID"] + ',1'
                         + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
                         + '<td class="alignCenter">'
                         + (i + 1) + '</td><td>'

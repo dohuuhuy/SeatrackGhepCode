@@ -6,12 +6,13 @@ var _def_zoom = 6;
 
 var _armarker = [];
 var _flightPath = [];
+var _SOS;
 var _interval;
 var point;
 var infowin;
 var _infowins = [];
 var _listDeviceStatus;
-
+var _IsDislay;
 
 
 

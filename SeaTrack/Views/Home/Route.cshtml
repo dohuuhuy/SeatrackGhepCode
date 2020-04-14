@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                                 <div class="input-group mb-3 text-center ">
-                                    <div class="slidecontainer">              
+                                    <div class="slidecontainer">
                                         <button class="btn"><i class="fa fa-play"></i></button>
                                         <input type="range" class="custom-range" min="0" max="5" step="0.5" id="myRange">
                                         <button class="btn"><i class="fa fa-play-circle"></i></button>
@@ -148,17 +148,19 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <style>
                                 .slidecontainer button {
                                     color: #15b4c4;
                                     border: 1px solid #15b4c4;
                                 }
+
                                 .custom-range {
                                     width: 70%;
                                     height: auto;
                                 }
-                                    .slidecontainer {
+
+                                .slidecontainer {
                                     width: 100%;
                                 }
 
@@ -176,7 +178,6 @@
                                     .slider:hover {
                                         opacity: 1;
                                     }
-                                
                             </style>
                             <div id="sublefttab_4" class="s-sub-left-tab">
 
@@ -239,6 +240,28 @@
                 </select>
             </div>
             <div id="map" class="s-map s-full"></div>
+            <div style="width:30%;background:#fff;position:absolute;right:10px;bottom:5%;text-align:center;border:0px;border-radius:5px;">
+                <label class="text-danger "  style="font-size:15px;font-weight:bold">CẢNH BÁO KHẨN CẤP</label>
+                <table id="tbldata" class="table-bordered table table-sm text-center" style="padding:0px">
+                    <thead style="white-space:nowrap;">
+                        <tr>
+                            <th class="headerAlignCenter">
+                                STT
+                            </th>
+                            <th class="headerAlignCenter">
+                                Số hiệu
+                            </th>
+                            <th class="headerAlignCenter">
+                                Thời gian
+                            </th>
+                            <th class="headerAlignCenter">
+                                Vị trí
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="SOSData"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>
