@@ -6,27 +6,27 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     $scope.namesData = [];
     LoadDevice();
     $scope.loadMessage = updateInfo();
-        function updateInfo() {
+    function updateInfo() {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
     };
-        $scope.total = function () {
+    $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
             total++;
         });
         return total;
     };
-    $scope.DeviceExtension = function(dateExpire,time) {
-    console.log('date'+dateExpire);
-    dateExpire.setDate(dateExpire.getDate() + time*30); // Set now + 30 days as the new date
-    console.log('new date'+dateExpire);
-    $scope.Device.ExpireDate = new Date(dateExpire);
-    $scope.Device.DateExpired = new Date(dateExpire);
+    $scope.DeviceExtension = function (dateExpire, time) {
+        console.log('date' + dateExpire);
+        dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
+        console.log('new date' + dateExpire);
+        $scope.Device.ExpireDate = new Date(dateExpire);
+        $scope.Device.DateExpired = new Date(dateExpire);
     }
-    $scope.ClearSearch = function(){
-    $scope.SearchKey = "";
-    $scope.Status = null;
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
     }
 
     $scope.Device = {
@@ -104,25 +104,25 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     };
     $scope.update = function () {
         //nếu không trường nào bị null
-            console.log('i am inside update funcr ' +
-                JSON.stringify($scope.Customer));
-            $http({
-                method: 'POST',
-                url: '/Admin/Device/EditDevice',
-                data: JSON.stringify($scope.Device)
-            }).then(function successCallback(response) {
-                $scope.namesData = null;
-                DeviceService.GetAllRecords().then(function (d) {
-                    $scope.namesData = d.data;
-                }, function () {
-                    alert('Unable to Get Data !!!');
-                });
-                $scope.Clear();
-                alert(" Updated Successfully !!!");
-            }, function errorCallback(response) {
-                alert("Error : " + response.data.ExceptionMessage);
+        console.log('i am inside update funcr ' +
+            JSON.stringify($scope.Customer));
+        $http({
+            method: 'POST',
+            url: '/Admin/Device/EditDevice',
+            data: JSON.stringify($scope.Device)
+        }).then(function successCallback(response) {
+            $scope.namesData = null;
+            DeviceService.GetAllRecords().then(function (d) {
+                $scope.namesData = d.data;
+            }, function () {
+                alert('Unable to Get Data !!!');
             });
-        
+            $scope.Clear();
+            alert(" Updated Successfully !!!");
+        }, function errorCallback(response) {
+            alert("Error : " + response.data.ExceptionMessage);
+        });
+
 
     };
     $scope.Edit = function (data) {

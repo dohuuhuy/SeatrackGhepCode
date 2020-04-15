@@ -5,8 +5,10 @@ var _def_Lng = 109.1243889;
 var _def_zoom = 6;
 
 var _armarker = [];
+var _arSOS = [];
 var _flightPath = [];
 var _interval;
+var _SOS;
 var point;
 var infowin;
 

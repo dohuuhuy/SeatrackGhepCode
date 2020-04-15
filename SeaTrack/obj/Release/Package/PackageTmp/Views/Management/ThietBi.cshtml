@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
-<div id="list-tienich" class="main">
+<div id="list-tienich" class="main" ng-app="ThietBiCuaKhachHangApp" ng-controller="Controller">
     <div class="wrapper">
         @Html.Partial("_MenuThietBiVaLaiTau");
         <div id="content-tienich-thongtinthietbi" class="content">
@@ -13,64 +13,99 @@
                     <div class="jumbotron ">
                         <h2>Thông Tin Thiết Bị</h2>
                     </div>
-                    <div ng-app="ThietBiVaLaiTauApp" ng-controller="Controller">
-                        <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
-                        <div class="card-body">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
-                                <i class="fa fa-plus"></i> Thêm mới
-                            </button>
-                            <label>Tổng: {{namesData.length}}</label>
-                            <div class="table-responsive">
-                                <table id="dataTable" class="table table-bordered table-striped text-center">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">#</th>
-                                            <th>Thao tác</th>
-                                            <th>Số hiệu</th>
-                                            <th>Tên thiết bị</th>
-                                            <th> Phiên bản</th>
-                                            <th> Imei</th>
-                                            <th> Ngày hết hạn</th>
-                                            <th> Trạng thái</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 7" current-page="currentPage">
-                                            <td>{{$index+1}}</td>
-                                            <td>
-                                                <a ng-click="View(namesData[$index])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
-                                                    <i class="fa fa-eye" style="color:black"></i>
-                                                </a>
-                                                <a ng-click="Edit(namesData[$index])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                                <a ng-click="Delete($index)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
-                                                <a ng-click="Unlock($index)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
-                                            </td>
-                                            <td>{{a.DeviceNo}}</td>
-                                            <td>{{a.DeviceName}}</td>
-                                            <td>{{a.DeviceVersion}}</td>
-                                            <td>{{a.DeviceImei}}</td>
-                                            <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired}}</p></td>
-                                            <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
-                                            <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
-                                            <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
-                                            <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
+                    <div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <strong class="card-title">Vùng Tìm Kiếm</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" ng-click="ClearSearch()">
+                                                <i class="fa fa-search"></i> Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="input-group ">
+                                        <label for="radio1" class="form-check-label col-md-4 ">
+                                            <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                                            {{Status}}
+                                        </label>
+                                        <label for="radio2" class="form-check-label col-md-4  ">
+                                            <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                                            {{Status}}
+                                        </label>
+                                        <label for="radio3" class="form-check-label col-md-4  ">
+                                            <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
+                                            {{Status}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
+                                    <i class="fa fa-plus"></i> Thêm mới
+                                </button>
+                                <label>Tổng: {{namesData.length}}</label>
+                                <div class="table-responsive">
+                                    <table id="dataTable" class="table table-bordered table-striped text-center table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%">#</th>
+                                                <th>Thao tác</th>
+                                                <th>Số hiệu</th>
+                                                <th>Tên thiết bị</th>
+                                                <th> Phiên bản</th>
+                                                <th> Imei</th>
+                                                <th> Ngày hết hạn</th>
+                                                <th> Trạng thái</th>
+                                            </tr>
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
-                                    <div class="text-center">
-                                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                                        </thead>
+                                        <tbody>
+                                            <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                                                <td>{{$index + (currentPage-1)*10+1}}</td>
+                                                <td>
+                                                    <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
+                                                        <i class="fa fa-eye" style="color:black"></i>
+                                                    </a>
+                                                    <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                                    <a ng-click="Delete($index + (currentPage-1)*10)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
+                                                    <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
+                                                </td>
+                                                <td>{{a.DeviceNo}}</td>
+                                                <td>{{a.DeviceName}}</td>
+                                                <td>{{a.DeviceVersion}}</td>
+                                                <td>{{a.DeviceImei}}</td>
+                                                <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired}}</p></td>
+                                                <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
+                                                <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
+                                                <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
+                                                <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
+                                        <div class="text-center">
+                                            <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
-
-
         <div class="modal fade" id="XemThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" ng-show="Device.DeviceID != '' ">
@@ -118,7 +153,17 @@
         </div>
     </div>
 </div>
+<style>
+    #dataTable th {
+        background-color: #15b4c4;
+        color: white;
+        padding: 15px;
+    }
 
+    #dataTable td {
+        vertical-align: inherit;
+    }
+</style>
 <script src="~/Scripts/angular.js"></script>
-<script src="~/Content/public/js/main/DeviceAndDriver.js"></script>
+<script src="~/Content/public/js/main/ThietBiCuaKhachHangApp.js"></script>
 <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>

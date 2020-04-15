@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	setup_selectDeviceNo();
-
+	interval_SOS();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();

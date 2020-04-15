@@ -322,8 +322,10 @@
     <Content Include="Content\images\UserAvatar\3.jpg" />
     <Content Include="Content\images\UserAvatar\4.jpg" />
     <Content Include="Content\images\UserAvatar\5.jpg" />
-    <Content Include="Content\images\UserAvatar\6.jpg" />
+    <Content Include="Content\images\UserAvatar\admin.jpg" />
     <Content Include="Content\images\UserAvatar\daily01.jpg" />
+    <Content Include="Content\images\UserAvatar\khachhang01.jpg" />
+    <Content Include="Content\images\UserAvatar\khachhang02.jpg" />
     <Content Include="Content\login-css\bootstrap-custom.css" />
     <Content Include="Content\login-css\bootstrap.css" />
     <Content Include="Content\login-css\vinasia.css" />
@@ -347,16 +349,8 @@
     <Content Include="Content\public\img\icon\marker_ef.png" />
     <Content Include="Content\public\img\icon\marker_ex.png" />
     <Content Include="Content\public\img\icon\marker_ex2.png" />
-    <Content Include="Content\public\img\icon\tau-cam.png" />
-    <Content Include="Content\public\img\icon\tau-den.png" />
-    <Content Include="Content\public\img\icon\tau-do.png" />
-    <Content Include="Content\public\img\icon\tau-xanh.png" />
     <Content Include="Content\public\img\logo-vinasia.png" />
     <Content Include="Content\public\img\logo.jpg" />
-    <Content Include="Content\public\img\tau\tau-black.png" />
-    <Content Include="Content\public\img\tau\tau-green.png" />
-    <Content Include="Content\public\img\tau\tau-red.png" />
-    <Content Include="Content\public\img\tau\tau-yellow.png" />
     <Content Include="Content\public\img\Vinasia.png" />
     <Content Include="Content\public\js\bootstrap.min.js" />
     <Content Include="Content\public\js\dataTables.bootstrap.min.js" />
@@ -380,6 +374,7 @@
     <Content Include="Content\public\js\main\DriverApp.js" />
     <Content Include="Content\public\js\main\FeedBackApp.js" />
     <Content Include="Content\public\js\main\Map.js" />
+    <Content Include="Content\public\js\main\SOS.js" />
     <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
@@ -563,6 +558,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\public\img\tau\" />
     <Folder Include="Views\SOS\" />
   </ItemGroup>
   <ItemGroup>

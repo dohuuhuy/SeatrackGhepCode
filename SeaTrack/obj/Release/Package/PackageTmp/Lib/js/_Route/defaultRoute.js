@@ -5,12 +5,13 @@ var _def_Lng = 109.1243889;
 var _def_zoom = 6;
 
 var _armarker = [];
+var _arSOS = [];
 var _flightPath = [];
 var _interval;
+var _SOS;
 var point;
 var infowin;
-var _infowins = [];
-var _listDeviceStatus;
+
 
 
 
@@ -89,17 +90,24 @@ var directionsDisplay = [];
 // 2: Đang neo
 // 3: Mất liên lạc
 // 4: Hết hạn
+var _stt_ = {
+    0: { "name": "Không xác định", "menucon": "tau-black.png", "polycon": "tau-den.png", "color": "white" },
+    1: { "name": "Tàu chạy", "menucon": "tau-green.png", "polycon": "tau-xanh.png", "color": "green" },
+    2: { "name": "Tàu dừng", "menucon": "tau-black.png", "polycon": "tau-den.png", "color": "black" },
+    3: { "name": "Mất tín hiệu", "menucon": "tau-yellow.png", "polycon": "tau-cam.png", "color": "#ff7f22" },
+    4: { "name": "SOS khẩn", "menucon": "tau-red.png", "polycon": "tau-do.png", "color": "red" }
+};
 var _stt_cmd = {
-	1:{"img": "bus-green.png",},
-	2:{"img": "bus-black.png",},
-	3:{"img": "bus-red.png",},
-	4:{"img": "bus-black.png",}
+    1: { "img": "bus-green.png", },
+    2: { "img": "bus-black.png", },
+    3: { "img": "bus-red.png", },
+    4: { "img": "bus-black.png", }
 };
 var _stt_cmd2 = {
-	1: { "img": "tau-green.png", },
-	2: { "img": "tau-black.png", },
-	3: { "img": "tau-red.png", },
-	4: { "img": "tau-black.png", }
+    1: { "img": "tau-green.png", },
+    2: { "img": "tau-black.png", },
+    3: { "img": "tau-red.png", },
+    4: { "img": "tau-black.png", }
 };
 var _c_marker = 0;
 
