@@ -15,7 +15,8 @@ namespace SeaTrack.Lib.DTO
         public string DeviceVersion { get; set; }
         public string DeviceImei { get; set; }
         public DateTime DateCreate { get; set; }
-        public string DeviceGroup { get; set; }
+        public int DeviceGroup { get; set; }
+        public int TypeShip { get; set; }
         public DateTime DateExpired { get; set; }
         public string DeviceNote { get; set; }
 

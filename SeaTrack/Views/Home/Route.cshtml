@@ -34,7 +34,7 @@
                         <div class="tab-pane active" id="lefttab_1">
                             <div class="m-b-5 m-t-5 input-group">
                                 <div class="input-group-prepend">
-                                    <select class="custom-select" id="selectState" onchange="//createTable(dataListStatus);">
+                                    <select class="custom-select" id="selectState" onchange="createTable('selectState', 'tblbodydata');">
                                         <option value="0">Tất cả</option>
                                         <option value="1">Di chuyển</option>
                                         <option value="2">Tàu Dừng</option>
@@ -200,8 +200,12 @@
                                         <td>Tàu di chuyển</td>
                                     </tr>
                                     <tr>
+                                        <td><img src="~/Content/images/tau/tau-yellow.png" alt=""></td>
+                                        <td>Tàu mất tín hiệu</td>
+                                    </tr>
+                                    <tr>
                                         <td><img src="/Content/images/tau/tau-red.png" alt=""></td>
-                                        <td>Tàu mất tín hiệu, hết hạn dịch vụ, cảnh báo sự cố, quá tốc độ ...</td>
+                                        <td>Tàu hết hạn dịch vụ, cảnh báo sự cố, vượt phạm vi ...</td>
                                     </tr>
                                 </tbody>
                             </table>

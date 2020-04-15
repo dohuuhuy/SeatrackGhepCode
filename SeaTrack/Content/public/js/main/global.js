@@ -66,12 +66,6 @@ $(document).ready(function () {
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
 
-
-
-	
-
-
-
 });
 
 

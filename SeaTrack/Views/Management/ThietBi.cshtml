@@ -49,9 +49,9 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
+                                @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ThemThietBi">
                                     <i class="fa fa-plus"></i> Thêm mới
-                                </button>
+                                </button>*@
                                 <label>Tổng: {{namesData.length}}</label>
                                 <div class="table-responsive">
                                     <table id="dataTable" class="table table-bordered table-striped text-center table-hover">
@@ -75,9 +75,9 @@
                                                     <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
                                                         <i class="fa fa-eye" style="color:black"></i>
                                                     </a>
-                                                    <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                                    @*<a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
                                                     <a ng-click="Delete($index + (currentPage-1)*10)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
-                                                    <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>
+                                                    <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>*@
                                                 </td>
                                                 <td>{{a.DeviceNo}}</td>
                                                 <td>{{a.DeviceName}}</td>
