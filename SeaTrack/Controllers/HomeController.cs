@@ -156,6 +156,17 @@ namespace SeaTrack.Controllers
             List<TrackData> data = TrackDataService.GetRoadmapByDateTime(deviceID, fromtime, totime);
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetRoadmapByDateTimeAndDriver(int deviceID, string From, string To)
+        {
+            DateTime fromtime = Convert.ToDateTime(DateTime.ParseExact(From, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
+            DateTime totime = Convert.ToDateTime(DateTime.ParseExact(To, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
+
+            //DateTime fromtime = Convert.ToDateTime(From);
+            //DateTime totime = Convert.ToDateTime(To);
+
+            List<TrackDataAndDriver> data = TrackDataService.GetRoadmapByDateTimeAndDriver(deviceID, fromtime, totime);
+            return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetListDevice()
         {
             List<Device> data = TrackDataService.GetListDevice();

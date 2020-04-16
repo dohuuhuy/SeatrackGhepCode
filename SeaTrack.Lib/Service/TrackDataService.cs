@@ -41,7 +41,7 @@ namespace SeaTrack.Lib.Service
                             DirectionEW = reader["DirectionEW"].ToString(),
                             TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
                             Speed = Convert.ToInt16(reader["Speed"]),
-                            
+
                         };
                         lst.Add(data);
                     }
@@ -112,6 +112,35 @@ namespace SeaTrack.Lib.Service
                             TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
                             Speed = Convert.ToInt16(reader["Speed"])
 
+                        };
+                        lst.Add(data);
+                    }
+                }
+                return lst;
+            }
+        }
+        public static List<TrackDataAndDriver> GetRoadmapByDateTimeAndDriver(int deviceID, DateTime from, DateTime to)
+        {
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetRoadmapByDateTimeAndDriver",
+                deviceID, from, to))
+            {
+                List<TrackDataAndDriver> lst = null;
+                if (reader.HasRows)
+                {
+                    lst = new List<TrackDataAndDriver>();
+                    while (reader.Read())
+                    {
+                        var data = new TrackDataAndDriver()
+                        {
+                            DeviceID = deviceID,
+                            DirectionSN = Convert.ToString(reader["DirectionSN"]),
+                            DirectionEW = Convert.ToString(reader["DirectionEW"]),
+                            Latitude = Convert.ToDecimal(reader["Latitude"]),
+                            Longitude = Convert.ToDecimal(reader["Longitude"]),
+                            TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                            Speed = Convert.ToInt16(reader["Speed"]),
+
+                            DriverName = reader["DriverName"].ToString(),
                         };
                         lst.Add(data);
                     }

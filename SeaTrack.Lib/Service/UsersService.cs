@@ -5,6 +5,7 @@ using SeaTrack.Lib.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,30 +17,32 @@ namespace SeaTrack.Lib.Service
         public static Users CheckUsers(String name, String pass)
         {
             if (name == null || pass == null) return null;
-            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataUser", name, pass);
-            if (reader.HasRows)
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataUser", name, pass))
             {
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    var data = new Users()
+                    while (reader.Read())
                     {
-                        UserID = Convert.ToInt16(reader["UserID"]),
-                        Username = reader["Username"].ToString(),
-                        Password = reader["Password"].ToString(),
-                        FullName = reader["FullName"].ToString(),
-                        Phone = reader["Phone"].ToString(),
-                        Address = reader["Address"].ToString(),
-                        Status = Convert.ToInt16(reader["Status"]),
-                        CreateBy = reader["CreateBy"].ToString(),
-                        CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
-                        UpdateBy = (reader["UpdateBy"].ToString()),
-                        LastUpdateDate = Convert.ToDateTime(reader["LastUpdateDate"].ToString()),
-                        RoleID = Convert.ToInt16(reader["RoleID"]),
-                        ManageBy = reader["ManageBy"].ToString(),
-                        Image = reader["Image"].ToString()
+                        var data = new Users()
+                        {
+                            UserID = Convert.ToInt16(reader["UserID"]),
+                            Username = reader["Username"].ToString(),
+                            Password = reader["Password"].ToString(),
+                            FullName = reader["FullName"].ToString(),
+                            Phone = reader["Phone"].ToString(),
+                            Address = reader["Address"].ToString(),
+                            Status = Convert.ToInt16(reader["Status"]),
+                            CreateBy = reader["CreateBy"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
+                            UpdateBy = (reader["UpdateBy"].ToString()),
+                            LastUpdateDate = Convert.ToDateTime(reader["LastUpdateDate"].ToString()),
+                            RoleID = Convert.ToInt16(reader["RoleID"]),
+                            ManageBy = reader["ManageBy"].ToString(),
+                            Image = reader["Image"].ToString()
 
-                    };
-                    return data;
+                        };
+                        return data;
+                    }
                 }
             }
             return null;
@@ -77,33 +80,35 @@ namespace SeaTrack.Lib.Service
         }
         public static List<Driver> GetListDriverByUserID(String name)
         {
-            var reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListUserDriverByManageOfCustomer", name);
-            if (reader.HasRows)
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "GetListUserDriverByManageOfCustomer", name))
             {
-                List<Driver> drivers = new List<Driver>();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    var data = new Driver()
+                    List<Driver> drivers = new List<Driver>();
+                    while (reader.Read())
                     {
-                        DriverID = Convert.ToInt16(reader["DriverID"]),
-                        DriverName = reader["DriverName"].ToString(),
-                        Phone = reader["Phone"].ToString(),
-                        Address = reader["Address"].ToString(),
-                        GPLT = reader["GPLT"].ToString(),
-                        CMND = reader["CMND"].ToString(),
-                        Rank = reader["Rank"].ToString(),
-                        IssuedBy = reader["IssuedBy"].ToString(),
-                        Note = reader["IssuedBy"].ToString(),
-                        ManageBy = reader["ManageBy"].ToString(),
-                        CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
-                        Status = Convert.ToInt16(reader["Status"]),
-                        CreateDateGPLT = Convert.ToDateTime(reader["CreateDateGPLT"].ToString()),
-                        ExpriseDateGPLT = Convert.ToDateTime(reader["ExpriseDateGPLT"].ToString()),
+                        var data = new Driver()
+                        {
+                            DriverID = Convert.ToInt16(reader["DriverID"]),
+                            DriverName = reader["DriverName"].ToString(),
+                            Phone = reader["Phone"].ToString(),
+                            Address = reader["Address"].ToString(),
+                            GPLT = reader["GPLT"].ToString(),
+                            CMND = reader["CMND"].ToString(),
+                            Rank = reader["Rank"].ToString(),
+                            IssuedBy = reader["IssuedBy"].ToString(),
+                            Note = reader["IssuedBy"].ToString(),
+                            ManageBy = reader["ManageBy"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
+                            Status = Convert.ToInt16(reader["Status"]),
+                            CreateDateGPLT = Convert.ToDateTime(reader["CreateDateGPLT"].ToString()),
+                            ExpriseDateGPLT = Convert.ToDateTime(reader["ExpriseDateGPLT"].ToString()),
 
-                    };
-                    drivers.Add(data);
+                        };
+                        drivers.Add(data);
+                    }
+                    return drivers;
                 }
-                return drivers;
             }
             return null;
         }

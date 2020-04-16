@@ -1,11 +1,14 @@
 ﻿var _listDeviceStatus = [];
+// loading màn hình
 function win_reload() {
     window.location.reload();
 }
+// tính hải lý sang km
 function toHaily(a) {
 
     return (Math.round((a * 0.53996) * 10) / 10);
 }
+// kiểm tra thiết bị
 function checkDevice(id) {
     i = 0;
     while (i < _listDeviceStatus.length) {
@@ -14,7 +17,6 @@ function checkDevice(id) {
     }
     return 0;
 }
-
 // lấy danh sách tàu 
 function setup_selectDeviceNo() {
     var dad = [];
@@ -37,7 +39,6 @@ function setup_selectDeviceNo() {
         }
     });
 }
-
 // tốc độ của tàu chạy 
 function TocDoCuaTau() {
     var id = $("#listDeviceNo").val();
@@ -98,7 +99,7 @@ function TocDoCuaTau() {
         }
     });
 }
-
+// tổng hợp theo tàu
 function TongHopTheoTau() {
     var id = $("#listDeviceNo").val();
     var date = $("#datefilter").val();
@@ -158,6 +159,68 @@ function TongHopTheoTau() {
         }
     });
 }
+// báo cáo theo lái tàu
+function TongHopTheoLaiTau() {
+    var id = $("#listDeviceNo").val();
+    var date = $("#datefilter").val();
+    var datetime = date.split(" - ");
+    var from = datetime[0].replace('/', '-');
+    var from = from.replace('/', '-');
+    var from = from + ' 00:00';
+    var to = datetime[1].replace('/', '-');
+    var to = to.replace('/', '-');
+    var to = to + ' 23:00';
+    var DS_tong = [];
+    var DS_diemtheotocdo = [];
+    var DS_diemnammotcho = [];
+    var ki = 0;
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetRoadmapByDateTimeAndDriver',
+        data: { deviceID: id, From: from, To: to },
+        success: function (data, txtStatus, XMLHttpRequest) {
+            DS_diem = data.Result;
+            if (DS_diem == null) {
+                alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+            } else {
+                if (DS_diem.length > 0) {
+                    var speed = toHaily(DS_diem[0]["Speed"]);
+                    var k = 0; var i = 0; var test = true;
+                    if (speed <= 3) test = false; else test = true;
+                    while (i < DS_diem.length) {
+                        speed = toHaily(DS_diem[i]["Speed"]);
+                        if (test) {
+                            if (speed >= 3) {
+                                DS_diemtheotocdo.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemtheotocdo;
+                                ki++;
+                                DS_diemtheotocdo = [];
+                                test = false;
+                            }
+                        } else {
+                            if (speed < 3) {
+                                DS_diemnammotcho.push(DS_diem[i]);
+                                i++;
+                                continue;
+                            } else {
+                                DS_tong[ki] = DS_diemnammotcho;
+                                ki++;
+                                DS_diemnammotcho = [];
+                                test = true;
+                            }
+                        }
+                    }
+                }
+                console.log(DS_tong);
+                ShowTable_TongHopTheoLaiTau(DS_tong);
+            }
+        }
+    });
+}
+// báo cáo tốc độ
 function ShowTable_BaoCaoTocDo(list) {
     var _tbl = "";
     for (var i = 0; i < list.length; i++) {
@@ -180,6 +243,7 @@ function ShowTable_BaoCaoTocDo(list) {
         $("#tbody_tocdocuatau").html(_tbl);
     }
 }
+// tổng hợp theo tàu
 function ShowTable_TongHopTheoTau(list) {
     var _tbl = "";
     for (var i = 0; i < list.length; i++) {
@@ -203,7 +267,32 @@ function ShowTable_TongHopTheoTau(list) {
         $("#tonghoptheotau").html(_tbl);
     }
 }
+// tổng hợp theo lái tàu
+function ShowTable_TongHopTheoLaiTau(list) {
+    var _tbl = "";
+    for (var i = 0; i < list.length; i++) {
+        var startdate = new Date(parseInt(list[i][0]["TransmitTime"].substr(6)));
+        var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
+        var fishdate = new Date(parseInt(list[i][list[i].length - 1]["TransmitTime"].substr(6)));
+        var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
+        var tocdotrungbinh = TinhVanTocTrungBinh(list[i]);
+        var tocdotoida = TinhVanTocToiDa(list[i]);
+        var quangduong = TinhQuangDuong(list[i]);
+        var laitau = list[i][0]["DriverName"];
 
+        _tbl +=
+            '<tr>' +
+            '<td>' + (i) + '</td>' + // số thứ tự
+            '<td>' + TuNgay + '</td>' + // từ ngày
+            '<td>' + DenNgay + '</td>' + // đến ngày 
+            '<td>' + laitau + '</td>' + // thuyền trưởng
+            '<td>' + quangduong + '</td>' + // quảng đường
+
+
+            '</tr>';
+        $("#BaoCaoTheoLaiTau").html(_tbl);
+    }
+}
 // tính quảng đường trong 1 khoảng thời gian
 function TinhQuangDuong(list) {
     var d = 0;
@@ -237,10 +326,6 @@ function TinhQuangDuong(list) {
     return toHaily(d);
 
 }
-
-
-
-
 // tính vận tốc tối đa trong 1 khoảng thời gian
 function TinhVanTocToiDa(list) {
 
@@ -261,7 +346,6 @@ function TinhVanTocToiDa(list) {
     }
     return max;
 }
-
 // tính vận tốc trung bình trong 1 khoảng thời gian
 function TinhVanTocTrungBinh(list) {
 
@@ -383,68 +467,3 @@ function setDate() {
     document.getElementById("date_t_d").value = datetimeF;
 };
 
-// lấy thông tin của người dùng 
-// USER
-function GetInfo_User() {
-    //var obj = document.querySelector('.preloader'), inner = document.querySelector('.preloader_inner'), page = document.querySelector('.main');
-    //obj.classList.add('show');
-    //page.classList.remove('show');
-
-    $.ajax({
-        type: 'GET',
-        dataType: "json",
-        url: '/Home/UserInfo',
-        data: {},
-        success: function (data, txtStatus, XMLHttpRequest) {
-            console.log(data);
-            //var obj = document.querySelector('.preloader'), inner = document.querySelector('.preloader_inner'), page = document.querySelector('.main');
-            //obj.classList.add('show');
-            //page.classList.remove('show');
-
-            if (data != null) {
-
-                if (data["RoleID"] == 3) {
-                    $("#item-taikhoan-them").show()
-                    $("#item-taikhoan-sua").show()
-                    $("#item-taikhoan-xoa").show()
-                    $("#item-taikhoan-status").hide()
-                    //GetList_User_Refresh();
-                    console.log(1);
-                }
-                else if (data["RoleID"] == 4) {
-                    $("#item-taikhoan-them").hide()
-                    $("#item-taikhoan-sua").hide()
-                    $("#item-taikhoan-xoa").hide()
-                    $("#item-taikhoan-status").show()
-                    var _tbody_taikhoan = document.getElementById("tbody_taikhoan");
-                    _tbody_taikhoan.innerHTML = "";
-                    var _tr = document.createElement("tr");
-                    var _td = document.createElement("td");
-                    _td.setAttribute("colspan", "9");
-                    _td.innerHTML = "Bạn không có quyền xem danh sách tài khoản";
-                    _tr.appendChild(_td);
-                    _tbody_taikhoan.appendChild(_tr);
-                }
-
-                $("#thongtin_nguoitao").val(data["CreateBy"]);
-                console.log(2);
-                $("#thongtin_taikhoan").val(data["Username"]);
-                console.log(3);
-                $("#thongtin_tenkhachhang").val(data["FullName"]);
-                console.log(4);
-                $("#thongtin_sodienthoai").val(data["Phone"]);
-                console.log(5);
-                $("#thongtin_email").val("");
-                console.log(6);
-                $("#thongtin_diachi").val(data["Address"]);
-                console.log(7);
-
-
-            } else { alert("Không có dữ liệu thông tin tài khoản"); }
-
-            //obj.classList.remove('show');
-            //page.classList.add('show');
-        }
-    });
-
-};
