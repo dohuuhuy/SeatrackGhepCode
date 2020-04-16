@@ -7,9 +7,8 @@ var vungbo;
 var vunglong;
 var EEZ;
 var map;
-var bo,long,China,ThaiLan;
 function CreatePoly() {
-     bo2 = [
+    var bo2 = [
     {
         lat: 23.280141,
         lng: 105.347008
@@ -94,7 +93,7 @@ function CreatePoly() {
         lat: 10.379073755361572,
         lng: 104.44467381205297
     }];
-     long2 = [
+    var long2 = [
         {
             lat: 23.280141,
             lng: 105.347008
@@ -183,7 +182,7 @@ function CreatePoly() {
             lat: 10.370579776181014,
             lng: 104.4344147351941
         }];
-     bo = [
+    var bo = [
       {
           lat: 23.280141,
           lng: 105.347008
@@ -352,7 +351,7 @@ function CreatePoly() {
           lat: 10.421051,
           lng: 104.438897
       }];
-     long = [
+    var long = [
       {
           lat: 23.280141,
           lng: 105.347008
@@ -534,7 +533,7 @@ function CreatePoly() {
           lat: 10.421051,
           lng: 104.438897
       }];
-     China = [
+    var China = [
         {
             lat: 21.209722,
             lng: 108.208611
@@ -588,7 +587,7 @@ function CreatePoly() {
             lng: 107.966667
         },
     ];
-     ThaiLan = [
+    var ThaiLan = [
         {
             lat: 8.781882,
             lng: 102.203204
@@ -662,15 +661,15 @@ function CreatePoly() {
     //     strokeWeight: 2,
     //     map: map
     // });    
-    // vungbo = new google.maps.Polygon({
-    //     paths: bo,
-    //     strokeColor: '#FF0000',
-    //     strokeOpacity: 0.8,
-    //     strokeWeight: 2,
-    //     fillColor: '#FF0000',
-    //     fillOpacity: 0.35
-    // });
-    // vungbo.setMap(map);
+    vungbo = new google.maps.Polygon({
+        paths: bo,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+    });
+    vungbo.setMap(map);
     // vungbo2 = new google.maps.Polygon({
     //     paths: bo2,
     //     strokeColor: '#000000',
@@ -689,13 +688,6 @@ function CreatePoly() {
         fillOpacity: 0.35
     });
     vunglong.setMap(map);
-    // vunglong.addListener('click', function (e){
-    //     if (marker && marker.setPosition) {
-    //         marker.setPosition(event.latLng);
-    //         } else {
-    //         marker = new google.maps.Marker({position: event.latLng,map:map});
-    //           }
-    // })
     // vunglong2 = new google.maps.Polygon({
     //     paths: long2,
     //     strokeColor: '#f91608',
@@ -705,44 +697,11 @@ function CreatePoly() {
     //     fillOpacity: 0.35
     // });
     // vunglong2.setMap(map);
-    google.maps.event.addListener(vunglong, 'click', function (event) {
-        var warring = "";
-        var res;
-        var A,B =0;
-        addMarker(event.latLng, map);
-        // console.log(event.latLng.lat());
-        // console.log(event.latLng.lng());
-        var ar = TimMin(event.latLng.lat(),event.latLng.lng());
-        console.log(ar);
-        
-            // var marker1 = new google.maps.Marker({
-            //     position: {lat: long[i]["lat"],lng: long[i]["lng"]},
-            //     label: "1",
-            //     map: map,
-            // });
-            // var marker2 = new google.maps.Marker({
-            //     position: {lat: long[i+1]["lat"],lng: long[i+1]["lng"]},
-            //     label: "2",
-            //     map: map,
-            // });
 
-            res = FindPoint(long[ar[0]]["lat"],long[ar[0]]["lng"],long[ar[1]]["lat"],long[ar[1]]["lng"],event.latLng.lat(),event.latLng.lng());
-            console.log(res);
-            if(res<5)
-                warring = "Cảnh báo";
-            // if(res<5){
-            //     warring = "Cảnh báo";
-            //     break;
-            // }
-                
-        
-        console.log(warring);
-    });
     google.maps.event.addListener(map, 'click', function (event) {
         addMarker(event.latLng, map);
-        // console.log(event.latLng.lat());
-        // console.log(event.latLng.lng());
-
+        console.log(event.latLng.lat());
+        console.log(event.latLng.lng());
         // var label;
         // if (google.maps.geometry.poly.containsLocation(event.latLng, vungbo)) {
         //     label = "B";
@@ -795,12 +754,17 @@ function checkArea(lat, lng) {
 }
 
 function FindPoint(lat1,lon1,lat2,lon2,lat3,lon3){
-    var a = Distance(lat3,lon3,lat1,lon1);
-    var b = Distance(lat3,lon3,lat2,lon2);
-    var c = Distance(lat1,lon1,lat2,lon2);
-    var p = (a+b+c)/2;
-    var h = 2*(Math.sqrt(p*(p-a)*(p-b)*(p-c))/a);
-    return h;
+    //Biên giới AB (lat1,lon1, lat2,lon2)
+    //Điểm M(lat3,lon3)
+    var a = lon2-lon1;
+    var b = lat1 - lat2;
+    var c = -a*lat1 -b*lat2;
+    var d = (Math.abs(a*lat3 + b*lon3 + c))/Math.sqrt(a*a + b*b);
+    var e = (d*Math.PI/180*6371);
+    if(d>5) console.log(d);
+    if(d<=5) console.log(d);
+    
+
 }
 function Distance(lat1,lon1,lat2,lon2){
     var R = 6371; // Km
@@ -811,24 +775,6 @@ function Distance(lat1,lon1,lat2,lon2){
     var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
+
 }
 
-function TimMin(lat,lng){
-    if(long.length>0){
-        var min1 = min2 = 1;
-        var ar = [];
-        for(var i =2; i<long.length; i++){
-            var d = Distance(lat,lng,long[i]["lat"],long[i]["lng"]);
-            if(d<Distance(lat,lng,long[min1]["lat"],long[min1]["lng"])){
-                min2 = min1;
-                min1 = i;
-            }
-            else{
-                if(d < Distance(lat,lng,long[min2]["lat"],long[min2]["lng"]))
-                    min2 = i;
-            }
-        }
-        ar = [min1,min2];
-        return ar;
-    }
-}
