@@ -218,9 +218,6 @@
                         </div>
                     </nav>
                 </div>
-                <div id="float-right">
-                    <button class="btn btn-blue" id="close" onclick="responsive()"> <i class="fa fa-angle-double-left"></i> </button>
-                </div>
             </div>
 
      
@@ -233,6 +230,32 @@
             </div>
       
             <div id="map" class="s-map s-full">
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" style="top:26%;right:5%;position:absolute">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Chú ý!</strong> <label id ="Warring">Tàu vi phạm vùng đánh bắt</label>.
+            </div>
+            <div id="SOS" style="width:30%;background:#fff;position:absolute;right:10px;bottom:5%;text-align:center;border:0px;border-radius:5px;">
+                <label class="text-danger "  style="font-size:15px;font-weight:bold">CẢNH BÁO KHẨN CẤP</label>
+                <table id="tbldata" class="table-bordered table table-sm text-center" style="padding:0px">
+                    <thead style="white-space:nowrap;">
+                        <tr>
+                            <th class="headerAlignCenter">
+                                STT
+                            </th>
+                            <th class="headerAlignCenter">
+                                Số hiệu
+                            </th>
+                            <th class="headerAlignCenter">
+                                Thời gian
+                            </th>
+                            <th class="headerAlignCenter">
+                                Vị trí
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="SOSData"></tbody>
+                </table>
             </div>
         </div>
 

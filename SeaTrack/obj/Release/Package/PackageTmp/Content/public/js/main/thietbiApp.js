@@ -57,11 +57,11 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
             DeviceNote: data.DeviceNote,
             TypeShip: data.TypeShip
         };
-        $scope.Device.TypeShip = {
-            1: "Tàu nhỏ hơn 12 mét",
-            2: "Tàu từ 12 mét đến 15 mét",
-            3: "Tàu lớn hơn 15 mét"
-        }
+        //$scope.Device.TypeShip = {
+        //    '1': "Tàu nhỏ hơn 12 mét",
+        //    '2': "Tàu từ 12 mét đến 15 mét",
+        //    '3': "Tàu lớn hơn 15 mét"
+        //}
     };
 
   

@@ -50,9 +50,6 @@ App.controller('Controller', function ($scope, $http, Service) {
 
 
     $scope.View = function (data) {
-
-        console.log('i am inside view()' + JSON.stringify($scope.Driver));
-
         $scope.Driver = {
             DriverID: data.DriverID,
             DriverName: data.DriverName,
@@ -70,6 +67,8 @@ App.controller('Controller', function ($scope, $http, Service) {
             CreateDate: new Date(parseInt(data.CreateDate.substr(6))),
 
         };
+        console.log('i am inside view()' + JSON.stringify($scope.Driver));
+
         fetchData($scope.Driver.DriverID);
 
     };
@@ -131,19 +130,20 @@ App.controller('Controller', function ($scope, $http, Service) {
 
     };
     $scope.Edit = function (data) {
-        console.log('i am inside edit() ' + JSON.stringify($scope.Driver));
         $scope.Driver = {
             DriverID: data.DriverID, 
             DriverName: data.DriverName, 
             Phone: data.Phone, 
             Address: data.Address, 
             GPLT: data.GPLT, 
-            CMND: data.CMND,  
+            CMND: data.CMND,
+            Rank: data.Rank,
             Note: data.Note, 
             CreateDateGPLT: new Date(parseInt(data.CreateDateGPLT.substr(6))),
             ExpriseDateGPLT: new Date(parseInt(data.ExpriseDateGPLT.substr(6))),
             IssuedBy: data.IssuedBy, 
         };
+        console.log('i am inside edit() ' + JSON.stringify($scope.Driver));
     };
     $scope.Clear = function () {
         $scope.Driver.DriverID = '',

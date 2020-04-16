@@ -376,7 +376,7 @@
     <Content Include="Content\public\js\main\Map.js" />
     <Content Include="Content\public\js\main\SOS.js" />
     <Content Include="Content\public\js\main\testmap.js" />
-    <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
+    <Content Include="Content\public\js\main\thietbiApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
     <Content Include="Content\public\js\main\controller.js" />
