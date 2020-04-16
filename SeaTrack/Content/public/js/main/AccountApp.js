@@ -4,7 +4,7 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
     LoadUser();
     $scope.ChangePassword = function(){
     $scope.Status = !$scope.Status;
-    $scope.User.CreateDate = new Date(ParseInt($scope.User.CreateDate.substr(6)));
+    //$scope.User.CreateDate = new Date(parseInt($scope.User.CreateDate.substr(6)));
 }
 
     $scope.update = function () {
@@ -23,9 +23,28 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
-        
-
     };
+
+    $scope.ChangePassword = function () {
+        var User = {
+            UserID: $scope.User.UserID,
+            Username: $scope.User.Username,
+            Password: $scope.NewPassword
+        }
+        console.log(User);
+        $http({
+            method: 'POST',
+            url: '/AccountInformation/ChangePassword',
+            data: User
+        }).then(function successCallback(response) {
+            LoadUser();
+            $scope.Clear();
+            if(response.data == 1)
+                alert("Đã đổi mật khẩu");
+        }, function errorCallback(response) {
+            alert("Error : " + response.data.ExceptionMessage);
+        });
+    }
     $scope.Clear = function(){
         $scope.OldPassword = null;
         $scope.NewPassword = null;

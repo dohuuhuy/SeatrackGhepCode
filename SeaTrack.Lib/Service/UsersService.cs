@@ -112,5 +112,10 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
+
+        public static int ChangePassword(int UserID, string Password)
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_ChangePassword", UserID, Password);
+        }
     }
 }
