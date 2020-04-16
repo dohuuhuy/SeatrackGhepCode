@@ -2,7 +2,16 @@
 @{
     ViewBag.Title = "Demo";
     Layout = "~/Views/Shared/_LayoutDemo.cshtml";
+    //Layout = null;
 }
 
-<h2>Demo</h2>
 
+<div id="map"></div>
+<script src="~/Content/public/js/main/testmap.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk&libraries=geometry&callback=initMap"
+        async defer></script>
+<style>
+    #map {
+        height: 100%;
+    }
+</style>

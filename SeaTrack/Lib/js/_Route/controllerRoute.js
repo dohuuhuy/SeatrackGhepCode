@@ -1,4 +1,8 @@
-﻿function loadSpeedLimit() {
+﻿function fetchdata() {
+    win_reload();
+    updateListDeviceStatus
+}
+function loadSpeedLimit() {
     var pathValues = [];
 
     var a = new google.maps.LatLng(10.834650, 106.667149);
@@ -33,6 +37,7 @@ function setRange(a) {
     $("#myRange").attr("max", a);
 }
 function setupMap(lat, lng, mapZoom) {
+    runWaiting();
     var mapLatlng = new google.maps.LatLng(lat, lng);
     var myOptions = {
         zoom: mapZoom,
@@ -51,6 +56,7 @@ function setupMap(lat, lng, mapZoom) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+    downWaiting();
 };
 function setDate() {
     cleanMap(0);
@@ -244,6 +250,8 @@ function makeListStop() {
     if (il > 45) { _drawingLinePoint[_drawingLinePoint.length - 1]["Status"] = 3; }
 }
 function setdrawingLinePoint(a = 0) {
+    runWaiting();
+
     var id = $("#list_xelotrinh").val();
     var from = $("#date_form_d").val() + " " + $("#date_form_h").val();
     var to = $("#date_t_d").val() + " " + $("#date_t_h").val();
@@ -265,6 +273,7 @@ function setdrawingLinePoint(a = 0) {
                 }
 
             }
+            downWaiting();
         },
     }, "json");
 }

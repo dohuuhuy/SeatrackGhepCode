@@ -28,14 +28,21 @@
 </style>
 <script>
 
-    var wait = function () {
-        $(document).ajaxStart(function () {
-            $("#main-wait").css("display", "block");
-        });
-        $(document).ajaxComplete(function () {
-            $("#main-wait").css("display", "none");
-        });
+    //var wait = function () {
+    //    $(document).ajaxStart(function () {
+    //        $("#main-wait").css("display", "block");
+    //    });
+    //    $(document).ajaxComplete(function () {
+    //        $("#main-wait").css("display", "none");
+    //    });
    
-    };
-    setTimeout(wait(), 2000);
+    //};
+    //setTimeout(wait(), 2000);
+    function runWaiting() {
+        $("#main-wait").css("display", "block");
+    }
+    function downWaiting() {
+        $("#main-wait").css("display", "none");
+    }
+
 </script>
