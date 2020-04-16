@@ -12,10 +12,8 @@
     <div class="s-full s-flexible-wrap">
         <div class="s-no-padding s-full">
 
-
-
-            <div id="side">
-                <div id="float-left">
+   
+        
                     <nav id="s-sidebar" class="s-absolute s-main-sidebar">
 
                    
@@ -53,10 +51,16 @@
                                             <li class="nav-item">
                                                 <a class="nav-link active" href="#sublefttab_1" data-toggle="tab">Tàu cá</a>
                                             </li>
+
+                                            <button class=" btn btn-info" style=" margin: 3px 5px 5px; height: 35px;" onclick="fetchdata()" >
+                                               <i class="fa fa-sync-alt"></i>
+                                            </button>
+
                                             <button id="s-info-button" class="float-right btn btn-info s-absolute-right" data-toggle="" data-placement="right" data-trigger="hover" data-html="true" title="Ý NGHĨA MÀU" data-content=''>
                                                 <i class="fas fa-info"></i>
                                             </button>
                                         </ul>
+                                       
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="sublefttab_1">
                                                 <div id="s-tab-table">
@@ -217,8 +221,7 @@
 
                         </div>
                     </nav>
-                </div>
-            </div>
+
 
      
             <div id="style-selector-control" class="map-control">
@@ -292,3 +295,8 @@
             opacity: 1;
         }
 </style>
+<script>
+    
+    $("#SOS").draggable();
+
+</script>
