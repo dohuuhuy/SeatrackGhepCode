@@ -24,10 +24,12 @@ namespace SeaTrack.Controllers
         public ActionResult GetUserInfo()
         {
             Users user = (Users)Session["User"];
+            Session["User"] = UsersService.CheckUsers(user.Username, user.Password);
+            var us = (Users)Session["User"];
             if (user != null)
             {
                 //Users us = UsersService.CheckUsers(user.Username, user.Password);
-                return Json(user, JsonRequestBehavior.AllowGet);
+                return Json(us, JsonRequestBehavior.AllowGet);
             }
 
             return RedirectToAction("Login", "Home", new { area = "" });
@@ -65,6 +67,19 @@ namespace SeaTrack.Controllers
             }
             return RedirectToAction("AccountInfo");
             //return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(Users user)
+        {
+            var us = (Users)Session["User"];
+            if (us != null && us.UserID != user.UserID)
+            {
+                return RedirectToAction("Login", "Home", new { area = "" });
+            }
+            var res = UsersService.ChangePassword(user.UserID, user.Password);
+            Session["User"] = UsersService.CheckUsers(user.Username, user.Password);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ExpiredDevice()
         {
