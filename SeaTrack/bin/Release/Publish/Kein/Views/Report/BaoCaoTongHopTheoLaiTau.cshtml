@@ -6,7 +6,7 @@
 
 <div class="main" id="list-bgt">
     <div class="wrapper">
-        @Html.Partial("_MenuBaoCaoChoBo");
+        @Html.Partial("_MenuBaoCaoChoBo")
 
         <div id="content-bgt-laixe" class="content">
             <div id="signupbox" class="mainbox">
@@ -40,7 +40,7 @@
                                     <select id="listDeviceNo" class="form-control select2 fl" style="width:100%"></select>
                                 </div>
                                 <div class="col-md-4 clearfix">
-                                    <input type="button" name="Signup" value="Xem" class="btn btn-primary btn" style="width:135px;" onclick="Report_BGT_TocDoXeChay();" />
+                                    <input type="button" name="Signup" value="Xem" class="btn btn-primary btn" style="width:135px;" onclick="TongHopTheoLaiTau();" />
                                 </div>
                             </div>
                         </form>
@@ -50,13 +50,13 @@
                             <thead>
                                 <tr>
                                     <th class="headerAlignCenter" style="width:25px">STT</th>
-                                    <th class="headerAlignCenter">Ngày</th>
-                                    <th class="headerAlignCenter">Số hiệu</th>
+                                    <th class="headerAlignCenter">Từ ngày</th>
+                                    <th class="headerAlignCenter">Đến ngày</th>
                                     <th class="headerAlignCenter">Thuyền trưởng</th>
                                     <th class="headerAlignCenter">Lộ trình</th>
                                 </tr>
                             </thead>
-                            <tbody id="tbody_bgt_laixe"></tbody>
+                            <tbody id="BaoCaoTheoLaiTau"></tbody>
                         </table>
                     </div>
                 </div>

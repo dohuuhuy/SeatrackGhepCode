@@ -19,7 +19,6 @@ app.controller("Controller", function ($scope, $http) {
         if ($scope.role == 4) {
         GetListDeviceOfCustomer(ManageBy, UserID);
         }
-
     }
     $scope.RemoveDeviceFromUser = function (UserID, index) {
         DeviceToRemove = $scope.Devices[index];

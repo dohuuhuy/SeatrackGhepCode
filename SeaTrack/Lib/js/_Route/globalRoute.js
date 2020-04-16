@@ -17,6 +17,9 @@ $(document).ready(function () {
         $("#sidebarCollapse").addClass("d-none");
         $("#giamsat_toggle").removeClass("d-none");
     });
+
+
+
     $('#giamsat_toggle').on('click', function () {
         //$( "#sidebarCollapse" ).trigger( "click" );
         $('#s-sidebar').toggleClass('active');

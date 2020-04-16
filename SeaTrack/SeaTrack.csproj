@@ -375,7 +375,7 @@
     <Content Include="Content\public\js\main\FeedBackApp.js" />
     <Content Include="Content\public\js\main\Map.js" />
     <Content Include="Content\public\js\main\SOS.js" />
-    <Content Include="Content\public\js\main\ThietBiCuaKhachHangApp.js" />
+    <Content Include="Content\public\js\main\thietbiApp.js" />
     <Content Include="Content\public\js\main\DeviceControllerJS.js" />
     <Content Include="Content\public\js\main\global.js" />
     <Content Include="Content\public\js\main\controller.js" />
@@ -493,6 +493,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\graham_scan.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -555,6 +556,7 @@
     <Content Include="Views\Utilities\Dangkiem.cshtml" />
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
+    <Content Include="Views\Shared\_LayoutDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

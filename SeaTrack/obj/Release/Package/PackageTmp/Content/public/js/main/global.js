@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	setup_selectDeviceNo();
-	interval_SOS();
+	//interval_SOS();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
@@ -65,12 +65,6 @@ $(document).ready(function () {
 
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
-
-
-
-	
-
-
 
 });
 

@@ -516,14 +516,14 @@ function setup_DataTable() {
             + '" classname="groupXe" onclick="makePoint(' + _listDeviceStatus[i]["DeviceID"] + ',1'
             + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
             + '<td class="alignCenter">'
-            + (i + 1) + '</td><td>'
+            + (i + 1) + '</td><td style="text-align:left">'
             + '<img src="/Content/images/tau/' + _stt_[_listDeviceStatus[i]["Status"]]["menucon"] + '">  '
             + _listDeviceStatus[i]["DeviceName"]
             + '</td><td>' + _listDeviceStatus[i]["Speed"]
             + '</td><td>' + dte + '</td><td>'
             + _listDeviceStatus[i]["Latitude"] + "." + _listDeviceStatus[i]["DirectionSN"] + " - "
             + _listDeviceStatus[i]["Longitude"] + "." + _listDeviceStatus[i]["DirectionEW"]
-            + '</td></tr>';
+            + '</td><td style="display:none">' + _listDeviceStatus[i]["Status"] +'</td></tr>';
     }
     $("#tblbodydata").html(_tb);
 }

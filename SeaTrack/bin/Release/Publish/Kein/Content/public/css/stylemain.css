@@ -1,6 +1,18 @@
 ﻿/* ---------------------------------------------------
   HOME
   ----------------------------------------------------- */
+
+#dataTable th {
+    background-color: #15b4c4;
+    color: white;
+    padding: 15px;
+}
+
+#dataTable td {
+    vertical-align: inherit;
+    padding: 15px;
+}
+
 html, body {
     margin: 0;
     padding: 0;

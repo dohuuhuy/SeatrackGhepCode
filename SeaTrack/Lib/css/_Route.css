@@ -251,7 +251,7 @@
         }
 
     .si-sidebar ul li.active > a,
-    .s-main-sidebar ul li.active > a,,
+    .s-main-sidebar ul li.active > a,
     a[aria-expanded="true"] {
         color: #fff !important;
         background: #019CDE;

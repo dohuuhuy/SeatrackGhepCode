@@ -3,6 +3,7 @@
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="/Content/public/img/logo.jpg" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Language" content="vi" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Test</title>
@@ -23,18 +24,14 @@
 <body id="body" class="class_body_t">
     <div class="body-content">
         <div class="wrapper ">
-            @Html.Partial("_Navbar");
+            @Html.Partial("_Navbar")
             <div id="content" class="s-relative main show">
-
                 @RenderBody()
-
-
-                @Html.Partial("_LoadingModal");
+                @Html.Partial("_LoadingModal")
             </div>
         </div>
     </div>
-
-    @Html.Partial("../_Waiting");
+    @Html.Partial("../_Waiting")
     <style>
         html {
             font-family: sans-serif;
@@ -78,10 +75,11 @@
     <script src="/Content/public/js/Gmap/markerclusterer.js"></script>
     <script src="/Content/public/js/Gmap/markerclusterer_compiled.js"></script>
     @*giao diện route và các chức năng của route*@
+    <script src="~/Scripts/graham_scan.js"></script>
     <script src="~/Lib/js/_Route/controllerRoute.js"></script>
     <script src="~/Lib/js/_Route/defaultRoute.js"></script>
     <script src="~/Lib/js/_Route/globalRoute.js"></script>
-
+    <script src="~/Handlers/keepAlive.js"></script>
 
 </body>
 </html>
