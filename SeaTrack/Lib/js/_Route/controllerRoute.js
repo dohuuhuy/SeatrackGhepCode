@@ -1,25 +1,27 @@
-﻿function fetchdata() {
+﻿
+
+function fetchdata() {
     win_reload();
     updateListDeviceStatus
 }
 function loadSpeedLimit() {
     var pathValues = [];
-  
+
     var a = new google.maps.LatLng(10.834650, 106.667149);
     var b = new google.maps.LatLng(10.833454, 106.670258);
     var c = new google.maps.LatLng(10.832250, 106.673723);
-  
+
     pathValues.push(a.toUrlValue());
     pathValues.push(b.toUrlValue());
     pathValues.push(c.toUrlValue());
     $.get("https://roads.googleapis.com/v1/speedLimits", {
-      //key: "AIzaSyARovOsZKZ1v0BQwAtcmoCNjT39z15exuI",
-      key: "AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk",
-      path: pathValues.join('|'),
-    },function (data) {
-      console.log(data);
+        //key: "AIzaSyARovOsZKZ1v0BQwAtcmoCNjT39z15exuI",
+        key: "AIzaSyADYWIGFSnn3DHlJblK0hntz5KQiwbD0hk",
+        path: pathValues.join('|'),
+    }, function (data) {
+        console.log(data);
     });
-  }
+}
 
 var _listDeviceStatus = [];
 var _listSOS = [];
@@ -31,7 +33,7 @@ var slider = $("myRange");
 
 var _SOS;
 var _arSOS = [];
-    bo = [
+bo = [
     {
         lat: 23.280141,
         lng: 105.347008
@@ -162,11 +164,11 @@ var _arSOS = [];
     },
     {
         lat: 10.3835,
-        lng:104.1107
+        lng: 104.1107
     },
     {
-        lat:10.34014,
-        lng:104.11135
+        lat: 10.34014,
+        lng: 104.11135
     },
     {
         lat: 10.30778,
@@ -188,7 +190,7 @@ var _arSOS = [];
         lat: 10.421051,
         lng: 104.438897
     }];
-   long = [
+long = [
     {
         lat: 23.280141,
         lng: 105.347008
@@ -274,8 +276,8 @@ var _arSOS = [];
         lng: 103.424444
     },
     {
-      lat: 10.1538,
-      lng: 103.9352
+        lat: 10.1538,
+        lng: 103.9352
     },
     {
         lat: 10.2177,
@@ -327,11 +329,11 @@ var _arSOS = [];
     },
     {
         lat: 10.3835,
-        lng:104.1107
+        lng: 104.1107
     },
     {
-        lat:10.34014,
-        lng:104.11135
+        lat: 10.34014,
+        lng: 104.11135
     },
     {
         lat: 10.30778,
@@ -369,9 +371,9 @@ function setupMap(lat, lng, mapZoom) {
         fullscreenControl: false,
         fullscreenControlOptions: {
             position: google.maps.ControlPosition.RIGHT_BOTTOM
-          },
-          zoomControl: true,
-          zoomControlOptions: {
+        },
+        zoomControl: true,
+        zoomControlOptions: {
             style: google.maps.ZoomControlStyle.LARGE,
             position: google.maps.ControlPosition.RIGHT_CENTER
         },
@@ -381,7 +383,7 @@ function setupMap(lat, lng, mapZoom) {
 };
 function setDate() {
     cleanMap(0);
- 
+
     var currentdate = new Date();
     var curentMonth = (currentdate.getMonth() + 1) < 10 ? "0" + (currentdate.getMonth() + 1) : (currentdate.getMonth() + 1);
     var curentdate = currentdate.getDate() < 10 ? "0" + currentdate.getDate() : currentdate.getDate();
@@ -404,53 +406,53 @@ function clearInfoWin() {
     }
 }
 function updateListDeviceStatus() {
-    if(_listDeviceStatus.length > 0) {_listDeviceStatus = [];}
+    if (_listDeviceStatus.length > 0) { _listDeviceStatus = []; }
     $.ajax({
-      type: 'GET',
-      url: '/Home/GetListDeviceStatus',
-      data: {},
-      success: function (data, txtStatus, XMLHttpRequest) {
-        _listDeviceStatus = data["Result"].slice();
-        for (var i = 0; i < _listDeviceStatus.length; i++) {
-          var status = 0;
-          var sp = toHaily(_listDeviceStatus[i]["Speed"]);
-          if (sp < 3) { sp = 0; status = 2; }
-          else { sp = toHaily(_listDeviceStatus[i]["Speed"]); status = 1; }
-          var dt = new Date(parseInt(_listDeviceStatus[i]["TransmitTime"].substr(6)));
-          var d = new Date();
-          if(Math.floor((d - dt)/1000/60) > 45) status = 3;
-          _listDeviceStatus[i]["TransmitTime"] = dt;
-          _listDeviceStatus[i]["Speed"] = sp;
-          _listDeviceStatus[i]["Status"] = status;
+        type: 'GET',
+        url: '/Home/GetListDeviceStatus',
+        data: {},
+        success: function (data, txtStatus, XMLHttpRequest) {
+            _listDeviceStatus = data["Result"].slice();
+            for (var i = 0; i < _listDeviceStatus.length; i++) {
+                var status = 0;
+                var sp = toHaily(_listDeviceStatus[i]["Speed"]);
+                if (sp < 3) { sp = 0; status = 2; }
+                else { sp = toHaily(_listDeviceStatus[i]["Speed"]); status = 1; }
+                var dt = new Date(parseInt(_listDeviceStatus[i]["TransmitTime"].substr(6)));
+                var d = new Date();
+                if (Math.floor((d - dt) / 1000 / 60) > 45) status = 3;
+                _listDeviceStatus[i]["TransmitTime"] = dt;
+                _listDeviceStatus[i]["Speed"] = sp;
+                _listDeviceStatus[i]["Status"] = status;
+            }
+            setup_DataTable();
         }
-        setup_DataTable();
-      }
     }, "json");
-  }
-  function cleanMap(a = 0) {
+}
+function cleanMap(a = 0) {
     if (a == 1) {
-      clearInterval(_interval);
+        clearInterval(_interval);
     }
     if (_armarker.length > 0) {
-      for (i = 0; i < _armarker.length; i++) {
-        _armarker[i].setMap(null);
-      }
-      if (a == 0) _armarker = [];
+        for (i = 0; i < _armarker.length; i++) {
+            _armarker[i].setMap(null);
+        }
+        if (a == 0) _armarker = [];
     }
     if (_flightPath.length > 0) {
-      for (j = 0; j < _flightPath.length; j++) {
-        _flightPath[j].setMap(null);
-      }
-      if (a == 0) _flightPath = [];
+        for (j = 0; j < _flightPath.length; j++) {
+            _flightPath[j].setMap(null);
+        }
+        if (a == 0) _flightPath = [];
     }
     if (_infowins.length > 0) {
-      for (j = 0; j < _infowins.length; j++) {
-        _infowins[j].close();
-      }
-      if (a == 0) _infowins = [];
+        for (j = 0; j < _infowins.length; j++) {
+            _infowins[j].close();
+        }
+        if (a == 0) _infowins = [];
     }
-  }
-  function checkDevice(id, n) {
+}
+function checkDevice(id, n) {
     i = 0;
     if (n == 1) {
         while (i < _listDeviceStatus.length) {
@@ -505,24 +507,25 @@ function makePoint(id, n) {
 }
 function makeListStop() {
     for (var i = 0; i < _drawingLinePoint.length; i++) {
-      var status = 0;
-      var sp = toHaily(_drawingLinePoint[i]["Speed"]);
-      if (sp < 3) { sp = 0; status = 2; }
-      else { sp = toHaily(_drawingLinePoint[i]["Speed"]); status = 1; }
-      var dt = new Date(parseInt(_drawingLinePoint[i]["TransmitTime"].substr(6)));
-      if(i >= 1){
-        var d = _drawingLinePoint[i-1]["TransmitTime"];
-        if(Math.floor((dt - d)/1000/60) > 45) status = 3;
-      }
-      _drawingLinePoint[i]["TransmitTime"] = dt;
-      _drawingLinePoint[i]["Speed"] = sp;
-      _drawingLinePoint[i]["Status"] = status;
+        var status = 0;
+        var sp = toHaily(_drawingLinePoint[i]["Speed"]);
+        if (sp < 3) { sp = 0; status = 2; }
+        else { sp = toHaily(_drawingLinePoint[i]["Speed"]); status = 1; }
+        var dt = new Date(parseInt(_drawingLinePoint[i]["TransmitTime"].substr(6)));
+        if (i >= 1) {
+            var d = _drawingLinePoint[i - 1]["TransmitTime"];
+            if (Math.floor((dt - d) / 1000 / 60) > 45) status = 3;
+        }
+        _drawingLinePoint[i]["TransmitTime"] = dt;
+        _drawingLinePoint[i]["Speed"] = sp;
+        _drawingLinePoint[i]["Status"] = status;
     }
     var te = new Date();
     var il = Math.floor((te - _drawingLinePoint[_drawingLinePoint.length - 1]["TransmitTime"]) / 1000 / 60);
     if (il > 45) { _drawingLinePoint[_drawingLinePoint.length - 1]["Status"] = 3; }
 }
 function setdrawingLinePoint(a = 0) {
+    runWaiting();
     var id = $("#list_xelotrinh").val();
     var from = $("#date_form_d").val() + " " + $("#date_form_h").val();
     var to = $("#date_t_d").val() + " " + $("#date_t_h").val();
@@ -546,10 +549,11 @@ function setdrawingLinePoint(a = 0) {
                 }
 
             }
+            downWaiting();
         },
     }, "json");
-  }
-  function drawingLinePoint(id, a = 0) {
+}
+function drawingLinePoint(id, a = 0) {
     cleanMap(0);
     var flightPath = new google.maps.Polyline({
         path: reListStop(),
@@ -784,41 +788,41 @@ function SOS() {
 }
 
 
-function FindPoint(lat1,lon1,lat2,lon2,lat3,lon3){
-    var a = Distance(lat3,lon3,lat1,lon1);
-    var b = Distance(lat3,lon3,lat2,lon2);
-    var c = Distance(lat1,lon1,lat2,lon2);
-    var p = (a+b+c)/2;
-    var h = 2*(Math.sqrt(p*(p-a)*(p-b)*(p-c))/a);
+function FindPoint(lat1, lon1, lat2, lon2, lat3, lon3) {
+    var a = Distance(lat3, lon3, lat1, lon1);
+    var b = Distance(lat3, lon3, lat2, lon2);
+    var c = Distance(lat1, lon1, lat2, lon2);
+    var p = (a + b + c) / 2;
+    var h = 2 * (Math.sqrt(p * (p - a) * (p - b) * (p - c)) / a);
     return h;
 }
-function Distance(lat1,lon1,lat2,lon2){
+function Distance(lat1, lon1, lat2, lon2) {
     var R = 6371; // Km
-    var φ1 = lat1*Math.PI/180;
-    var φ2 = lat2*Math.PI/180;
-    var Δφ = (lat2-lat1)*Math.PI/180;
-    var Δλ = (lon2-lon1)*Math.PI/180;
-    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var φ1 = lat1 * Math.PI / 180;
+    var φ2 = lat2 * Math.PI / 180;
+    var Δφ = (lat2 - lat1) * Math.PI / 180;
+    var Δλ = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
 
-function TimMin(lat,lng){
-    if(long.length>0){
+function TimMin(lat, lng) {
+    if (long.length > 0) {
         var min1 = min2 = 1;
         var ar = [];
-        for(var i =2; i<long.length; i++){
-            var d = Distance(lat,lng,long[i]["lat"],long[i]["lng"]);
-            if(d<Distance(lat,lng,long[min1]["lat"],long[min1]["lng"])){
+        for (var i = 2; i < long.length; i++) {
+            var d = Distance(lat, lng, long[i]["lat"], long[i]["lng"]);
+            if (d < Distance(lat, lng, long[min1]["lat"], long[min1]["lng"])) {
                 min2 = min1;
                 min1 = i;
             }
-            else{
-                if(d < Distance(lat,lng,long[min2]["lat"],long[min2]["lng"]))
+            else {
+                if (d < Distance(lat, lng, long[min2]["lat"], long[min2]["lng"]))
                     min2 = i;
             }
         }
-        ar = [min1,min2];
+        ar = [min1, min2];
         return ar;
     }
 }
@@ -844,7 +848,7 @@ function setup_DataTable() {
             + '</td><td>' + dte + '</td><td>'
             + _listDeviceStatus[i]["Latitude"] + "." + _listDeviceStatus[i]["DirectionSN"] + " - "
             + _listDeviceStatus[i]["Longitude"] + "." + _listDeviceStatus[i]["DirectionEW"]
-            + '</td><td style="display:none">' + _listDeviceStatus[i]["Status"] +'</td></tr>';
+            + '</td><td style="display:none">' + _listDeviceStatus[i]["Status"] + '</td></tr>';
     }
     $("#tblbodydata").html(_tb);
 }
@@ -929,22 +933,22 @@ $("#myRange").change(function () {
 function animateCircle(polyline) {
     var count = 0;
     var defaultIcon = [
-    {
-      icon: lineSymbol,
-      offset: '100%'
-    }];
-    drawLineInterval = window.setInterval(runany,20);
+        {
+            icon: lineSymbol,
+            offset: '100%'
+        }];
+    drawLineInterval = window.setInterval(runany, 20);
     function runany() {
-      if(count >= 199) clearInterval(drawLineInterval);
-      else{
-        count = (count + 1) % 200;
-        var icons = defaultIcon;
-        icons[0].offset = (count / 2) + '%';
-        polyline.set('icons', icons);
-      }
+        if (count >= 199) clearInterval(drawLineInterval);
+        else {
+            count = (count + 1) % 200;
+            var icons = defaultIcon;
+            icons[0].offset = (count / 2) + '%';
+            polyline.set('icons', icons);
+        }
     }
-  }
-  function animateCir(polyline, pl) {
+}
+function animateCir(polyline, pl) {
     var defaultIcon = [
         {
             icon: lineSymbol,
@@ -954,32 +958,32 @@ function animateCircle(polyline) {
     icons[0].offset = (pl / 2) + '%';
     polyline.set('icons', icons);
 }
-function animateCir(polyline,pl) {
+function animateCir(polyline, pl) {
     var defaultIcon = [
-    {
-      icon: lineSymbol,
-      offset: '100%'
-    }];
+        {
+            icon: lineSymbol,
+            offset: '100%'
+        }];
     var icons = defaultIcon;
     icons[0].offset = (pl / 2) + '%';
     polyline.set('icons', icons);
-  }
-  function animateC(polyline) {
+}
+function animateC(polyline) {
     var count = 0;
     var defaultIcon = [
-    {
-      icon: lineSymbol,
-      offset: '100%'
-    }];
-  
-    drawLineInterval = window.setInterval(function() {
-      count = (count + 1) % 200;
-      var icons = defaultIcon;
-      icons[0].offset = (count / 2) + '%';
-      polyline.set('icons', icons);
+        {
+            icon: lineSymbol,
+            offset: '100%'
+        }];
+
+    drawLineInterval = window.setInterval(function () {
+        count = (count + 1) % 200;
+        var icons = defaultIcon;
+        icons[0].offset = (count / 2) + '%';
+        polyline.set('icons', icons);
     }, 20);
-  }
-  
+}
+
 
 
 
