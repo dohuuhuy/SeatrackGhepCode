@@ -1,95 +1,106 @@
 ﻿
 
+<style>
+    @@media only screen and (max-width : 480px) {
+      .float-right{
+          display:none;
+      }
+
+    }
+    
+</style>
+
+
 <nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
-        <div class="container-fluid s-display-block">
-            <div class="float-left">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Menu</span>
-                </button>
-                <button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
-                    <i class="fas fa-indent"></i>
-                    <span style="font-weight:bolder">Giám sát</span>
-                </button>
-                <img id="s-logo-menu" src="~/Content/images/logo/logo-vinasia.png" class="s-logo-menu d-none">
-            </div>
-        
-
-            <div class="float-right">
-
-                <div class="dropdown s-div-btn">
-                    <a id="linkmenu" href="~/Home/Route">
-                        <button onclick="win_reload();" type="button"
-                                class="btn btn-outline-primary">
-                            <i class="fas fa-location-arrow"></i>
-                            Giám sát
-                        </button>
-                    </a>
-                </div>
-                <div class="dropdown s-div-btn">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
-                        <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
-                    </div>
-                </div>
-                <div class="dropdown s-div-btn">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-users-cog"></i>
-                        Quản trị
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
-                        <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị và Lái tàu</a>
-                    </div>
-                </div>
-                <div class="dropdown s-div-btn">
-                    <a id="linkmenu" href="~/Utilities/Index">
-                        <button id="show_tienich" type="button" class="btn btn-outline-info">
-                            <i class="fas fa-tasks"></i>
-                            Tiện ích
-
-                        </button>
-                    </a>
-                </div>
-                <div class="dropdown s-div-btn">
-                    <a id="linkmenu" href="~/FeedBack/Index">
-                        <button id="show_comment" type="button" class="btn btn-outline-info">
-                            <i class="fas fa-comments"></i>
-                            Phản hồi
-                        </button>
-                    </a>
-                </div>
-                <div class="dropdown s-div-btn">
-
-                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-question"></i>
-                        Hướng dẫn
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
-                    </div>
-                </div>
-                <div class="dropdown s-div-btn">
-                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-user"></i>
-                        Tài khoản
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                        <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
-                    </div>
-                </div>
-                <a id="linkmenu" href="~/Home/Logout">
-                    <button type="button" class="btn btn-outline-dark" title="Đăng xuất">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </a>
-            </div>
+    <div class="container-fluid s-display-block">
+        <div class="float-left">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Menu</span>
+            </button>
+            <button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
+                <i class="fas fa-indent"></i>
+                <span style="font-weight:bolder">Giám sát</span>
+            </button>
+            <img id="s-logo-menu" src="~/Content/images/logo/logo-vinasia.png" class="s-logo-menu d-none">
         </div>
 
 
-    </nav>
+        <div class="float-right">
+
+            <div class="dropdown s-div-btn">
+                <a id="linkmenu" href="~/Home/Route">
+                    <button onclick="win_reload();" type="button"
+                            class="btn btn-outline-primary">
+                        <i class="fas fa-location-arrow"></i>
+                        Giám sát
+                    </button>
+                </a>
+            </div>
+            <div class="dropdown s-div-btn">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-chart-bar"></i>
+                    Báo cáo
+                </button>
+                <div class="dropdown-menu">
+                    <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
+                    <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
+                </div>
+            </div>
+            <div class="dropdown s-div-btn">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-users-cog"></i>
+                    Quản trị
+                </button>
+                <div class="dropdown-menu">
+                    <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
+                    <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị và Lái tàu</a>
+                </div>
+            </div>
+            <div class="dropdown s-div-btn">
+                <a id="linkmenu" href="~/Utilities/Index">
+                    <button id="show_tienich" type="button" class="btn btn-outline-info">
+                        <i class="fas fa-tasks"></i>
+                        Tiện ích
+
+                    </button>
+                </a>
+            </div>
+            <div class="dropdown s-div-btn">
+                <a id="linkmenu" href="~/FeedBack/Index">
+                    <button id="show_comment" type="button" class="btn btn-outline-info">
+                        <i class="fas fa-comments"></i>
+                        Phản hồi
+                    </button>
+                </a>
+            </div>
+            <div class="dropdown s-div-btn">
+
+                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-question"></i>
+                    Hướng dẫn
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
+                </div>
+            </div>
+            <div class="dropdown s-div-btn">
+                <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-user"></i>
+                    Tài khoản
+                </button>
+                <div class="dropdown-menu">
+                    <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
+                    <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
+                </div>
+            </div>
+            <a id="linkmenu" href="~/Home/Logout">
+                <button type="button" class="btn btn-outline-dark" title="Đăng xuất">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+</nav>

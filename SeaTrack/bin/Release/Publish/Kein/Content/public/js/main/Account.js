@@ -2,11 +2,11 @@
 
 AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 3;
     $scope.namesData = [];
     //$scope.loadMessage = updateInfo();
     LoadAccounts();
-  
+
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
@@ -22,13 +22,13 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
 
     $scope.Account = {
         UserID: "",
-        Username : "",
-        Password : "",
-        FullName : "",
-        Phone : "",
-        Address : "",
-        ManageBy : "",
-        CreateBy : "",
+        Username: "",
+        Password: "",
+        FullName: "",
+        Phone: "",
+        Address: "",
+        ManageBy: "",
+        CreateBy: "",
         Status: "",
         Image: ""
     };
@@ -56,8 +56,8 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
                 url: '/Management/CreateUser',
                 data: JSON.stringify($scope.Account)
             }).then(function successCallback(response) {
-               
-               // $scope.namesData.push(response.data);
+
+                // $scope.namesData.push(response.data);
                 LoadAccounts();
                 $scope.Clear();
                 alert(" Added Successfully !!!");
@@ -79,6 +79,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             data: JSON.stringify($scope.Account)
         }).then(function successCallback(response) {
             $scope.namesData = null;
+
             AccountService.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
@@ -106,6 +107,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             Status: data.Status,
             Image: data.Image
         };
+        fetchData($scope.Account.UserID);
     };
     $scope.Clear = function () {
         $scope.Account.UserID = '',
@@ -129,7 +131,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         console.log('i am inside khóa funcr' + JSON.stringify($scope.Account));
         $http({
             method: 'GET',
-            url: '/Management/LockUsers/' + $scope.namesData[index].UserID  
+            url: '/Management/LockUsers/' + $scope.namesData[index].UserID
         }).then(function (response) {
             LoadAccounts();
             alert(response.data);
@@ -155,16 +157,84 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         });
 
     }
+    // -------------------------- Cấp thiết bị   ------------------------------------------------//
+    $scope.UserID = function (name) {
+   
+        $scope.name = name;
+
+    }
+    //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
+    $scope.AddDevice = function () {
+        GetListDeviceOfCustomer($scope.Account.UserID);
+    }
+    // xóa thiết bị được cấp và thêm vào list thiết bị không sử dụng
+    $scope.RemoveDeviceFromUser = function (index) {
+        DeviceToRemove = $scope.Devices[index];
+        id = $scope.Account.UserID;
+        var RemoveModel = { UserID: id, DeviceID: DeviceToRemove.DeviceID };
+        $http({
+            method: "POST",
+            url: '/Management/RemoveDeviceFromUser/',
+            data: RemoveModel
+        }).then(function (response) {
+            console.log(response, 'Bỏ cấp thiết bị cho người dùng' + $scope.Account.FullName);
+
+        });
+
+        $scope.Devices.splice(index, 1);
+        $scope.DevicesNotUsed.push(DeviceToRemove);
+        fetchData(id);
+    }
+    // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
+    $scope.AddDeviceToUser = function(index) {
+        DeviceToAdd = $scope.DevicesNotUsed[index];
+        id = $scope.Account.UserID;
+        var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
+        $http({
+            method: "POST",
+            url: '/Management/AddDeviceToUser/',
+            data: Model
+        }).then(function (response) {
+            console.log(response, 'Đã cấp thiết bị cho người dùng' + $scope.Account.FullName);
+
+        });
+        $scope.DevicesNotUsed.splice(index, 1);
+        $scope.Devices.push(DeviceToAdd);
+        fetchData(id);
+    }
+
+    // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
+    function GetListDeviceOfCustomer(id) {
+        $http({
+            method: "GET",
+            url: '/Management/GetListDeviceOfCustomer/' + id
+        }).then(function (response) {
+            console.log(response, 'res');
+            $scope.DevicesNotUsed = response.data;
+        }, function (error) {
+            console.log(error, 'can not get data.');
+        });
+        };
+
+        // lấy danh sach thiết bị của người dùng theo id trong list của khách hàng
+        // oke chạy
+        function fetchData(UserID) {
+            $http({
+                method: "GET",
+                url: '/Management/GetListDeviceByUserID/' + UserID
+            }).then(function (response) {
+                console.log(response, 'res');
+                $scope.Devices = response.data;
+            }, function (error) {
+                console.log(error, 'can not get data.');
+            });
+        };
 });
 
-
-
 AccountApp.factory('AccountService', function ($http) {
-    var fac = {};
-    fac.GetAllRecords = function () {
+    var Acc = {};
+    Acc.GetAllRecords = function () {
         return $http.get('/Management/GetListUserOfCus');
     };
-    console.log('i am inside Service ' + fac.GetAllRecords());
-
-    return fac;
+    return Acc;
 });

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	setup_selectDeviceNo();
-	interval_SOS();
+	//interval_SOS();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
@@ -13,6 +13,15 @@ $(document).ready(function () {
 		$('#s-logo-menu').toggleClass('d-none');
 		$("#sidebarCollapse").addClass("d-none");
 		$("#giamsat_toggle").removeClass("d-none");
+	});
+	$('#giamsat_toggle').on('click', function () {
+		//$( "#sidebarCollapse" ).trigger( "click" );
+		$('#s-sidebar').toggleClass('active');
+		$('.s-sidebar').toggleClass('active');
+		$('#menubar').toggleClass('active');
+		$('#s-logo-menu').toggleClass('d-none');
+		$("#sidebarCollapse").removeClass("d-none");
+		$("#giamsat_toggle").addClass("d-none");
 	});
 
 	$('input[name="datefilter"]').daterangepicker({

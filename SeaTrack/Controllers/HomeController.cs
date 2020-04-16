@@ -16,7 +16,10 @@ namespace SeaTrack.Controllers
 {
     public class HomeController : Controller
     {
-
+        public ActionResult Demo()
+        {
+            return View("Demo");
+        }
         public ActionResult Route()
         {
             if (Session["User"] == null)

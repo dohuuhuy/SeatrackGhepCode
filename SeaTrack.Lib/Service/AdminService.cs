@@ -328,7 +328,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new DeviceViewModel()
                         {
-                            //TypeShip = Convert.ToInt32(reader["TypeShip"]),
+                            TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
@@ -362,7 +362,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new DeviceViewModel()
                         {
-                            //TypeShip = Convert.ToInt32(reader["TypeShip"]),
+                            TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
@@ -395,7 +395,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new DeviceViewModel()
                         {
-                            //TypeShip = Convert.ToInt32(reader["TypeShip"]),
+                            TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
@@ -406,7 +406,8 @@ namespace SeaTrack.Lib.Service
                             DateExpired = (reader["DateExpired"].ToString()),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
-                            ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1
+                            ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
+                          
                         };
                         lst.Add(data);
                     }
@@ -427,7 +428,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new DeviceViewModel()
                         {
-                            //TypeShip = Convert.ToInt32(reader["TypeShip"]),
+                            TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),

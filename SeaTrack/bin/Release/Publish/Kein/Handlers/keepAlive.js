@@ -2,6 +2,6 @@
 var keepAlive = {
     refresh: function () {
         $.get('/keep-alive.ashx');
-        setTimeout(keepAlive.refresh, 60000);
+        setTimeout(keepAlive.refresh, 180000);
     }
 }; $(document).ready(keepAlive.refresh());
