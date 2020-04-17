@@ -293,7 +293,7 @@ namespace SeaTrack.Lib.Service
         public static int CreateDevice(Device device)
         {
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "[sp_CreateDevice]", device.DeviceNo, device.DeviceName, device.DeviceVersion,
-                device.DeviceImei, device.DeviceGroup, device.DateExpired, device.DeviceNote, device.StatusDevice, device.CreateBy, device.DateCreate))
+                device.DeviceImei, device.DeviceGroup, device.DateExpired, device.DeviceNote, device.StatusDevice, device.CreateBy, device.DateCreate, device.TypeShip))
             {
                 if (reader.HasRows)
                 {

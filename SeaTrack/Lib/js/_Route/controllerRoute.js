@@ -1,7 +1,7 @@
 ﻿
 
 function fetchdata() {
-    win_reload();
+    //win_reload();
     updateListDeviceStatus
 }
 function loadSpeedLimit() {
@@ -585,7 +585,8 @@ function drawingLinePoint(id, a = 0) {
         marker.setMap(map);
 
         content_ =
-            '<div class="">Tọa độ: '
+            '<div class=""> Số hiệu'
+            + _drawingLinePoint[i].DeviceName + 'Tọa độ: '
             + _drawingLinePoint[i].Latitude + ' - '
             + _drawingLinePoint[i].Longitude + '<br/> ' + 'Thời gian: '
             + _drawingLinePoint[i].TransmitTime + '<br/> ' + 'Trạng thái: '
