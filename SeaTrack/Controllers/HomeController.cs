@@ -11,6 +11,7 @@ using DotNetNuke.Common.Utilities;
 using SeaTrack.Lib.DTO;
 using SeaTrack.Lib.Service;
 using SeaTrack.Models;
+using SeaTrack.Lib.Database;
 
 namespace SeaTrack.Controllers
 {
@@ -176,7 +177,29 @@ namespace SeaTrack.Controllers
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpPost]
+        public JsonResult GetCurrentLocation(InfoDTO info)
+        {
+            if (info.SecretCode ==ConnectData.SecretCode)
+            {
+                var item = TrackDataService.GetLastedLocationByImei(info.ID);
+                RequestInfo returnInfo = new RequestInfo();
+                returnInfo.MREF = info.MREF;
+                returnInfo.Seqno = info.Seqno;
+                returnInfo.ID = info.ID;
+                returnInfo.Time = item.TransmitTime.ToString("HH:MM:SS");
+                returnInfo.State = item.State;
+                returnInfo.Latitude = item.Latitude.ToString();
+                returnInfo.ExpSN = item.DirectionSN;
+                returnInfo.Longitude = item.Longitude.ToString();
+                returnInfo.ExpEW = item.DirectionEW;
+                returnInfo.Speed = item.Speed;
+                returnInfo.DIR = "";
+                returnInfo.Date = item.TransmitTime.ToString("DD/MM/YY");
+                return Json(returnInfo, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
 
 
         public ActionResult UserInfo()

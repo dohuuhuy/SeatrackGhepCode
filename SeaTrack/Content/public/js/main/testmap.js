@@ -628,15 +628,24 @@ function CreatePoly() {
         scaleControl: true
     });
     //EEZ = ThaiLan.concat(Indonesia);
-    // for(i = 0; i < ThaiLan.length+Indonesia.length+China.length; i++)
-    // {
-    //     //var p = new google.maps.LatLng(ThaiLan.join(Indonesia)[i]["lat"],ThaiLan.join(Indonesia)[i]["lng"]);
-    //     var marker = new google.maps.Marker({
-    //         position: EEZ[i],
-    //         label: "EEZ",
-    //         map: map
-    //     })
-    // }
+    for(i = 0; i < bo.length; i++)
+    {
+        //var p = new google.maps.LatLng(ThaiLan.join(Indonesia)[i]["lat"],ThaiLan.join(Indonesia)[i]["lng"]);
+        var marker = new google.maps.Marker({
+            position: bo[i],
+            label: "B",
+            map: map
+        })
+    }
+    for(i = 0; i < long.length; i++)
+    {
+        //var p = new google.maps.LatLng(ThaiLan.join(Indonesia)[i]["lat"],ThaiLan.join(Indonesia)[i]["lng"]);
+        var marker = new google.maps.Marker({
+            position: long[i],
+            label: "B",
+            map: map
+        })
+    }
     var EEZLine = new google.maps.Polyline({
         path: China,
         geodesic: true,
@@ -662,15 +671,15 @@ function CreatePoly() {
     //     strokeWeight: 2,
     //     map: map
     // });    
-    // vungbo = new google.maps.Polygon({
-    //     paths: bo,
-    //     strokeColor: '#FF0000',
-    //     strokeOpacity: 0.8,
-    //     strokeWeight: 2,
-    //     fillColor: '#FF0000',
-    //     fillOpacity: 0.35
-    // });
-    // vungbo.setMap(map);
+    vungbo = new google.maps.Polygon({
+        paths: bo,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+    });
+    vungbo.setMap(map);
     // vungbo2 = new google.maps.Polygon({
     //     paths: bo2,
     //     strokeColor: '#000000',

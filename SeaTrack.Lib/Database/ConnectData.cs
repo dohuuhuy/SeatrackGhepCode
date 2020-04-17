@@ -11,6 +11,7 @@ namespace SeaTrack.Lib.Database
     public class ConnectData
     {
         public static string ConnectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        public static string SecretCode = WebConfigurationManager.ConnectionStrings["SecretCode"].ConnectionString;
         public static TrackData GetDataByDeviceID(int deviceID)
         {
             return CBO.FillObject<TrackData>(GetData(deviceID));

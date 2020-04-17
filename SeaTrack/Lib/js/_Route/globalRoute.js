@@ -2,8 +2,7 @@
 $(document).ready(function () {
 
     setupMap(_def_Lat, _def_Lng, _def_zoom);
-    interval_SOS();
-    SOS();
+
 
 
 	$('#SOS').draggable({

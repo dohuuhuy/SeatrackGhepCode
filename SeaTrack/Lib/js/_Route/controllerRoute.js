@@ -2,7 +2,7 @@
 
 function fetchdata() {
     //win_reload();
-    updateListDeviceStatus
+    updateListDeviceStatus();
 }
 function loadSpeedLimit() {
     var pathValues = [];
@@ -23,16 +23,6 @@ function loadSpeedLimit() {
     });
 }
 
-var _listDeviceStatus = [];
-var _listSOS = [];
-var _SOSInfo = [];
-var _drawingLinePoint = [];
-var _infowins = [];
-var _drawingMarker = [];
-var slider = $("myRange");
-
-var _SOS;
-var _arSOS = [];
 bo = [
     {
         lat: 23.280141,
@@ -355,6 +345,12 @@ long = [
         lat: 10.421051,
         lng: 104.438897
     }];
+//bờ: 2-19
+//lộng:4-21
+var bolong = [];
+var vungbo;
+var vungbolong;
+var vunglong;
 
 
 slider.oninput = function () { }
@@ -537,7 +533,9 @@ function setdrawingLinePoint(a = 0) {
         url: '/Home/GetRoadmapByDateTime',
         data: { deviceID: id, From: from, To: to },
         success: function (data, txtStatus, XMLHttpRequest) {
+            var u = checkDevice(id,1).DeviceName;
             _drawingLinePoint = data.Result;
+            _drawingLinePoint.forEach(t => { t.DeviceName = u;});
             //console.log(_drawingLinePoint.length);
             if (_drawingLinePoint == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
@@ -585,8 +583,9 @@ function drawingLinePoint(id, a = 0) {
         marker.setMap(map);
 
         content_ =
-            '<div class=""> Số hiệu'
-            + _drawingLinePoint[i].DeviceName + 'Tọa độ: '
+            '<div class="">'
+            + 'Tên thiết bị: ' + _drawingLinePoint["dvn"]
+            + 'Tọa độ: '
             + _drawingLinePoint[i].Latitude + ' - '
             + _drawingLinePoint[i].Longitude + '<br/> ' + 'Thời gian: '
             + _drawingLinePoint[i].TransmitTime + '<br/> ' + 'Trạng thái: '
@@ -713,22 +712,14 @@ function TinhGoc(lat1, long1, lat2, long2) {
 
     return brng;
 }
-function interval_draw() {
-    if (_interval != null) clearInterval(_interval);
-    _interval = setInterval(function () { setdrawingLinePoint() }, 120000);
-}
-
-function interval_SOS() {
-    _SOS = setInterval(function () { SOS() }, 60000);
-}
 function SOS() {
-    for (var i = 0; i < _arSOS.length; i++) {
-        _arSOS[i].setMap(null);
+    for (var i = 0; i < _arSOSMarker.length; i++) {
+        _arSOSMarker[i].setMap(null);
     }
     // for(var i = 0; i < markerSOS.length; I++){
     //     markerSOS[i].setMap(null);
     // }
-    _arSOS = [];
+    _arSOSMarker = [];
     $.ajax({
         type: 'GET',
         url: '/SOS/GetSOS',
@@ -763,7 +754,7 @@ function SOS() {
                 });
                 marker.setMap(map);
                 _SOSInfo.push(SOSInfo);
-                _arSOS.push(marker);
+                _arSOSMarker.push(marker);
 
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
                 //console.log(date);
@@ -788,7 +779,75 @@ function SOS() {
     //console.log("done");
 }
 
-
+function Warning() {
+    for(var i=0;i<_listDeviceStatus.length;i++){
+        var dv = _listDeviceStatus[i];
+        var warning = "";
+        var checkpoint = new google.maps.LatLng(dv.Latitude,dv.Longitude);
+        var biengioi;
+        if(dv.TypeShip == 1){
+            if(google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == true){
+                biengioi = bo;
+            }
+            //cảnh báo tàu vi phạm vùng lộng
+            warning = "Tàu "+ dv.DeviceName + " vi phạm vùng lộng";
+            document.getElementById("WarningDiv").style.display = "block";
+            document.getElementById("warning").innerText = warning;
+            continue;
+        }else{
+            if(dv.TypeShip == 2){
+                if(google.maps.geometry.poly.containsLocation(checkpoint, vungbolong) == true){
+                    biengioi = bolong;
+                }else{
+                    if(google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == true){
+                        //Cảnh báo tàu vi phạm vùng bờ
+                        warning = "Tàu "+ dv.DeviceName + " vi phạm vùng bờ";
+                        document.getElementById("WarningDiv").style.display = "block";
+                        document.getElementById("warning").innerText = warning;
+                        continue;
+                    }
+                    warning = "Tàu "+ dv.DeviceName + " vi phạm vùng khơi";
+                    document.getElementById("WarningDiv").style.display = "block";
+                    document.getElementById("warning").innerText = warning;
+                    //Cảnh báo tàu vi phạm vùng khơi
+                    continue;
+                }
+            }else{
+                if(dv.TypeShip == 3){
+                    if(google.maps.geometry.poly.containsLocation(checkpoint, vunglong) == false){
+                        biengioi = long;
+                    }else{
+                        if(google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == true){
+                            //Cảnh báo tàu cá vi phạm vùng bờ
+                            warning = "Tàu "+ dv.DeviceName + " vi phạm vùng bờ";
+                            document.getElementById("WarningDiv").style.display = "block";
+                            document.getElementById("warning").innerText = warning;
+                            continue;
+                        }
+                        //Cảnh báo tàu cá vi phạm vùng lộng
+                        warning = "Tàu "+ dv.DeviceName + " vi phạm vùng lộng";
+                        document.getElementById("WarningDiv").style.display = "block";
+                        document.getElementById("warning").innerText = warning;
+                        continue;
+                    }
+                }
+            }
+        }
+        //console.log(biengioi.length);
+        var ar = TimMin(dv["Latitude"],dv["Longitude"],biengioi);
+        //console.log(ar);
+        res = FindPoint(biengioi[ar[0]]["lat"],biengioi[ar[0]]["lng"],long[ar[1]]["lat"],long[ar[1]]["lng"],dv["Latitude"],dv["Longitude"]);
+        console.log(res);
+        if(res<5){
+            warning = "Tàu "+ dv.DeviceName + " chuẩn bị ra khỏi phạm vi đánh bắt";
+            document.getElementById("WarningDiv").style.display = "block";
+            document.getElementById("warning").innerText = warning;
+        }
+            
+    
+    }
+    //_listDeviceStatus
+}
 function FindPoint(lat1, lon1, lat2, lon2, lat3, lon3) {
     var a = Distance(lat3, lon3, lat1, lon1);
     var b = Distance(lat3, lon3, lat2, lon2);
@@ -808,18 +867,19 @@ function Distance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 
-function TimMin(lat, lng) {
-    if (long.length > 0) {
-        var min1 = min2 = 1;
+function TimMin(lat, lng, biengioi) {
+    if (biengioi.length > 0) {
+        var min1 = 0;
+        var min2 = 1;
         var ar = [];
-        for (var i = 2; i < long.length; i++) {
-            var d = Distance(lat, lng, long[i]["lat"], long[i]["lng"]);
-            if (d < Distance(lat, lng, long[min1]["lat"], long[min1]["lng"])) {
+        for (var i = 2; i < biengioi.length; i++) {
+            var d = Distance(lat, lng, biengioi[i]["lat"], biengioi[i]["lng"]);
+            if (d < Distance(lat, lng, biengioi[min1]["lat"], biengioi[min1]["lng"])) {
                 min2 = min1;
                 min1 = i;
             }
             else {
-                if (d < Distance(lat, lng, long[min2]["lat"], long[min2]["lng"]))
+                if (d < Distance(lat, lng, biengioi[min2]["lat"], biengioi[min2]["lng"]))
                     min2 = i;
             }
         }
@@ -984,8 +1044,36 @@ function animateC(polyline) {
         polyline.set('icons', icons);
     }, 20);
 }
+function interval_draw() {
+    //if (_interval != null) clearInterval(_interval);
+    //_interval = setInterval(function () { setdrawingLinePoint() }, 120000);
+    _intervalDeviceStatus = setInterval(function () {updateListDeviceStatus()},120000);
+    _intervalDataline = setInterval(function () {setup_selectDataLine()},180000);
+    _intervalSOS = setInterval(function () { SOS() }, 120000);
+    _intervalWaning = setInterval(function () {Warning()},12000);
+}
 
-
+function Taomang(){
+    for(i = 2;i<20;i++){
+        bolong.push(bo[i]);
+    }
+    for(i = 21;i>2;i--){
+        bolong.push(long[i]);
+    }
+    //console.log(bolong.length);
+    // var nothing = new google.maps.Polygon({
+    //     path: bolong,
+    // })
+    vungbo = new google.maps.Polygon({
+        paths: bo
+    });
+    vungbolong = new google.maps.Polygon({
+        paths: bolong
+    });
+    vunglong = new google.maps.Polygon({
+        paths: long
+    });
+}
 
 
 
@@ -994,4 +1082,7 @@ $(document).ready(function () {
     setupMap(_def_Lat, _def_Lng, _def_zoom);
     updateListDeviceStatus();
     setup_selectDataLine();
+    Taomang();
+    interval_draw();
+    SOS();
 });

@@ -34,12 +34,12 @@ namespace SeaTrack.Lib.Job
                             Seqno = "1",
                             ID = item.DeviceID,
                             Time = item.TransmitTime.ToString("HHmmss"),
-                            item.State,
-                            item.Latitude,
+                            State = item.State,
+                            Latitude = item.Latitude,
                             ExpSN = item.DirectionSN,
-                            item.Longitude,
+                            Longitude = item.Longitude,
                             ExpEW = item.DirectionEW,
-                            item.Speed,
+                            Speed = item.Speed,
                             DIR = "",
                             Date = item.TransmitTime.ToString("ddMMyyyy")
                         });

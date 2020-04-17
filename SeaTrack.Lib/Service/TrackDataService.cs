@@ -24,7 +24,7 @@ namespace SeaTrack.Lib.Service
         }
         public static List<DeviceStatus> GetListDeviceStatus(int _userid)
         {
-            List<DeviceStatus> lst = new List<DeviceStatus>(); ;
+            List<DeviceStatus> lst = new List<DeviceStatus>();
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceStatusUser", _userid))
             {
                 if (reader.HasRows)
@@ -35,6 +35,7 @@ namespace SeaTrack.Lib.Service
                         {
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceName = reader["DeviceName"].ToString(),
+                            TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
                             Latitude = Convert.ToDecimal(reader["Latitude"]),
                             Longitude = Convert.ToDecimal(reader["Longitude"]),
                             DirectionSN = reader["DirectionSN"].ToString(),
@@ -50,10 +51,10 @@ namespace SeaTrack.Lib.Service
 
             return lst;
         }
-        public static TrackData GetLastedLocation(int deviceID)
+        public static TrackData GetLastedLocation(int DeviceID)
         {
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetLastedLocation",
-                deviceID))
+                DeviceID))
             {
                 while (reader.Read())
                 {
@@ -69,6 +70,30 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
+
+        public static TrackData GetLastedLocationByImei(string DeviceImei)
+        {
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetLastedLocationByImei",
+                DeviceImei))
+            {
+                while (reader.Read())
+                {
+                    var data = new TrackData()
+                    {
+                        TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                        DirectionEW = reader["DirectionEW"].ToString(),
+                        DirectionSN = reader["DirectionSN"].ToString(),
+                        Latitude = Convert.ToDecimal(reader["Latitude"]),
+                        Longitude = Convert.ToDecimal(reader["Longitude"]),
+                        Speed = Convert.ToInt16(reader["Speed"]),
+                        State = reader["State"].ToString(),
+                    };
+                    return data;
+                }
+            }
+            return null;
+        }
+
         public static List<TrackData> GetRoadmap(int deviceID)
         {
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetRoadmap",
