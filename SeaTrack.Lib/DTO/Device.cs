@@ -22,7 +22,6 @@ namespace SeaTrack.Lib.DTO
 
         public string CreateBy { get; set; }
         public int StatusDevice { get; set; }
-        public string LastUpdateBy { get; set; }
-        public DateTime LastUpdateDate { get; set; }
+
     }
 }

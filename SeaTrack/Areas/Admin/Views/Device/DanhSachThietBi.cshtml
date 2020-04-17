@@ -169,7 +169,7 @@
                         <div class="col col-md-6">
                             <div class="form-group">
                                 <label class="control-label"> Imei </label>
-                                <input class="form-control" name="DeviceImei" ng-model="Device.DeviceImei" type="text" placeholder="Imei ..." required maxlength="10" ng-blur="ImeiDeviceExist(Device.DeviceImei)" />
+                                <input class="form-control" name="DeviceImei" ng-model="Device.DeviceImei" type="text" placeholder="Imei ..." required maxlength="50" ng-blur="ImeiDeviceExist(Device.DeviceImei)" />
                                 <label ng-if="ImeiCheck == Device.DeviceImei" style="color:red">Imei đã tồn tại</label>
                             </div>
                             <div class="form-group">

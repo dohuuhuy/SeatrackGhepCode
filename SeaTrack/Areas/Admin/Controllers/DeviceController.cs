@@ -119,6 +119,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             device.CreateBy = user.Username;
             device.DateCreate = DateTime.Now;
             device.StatusDevice = 1;
+            device.TypeShip = 1;
             var rs = AdminService.CreateDevice(device);
             return Json(new { success = true });
 
