@@ -15,5 +15,6 @@ namespace SeaTrack.Lib.DTO
         public string SecretCode { get; set; }
         public string OpCode { get; set; }
         public int Time { get; set; }
+
     }
 }

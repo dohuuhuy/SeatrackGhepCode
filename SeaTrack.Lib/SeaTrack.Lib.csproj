@@ -51,6 +51,7 @@
     <Compile Include="DTO\DeviceStatus.cs" />
     <Compile Include="DTO\FeedBack.cs" />
     <Compile Include="DTO\InfoDTO.cs" />
+    <Compile Include="DTO\RequestInfo.cs" />
     <Compile Include="DTO\SOSDTO.cs" />
     <Compile Include="DTO\TrackDataAndDriver.cs" />
     <Compile Include="DTO\TrackData.cs" />

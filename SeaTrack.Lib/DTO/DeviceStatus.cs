@@ -12,6 +12,7 @@ namespace SeaTrack.Lib.DTO
         public Int64 ID { get; set; }
         public int DeviceID { get; set; }
         public string DeviceName { get; set; }
+        public int TypeShip { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public int Speed { get; set; }
