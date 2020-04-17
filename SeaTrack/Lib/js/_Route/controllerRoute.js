@@ -357,6 +357,8 @@ slider.oninput = function () { }
 function setRange(a) {
     $("#myRange").attr("max", a);
 }
+
+
 function setupMap(lat, lng, mapZoom) {
     var mapLatlng = new google.maps.LatLng(lat, lng);
     var myOptions = {
