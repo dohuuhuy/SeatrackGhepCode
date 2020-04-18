@@ -31,20 +31,42 @@ namespace SeaTrack.Lib.Service
                 {
                     while (reader.Read())
                     {
-                        var data = new DeviceStatus()
-                        {
-                            DeviceID = Convert.ToInt32(reader["DeviceID"]),
-                            DeviceName = reader["DeviceName"].ToString(),
-                            TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
-                            Latitude = Convert.ToDecimal(reader["Latitude"]),
-                            Longitude = Convert.ToDecimal(reader["Longitude"]),
-                            DirectionSN = reader["DirectionSN"].ToString(),
-                            DirectionEW = reader["DirectionEW"].ToString(),
-                            TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
-                            Speed = Convert.ToInt16(reader["Speed"]),
+                        var dt = new DeviceStatus();
+                        //if (reader["DeviceID"] == null
+                        //    || reader["DeviceName"] == null
+                        //    || reader["DeviceGroup"] == null) continue;
+                        //else if (reader["Latitude"] == null
+                        //    || reader["Longitude"] == null
+                        //    || reader["DirectionSN"] == null
+                        //    || reader["DirectionEW"] == null
+                        //    || reader["TransmitTime"] == null
+                        //    || reader["Speed"] == null) { }
 
-                        };
-                        lst.Add(data);
+
+
+                        if (reader["DeviceID"] != null) dt.DeviceID = Convert.ToInt32(reader["DeviceID"]);
+                        if (reader["DeviceName"] != null) dt.DeviceName = reader["DeviceName"].ToString();
+                        if (reader["Latitude"] != null) dt.Latitude = Convert.ToInt32(reader["Latitude"]);
+                        if (reader["Longitude"] != null) dt.Longitude = Convert.ToInt32(reader["Longitude"]);
+                        if (reader["DirectionSN"] != null) dt.DirectionSN = reader["DirectionSN"].ToString();
+                        if (reader["DirectionEW"] != null) dt.DirectionEW = reader["DirectionEW"].ToString();
+                        if (reader["TransmitTime"] != null) dt.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]);
+                        if (reader["Speed"] != null) dt.Speed = Convert.ToInt16(reader["Speed"]);
+
+                        //var data = new DeviceStatus()
+                        //{
+                        //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                        //    DeviceName = reader["DeviceName"].ToString(),
+                        //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
+                        //    Latitude = Convert.ToDecimal(reader["Latitude"]),
+                        //    Longitude = Convert.ToDecimal(reader["Longitude"]),
+                        //    DirectionSN = reader["DirectionSN"].ToString(),
+                        //    DirectionEW = reader["DirectionEW"].ToString(),
+                        //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                        //    Speed = Convert.ToInt16(reader["Speed"]),
+
+                        //};
+                        lst.Add(dt);
                     }
                 }
             }

@@ -26,6 +26,20 @@ $(document).ready(function () {
 	
 
 
+	$('#menu2').on('click', function () {
+		if ($('#menubar').hasClass('active')) {
+
+			$('#s-sidebar').toggleClass('active');
+			$('.s-sidebar').toggleClass('active');
+			$('#menubar').toggleClass('active');
+			$('#s-logo-menu').toggleClass('d-none');
+			$("#sidebarCollapse").addClass("d-none");
+			$("#giamsat_toggle").removeClass("d-none");
+
+		} else {
+			$("#navbarSupportedContent").removeClass("d-none");
+		}
+	});
 
 	$('#giamsat_toggle').on('click', function () {
 
@@ -35,6 +49,9 @@ $(document).ready(function () {
 		$('#s-logo-menu').toggleClass('d-none');
 		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").addClass("d-none");
+		if ($("#navbarSupportedContent").removeClass("d-none")) {
+			$("#navbarSupportedContent").addClass("d-none");
+        }
 	});
 
 

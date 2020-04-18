@@ -973,8 +973,6 @@ function createTable(selectState, list_result) { // list_result = tbl_tablebody 
             tr[i].style.display = "none"; // ẩn đi 
         }
     }
-
-
 }
 var lineSymbol = {
     path: google.maps.SymbolPath.CIRCLE,

@@ -7,7 +7,7 @@
     <h1 class="mt-4">Danh Mục Thiết Bị</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Quản mục thiết bị</li>
+        <li class="breadcrumb-item active">Danh mục thiết bị</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
@@ -18,23 +18,25 @@
                 <div class="input-group">
                     <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListDeviceSearch('SearchKey', 'S-table')"><br />
                     <div class="input-group-btn">
-                        <button class="btn btn-primary" ng-click="ClearSearch()">
+                        @*<button class="btn btn-primary" ng-click="ClearSearch()">
                             <i class="fa fa-search"></i> Search
-                        </button>
+                        </button>*@
                     </div>
                 </div>
                 <br />
-                @*<div class="input-group ">
+                <div class="input-group ">
+                    @*<form id="mainform">
                         <label for="radio1" class="form-check-label col-md-4 ">
-                            <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                            <input type="radio" id="Status" name="Status" ng-model="Status" value="1" class="form-check-input">Kích hoạt
                         </label>
                         <label for="radio2" class="form-check-label col-md-4  ">
-                            <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                            <input type="radio" id="Status" name="Status" ng-model="Status" value="-1" class="form-check-input">Đã khóa
                         </label>
                         <label for="radio3" class="form-check-label col-md-4  ">
-                            <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
+                            <input type="radio" id="Status" name="Status" ng-model="Status" value="0" class="form-check-input">Hết hạn
                         </label>
-                    </div>*@
+                    </form>*@
+                    </div>
             </div>
         </div>
     </div>
@@ -50,9 +52,9 @@
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th>Thao tác</th>
-                            <th>Số hiệu</th>
-                            <th>Tên thiết bị</th>
+                            <th> Thao tác</th>
+                            <th> Số hiệu</th>
+                            <th> Tên thiết bị</th>
                             <th> Phiên bản</th>
                             <th> Imei</th>
                             <th> Ngày hết hạn</th>
@@ -75,8 +77,8 @@
                             <td>{{a.DeviceName}}</td>
                             <td>{{a.DeviceVersion}}</td>
                             <td>{{a.DeviceImei}}</td>
-                            <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired}}</p></td>
-                            <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
+                            <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired  | date:"dd/MM/yyyy HH:mm"}}</p></td>
+                            <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired  | date:"dd/MM/yyyy HH:mm"}}</p></td>
                             <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                             <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
                             <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
@@ -263,7 +265,29 @@
     </div>
 </div>
 <script>
-    
+
+    // function SearchRadio (selectState, list_result) { // list_result = tbl_tablebody từ vùng kêt quả
+    //    var _selectState, _list_result;
+    //    _selectState = document.getElementById(selectState).value; // lây value option
+    //    _list_result = document.getElementById(list_result); // lấy value từ vùng kq
+    //    tr = _list_result.getElementsByTagName('tr'); // đặc = tr 
+
+    //    for (var i = 0; i < tr.length; i++) {
+    //        td = tr[i].getElementsByTagName('td')["Trạng Thái"]; // lấy trạng thái
+
+    //        if (_selectState == 0) { // nêu select tât cả
+    //            //alert('helo'); 
+    //            // show tat cả dòng
+    //            tr[i].style.display = "";
+    //        }
+    //        if (td.innerText == _selectState) { // dữ liệu cột 5 so sánh vs select --> có dữ liệu 
+    //            tr[i].style.display = ""; // hiển thị
+    //        } else if (_selectState != 0) {
+    //            tr[i].style.display = "none"; // ẩn đi 
+    //        }
+    //    }
+    //}
+
     function ListDeviceSearch(id_search, list_result) {
         var _id_search, _list_result, filter, tr, td;
         _id_search = document.getElementById(id_search);

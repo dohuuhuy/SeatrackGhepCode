@@ -10,13 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl" ng-init="UserID( '@user.Username')">
     <div class="wrapper">
-        <div id="sidebar5" class="si-sidebar s-sidebar">
-            <div class="sidebar-header s-flexible s-just-center">
-                <img src="/Content/public/img/logo-vinasia.png" class="s-logo-dom">
-            </div>
-            <hr>
+        @Html.Partial("_MenuThietBiVaLaiTau");
 
-        </div>
 
         <div id="content-taikhoan-body" class="content">
             <div class="container-fluid">
@@ -32,7 +27,7 @@
                             <div class="card-body">
                                 <div class="col col-md-12">
                                     <div class="input-group">
-                                        <input type="text"  name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
+                                        <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" ng-click="ClearSearch()">
                                                 <i class="fa fa-search"></i> Search
@@ -183,7 +178,7 @@
                                     <label class="control-label"> Tên tài khoản </label>
                                     <input class="form-control" name="Username" ng-model="Account.Username" type="text" placeholder="Tên tài khoản ..."
                                            required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
-                                    <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
+                                    @*<label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>*@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Họ và tên </label>
