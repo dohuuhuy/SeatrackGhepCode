@@ -671,7 +671,7 @@ p {
     .navbar a {
         float: left;
         text-align: center;
-        padding: 10px 16px;
+        padding: 7px 16px;
         text-decoration: none;
     }
 
@@ -1051,4 +1051,7 @@ legend.groupbox-border {
     width: 100% !important;
     height: 100% !important;
     border: groove;
+}
+@media(max-width: 480){
+
 }

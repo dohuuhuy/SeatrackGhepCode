@@ -10247,7 +10247,7 @@ body {
         }
 
 table.table {
-    table-layout: fixed;
+    table-layout: inherit;
 }
 
     table.table tr th, table.table tr td {
