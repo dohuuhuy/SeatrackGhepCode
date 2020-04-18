@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <div class="col col-md-12">
                                 <div class="input-group">
-                                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                                    <input type="text"  name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control"  id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
                                     <div class="input-group-btn">
                                         <button class="btn btn-primary" ng-click="ClearSearch()">
                                             <i class="fa fa-search"></i> Search
@@ -29,20 +29,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                <div class="input-group ">
-                                    <label for="radio1" class="form-check-label col-md-4 ">
-                                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
-                                        {{Status}}
-                                    </label>
-                                    <label for="radio2" class="form-check-label col-md-4  ">
-                                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
-                                        {{Status}}
-                                    </label>
-                                    <label for="radio3" class="form-check-label col-md-4  ">
-                                        <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
-                                        {{Status}}
-                                    </label>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -68,7 +55,7 @@
                                             <th> Trạng thái</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="data">
                                         <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
                                             <td>{{$index + (currentPage-1)*10+1}}</td>
                                             <td>
@@ -266,7 +253,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="30" />
+                                    <input class="form-control" name="Phone" ng-model="Driver.Phone" type="text" maxlength="30" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>

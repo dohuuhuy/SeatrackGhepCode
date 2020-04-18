@@ -31,19 +31,55 @@ namespace SeaTrack.Lib.Service
                 {
                     while (reader.Read())
                     {
-                        var data = new DeviceStatus()
-                        {
-                            DeviceID = Convert.ToInt32(reader["DeviceID"]),
-                            DeviceName = reader["DeviceName"].ToString(),
-                            TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
-                            Latitude = Convert.ToDecimal(reader["Latitude"]),
-                            Longitude = Convert.ToDecimal(reader["Longitude"]),
-                            DirectionSN = reader["DirectionSN"].ToString(),
-                            DirectionEW = reader["DirectionEW"].ToString(),
-                            TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
-                            Speed = Convert.ToInt16(reader["Speed"]),
+                        DeviceStatus data = new DeviceStatus();
+                        data.DeviceID = Convert.ToInt32(reader["DeviceID"]);
+                        data.DeviceName = reader["DeviceName"].ToString();
 
-                        };
+                        object TypeShip = reader["TypeShip"];
+                        if (TypeShip == DBNull.Value)
+                        {
+                            data.TypeShip = -1;
+                        }else { data.TypeShip = Convert.ToInt32(reader["TypeShip"]); }
+
+                        object Latitude = reader["Latitude"];
+                        if (Latitude == DBNull.Value)
+                        {
+                            data.Latitude = -1;
+                        }else { data.Latitude = Convert.ToDecimal(reader["Latitude"]); }
+
+                        object Longitude = reader["Longitude"];
+                        if (Longitude == DBNull.Value)
+                        {
+                            data.Longitude = -1;
+                        }else { data.Longitude = Convert.ToDecimal(reader["Longitude"]); }
+                        data.DirectionSN = reader["DirectionSN"].ToString();
+                        data.DirectionEW = reader["DirectionEW"].ToString();
+
+                        object TransmitTime = reader["TransmitTime"];
+                        if (TransmitTime == DBNull.Value)
+                        {
+                            data.TransmitTime = Convert.ToDateTime(reader["DateCreate"]);
+                        }else { data.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]); }
+
+                        object Speed = reader["Speed"];
+                        if (Speed == DBNull.Value)
+                        {
+                            data.Speed = -1;
+                        }
+                        else { data.Speed = Convert.ToInt32(reader["Speed"]); }
+                        //var data = new DeviceStatus()
+                        //{
+                        //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                        //    DeviceName = reader["DeviceName"].ToString(),
+                        //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
+                        //    Latitude = Convert.ToDecimal(reader["Latitude"]),
+                        //    Longitude = Convert.ToDecimal(reader["Longitude"]),
+                        //    DirectionSN = reader["DirectionSN"].ToString(),
+                        //    DirectionEW = reader["DirectionEW"].ToString(),
+                        //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                        //    Speed = Convert.ToInt16(reader["Speed"]),
+
+                        //};
                         lst.Add(data);
                     }
                 }

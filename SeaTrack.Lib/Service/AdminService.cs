@@ -108,7 +108,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = reader["CreateDate"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -138,9 +138,9 @@ namespace SeaTrack.Lib.Service
                             Address = reader["Address"].ToString(),
                             Status = Convert.ToInt16(reader["Status"]),
                             CreateBy = reader["CreateBy"].ToString(),
-                            CreateDate = reader["CreateDate"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
                             UpdateBy = reader["UpdateBy"].ToString(),
-                            LastUpdateDate = reader["LastUpdateDate"].ToString(),
+                            LastUpdateDate = Convert.ToDateTime(reader["LastUpdateDate"]).ToString("dd/MM/yyyy"),
                             RoleID = Convert.ToInt16(reader["RoleID"]),
                             ManageBy = reader["ManageBy"].ToString(),
                             Image = reader["Image"].ToString()
@@ -173,7 +173,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = reader["CreateDate"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -202,7 +202,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = reader["CreateDate"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -336,7 +336,7 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (reader["DateExpired"].ToString().Substring(0, 10)),
+                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
                             ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
@@ -370,7 +370,7 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (reader["DateExpired"].ToString()),
+                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
 
                         };
@@ -403,7 +403,7 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (reader["DateExpired"].ToString()),
+                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
                             ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
@@ -436,7 +436,7 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (reader["DateExpired"].ToString()),
+                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
                             ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1
@@ -465,7 +465,7 @@ namespace SeaTrack.Lib.Service
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DateExpired = reader["DateExpired"].ToString()
+                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                         };
                         lst.Add(data);
                     }

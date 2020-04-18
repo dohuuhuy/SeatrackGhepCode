@@ -471,7 +471,7 @@ function makePoint(id, n) {
     _device = checkDevice(id, n);
     if (n == 1) {
         icon = "/Content/images/tau/" + _stt_[_device.Status]["polycon"];
-        if (_device != 0) {
+        if (_device != 0 && _device.Latitude != -1 && _device.Longitude != -1) {
             point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
             marker = new google.maps.Marker({
                 position: point,
@@ -535,11 +535,12 @@ function setdrawingLinePoint(a = 0) {
         success: function (data, txtStatus, XMLHttpRequest) {
             var u = checkDevice(id,1).DeviceName;
             _drawingLinePoint = data.Result;
-            _drawingLinePoint.forEach(t => { t.DeviceName = u;});
+            
             //console.log(_drawingLinePoint.length);
             if (_drawingLinePoint == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
             } else {
+                _drawingLinePoint.forEach(t => { t.DeviceName = u;});
                 makeListStop();
                 drawingLinePoint(id, a);
                 if (_drawingLinePoint.length > 0) {
@@ -726,10 +727,12 @@ function SOS() {
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
             _listSOS = data;
+            console.log(_listSOS);
             //console.log(_listSOS);
             var _tb = "";
-            if (_listSOS == null) {
-                document.getElementById("SOS").style.display = "none";
+            if (_listSOS != null) {
+                console.log("None");
+                document.getElementById("SOS").style.display = "block";
             }
             for (var i = 0; i < _listSOS.length; i++) {
                 var p = new google.maps.LatLng(_listSOS[i]["Latitude"], _listSOS[i]["Longitude"]);
@@ -785,6 +788,7 @@ function Warning() {
         var warning = "";
         var checkpoint = new google.maps.LatLng(dv.Latitude,dv.Longitude);
         var biengioi;
+        if(dv.Latitude == -1 && dv.Longitude == -1) continue;
         if(dv.TypeShip == 1){
             if(google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == true){
                 biengioi = bo;
@@ -897,7 +901,13 @@ function setup_DataTable() {
         var dte = _listDeviceStatus[i]["TransmitTime"].getDate() + '/' + (_listDeviceStatus[i]["TransmitTime"].getMonth() + 1) + '/'
             + _listDeviceStatus[i]["TransmitTime"].getFullYear() + ' ' + _listDeviceStatus[i]["TransmitTime"].getHours() + ':'
             + _listDeviceStatus[i]["TransmitTime"].getMinutes();
-
+        if(_listDeviceStatus[i]["Latitude"] == -1 && _listDeviceStatus[i]["Longitude"] == -1){
+            var location = "Chưa có dữ liệu";
+        }else{
+            var location = _listDeviceStatus[i]["Latitude"] + "." + _listDeviceStatus[i]["DirectionSN"] + " - "
+            + _listDeviceStatus[i]["Longitude"] + "." + _listDeviceStatus[i]["DirectionEW"];
+        }
+        
         _tb += '<tr id="tr' + _listDeviceStatus[i]["DeviceID"]
             + '" classname="groupXe" onclick="makePoint(' + _listDeviceStatus[i]["DeviceID"] + ',1'
             + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
@@ -907,8 +917,7 @@ function setup_DataTable() {
             + _listDeviceStatus[i]["DeviceName"]
             + '</td><td>' + _listDeviceStatus[i]["Speed"]
             + '</td><td>' + dte + '</td><td>'
-            + _listDeviceStatus[i]["Latitude"] + "." + _listDeviceStatus[i]["DirectionSN"] + " - "
-            + _listDeviceStatus[i]["Longitude"] + "." + _listDeviceStatus[i]["DirectionEW"]
+            + location
             + '</td><td style="display:none">' + _listDeviceStatus[i]["Status"] + '</td></tr>';
     }
     $("#tblbodydata").html(_tb);
@@ -1050,7 +1059,7 @@ function interval_draw() {
     _intervalDeviceStatus = setInterval(function () {updateListDeviceStatus()},120000);
     _intervalDataline = setInterval(function () {setup_selectDataLine()},180000);
     _intervalSOS = setInterval(function () { SOS() }, 120000);
-    _intervalWaning = setInterval(function () {Warning()},12000);
+    //_intervalWaning = setInterval(function () {Warning()},12000);
 }
 
 function Taomang(){

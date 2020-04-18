@@ -1,4 +1,28 @@
-﻿var _listDeviceStatus = [];
+﻿function ListSearch(id_search, list_result) {
+    var _id_search, _list_result, filter, tr, td;
+    _id_search = document.getElementById(id_search);
+    _list_result = document.getElementById(list_result);
+    tr = _list_result.getElementsByTagName('tr');
+    filter = _id_search.value.toUpperCase();
+
+
+    for (var i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName('td');
+        var get = false;
+        for (var j = 2; j < td.length; j++) {
+            get = get || (td[j].innerText.toUpperCase().indexOf(filter) > -1);
+        }
+        if (get) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+
+    }
+};
+
+
+var _listDeviceStatus = [];
 // loading màn hình
 function win_reload() {
     window.location.reload();
@@ -65,8 +89,8 @@ function TocDoCuaTau() {
             } else {
                 if (DS_diem.length > 0) {
                     var speed = toHaily(DS_diem[0]["Speed"]);
-                    var k = 0; var i = 0; var test = true;
-                    if (speed <= 3) test = false; else test = true;
+                    var k = 0; var i = 0; var test = true; // đặc cờ 
+                    if (speed <= 3) test = false; else test = true; 
                     while (i < DS_diem.length) {
                         speed = toHaily(DS_diem[i]["Speed"]);
                         if (test) {
@@ -91,8 +115,17 @@ function TocDoCuaTau() {
                                 DS_diemnammotcho = [];
                                 test = true;
                             }
+
                         }
                     }
+                    if (DS_diemnammotcho.length == 0) {
+                        DS_tong.push(DS_diemtheotocdo);
+                    }
+                    else {
+                        DS_tong.push(DS_diemnammotcho);
+                    }
+
+
                 }
                 ShowTable_BaoCaoTocDo(DS_tong);
             }
@@ -153,6 +186,15 @@ function TongHopTheoTau() {
                             }
                         }
                     }
+                   
+                        if (DS_diemnammotcho.length == 0) {
+                            DS_tong.push( DS_diemtheotocdo );
+                        }
+                        else {
+                            DS_tong.push(DS_diemnammotcho);
+                        }
+
+                    
                 }
                 ShowTable_TongHopTheoTau(DS_tong);
             }
@@ -213,8 +255,13 @@ function TongHopTheoLaiTau() {
                             }
                         }
                     }
+                    if (DS_diemnammotcho.length == 0) {
+                        DS_tong.push(DS_diemtheotocdo);
+                    }
+                    else {
+                        DS_tong.push(DS_diemnammotcho);
+                    }
                 }
-                console.log(DS_tong);
                 ShowTable_TongHopTheoLaiTau(DS_tong);
             }
         }
@@ -275,8 +322,7 @@ function ShowTable_TongHopTheoLaiTau(list) {
         var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
         var fishdate = new Date(parseInt(list[i][list[i].length - 1]["TransmitTime"].substr(6)));
         var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
-        var tocdotrungbinh = TinhVanTocTrungBinh(list[i]);
-        var tocdotoida = TinhVanTocToiDa(list[i]);
+  
         var quangduong = TinhQuangDuong(list[i]);
         var laitau = list[i][0]["DriverName"];
 
