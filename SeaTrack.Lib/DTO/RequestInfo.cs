@@ -10,7 +10,7 @@ namespace SeaTrack.Lib.DTO
     {
         public string MREF { get; set; }
         public string ID { get; set; }
-        public string Message { get; set; }
+        //public string Message { get; set; }
         public string Seqno { get; set; }
         public string Time { get; set; }
         public string State { get; set; }

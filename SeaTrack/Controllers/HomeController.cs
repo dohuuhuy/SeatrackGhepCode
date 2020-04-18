@@ -178,29 +178,67 @@ namespace SeaTrack.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetCurrentLocation(InfoDTO info)
+        public JsonResult PostCurrentLocation(InfoDTO info)
         {
-            if (info.SecretCode ==ConnectData.SecretCode)
+            if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
             {
                 var item = TrackDataService.GetLastedLocationByImei(info.ID);
                 RequestInfo returnInfo = new RequestInfo();
                 returnInfo.MREF = info.MREF;
                 returnInfo.Seqno = info.Seqno;
                 returnInfo.ID = info.ID;
-                returnInfo.Time = item.TransmitTime.ToString("HH:MM:SS");
-                returnInfo.State = item.State;
+                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
+                returnInfo.State = "A";
                 returnInfo.Latitude = item.Latitude.ToString();
                 returnInfo.ExpSN = item.DirectionSN;
                 returnInfo.Longitude = item.Longitude.ToString();
                 returnInfo.ExpEW = item.DirectionEW;
                 returnInfo.Speed = item.Speed;
                 returnInfo.DIR = "";
-                returnInfo.Date = item.TransmitTime.ToString("DD/MM/YY");
+                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
+                return Json(returnInfo, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult GetCurrentLocation(InfoDTO info)
+        {
+            if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
+            {
+                var item = TrackDataService.GetLastedLocationByImei(info.ID);
+                RequestInfo returnInfo = new RequestInfo();
+                returnInfo.MREF = info.MREF;
+                returnInfo.Seqno = info.Seqno;
+                returnInfo.ID = info.ID;
+                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
+                returnInfo.State = "A";
+                returnInfo.Latitude = item.Latitude.ToString();
+                returnInfo.ExpSN = item.DirectionSN;
+                returnInfo.Longitude = item.Longitude.ToString();
+                returnInfo.ExpEW = item.DirectionEW;
+                returnInfo.Speed = item.Speed;
+                returnInfo.DIR = "";
+                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
                 return Json(returnInfo, JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        public JsonResult SetUpDelay(InfoDTO info)
+        {
+            if(info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
+            {
+                if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay().Time == info.Time)
+                {
+
+                    return Json(new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "OK" });
+                }
+                return Json(new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Fail" });
+            }
+            return Json(null);
+        }
 
         public ActionResult UserInfo()
         {
