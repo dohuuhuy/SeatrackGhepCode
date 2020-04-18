@@ -130,6 +130,12 @@
             }
         })
     }
-
+    $scope.UsernameExist = function (Username) {
+        $scope.UsernameCheck = "OK";
+        var r = AdminService.CheckUsername(Username)
+        r.then(function successCallback(response) {
+            $scope.UsernameCheck = response.data;
+        })
+    }
 
 })

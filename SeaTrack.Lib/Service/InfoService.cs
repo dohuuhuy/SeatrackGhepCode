@@ -37,6 +37,26 @@ namespace SeaTrack.Lib.Service
                 return null;
             }
         }
+
+        public static List<InfoDTO> GetAllDelayInfo()
+        {
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString,"sp_GetAllDelayInfo"))
+            {
+                List<InfoDTO> data = new List<InfoDTO>();
+                if(reader.HasRows){
+                    while (reader.Read())
+                    {
+                        InfoDTO dt = new InfoDTO();
+                        dt.ID = reader["DeviceImei"].ToString();
+                        dt.Time = Convert.ToInt32(reader["Time"]);
+                        dt.LastSend = Convert.ToDateTime(reader["LastSend"]);
+                        data.Add(dt);
+                    }
+                    return data;
+                }
+                return null;
+            }
+        }
     }
 }
 

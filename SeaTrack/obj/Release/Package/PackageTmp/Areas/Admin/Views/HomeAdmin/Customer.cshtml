@@ -7,8 +7,8 @@
 <div class="container-fluid" ng-app="AdminModule" ng-controller="AdminController" ng-init="Role(3)">
     <h1 class="mt-4">Quản lý khách hàng</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item active">Quản lý khách hàng</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
@@ -18,24 +18,21 @@
             <div class="col col-md-12">
                 <div class="input-group">
                     <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                    <div class="input-group-btn">
+                    @*<div class="input-group-btn">
                         <button class="btn btn-primary" ng-click="ClearSearch()">
                             <i class="fa fa-search"></i> Search
                         </button>
-                    </div>
+                    </div>*@
                 </div>
                 <br />
-                <div class="input-group ">
+                @*<div class="input-group ">
                     <label for="radio1" class="form-check-label col-md-4 ">
                         <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
                     </label>
                     <label for="radio2" class="form-check-label col-md-4  ">
                         <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
                     </label>
-                    @*<label for="radio3" class="form-check-label col-md-4  ">
-                            <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
-                        </label>*@
-                </div>
+                </div>*@
             </div>
 
         </div>
@@ -58,11 +55,11 @@
                         <tr>
                             <th width="5%">#</th>
                             <th width="10%">Thao tác</th>
-                            <th width="15%">Username</th>
-                            <th width="15%">Fullname</th>
-                            <th width="20%">CreateDate</th>
+                            <th width="15%">Tên tài khoản</th>
+                            <th width="15%">Họ tên</th>
+                            <th width="20%">Ngày tạo</th>
                             <th width="15%">Đại lý</th>
-                            <th width="15%">Status</th>
+                            <th width="15%">Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,24 +92,27 @@
                     <div class="modal-body" style="margin-left:20px">
                         <form class="form-horizontal" name="AddNewForm">
                             <div class="form-group">
-                                <label class="control-label"> Username</label>
-                                <input class="form-control" name="Username" ng-model="Username" type="text" placeholder="Username" required maxlength="50" />
-
+                                <label class="control-label"> Tên tài khoản</label>
+                                <input class="form-control" name="Username" ng-model="Username" ng-blur="UsernameExist(Username)" ng-pattern="/^[a-z0-9]\S{5,20}$/" onkeyup="this.value = this.value.toLowerCase();" type="text" placeholder="Username" required maxlength="50" />
+                                <label ng-if="UsernameCheck != 'OK' && UsernameCheck != null" style="color:red">Tên tài khoản đã tồn tại </label>
+                                <span style="color:Red" ng-if="AddNewForm.Username.$error.pattern">Tên tài khoản không phù hợp</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Password</label>
-                                <input class="form-control" name="Password" ng-model="Password" type="password" placeholder="password" required maxlength="30" />
+                                <label class="control-label"> Mật khẩu</label>
+                                <input class="form-control" name="Password" ng-model="Password" ng-pattern="/^[a-z0-9 ]{5,30}$/" type="password" placeholder="password" required maxlength="30" />
+                                <span style="color:Red" ng-show="AddNewForm.Password.$error.pattern">Mật khẩu không phù hợp</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Fullname</label>
+                                <label class="control-label"> Họ tên</label>
                                 <input class="form-control" name="Fullname" ng-model="Fullname" type="text" placeholder="Fullname" required maxlength="50" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Phone</label>
-                                <input class="form-control" name="Phone" ng-model="Phone" type="text" placeholder="Phone" required maxlength="10" />
+                                <label class="control-label"> Số điện thoại</label>
+                                <input class="form-control" name="Phone" ng-model="Phone" type="text" ng-pattern="/^[0-9]{0,11}$/" placeholder="Phone" required maxlength="10" />
+                                <span style="color:Red" ng-show="AddNewForm.Phone.$error.pattern">Số điện thoại không đúng</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Address</label>
+                                <label class="control-label"> Địa chỉ</label>
                                 <input class="form-control" name="Address" ng-model="Address" type="text" placeholder="Address" required maxlength="200" />
                             </div>
                             <div class="form-group">
@@ -125,8 +125,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid" ng-click="save()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Resetsave()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid || UsernameCheck != 'OK'" ng-click="save()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Resetsave()">Đóng</button>
                     </div>
                 </div>
             </div>

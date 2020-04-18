@@ -79,3 +79,9 @@ D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Release\SeaTrack.Lib.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Newtonsoft.Json.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\System.Net.Http.Extensions.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\System.Net.Http.Formatting.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\System.Net.Http.Primitives.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\Newtonsoft.Json.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Release\System.Net.Http.Formatting.xml

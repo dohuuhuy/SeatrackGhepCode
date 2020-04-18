@@ -22,7 +22,7 @@
 
                 <div class="card-body card-block">
                     <div class="row form-group">
-                        <div class="col col-md-3"><label class="form-control-label">Username</label></div>
+                        <div class="col col-md-3"><label class="form-control-label">Tên tài khoản</label></div>
                         <div class="col-12 col-md-9">
                             @Html.HiddenFor(m => m.UserID)
                             @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @readonly = "readonly" })
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Password</label></div>
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Mật khẩu</label></div>
                         <div class="col-12 col-md-9">@Html.PasswordFor(model => model.Password, new { @value = @Model.Password, @required = "required", @pattern = "^[a-z0-9 ]+$", @class = "form-control", @placeholder = "Text", @minlength = 5, @maxlength = 30, @oninput = "InvalidMsg(this);", oninvalid = "InvalidMsg(this);" })</div>
                     </div>
                     <div class="row form-group">
@@ -45,10 +45,19 @@
                         <div class="col col-md-3"><label for="text-input" class="form-control-label">Địa chỉ</label></div>
                         <div class="col-12 col-md-9">@Html.TextBoxFor(model => model.Address, new { @value = @Model.Address, @required = "required", @class = "form-control", placeholder = "Số điện thoại" })</div>
                     </div>
-                    @if (Model.RoleID != 2)
+                    @if (Model.RoleID == 3)
                     {
                         <div class="row form-group">
-                            <div class="col col-md-3"><label class="form-control-label">Manage By: </label></div>
+                            <div class="col col-md-3"><label class="form-control-label">Đại lý: </label></div>
+                            <div class="col-12 col-md-9">
+                                @Html.DisplayFor(m => m.ManageBy, new { @class = "form-control-static" })
+                            </div>
+                        </div>
+                    }
+                    @if (Model.RoleID == 4)
+                    {
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class="form-control-label">Khách hàng: </label></div>
                             <div class="col-12 col-md-9">
                                 @Html.DisplayFor(m => m.ManageBy, new { @class = "form-control-static" })
                             </div>
@@ -57,7 +66,7 @@
 
                     @*<input type="submit" value="Submit" />*@
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
+                        <i class="fa fa-dot-circle-o"></i> Lưu
                     </button>
 
                 </div>
@@ -103,7 +112,7 @@
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col" style="width:5%">#</th>
                                 <th scope="col">Tên thiết bị</th>
                                 <th scope="col">Ngày hết hạn</th>
                                 <th scope="col">Thao tác</th>
@@ -115,7 +124,7 @@
                                 <td>{{d.DeviceName}}</td>
                                 <td>{{d.DateExpired}}</td>
                                 <td align="center">
-                                    <a ng-click="RemoveDeviceFromUser(id, $index)"><i class="fa fa-trash"></i></a>
+                                    <a ng-click="RemoveDeviceFromUser(id, $index)" title="Xóa"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
 
@@ -136,7 +145,7 @@
                         <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col" style="width:5%">#</th>
                                     <th scope="col">Tên thiết bị</th>
                                     <th scope="col">Ngày hết hạn</th>
                                     <th scope="col">Thao tác</th>
@@ -148,7 +157,7 @@
                                     <td>{{dv.DeviceName}}</td>
                                     <td>{{dv.DateExpired}}</td>
                                     <td align="center">
-                                        <a ng-click="AddDeviceToUser(id, $index)"><i class="fa fa-plus-circle"></i></a>
+                                        <a ng-click="AddDeviceToUser(id, $index)" title="Thêm"><i class="fa fa-plus-circle"></i></a>
                                     </td>
                                 </tr>
 
@@ -157,7 +166,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="LoadDevice(id)">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="LoadDevice(id)">Đóng</button>
                     </div>
                 </div>
             </div>

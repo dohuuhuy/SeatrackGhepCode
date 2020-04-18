@@ -209,6 +209,30 @@ namespace SeaTrack.Lib.Service
                 return lst;
             }
         }
+
+        public static List<TrackData> GetDataByDelayTime(string DeviceImei)
+        {
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataByDelayTime",DeviceImei))
+            {
+                List<TrackData> data = new List<TrackData>();
+                while (reader.Read())
+                {
+                    var dt = new TrackData()
+                    {
+                        TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                        DirectionEW = reader["DirectionEW"].ToString(),
+                        DirectionSN = reader["DirectionSN"].ToString(),
+                        Latitude = Convert.ToDecimal(reader["Latitude"]),
+                        Longitude = Convert.ToDecimal(reader["Longitude"]),
+                        Speed = Convert.ToInt16(reader["Speed"]),
+                        State = reader["State"].ToString(),
+                    };
+                    data.Add(dt);
+                }
+                return data;
+            }
+        }
+
         public static List<Device> GetListDevice()
         {
             List<Device> lst = null;

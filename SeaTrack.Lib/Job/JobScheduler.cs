@@ -31,12 +31,12 @@ namespace SeaTrack.Lib.Job
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
-            IJobDetail job = JobBuilder.Create<JobSOS>().Build();
+            IJobDetail job = JobBuilder.Create<JobInfo>().Build();
 
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                   (s =>
-                     s.WithIntervalInMinutes(1)
+                     s.WithIntervalInSeconds(10)
                     .OnEveryDay()
                     .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
                   )
