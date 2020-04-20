@@ -193,9 +193,9 @@ namespace SeaTrack.Controllers
                 returnInfo.ID = info.ID;
                 returnInfo.Time = item.TransmitTime.ToString("HHMMss");
                 returnInfo.State = "A";
-                returnInfo.Latitude = item.Latitude.ToString();
+                returnInfo.Latitude = item.Latitude;
                 returnInfo.ExpSN = item.DirectionSN;
-                returnInfo.Longitude = item.Longitude.ToString();
+                returnInfo.Longitude = item.Longitude;
                 returnInfo.ExpEW = item.DirectionEW;
                 returnInfo.Speed = item.Speed;
                 returnInfo.DIR = "";
@@ -216,9 +216,9 @@ namespace SeaTrack.Controllers
                 returnInfo.ID = info.ID;
                 returnInfo.Time = item.TransmitTime.ToString("HHMMss");
                 returnInfo.State = "A";
-                returnInfo.Latitude = item.Latitude.ToString();
+                returnInfo.Latitude = item.Latitude;
                 returnInfo.ExpSN = item.DirectionSN;
-                returnInfo.Longitude = item.Longitude.ToString();
+                returnInfo.Longitude = item.Longitude;
                 returnInfo.ExpEW = item.DirectionEW;
                 returnInfo.Speed = item.Speed;
                 returnInfo.DIR = "";
@@ -234,7 +234,7 @@ namespace SeaTrack.Controllers
         {
             if(info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
             {
-                if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay().Time == info.Time)
+                if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay(info.ID).Time == info.Time)
                 {
 
                     return Json(new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "OK" });

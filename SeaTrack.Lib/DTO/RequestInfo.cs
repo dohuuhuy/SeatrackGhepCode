@@ -14,11 +14,11 @@ namespace SeaTrack.Lib.DTO
         public string Seqno { get; set; }
         public string Time { get; set; }
         public string State { get; set; }
-        public string Latitude { get; set; }
+        public decimal Latitude { get; set; }
         public string ExpSN { get; set; }
-        public string Longitude { get; set; }
+        public decimal Longitude { get; set; }
         public string ExpEW { get; set; }
-        public float Speed { get; set; }
+        public int Speed { get; set; }
         public string DIR { get; set; }
         public string Date { get; set; }
     }

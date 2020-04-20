@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Quartz;
 using Quartz.Impl;
+using SeaTrack.Lib.Database;
 
 namespace SeaTrack.Lib.Job
 {
@@ -36,7 +37,7 @@ namespace SeaTrack.Lib.Job
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                   (s =>
-                     s.WithIntervalInSeconds(30)
+                     s.WithIntervalInSeconds(ConnectData.TimeDelay)
                     .OnEveryDay()
                     .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
                   )

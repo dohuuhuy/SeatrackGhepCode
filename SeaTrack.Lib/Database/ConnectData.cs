@@ -12,6 +12,7 @@ namespace SeaTrack.Lib.Database
     {
         public static string ConnectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public static string SecretCode = WebConfigurationManager.ConnectionStrings["SecretCode"].ConnectionString;
+        public static int TimeDelay = Int32.Parse(WebConfigurationManager.ConnectionStrings["TimeDelay"].ConnectionString);
         public static TrackData GetDataByDeviceID(int deviceID)
         {
             return CBO.FillObject<TrackData>(GetData(deviceID));
