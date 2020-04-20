@@ -7,7 +7,7 @@
 
 <div id="list-tienich" class="main" ng-app="LaiTauApp" ng-controller="Controller"  ng-init="UserID('@user.Username')">
     <div class="wrapper">
-        @Html.Partial("_MenuThietBiVaLaiTau");
+        @Html.Partial("_MenuThietBiVaLaiTau")
         <div id="content-tienich-thongtinthietbi" class="content">
             <div id="signupbox" class="mainbox">
                 <div class="panel panel-primary">
@@ -21,10 +21,10 @@
                         <div class="card-body">
                             <div class="col col-md-12">
                                 <div class="input-group">
-                                    <input type="text"  name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control"  id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
+                                    <input type="text"  name="input1-group2" ng-model="SearchKey" placeholder="Nhập từ khóa ..." class="form-control"  id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
                                     <div class="input-group-btn">
                                         <button class="btn btn-primary" ng-click="ClearSearch()">
-                                            <i class="fa fa-search"></i> Search
+                                            <i class="fa fa-search"></i> Làm mới
                                         </button>
                                     </div>
                                 </div>
@@ -123,8 +123,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn" ng-click="fetchData(Driver.DriverID)">Close</a>
+                        <a href="#" data-dismiss="modal" class="btn" ng-click="fetchData(Driver.DriverID)">Đóng</a>
                     </div>
                 </div>
             </div>
@@ -175,18 +175,25 @@
                     </div>
                     <div class="modal-body" style="margin-left:20px">
                         <form class="form-horizontal row" name="Xem">
+
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên lái tàu </label>
                                     <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
+                               
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
                                     <input class="form-control" name="Phone" ng-model="Driver.Phone" type="text" maxlength="30" />
                                 </div>
+                               
                                 <div class="form-group">
                                     <label class="control-label"> Chứng minh thư </label>
-                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" type="text" maxlength="10" />
+                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" ng-blur="CheckCMND(Driver.CMND)"
+                                           ng-pattern="/^[0-9]{9}$/" onkeyup="this.value = this.value.toLowerCase();"
+                                           type="number" required maxlength="9" min="1" >
+                                    <label ng-if="CMNDexists != 'OK' && CMNDexists != null" style="color:red">Chứng minh thư đã tồn tại </label>
+                                    <span style="color:Red" ng-show="Xem.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>
@@ -230,8 +237,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -301,8 +308,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Cập nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -312,17 +319,3 @@
     </div>
 </div>
 
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Content/public/js/main/DriverApp.js"></script>
-<script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
-<style>
-    #dataTable th {
-        background-color: #15b4c4;
-        color: white;
-        padding: 15px;
-    }
-
-    #dataTable td {
-        vertical-align: inherit;
-    }
-</style>

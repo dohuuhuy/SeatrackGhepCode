@@ -2,6 +2,7 @@
 using SeaTrack.Lib.DTO;
 using SeaTrack.Lib.DTO.Admin;
 using SeaTrack.Lib.Service;
+using SeaTrack.Models;
 using System;
 using System.Web.Mvc;
 
@@ -10,6 +11,25 @@ namespace SeaTrack.Controllers
     public class ManagementController : Controller
     {
         // GET: Management
+
+        public ActionResult CheckUsername(Users user)
+        {
+            var res = AdminService.CheckUserExist(user.Username);
+            if (res == null)
+            {
+                res = "OK";
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CheckCMND(Driver driver)
+        {
+            var res = AdminService.CheckCMND(driver.CMND);
+            if (res == null)
+            {
+                res = "OK";
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Account()
         {
             if (Session["User"] == null)

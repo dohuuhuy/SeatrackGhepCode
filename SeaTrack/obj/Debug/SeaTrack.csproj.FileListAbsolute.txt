@@ -342,7 +342,6 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\S
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.WebPages.Razor.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\WebGrease.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Quartz.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Microsoft.ApplicationBlocks.Data.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Common.Logging.Core.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Common.Logging.dll
@@ -382,7 +381,6 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\M
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.Owin.xml
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Quartz.pdb
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Quartz.xml
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.xml
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Common.Logging.Core.pdb
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Common.Logging.Core.xml
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\Common.Logging.pdb
@@ -498,3 +496,7 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Formatting.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.xml
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Extensions.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Primitives.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.xml

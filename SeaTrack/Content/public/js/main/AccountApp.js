@@ -6,7 +6,10 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
     $scope.Status = !$scope.Status;
     //$scope.User.CreateDate = new Date(parseInt($scope.User.CreateDate.substr(6)));
 }
-
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.update = function () {
         //nếu không trường nào bị null
         

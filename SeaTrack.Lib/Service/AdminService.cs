@@ -279,6 +279,21 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
+        public static string CheckCMND(string cmnd)
+        {
+
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_CheckCMND", cmnd))
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        return reader["CMND"].ToString();
+                    }
+                }
+            }
+            return null;
+        }
 
         public static bool UpdateAvatar(int UserID, string Image)
         {

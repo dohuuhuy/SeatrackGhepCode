@@ -15,8 +15,6 @@
         Layout = "~/Views/Shared/_LayoutInfo.cshtml";
     }
 }
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Content/public/js/main/AccountApp.js"></script>
 
 <div class="container">
     <div class="row" ng-app="App" ng-controller="Controller" ng-init="Status = false">
@@ -54,14 +52,16 @@
                         </div>
                     </div>
                     <div class="row form-group" ng-if="User.ManageBy != null">
-                        <div class="col col-md-3"><label class="form-control-label">Manage By: </label></div>
+                        <div class="col col-md-3"><label class="form-control-label">Quản lý : </label></div>
                         <div class="col-12 col-md-9">
-                            <p>{{User.ManageBy}}</p>
+                            <input class="form-control" type="text" required maxlength="200" ng-model=" User.ManageBy" readonly />
+
+                           
                         </div>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm" ng-click="update()">
-                            <i class="fa fa-dot-circle-o"></i> Submit
+                            <i class="fa fa-dot-circle-o"></i> Cập nhật
                         </button>
                         <button data-toggle="modal" data-target="#ChangePassword" class="btn btn-primary btn-sm" style="padding-right:4%">
                             Đổi mật khẩu
@@ -109,8 +109,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="ChangePassword()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="ChangePassword()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -146,12 +146,3 @@
     </div>
 
 </div>
-<script>
-  var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
-    }
-  };
-</script>
