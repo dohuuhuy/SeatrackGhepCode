@@ -18,6 +18,10 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
         return total;
     };
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.DeviceExtension = function (dateExpire, time) {
         console.log('date' + dateExpire);
         dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date

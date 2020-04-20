@@ -1,4 +1,7 @@
-﻿
+﻿function hide(n) {
+    document.getElementById(n).style.display = "none";
+}
+
 
 function fetchdata() {
     //win_reload();

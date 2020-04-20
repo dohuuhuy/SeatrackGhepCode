@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Quartz;
@@ -15,47 +16,14 @@ namespace SeaTrack.Lib.Job
     {
         public void Execute(IJobExecutionContext context)
         {
-            Console.WriteLine("Hello, JOb info");
+            var client = new RestClient("http://192.168.1.14/11412");
+            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+
+            var request = new RestRequest("statuses/home_timeline.json", DataFormat.Json);
+
+            var timeline = await client.GetAsync<HomeTimeline>(request, cancellationToken);
 
 
-            var lstDevice = TrackDataService.GetListDeviceStatus(1); // 1 la gì 
-            if (lstDevice != null)
-            {
-                foreach (var item in lstDevice)
-                {
-                    try
-                    {
-                        var client = new RestClient("http://192.168.1.1");
-                        var request = new RestRequest("api/item/", Method.POST);
-                        request.RequestFormat = DataFormat.Json;
-                        request.AddBody(new
-                        {
-                            MRFF = "1",
-                            Seqno = "1",
-                            ID = item.DeviceID,
-                            Time = item.TransmitTime.ToString("HHmmss"),
-                            State = item.State,
-                            Latitude = item.Latitude,
-                            ExpSN = item.DirectionSN,
-                            Longitude = item.Longitude,
-                            ExpEW = item.DirectionEW,
-                            Speed = item.Speed,
-                            DIR = "",
-                            Date = item.TransmitTime.ToString("ddMMyyyy")
-                        });
-                        request.Timeout = 30 * 1000;
-                        var rs = client.Execute(request);
-                        if (rs.StatusCode == HttpStatusCode.OK)
-                        {
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-            }
         }
     }
 }

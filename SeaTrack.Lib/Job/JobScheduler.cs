@@ -31,7 +31,7 @@ namespace SeaTrack.Lib.Job
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
-            IJobDetail job = JobBuilder.Create<JobSOS>().Build();
+            IJobDetail job = JobBuilder.Create<JobInfo>().Build();
 
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule

@@ -6,7 +6,7 @@
 
 <div id="list-tienich" class="main" ng-app="ThietBiCuaKhachHangApp" ng-controller="Controller">
     <div class="wrapper">
-        @Html.Partial("_MenuThietBiVaLaiTau");
+        @Html.Partial("_MenuThietBiVaLaiTau")
         <div id="content-tienich-thongtinthietbi" class="content">
             <div id="signupbox" class="mainbox">
                 <div class="panel panel-primary">
@@ -21,10 +21,10 @@
                             <div class="card-body">
                                 <div class="col col-md-12">
                                     <div class="input-group">
-                                        <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
+                                        <input type="text" name="input1-group2" ng-model="SearchKey" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" ng-click="ClearSearch()">
-                                                <i class="fa fa-search"></i> Search
+                                                <i class="fa fa-search"></i> Làm mới
                                             </button>
                                         </div>
                                     </div>

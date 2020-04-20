@@ -7,7 +7,10 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     //$scope.loadMessage = updateInfo();
     LoadAccounts();
 
-
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {

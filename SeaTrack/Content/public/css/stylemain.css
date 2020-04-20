@@ -490,11 +490,6 @@ a[data-toggle="collapse"] {
 }
 
 .dropdown-toggle::after {
-    .display: block;
-    .position: absolute;
-    .top: 50%;
-    .right: 20px;
-    .transform: translateY(-50%);
 }
 
 ul.CTAs {
@@ -664,7 +659,6 @@ p {
 }
 
 .navbar {
-    .overflow: hidden;
     margin: 0;
 }
 
@@ -803,9 +797,7 @@ p {
     display: block;
     position: absolute;
     left: 48%;
-    : 40%;
     width: 40px;
-    : 40px;
     border-style: solid;
     border-color: black;
     border-top-color: transparent;
