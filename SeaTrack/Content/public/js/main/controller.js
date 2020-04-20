@@ -1,4 +1,67 @@
-﻿function ListSearch(id_search, list_result) {
+﻿var loadFile = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+        URL.revokeObjectURL(output.src)
+    }
+};
+
+// danh sach thiết bị đã và sặp hết hạn
+function DanhSachThietBiHetHan() {
+    var DSHetHan = [];
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetListDeviceExprise',
+        data: {},
+        success: function (data, txtStatus, XMLHttpRequest) {
+            DSHetHan = data.Result;
+            console.log(DSHetHan);
+            if (DSHetHan.length > 0) {
+                var _tb = '';
+                var trangthai = '';
+                for (var i = 0, j = 1; i < DSHetHan.length; i++) {
+                    ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
+                    ngayHienTai = new Date();
+                    hiệu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
+                    if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
+                        trangthai = 'Hết hạn';
+                        _tb +=
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
+                            '<td style="color:red">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
+                        j++;
+                    }
+                    else if ((hiệu) <= 5) // hiệu của 2 ngày <= 5 
+                    {
+                        trangthai = 'Sắp hết hạn';
+                        _tb +=
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
+                            '<td style="color:orange">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
+                        j++;
+                    }
+                    else if (hiệu > 5) {
+                        trangthai = 'Còn lâu lắm mới hết hạn';
+                        _tb += '';
+                    }
+                   
+                }
+                $("#body_dv_exp").html(_tb);
+
+
+            }
+        }
+    });
+}
+function ListSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
     _list_result = document.getElementById(list_result);
@@ -20,8 +83,6 @@
 
     }
 };
-
-
 var _listDeviceStatus = [];
 // loading màn hình
 function win_reload() {
@@ -90,7 +151,7 @@ function TocDoCuaTau() {
                 if (DS_diem.length > 0) {
                     var speed = toHaily(DS_diem[0]["Speed"]);
                     var k = 0; var i = 0; var test = true; // đặc cờ 
-                    if (speed <= 3) test = false; else test = true; 
+                    if (speed <= 3) test = false; else test = true;
                     while (i < DS_diem.length) {
                         speed = toHaily(DS_diem[i]["Speed"]);
                         if (test) {
@@ -186,15 +247,15 @@ function TongHopTheoTau() {
                             }
                         }
                     }
-                   
-                        if (DS_diemnammotcho.length == 0) {
-                            DS_tong.push( DS_diemtheotocdo );
-                        }
-                        else {
-                            DS_tong.push(DS_diemnammotcho);
-                        }
 
-                    
+                    if (DS_diemnammotcho.length == 0) {
+                        DS_tong.push(DS_diemtheotocdo);
+                    }
+                    else {
+                        DS_tong.push(DS_diemnammotcho);
+                    }
+
+
                 }
                 ShowTable_TongHopTheoTau(DS_tong);
             }
@@ -322,7 +383,7 @@ function ShowTable_TongHopTheoLaiTau(list) {
         var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
         var fishdate = new Date(parseInt(list[i][list[i].length - 1]["TransmitTime"].substr(6)));
         var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
-  
+
         var quangduong = TinhQuangDuong(list[i]);
         var laitau = list[i][0]["DriverName"];
 

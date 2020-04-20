@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
 	setup_selectDeviceNo();
+	DanhSachThietBiHetHan();
 	//interval_SOS();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
 	$('#sidebarCollapse').on('click', function () {
-		$('#s-sidebar').toggleClass('active');
-		$('.s-sidebar').toggleClass('active');
+		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
 		$('#s-logo-menu').toggleClass('d-none');
 		$("#sidebarCollapse").addClass("d-none");
@@ -19,10 +19,10 @@ $(document).ready(function () {
 
 
 	$('#menu2').on('click', function () {
+
 		if ($('#menubar').hasClass('active')) {
 
-			$('#s-sidebar').toggleClass('active');
-			$('.s-sidebar').toggleClass('active');
+			$('.si-sidebar').toggleClass('active');
 			$('#menubar').toggleClass('active');
 			$('#s-logo-menu').toggleClass('d-none');
 			$("#sidebarCollapse").addClass("d-none");
@@ -35,8 +35,7 @@ $(document).ready(function () {
 
 	$('#giamsat_toggle').on('click', function () {
 
-		$('#s-sidebar').toggleClass('active');
-		$('.s-sidebar').toggleClass('active');
+		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
 		$('#s-logo-menu').toggleClass('d-none');
 		$("#sidebarCollapse").removeClass("d-none");

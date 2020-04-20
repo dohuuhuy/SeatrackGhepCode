@@ -140,6 +140,19 @@ namespace SeaTrack.Controllers
             List<DeviceStatus> data = TrackDataService.GetListDeviceStatus(_userid);
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetListDeviceExprise()
+        {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
+            int _userid = user.UserID;
+
+            var data = AdminService.GetListDeviceByUserID(_userid);
+            return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult GetLastedLocation(int deviceID)
         {
@@ -232,7 +245,7 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public JsonResult SetUpDelay(InfoDTO info)
         {
-            if(info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
+            if (info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
             {
                 if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay().Time == info.Time)
                 {

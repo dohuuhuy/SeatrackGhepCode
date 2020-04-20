@@ -527,19 +527,6 @@ a.article:hover {
 /* ---------------------------------------------------
   MEDIAQUERIES
   ----------------------------------------------------- */
-@media (max-width: 768px) {
-    .si-sidebar {
-        margin-left: -250px;
-    }
-
-        .si-sidebar.active {
-            margin-left: 0;
-        }
-
-    .si-sidebarCollapse span {
-        display: none;
-    }
-}
 
 /* ---------------------------------------------------
   LIST REPORT

@@ -95,13 +95,13 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
                 LoadDevice();
                 //$scope.namesData.push(response.data);
                 $scope.Clear();
-                alert(" Added Successfully !!!");
+                alert(" Thêm mới thành công !!!");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
         }
         else {
-            alert('Please Enter All the Values !!');
+            alert('Hãy chắc rằng bạn đã nhập đầy đủ !!');
         }
     };
     $scope.update = function () {
@@ -117,10 +117,10 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             DeviceService.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
-                alert('Unable to Get Data !!!');
+                alert('Không tìm thấy dữ liệu !!!');
             });
             $scope.Clear();
-            alert(" Updated Successfully !!!");
+            alert(" Cập nhật mới thành công !!!");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -187,7 +187,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         DeviceService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
         }, function () {
-            alert('Unable to Get Data !!!');
+            alert('Không tìm thấy dữ liệu !!!');
         });
 
     }

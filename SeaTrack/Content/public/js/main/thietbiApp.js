@@ -69,6 +69,8 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
     function LoadDevice() {
         DeviceService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
+            console.log('i am inside load() ' + JSON.stringify($scope.namesData));
+
         }, function () {
             alert('Unable to Get Data !!!');
         });

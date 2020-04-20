@@ -537,7 +537,6 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\PlayBackJourney.cshtml" />
     <Content Include="Views\Feedback\PhanHoi.cshtml" />
-    <Content Include="Views\UserGuide\HuongDan.cshtml" />
     <Content Include="Views\Utilities\TienIchThietBi.cshtml" />
     <Content Include="Views\Management\ThongTinTaiKhoan.cshtml" />
     <Content Include="Views\Management\ThietBi.cshtml" />
@@ -551,7 +550,6 @@
     <Content Include="Views\Report\BaoCaoTongHopPhamViHoatDong.cshtml" />
     <Content Include="Views\Home\Route.cshtml" />
     <Content Include="Views\AccountInformation\ThongTinCaNhan.cshtml" />
-    <Content Include="Views\AccountInformation\DichVuHetHan.cshtml" />
     <Content Include="Views\Shared\_Route.cshtml" />
     <Content Include="Views\Report\_MenuBaoCaoChoBo.cshtml" />
     <Content Include="Views\Report\_MenuBaoCaoChoDoanhNghiep.cshtml" />
@@ -567,13 +565,13 @@
     <Content Include="Views\Utilities\Dangkiem.cshtml" />
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
-    <Content Include="Views\Shared\_LayoutDemo.cshtml" />
     <Content Include="Views\Home\Demo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\public\img\tau\" />
     <Folder Include="Views\SOS\" />
+    <Folder Include="Views\UserGuide\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
