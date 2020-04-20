@@ -10,38 +10,38 @@ namespace SeaTrack.Lib.Job
 {
     public class JobScheduler
     {
-        public static void StartJobSOS()
-        {
-            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.Start();
+        //public static void StartJobSOS()
+        //{
+        //    IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+        //    scheduler.Start();
 
-            IJobDetail job = JobBuilder.Create<JobSOS>().Build();
+        //    IJobDetail job = JobBuilder.Create<JobSOS>().Build();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithDailyTimeIntervalSchedule
-                  (s =>
-                     s.WithIntervalInMinutes(120)
-                    .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
-                  )
-                .Build();
-            scheduler.ScheduleJob(job, trigger);
-        }
-        public static void StartJobInfo()
-        {
-            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.Start();
-            IJobDetail job = JobBuilder.Create<JobInfo>().Build();
+        //    ITrigger trigger = TriggerBuilder.Create()
+        //        .WithDailyTimeIntervalSchedule
+        //          (s =>
+        //             s.WithIntervalInMinutes(120)
+        //            .OnEveryDay()
+        //            .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
+        //          )
+        //        .Build();
+        //    scheduler.ScheduleJob(job, trigger);
+        //}
+        //public static void StartJobInfo()
+        //{
+        //    IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+        //    scheduler.Start();
+        //    IJobDetail job = JobBuilder.Create<JobInfo>().Build();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithDailyTimeIntervalSchedule
-                  (s =>
-                     s.WithIntervalInSeconds(30)
-                    .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
-                  )
-                .Build();
-            scheduler.ScheduleJob(job, trigger);
-        }
+        //    ITrigger trigger = TriggerBuilder.Create()
+        //        .WithDailyTimeIntervalSchedule
+        //          (s =>
+        //             s.WithIntervalInSeconds(30)
+        //            .OnEveryDay()
+        //            .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
+        //          )
+        //        .Build();
+        //    scheduler.ScheduleJob(job, trigger);
+        //}
     }
 }

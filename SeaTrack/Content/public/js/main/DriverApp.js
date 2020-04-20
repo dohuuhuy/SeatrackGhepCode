@@ -11,6 +11,24 @@ App.controller('Controller', function ($scope, $http, Service) {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
     };
+
+   
+
+    $scope.CheckCMND = function (CMND) {
+        console.log('cmnd: ' + CMND);
+        $scope.CMNDexists = "OK";
+        var x = { CMND: CMND };
+        $http({
+            method: 'POST',
+            url: '/Management/CheckCMND',
+            data: x
+        }).then(function (response) {
+            console.log(response, 'kiểm tra tồn tại' );
+            $scope.CMNDexists = response.data;
+        });
+    }
+
+
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {

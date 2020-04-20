@@ -496,3 +496,7 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Formatting.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.xml
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Extensions.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Primitives.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.xml
