@@ -4,15 +4,15 @@ using System.Data;
 using Microsoft.ApplicationBlocks.Data;
 using System.Web.Configuration;
 using DotNetNuke.Common.Utilities;
-
+using System.Configuration;
 
 namespace SeaTrack.Lib.Database
 {
     public class ConnectData
     {
         public static string ConnectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        public static string SecretCode = WebConfigurationManager.ConnectionStrings["SecretCode"].ConnectionString;
-        public static int TimeDelay = Int32.Parse(WebConfigurationManager.ConnectionStrings["TimeDelay"].ConnectionString);
+        public static string SecretCode = ConfigurationManager.AppSettings["SecretCode"].ToString();
+        public static int TimeDelay = Int32.Parse(ConfigurationManager.AppSettings["TimeDelay"]);
         public static TrackData GetDataByDeviceID(int deviceID)
         {
             return CBO.FillObject<TrackData>(GetData(deviceID));

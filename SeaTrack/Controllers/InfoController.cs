@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Web.Http;
 using SeaTrack.Lib.DTO;
 using SeaTrack.Models;
+using SeaTrack.Lib.Database;
+using SeaTrack.Lib.Service;
 
 namespace SeaTrack.Controllers
 {
@@ -51,6 +53,46 @@ namespace SeaTrack.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.OK);
 
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CurrentLocation([FromBody] InfoDTO info)
+        {
+            if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
+            {
+                var item = TrackDataService.GetLastedLocationByImei(info.ID);
+                RequestInfo returnInfo = new RequestInfo();
+                returnInfo.MREF = info.MREF;
+                returnInfo.Seqno = info.Seqno;
+                returnInfo.ID = info.ID;
+                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
+                returnInfo.State = "A";
+                returnInfo.Latitude = item.Latitude;
+                returnInfo.ExpSN = item.DirectionSN;
+                returnInfo.Longitude = item.Longitude;
+                returnInfo.ExpEW = item.DirectionEW;
+                returnInfo.Speed = item.Speed;
+                returnInfo.DIR = "";
+                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
+                return Request.CreateResponse(HttpStatusCode.OK, returnInfo);
+
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SetUpDelay([FromBody] InfoDTO info)
+        {
+            if (info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
+            {
+                if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay(info.ID).Time == info.Time)
+                {
+
+                    return Request.CreateResponse(HttpStatusCode.OK, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "OK" });
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Fail" });
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
     }
