@@ -7,6 +7,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     //$scope.loadMessage = updateInfo();
     LoadAccounts();
 
+
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
@@ -47,6 +48,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             Status: data.Status,
             Image: data.Image
         };
+        fetchData($scope.Account.UserID);
     };
     $scope.Save = function () {
         if ($scope.Account.Username != "") {

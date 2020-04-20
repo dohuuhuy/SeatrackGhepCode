@@ -31,28 +31,42 @@ namespace SeaTrack.Lib.Service
                 {
                     while (reader.Read())
                     {
-                        var dt = new DeviceStatus();
-                        //if (reader["DeviceID"] == null
-                        //    || reader["DeviceName"] == null
-                        //    || reader["DeviceGroup"] == null) continue;
-                        //else if (reader["Latitude"] == null
-                        //    || reader["Longitude"] == null
-                        //    || reader["DirectionSN"] == null
-                        //    || reader["DirectionEW"] == null
-                        //    || reader["TransmitTime"] == null
-                        //    || reader["Speed"] == null) { }
+                        DeviceStatus data = new DeviceStatus();
+                        data.DeviceID = Convert.ToInt32(reader["DeviceID"]);
+                        data.DeviceName = reader["DeviceName"].ToString();
 
+                        object TypeShip = reader["TypeShip"];
+                        if (TypeShip == DBNull.Value)
+                        {
+                            data.TypeShip = -1;
+                        }else { data.TypeShip = Convert.ToInt32(reader["TypeShip"]); }
 
+                        object Latitude = reader["Latitude"];
+                        if (Latitude == DBNull.Value)
+                        {
+                            data.Latitude = -1;
+                        }else { data.Latitude = Convert.ToDecimal(reader["Latitude"]); }
 
-                        if (reader["DeviceID"] != null) dt.DeviceID = Convert.ToInt32(reader["DeviceID"]);
-                        if (reader["DeviceName"] != null) dt.DeviceName = reader["DeviceName"].ToString();
-                        if (reader["Latitude"] != null) dt.Latitude = Convert.ToInt32(reader["Latitude"]);
-                        if (reader["Longitude"] != null) dt.Longitude = Convert.ToInt32(reader["Longitude"]);
-                        if (reader["DirectionSN"] != null) dt.DirectionSN = reader["DirectionSN"].ToString();
-                        if (reader["DirectionEW"] != null) dt.DirectionEW = reader["DirectionEW"].ToString();
-                        if (reader["TransmitTime"] != null) dt.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]);
-                        if (reader["Speed"] != null) dt.Speed = Convert.ToInt16(reader["Speed"]);
+                        object Longitude = reader["Longitude"];
+                        if (Longitude == DBNull.Value)
+                        {
+                            data.Longitude = -1;
+                        }else { data.Longitude = Convert.ToDecimal(reader["Longitude"]); }
+                        data.DirectionSN = reader["DirectionSN"].ToString();
+                        data.DirectionEW = reader["DirectionEW"].ToString();
 
+                        object TransmitTime = reader["TransmitTime"];
+                        if (TransmitTime == DBNull.Value)
+                        {
+                            data.TransmitTime = Convert.ToDateTime(reader["DateCreate"]);
+                        }else { data.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]); }
+
+                        object Speed = reader["Speed"];
+                        if (Speed == DBNull.Value)
+                        {
+                            data.Speed = -1;
+                        }
+                        else { data.Speed = Convert.ToInt32(reader["Speed"]); }
                         //var data = new DeviceStatus()
                         //{
                         //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
@@ -66,7 +80,7 @@ namespace SeaTrack.Lib.Service
                         //    Speed = Convert.ToInt16(reader["Speed"]),
 
                         //};
-                        lst.Add(dt);
+                        lst.Add(data);
                     }
                 }
             }
@@ -195,6 +209,30 @@ namespace SeaTrack.Lib.Service
                 return lst;
             }
         }
+
+        public static List<TrackData> GetDataByDelayTime(string DeviceImei)
+        {
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataByDelayTime",DeviceImei))
+            {
+                List<TrackData> data = new List<TrackData>();
+                while (reader.Read())
+                {
+                    var dt = new TrackData()
+                    {
+                        TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                        DirectionEW = reader["DirectionEW"].ToString(),
+                        DirectionSN = reader["DirectionSN"].ToString(),
+                        Latitude = Convert.ToDecimal(reader["Latitude"]),
+                        Longitude = Convert.ToDecimal(reader["Longitude"]),
+                        Speed = Convert.ToInt16(reader["Speed"]),
+                        State = reader["State"].ToString(),
+                    };
+                    data.Add(dt);
+                }
+                return data;
+            }
+        }
+
         public static List<Device> GetListDevice()
         {
             List<Device> lst = null;

@@ -131,6 +131,10 @@ namespace SeaTrack.Controllers
         public ActionResult GetListDeviceStatus()
         {
             var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             int _userid = user.UserID;
 
             List<DeviceStatus> data = TrackDataService.GetListDeviceStatus(_userid);

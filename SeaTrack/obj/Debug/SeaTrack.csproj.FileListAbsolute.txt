@@ -390,11 +390,11 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\obj\D
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\obj\Debug\SeaTrack.csproj.CopyComplete
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\obj\Debug\SeaTrack.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\obj\Debug\SeaTrack.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\ApplicationInsights.config
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\csc.exe
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.VisualBasic.Core.targets
@@ -433,7 +433,9 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.Web.Infrastructure.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Newtonsoft.Json.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Owin.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\SeaTrack.Lib.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Extensions.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Formatting.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Primitives.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Helpers.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.Owin.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.WebHost.dll
@@ -457,7 +459,6 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.AI.WindowsServer.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.ApplicationInsights.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Newtonsoft.Json.xml
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Formatting.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Helpers.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.WebHost.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Mvc.xml
@@ -492,3 +493,6 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Formatting.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.xml

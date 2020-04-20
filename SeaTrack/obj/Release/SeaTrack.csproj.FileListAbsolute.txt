@@ -415,3 +415,7 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Release\SeaTrack.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Release\SeaTrack.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Release\SeaTrack.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Extensions.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Primitives.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.xml

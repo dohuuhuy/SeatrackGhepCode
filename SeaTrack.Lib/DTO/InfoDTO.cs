@@ -15,7 +15,7 @@ namespace SeaTrack.Lib.DTO
         public string SecretCode { get; set; }
         public string OpCode { get; set; }
         public int Time { get; set; }
-
+        public DateTime LastSend { get; set; }     
         public bool CheckNull()
         {
             if (this.MREF == null) return false;
