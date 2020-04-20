@@ -36,7 +36,7 @@ namespace SeaTrack.Lib.Job
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                   (s =>
-                     s.WithIntervalInSeconds(10)
+                     s.WithIntervalInSeconds(30)
                     .OnEveryDay()
                     .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
                   )

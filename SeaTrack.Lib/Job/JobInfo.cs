@@ -19,6 +19,7 @@ namespace SeaTrack.Lib.Job
 
         public async void Execute(IJobExecutionContext context)
         {
+            var lstDelayInfo = InfoService.GetAllDelayInfo();
             InfoDTO info = new InfoDTO();
             info.MREF = "Alo";
             info.ID = "869247042912003";
@@ -34,10 +35,11 @@ namespace SeaTrack.Lib.Job
                 using (var res = await client.PostAsync(URI, strContent))
                 {
                     var kq = await res.Content.ReadAsStringAsync();
-                    Console.Write(res);
+                    RequestInfo rf = JsonConvert.DeserializeObject<RequestInfo>(kq);
+                    Console.Write(rf);
                 }
             }
-            //var lstDelayInfo = InfoService.GetAllDelayInfo();
+            //
             //using (var clients = new HttpClient())
             //{
             //    string URI = "http://192.168.1.14:11412";
