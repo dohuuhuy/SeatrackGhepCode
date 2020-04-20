@@ -61,20 +61,24 @@ namespace SeaTrack.Controllers
             if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
             {
                 var item = TrackDataService.GetLastedLocationByImei(info.ID);
-                RequestInfo returnInfo = new RequestInfo();
-                returnInfo.MREF = info.MREF;
-                returnInfo.Seqno = info.Seqno;
-                returnInfo.ID = info.ID;
-                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
-                returnInfo.State = "A";
-                returnInfo.Latitude = item.Latitude;
-                returnInfo.ExpSN = item.DirectionSN;
-                returnInfo.Longitude = item.Longitude;
-                returnInfo.ExpEW = item.DirectionEW;
-                returnInfo.Speed = item.Speed;
-                returnInfo.DIR = "";
-                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
-                return Request.CreateResponse(HttpStatusCode.OK, returnInfo);
+                if (item != null)
+                {
+                    RequestInfo returnInfo = new RequestInfo();
+                    returnInfo.MREF = info.MREF;
+                    returnInfo.Seqno = info.Seqno;
+                    returnInfo.ID = info.ID;
+                    returnInfo.Time = item.TransmitTime.ToString("HH:mm:ss");
+                    returnInfo.State = "A";
+                    returnInfo.Latitude = item.Latitude;
+                    returnInfo.ExpSN = item.DirectionSN;
+                    returnInfo.Longitude = item.Longitude;
+                    returnInfo.ExpEW = item.DirectionEW;
+                    returnInfo.Speed = item.Speed;
+                    returnInfo.DIR = "";
+                    returnInfo.Date = item.TransmitTime.ToString("dd/MM/yyyy");
+                    return Request.CreateResponse(HttpStatusCode.OK, returnInfo);
+                }
+                Request.CreateResponse(HttpStatusCode.BadRequest);
 
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);

@@ -300,6 +300,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\17384.jpg" />
     <Content Include="Content\images\background\bg_log.png" />
     <Content Include="Content\images\background\bg_vin_01.jpg" />
     <Content Include="Content\images\background\bg_vin_02.jpg" />
