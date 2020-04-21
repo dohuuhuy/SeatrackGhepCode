@@ -12,6 +12,7 @@ using SeaTrack.Lib.Service;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.IO;
+using SeaTrack.Lib.Database;
 
 namespace SeaTrack.Lib.Job
 {
@@ -45,10 +46,10 @@ namespace SeaTrack.Lib.Job
                             {"DIR","" },
                             {"Date",i.Date },
                         };
-                            //var content = new FormUrlEncodedContent(value);
-                            var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
-                            //var res = await client.PostAsync("http://hkt01.demowebmau.com/post/iridiums", content);
-                            var res = await client.PostAsync("http://192.168.1.14:11413", emptyContent);
+                            var content = new FormUrlEncodedContent(value);
+                            //var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
+                            var res = await client.PostAsync(ConnectData.URLBaoCaoDinhKy, content);
+                            //var res = await client.PostAsync("http://192.168.1.14:11413", emptyContent);
                             var responseString = await res.Content.ReadAsStringAsync();
 
                             //var client = new RestClient("http://hkt01.demowebmau.com");

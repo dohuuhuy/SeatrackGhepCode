@@ -226,6 +226,32 @@ namespace SeaTrack.Areas.Admin.Controllers
             return Json("Đã kích hoạt", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult DeleteUser(int id)
+        {
+            if (CheckRole(1) == -1 && CheckRole(2) == -1)
+            {
+                if (CheckRole(1) == 0 && CheckRole(2) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+            var user = (Users)Session["User"];
+            if (user.RoleID != 1)
+            {
+                var r = AdminService.GetUserByID(id).ManageBy == user.Username ? true : false;
+                if (r || AdminService.CheckUserManage(id, user.Username))
+                {
+                    AdminService.DeleteUser(id);
+                    return Json("Đã xóa", JsonRequestBehavior.AllowGet);
+                }
+                return Json("Không tìm thấy người dùng", JsonRequestBehavior.AllowGet);
+            }
+            AdminService.DeleteUser(id);
+            return Json("Đã xóa", JsonRequestBehavior.AllowGet);
+
+        }
         [HttpPost]
         public ActionResult CheckUsername(Users user)
         {

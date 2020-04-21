@@ -31,7 +31,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         DeviceName: '',
         DeviceImei: '',
         DeviceVersion: '',
-        DeviceGroup: '',
+        TypeShip: '',
         DateExpired: '',
         DeviceNote: ''
 
@@ -51,7 +51,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             DeviceName: data.DeviceName,
             DeviceImei: data.DeviceImei,
             DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
+            TypeShip: data.TypeShip,
             DateExpired: data.DateExpired,
             DeviceNote: data.DeviceNote
 
@@ -134,7 +134,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             DeviceName: data.DeviceName,
             DeviceImei: data.DeviceImei,
             DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
+            TypeShip: data.TypeShip,
             DateExpired: data.DateExpired,
             DeviceNote: data.DeviceNote,
             ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
@@ -150,7 +150,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         //$scope.Device.DeviceName = '',
         //$scope.Device.DeviceImei = '',
         //$scope.Device.DeviceVersion = '',
-        //$scope.Device.DeviceGroup = '',
+        //$scope.Device.TypeShip = '',
         //$scope.Device.DateExpired = '',
         //$scope.Device.DeviceNote = '',
 

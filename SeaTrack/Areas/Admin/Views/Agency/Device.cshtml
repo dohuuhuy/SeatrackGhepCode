@@ -25,17 +25,6 @@
                     </div>
                 </div>
                 <br />
-                <div class="input-group ">
-                    <label for="radio1" class="form-check-label col-md-4 ">
-                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
-                    </label>
-                    <label for="radio2" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
-                    </label>
-                    <label for="radio3" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio3" name="checkbox3" ng-model="Status" value="0" class="form-check-input">Hết hạn
-                    </label>
-                </div>
             </div>
 
         </div>
@@ -83,7 +72,7 @@
                             <td>{{a.DeviceImei}}</td>
                             <td ng-if="a.ExpireStatus == -1"><p style="color:gold">{{a.DateExpired}}</p></td>
                             <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
-                            <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Đang kích hoạt</p></td>
+                            <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                             <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
                             <td ng-if="a.StatusDevice == 0"><p style="color:red">Đã hết hạn</p></td>
                         </tr>
@@ -120,6 +109,12 @@
                             <div class="form-group">
                                 <label class="control-label"> Phiên bản </label>
                                 <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceVersion" type="text" disabled maxlength="50" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> Loại tàu </label>
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==1" type="text" disabled maxlength="50" value="Tàu dưới 12m" />
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==2" type="text" disabled maxlength="50" value="Tàu từ 12m - 15m" />
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==3" type="text" disabled maxlength="50" value="Tàu trên 15m" />
                             </div>
                         </div>
                         <div class="col col-md-6">
@@ -169,8 +164,14 @@
                                 <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceVersion" type="text" placeholder="Phiên bản ..." required maxlength="50" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Nhóm thiết bị </label>
-                                <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceGroup" type="text" placeholder="Nhóm ..." required maxlength="50" />
+                                <label class="control-label"> Loại tàu </label>
+                                <select class="form-control" name="TypeShip" ng-model="Device.TypeShip" required>
+                                    <option value="">Chọn loại tàu</option>
+                                    <option value="1">Tàu dưới 12m</option>
+                                    <option value="2">Tàu từ 12m - 15m</option>
+                                    <option value="3">Tàu trên 15m</option>
+                                </select>
+                                @*<input class="form-control" name="TypeShip" ng-model="Device.TypeShip" type="text" placeholder="Nhóm ..." required maxlength="50" />*@
                             </div>
                         </div>
                         <div class="col col-md-6">
@@ -234,8 +235,14 @@
                                 <label ng-if="ImeiCheck == Device.DeviceImei" style="color:red">Imei đã tồn tại</label>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Nhóm thiết bị </label>
-                                <input class="form-control" name="DeviceGroup" ng-model="Device.DeviceGroup" type="text" placeholder="Nhóm ..." required />
+                                <label class="control-label"> Loại tàu </label>
+                                <select class="form-control" name="TypeShip" ng-model="Device.TypeShip" required>
+                                    <option value="">Chọn loại tàu</option>
+                                    <option value="1">Tàu dưới 12m</option>
+                                    <option value="2">Tàu từ 12m - 15m</option>
+                                    <option value="3">Tàu trên 15m</option>
+                                </select>
+                                @*<input class="form-control" name="DeviceGroup" ng-model="Device.DeviceGroup" type="text" placeholder="Nhóm ..." required />*@
                             </div>
 
                             <div class="form-group">

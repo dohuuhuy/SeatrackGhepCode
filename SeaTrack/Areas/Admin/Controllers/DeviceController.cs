@@ -45,7 +45,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             dv.DeviceName = device.DeviceName;
             dv.DeviceVersion = device.DeviceVersion;
             dv.DeviceImei = device.DeviceImei;
-            dv.DeviceGroup = device.DeviceGroup;
+            dv.TypeShip = device.TypeShip;
             dv.DeviceNote = device.DeviceNote;
             dv.DateExpired = device.ExpireDate;
             var res = AdminService.UpdateDevice(dv);

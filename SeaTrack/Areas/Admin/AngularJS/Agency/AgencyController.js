@@ -122,5 +122,22 @@
         })
     }
 
+    $scope.DeleteUser = function (UserID) {
+        console.log(UserID);
+        if (confirm("bạn có muốn xóa ?", "thông báo")) {
+
+            var res = AgencyService.DeleteUser(UserID);
+            res.then(function (d) {
+                alert(d.data);
+                if ($scope.role == 3) {
+                    LoadListCustomer();
+                }
+                if ($scope.role == 4) {
+                    LoadListUser();
+                }
+            })
+
+        }
+    }
 
 })

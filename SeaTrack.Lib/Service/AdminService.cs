@@ -245,7 +245,23 @@ namespace SeaTrack.Lib.Service
                 throw;
             }
         }
+        public static bool DeleteUser(int UserID)
+        {
+            try
+            {
+                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_DeleteUser", UserID);
+                if (res != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public static bool CheckUserManage(int UserID, string Username)
         {
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_CheckUserManage", UserID, Username))
@@ -308,7 +324,7 @@ namespace SeaTrack.Lib.Service
         public static int CreateDevice(Device device)
         {
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "[sp_CreateDevice]", device.DeviceNo, device.DeviceName, device.DeviceVersion,
-                device.DeviceImei, device.DeviceGroup, device.DateExpired, device.DeviceNote, device.StatusDevice, device.CreateBy, device.DateCreate, device.TypeShip))
+                device.DeviceImei, device.DateExpired, device.DeviceNote, device.StatusDevice, device.CreateBy, device.DateCreate, device.TypeShip))
             {
                 if (reader.HasRows)
                 {
@@ -327,7 +343,7 @@ namespace SeaTrack.Lib.Service
         public static int UpdateDevice(Device device)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_UpdateDevice", device.DeviceID, device.DeviceNo, device.DeviceName,
-                device.DeviceVersion, device.DeviceImei, device.DeviceGroup, device.DateExpired, device.DeviceNote);
+                device.DeviceVersion, device.DeviceImei, device.TypeShip, device.DateExpired, device.DeviceNote);
         }
 
         public static List<DeviceViewModel> GetListDevice()
@@ -349,7 +365,7 @@ namespace SeaTrack.Lib.Service
                             DeviceName = reader["DeviceName"].ToString(),
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
-                            DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
+                            //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
                             DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
@@ -383,7 +399,7 @@ namespace SeaTrack.Lib.Service
                             DeviceName = reader["DeviceName"].ToString(),
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
-                            DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
+                            //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
                             DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
@@ -416,7 +432,7 @@ namespace SeaTrack.Lib.Service
                             DeviceName = reader["DeviceName"].ToString(),
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
-                            DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
+                            //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
                             DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
@@ -449,7 +465,7 @@ namespace SeaTrack.Lib.Service
                             DeviceName = reader["DeviceName"].ToString(),
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
-                            DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
+                            //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
                             DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
