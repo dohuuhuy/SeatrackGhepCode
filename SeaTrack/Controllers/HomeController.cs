@@ -17,10 +17,7 @@ namespace SeaTrack.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Demo()
-        {
-            return View("Demo");
-        }
+       
         public ActionResult Route()
         {
             if (Session["User"] == null)
@@ -259,17 +256,12 @@ namespace SeaTrack.Controllers
 
         public ActionResult UserInfo()
         {
-            Users uitem = null;
-            if (Request.Cookies["userName"] != null && Request.Cookies["pass"] != null)
+            var user = (Users)Session["User"];
+            if (user.Username != null && user.Password != null )
             {
-                var name = Request.Cookies["userName"].Value;
-                var pass = Request.Cookies["pass"].Value;
-                uitem = UsersService.CheckUsers(name, pass);
-            }
-            if (uitem != null)
-            {
-                return Json(uitem, JsonRequestBehavior.AllowGet);
-            }
+                
+               var data = UsersService.CheckUsers(user.Username, user.Password);
+            } 
             return Json("0001", JsonRequestBehavior.AllowGet);
         }
     }

@@ -3,6 +3,7 @@ $(document).ready(function () {
 	setup_selectDeviceNo();
 	DanhSachThietBiHetHan();
 	interval_SOS();
+	GetInfo_User();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();

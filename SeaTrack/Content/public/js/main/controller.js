@@ -1,4 +1,32 @@
-﻿
+﻿function GetInfo_User() {
+
+    $.ajax({
+        type: 'GET',
+        dataType: "json",
+        url: '/Home/UserInfo',
+        data: {},
+        success: function (data, txtStatus, XMLHttpRequest) {
+            console.log('---------------: ' + data);
+            if (data != null) {
+
+
+                if (data["RoleID"] == 4) {
+                    $("#menubar").hide()
+                    $("#item-taikhoan-sua").hide()
+                    $("#item-taikhoan-xoa").hide()
+                    $("#item-taikhoan-status").show()
+                   
+                }
+
+
+
+            } else { alert("Không có dữ liệu thông tin tài khoản"); }
+
+
+        }
+    });
+};
+
 
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {
@@ -17,7 +45,7 @@ function DanhSachThietBiHetHan() {
                     ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
                     ngayHienTai = new Date();
                     hieu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
-                   
+
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
@@ -53,7 +81,7 @@ function DanhSachThietBiHetHan() {
                 }
                 $("#body_dv_exp").html(_tb);
             }
-            
+
             else {
                 document.getElementById('thongbaohangloi').style.display = '';
                 document.getElementById('error').innerHTML = "không có dữ liệu !";

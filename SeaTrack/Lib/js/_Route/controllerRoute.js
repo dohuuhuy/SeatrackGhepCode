@@ -1,4 +1,34 @@
-﻿function hide(n) {
+﻿function GetInfo_User() {
+
+    $.ajax({
+        type: 'GET',
+        dataType: "json",
+        url: '/Home/UserInfo',
+        data: {},
+        success: function (data, txtStatus, XMLHttpRequest) {
+            console.log('---------------: ' + data);
+            if (data != null) {
+
+
+                if (data["RoleID"] == 4) {
+                    $("#menubar").hide()
+                    $("#item-taikhoan-sua").hide()
+                    $("#item-taikhoan-xoa").hide()
+                    $("#item-taikhoan-status").show()
+
+                }
+
+
+
+            } else { alert("Không có dữ liệu thông tin tài khoản"); }
+
+
+        }
+    });
+};
+
+
+function hide(n) {
     document.getElementById(n).style.display = "none";
 }
 
