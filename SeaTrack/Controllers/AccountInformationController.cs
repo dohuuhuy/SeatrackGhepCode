@@ -17,7 +17,11 @@ namespace SeaTrack.Controllers
         {
             if (Session["User"] == null)
             {
-                return RedirectToAction("Login","Home", new {area = "" });
+                return RedirectToAction("Login", "Home", new { area = "" });
+            }
+            if (TempData["uploadresult"] != null)
+            {
+                ViewBag.uploadresult = "Thay đổi ảnh đại diện thành công !";
             }
             return View("ThongTinCaNhan");
         }
@@ -55,8 +59,8 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
-            
-            if (file != null && file.ContentLength > 0 )
+            var ErrorMessage = "";
+            if (file != null && file.ContentLength > 1 * 1024 * 1024)
             {
 
                 Users user = (Users)Session["User"];
@@ -64,9 +68,37 @@ namespace SeaTrack.Controllers
                 var path = Path.Combine(Server.MapPath("~/Content/images/UserAvatar"), filename);
                 file.SaveAs(path);
                 AdminService.UpdateAvatar(user.UserID, filename);
+                TempData["uploadresult"] = "ok";
             }
-            return RedirectToAction("AccountInfo");
-            //return Json("OK", JsonRequestBehavior.AllowGet);
+            try
+            {
+               
+                var supportedTypes = new[] { "png", "gif", "jpg" };
+                var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
+                if (!supportedTypes.Contains(fileExt))
+                {
+                    ErrorMessage = "File Extension Is InValid - Only Upload WORD/PDF/EXCEL/TXT File";
+                 
+                }
+                else if (file.ContentLength > (filesize * 1024))
+                {
+                    ErrorMessage = "File size Should Be UpTo " + filesize + "KB";
+                  
+                }
+                else
+                {
+                    ErrorMessage = "File Is Successfully Uploaded";
+                 
+                }
+            }
+            catch (Exception )
+            {
+                ErrorMessage = "Upload Container Should Not Be Empty or Contact Admin";
+               
+            }
+
+            //return RedirectToAction("AccountInfo");
+
         }
 
         [HttpPost]

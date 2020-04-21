@@ -27,10 +27,22 @@
     #menubar ul li a {
         padding: .375rem .75rem;
     }
-        #menubar ul li a:hover {
+    #menubar ul li #a {
+        color: #007bff;
+    }
+        #menubar ul li #a:hover {
             color: white;
-            background-color: #007bff
+            background-color: #007bff;
         }
+
+    #menubar ul li #b {
+        color: #17a2b8;
+    }
+        #menubar ul li #b:hover {
+            color: white;
+            background-color: #17a2b8;
+        }
+      
 .dropdown-item {
     font-weight: bolder;
 }
@@ -152,7 +164,9 @@
 }
 
 
-
+#body a {
+    color: #000;
+}
 #rounded > a {
     color: #019CDE !important;
 }

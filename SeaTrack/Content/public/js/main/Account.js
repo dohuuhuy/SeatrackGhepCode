@@ -147,13 +147,16 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     $scope.Lock = function (index) {
 
         console.log('i am inside khóa funcr' + JSON.stringify($scope.Account));
-        $http({
-            method: 'GET',
-            url: '/Management/LockUsers/' + $scope.namesData[index].UserID
-        }).then(function (response) {
-            LoadAccounts();
-            alert(response.data);
-        });
+        if (confirm("Bạn có muốn khóa người dùng ?", "thông báo")) {
+            $http({
+                method: 'GET',
+                url: '/Management/LockUsers/' + $scope.namesData[index].UserID
+            }).then(function (response) {
+                LoadAccounts();
+                alert(response.data);
+            });
+        }
+
     };
     $scope.Unlock = function (index) {
 

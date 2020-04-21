@@ -14,7 +14,14 @@
     {
         Layout = "~/Views/Shared/_LayoutInfo.cshtml";
     }
+
 }
+
+       @if (ViewBag.uploadresult != null)
+    {
+    <script>alert("Thay đổi ảnh đại diện thành công !")</script >
+    }
+        
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Content/public/js/main/AccountApp.js"></script>
 <div class="container">
@@ -126,7 +133,7 @@
                 <div class="card-body">
                     <div class="mx-auto d-block">
                         <img id="output" ng-if="User.Image != ''" class="rounded-circle mx-auto d-block" width="167" height="158" src="~/Content/images/UserAvatar/{{User.Image}}" alt="Card image cap">
-                        <img ng-if="User.Image == ''" class="rounded-circle mx-auto d-block" src="~/Content/images/UserAvatar/daily01.jpg" alt="Card image cap">
+                        <img id="output" ng-if="User.Image == ''" class="rounded-circle mx-auto d-block" width="167" height="158" src="~/Content/images/UserAvatar/daily01.jpg" alt="Card image cap">
 
                         <h5 class="text-sm-center mt-2 mb-1">{{User.FullName}}</h5>
                         <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {{User.Address}}</div>
@@ -134,7 +141,7 @@
                     <hr>
                     <div class="card-text text-sm-center">
                         <form action="Upload" method="post" enctype="multipart/form-data" name="UpLoad">
-                            <input type="file" name="file" id="file" accept="image/*" onchange="loadFile(event);" class="btn btn-light" />
+                            <input type="file" required name="file" id="file" accept="image/*" onchange="loadFile(event);" class="btn btn-light" />
 
                             <button type="submit" ng-click="LoadUser()" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Lưu
@@ -147,7 +154,10 @@
     </div>
 
 </div>
+
+
 <script>
+
     var loadFile = function (event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
