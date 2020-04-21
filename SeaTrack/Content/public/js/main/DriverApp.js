@@ -5,6 +5,8 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.currentPage = 1;
     $scope.pageSize = 5;
     $scope.namesData = [];
+    $scope.DevicesNotUsed = [];
+    $scope.AddDeviceToUser = [];
     LoadDriver();
     $scope.loadMessage = updateInfo();
 
@@ -232,8 +234,7 @@ App.controller('Controller', function ($scope, $http, Service) {
         $scope.name = name;
 
     }
-    $scope.DevicesNotUsed = [];
-    $scope.AddDeviceToUser = [];
+
 
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
     $scope.AddDevice = function () {
@@ -297,7 +298,8 @@ App.controller('Controller', function ($scope, $http, Service) {
             url: '/Management/GetListDeviceByDriverID/' + DriverID
         }).then(function (response) {
             console.log(response, 'resi');
-            if (response != '') { $scope.Devices = response.data; }
+            if (response != '')
+                $scope.Devices = response.data;
         }, function (error) {
             console.log(error, 'can not get data.');
         });

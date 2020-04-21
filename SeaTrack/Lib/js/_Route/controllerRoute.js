@@ -464,6 +464,11 @@ function clearInfoWin() {
     for (var i = 0; i < _infowins.length; i++) {
         _infowins[i].close();
     }
+    if(_SOSInfo != []){
+        for(var i = 0; i< _SOSInfo.length;i++) {
+            _SOSInfo[i].close();
+        }
+    }
 }
 function updateListDeviceStatus() {
     if (_listDeviceStatus.length > 0) { _listDeviceStatus = []; }
@@ -805,23 +810,28 @@ function SOS() {
                     position: p,
                     icon: "/Content/images/tau/tau-do.png",
                 });
-
-
+                marker.setMap(map);
+                console.log(marker);
+                
                 var SOSInfo = new google.maps.InfoWindow({
                     content: 'Đang cập nhật dữ liệu!',
                 });
 
                 SOSInfo.setContent(getInfoWindow(_listSOS[i], 2));
-
-                marker.addListener('click', function () {
-                    //clearInfoWin();
-                    console.log(SOSInfo);
-                    console.log(marker);
+                console.log(SOSInfo);
+                google.maps.event.addListener(marker, 'click', function () {
+                    clearInfoWin();
                     SOSInfo.open(map, marker);
                 });
-                marker.setMap(map);
-                _SOSInfo.push(SOSInfo);
+                // marker.addListener('click', function () {
+                //     clearInfoWin();
+                //     console.log(marker);
+                //     console.log(SOSInfo);
+                //     SOSInfo.open(map, marker);
+                // });
                 _arSOSMarker.push(marker);
+                _SOSInfo.push(SOSInfo);
+                
 
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
                 //console.log(date);

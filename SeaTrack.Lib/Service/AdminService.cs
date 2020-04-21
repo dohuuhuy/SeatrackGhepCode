@@ -448,12 +448,12 @@ namespace SeaTrack.Lib.Service
         }
         public static List<DeviceViewModel> GetListDeviceByDriverID(int UserID)
         {
-            List<DeviceViewModel> lst = null;
+            List<DeviceViewModel> lst = new List<DeviceViewModel>();
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceByDriverID", UserID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    //lst = new List<DeviceViewModel>();
 
                     while (reader.Read())
                     {

@@ -174,7 +174,7 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="Xem">
+                        <form class="form-horizontal row" name="Them">
 
                             <div class="col col-md-6">
                                 <div class="form-group">
@@ -190,10 +190,10 @@
                                 <div class="form-group">
                                     <label class="control-label"> Chứng minh thư </label>
                                     <input class="form-control" name="CMND" ng-model="Driver.CMND" ng-blur="CheckCMND(Driver.CMND)"
-                                           ng-pattern="/^[0-9]{9}$/" onkeyup="this.value = this.value.toLowerCase();"
-                                           type="number" required maxlength="9" min="1" >
+                                           ng-pattern="/^[0-9]{0,11}$/"
+                                           type="text">
                                     <label ng-if="CMNDexists != 'OK' && CMNDexists != null" style="color:red">Chứng minh thư đã tồn tại </label>
-                                    <span style="color:Red" ng-show="Xem.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
+                                    <span style="color:Red" ng-show="Them.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>
@@ -237,7 +237,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Lưu</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="Them.$invalid" ng-click="Save()">Lưu</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
