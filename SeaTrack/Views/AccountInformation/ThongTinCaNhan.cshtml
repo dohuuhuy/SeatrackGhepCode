@@ -15,6 +15,8 @@
         Layout = "~/Views/Shared/_LayoutInfo.cshtml";
     }
 }
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Content/public/js/main/AccountApp.js"></script>
 
 <div class="container">
     <div class="row" ng-app="App" ng-controller="Controller" ng-init="Status = false">
@@ -52,16 +54,14 @@
                         </div>
                     </div>
                     <div class="row form-group" ng-if="User.ManageBy != null">
-                        <div class="col col-md-3"><label class="form-control-label">Quản lý : </label></div>
+                        <div class="col col-md-3"><label class="form-control-label">Manage By: </label></div>
                         <div class="col-12 col-md-9">
-                            <input class="form-control" type="text" required maxlength="200" ng-model=" User.ManageBy" readonly />
-
-                           
+                            <p>{{User.ManageBy}}</p>
                         </div>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm" ng-click="update()">
-                            <i class="fa fa-dot-circle-o"></i> Cập nhật
+                            <i class="fa fa-dot-circle-o"></i> Submit
                         </button>
                         <button data-toggle="modal" data-target="#ChangePassword" class="btn btn-primary btn-sm" style="padding-right:4%">
                             Đổi mật khẩu
@@ -90,7 +90,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-4"><label class="control-label"> Mật khẩu mới </label></div>
                                 <div class="col-12 col-md-8">
-                                    <input class="form-control" name="NewPassword" ng-model="NewPassword" type="password" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,30}$/" />
+                                    <input class="form-control" name="NewPassword" ng-model="NewPassword" type="password" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^[a-zA-Z0-9]{6,30}$/" />
                                     <label ng-if="ChangePasswordForm.NewPassword.$invalid" style="color:red">Mật khẩu không phù hợp</label>
                                 </div>
                             </div>
@@ -109,8 +109,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="ChangePassword()">Lưu</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="ChangePassword()">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
                     </div>
                 </div>
             </div>
@@ -146,3 +146,12 @@
     </div>
 
 </div>
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
