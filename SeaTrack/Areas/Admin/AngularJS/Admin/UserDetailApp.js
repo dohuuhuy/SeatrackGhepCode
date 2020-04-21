@@ -5,6 +5,8 @@ app.controller("Controller", function ($scope, $http) {
         $scope.role = role;
         $scope.id = id;
         $scope.manageby = managey;
+        $scope.DevicesNotUsed = [];
+        $scope.Devices = [];
         fetchData(id);
         //GetListDeviceNotUsedByUser(id);
     }
@@ -89,8 +91,9 @@ app.controller("Controller", function ($scope, $http) {
             method: "GET",
             url: '/Admin/Device/GetListDeviceByUserID/' + UserID
         }).then(function (response) {
-            console.log(response, 'res');
-            $scope.Devices = response.data;
+            console.log(response.data);
+            if(response!= '')
+                $scope.Devices=(response.data);
         }, function (error) {
             console.log(error, 'can not get data.');
         });

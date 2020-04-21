@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 	setup_selectDeviceNo();
 	DanhSachThietBiHetHan();
-	//interval_SOS();
+	interval_SOS();
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();

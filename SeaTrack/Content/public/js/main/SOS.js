@@ -15,7 +15,7 @@ function SOS(){
             console.log(SOS);
             if(SOS != null && _IsDislay == null) {
                 _IsDislay = confirm("Cảnh báo sự cố, xác nhận điều hướng sang trang giám sát");
-                if (_IsDislay) window.location.href = "http://localhost:2856/";
+                if (_IsDislay) window.location.href = "";
                 else _IsDislay = null;
             }
         }

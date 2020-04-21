@@ -415,12 +415,12 @@ namespace SeaTrack.Lib.Service
         //Lấy danh sách device theo UserID
         public static List<DeviceViewModel> GetListDeviceByUserID(int UserID)
         {
-            List<DeviceViewModel> lst = null;
+            List<DeviceViewModel> lst = new List<DeviceViewModel>();
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceByUserID", UserID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    //lst = new List<DeviceViewModel>();
 
                     while (reader.Read())
                     {
