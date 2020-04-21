@@ -85,14 +85,14 @@ namespace SeaTrack.Controllers
 
         {
             var data = AdminService.UpdateStatusUser(id, -1);
-            return Json("đã khóa", JsonRequestBehavior.AllowGet);
+            return Json("Đã khóa", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult UnlockUsers(int id)
         {
             var data = AdminService.UpdateStatusUser(id, 1);
-            return Json("đã mở khóa", JsonRequestBehavior.AllowGet);
+            return Json("Đã mở khóa", JsonRequestBehavior.AllowGet);
         }
         public ActionResult Device()
         {
@@ -144,6 +144,7 @@ namespace SeaTrack.Controllers
             return Json(new { success = true });
         }
 
+    
         public ActionResult GetListDeviceByUserID(int? id)
         {
             if (id == null)
@@ -238,14 +239,14 @@ namespace SeaTrack.Controllers
 
         {
             var data = AdminService.UpdateStatusDriver(id, -1);
-            return Json("đã khóa", JsonRequestBehavior.AllowGet);
+            return Json("Đã khóa", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult UnlockDriver(int id)
         {
             var data = AdminService.UpdateStatusDriver(id, 1);
-            return Json("đã mở khóa", JsonRequestBehavior.AllowGet);
+            return Json("Đã mở khóa", JsonRequestBehavior.AllowGet);
         }
 
     }

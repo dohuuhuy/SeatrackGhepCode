@@ -1,10 +1,4 @@
-﻿var loadFile = function (event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function () {
-        URL.revokeObjectURL(output.src)
-    }
-};
+﻿
 
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {

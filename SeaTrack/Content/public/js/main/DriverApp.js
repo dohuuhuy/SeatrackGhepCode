@@ -141,7 +141,7 @@ App.controller('Controller', function ($scope, $http, Service) {
             Service.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
-                alert('Unable to Get Data !!!');
+                alert('Không có dữ liệu !!!');
             });
             $scope.Clear();
             alert(" Updated Successfully !!!");
@@ -190,13 +190,15 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.Lock = function (index) {
 
         console.log('i am inside khóa funcr' + JSON.stringify($scope.Driver));
-        $http({
-            method: 'GET',
-            url: '/Management/LockDriver/' + $scope.namesData[index].DriverID
-        }).then(function (response) {
-            LoadDriver();
-            alert(response.data);
-        });
+        if (confirm("Bạn có muốn Khóa lái tàu ?", "thông báo")) {
+            $http({
+                method: 'GET',
+                url: '/Management/LockDriver/' + $scope.namesData[index].DriverID
+            }).then(function (response) {
+                LoadDriver();
+                alert(response.data);
+            });
+        }
     };
     $scope.Unlock = function (index) {
 
@@ -214,7 +216,7 @@ App.controller('Controller', function ($scope, $http, Service) {
         Service.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
         }, function () {
-            alert('Unable to Get Data !!!');
+            alert('Không có dữ liệu !!!');
         });
 
     }
