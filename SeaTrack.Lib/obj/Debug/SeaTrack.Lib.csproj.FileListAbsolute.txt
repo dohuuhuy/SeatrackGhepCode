@@ -51,6 +51,12 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\o
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.csproj.CopyComplete
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.pdb
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Formatting.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\SeaTrack.Lib.dll.config
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\SeaTrack.Lib.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\SeaTrack.Lib.pdb
@@ -75,10 +81,3 @@ D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\bin\Debug\System.Net.Http.Formatting.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.pdb
-D:\Work\git\SeatrackGhepCode\SeaTrack.Lib\obj\Debug\SeaTrack.Lib.csprojResolveAssemblyReference.cache
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\Newtonsoft.Json.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Extensions.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Formatting.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Primitives.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\Newtonsoft.Json.xml
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack.Lib\bin\Debug\System.Net.Http.Formatting.xml

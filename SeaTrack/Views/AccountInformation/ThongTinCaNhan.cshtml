@@ -15,7 +15,8 @@
         Layout = "~/Views/Shared/_LayoutInfo.cshtml";
     }
 }
-
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Content/public/js/main/AccountApp.js"></script>
 <div class="container">
     <div class="row" ng-app="App" ng-controller="Controller" ng-init="Status = false">
         <div class="col-md-6">
@@ -90,7 +91,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-4"><label class="control-label"> Mật khẩu mới </label></div>
                                 <div class="col-12 col-md-8">
-                                    <input class="form-control" name="NewPassword" ng-model="NewPassword" type="password" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,30}$/" />
+                                    <input class="form-control" name="NewPassword" ng-model="NewPassword" type="password" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^[a-zA-Z0-9]{6,30}$/" />
                                     <label ng-if="ChangePasswordForm.NewPassword.$invalid" style="color:red">Mật khẩu không phù hợp</label>
                                 </div>
                             </div>
@@ -103,8 +104,8 @@
                             </div>
                             <div class="text-danger">
                                 <small>- Mật khẩu từ 6 - 30 ký tự</small><br />
-                                <small>- Mật khẩu không chứa các ký tự Unicode</small><br />
-                                <small>- Mật khẩu chứa cả ký tự hoa và thường</small><br />
+                                <small>- Mật khẩu không chứa các ký tự đặc biệt</small><br />
+                                @*<small>- Mật khẩu chứa cả ký tự hoa và thường</small><br />*@
                             </div>
                         </form>
                     </div>
@@ -146,3 +147,12 @@
     </div>
 
 </div>
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+</script>

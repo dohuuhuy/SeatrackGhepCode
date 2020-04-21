@@ -2,10 +2,9 @@
 
 AccountApp.controller('Controller', function ($scope, $http, Service) {
     LoadUser();
-    $scope.ChangePassword = function(){
-    $scope.Status = !$scope.Status;
-    //$scope.User.CreateDate = new Date(parseInt($scope.User.CreateDate.substr(6)));
-}
+//    $scope.ChangePassword = function(){
+//    $scope.Status = !$scope.Status;
+//}
     $scope.ClearSearch = function () {
         $scope.SearchKey = "";
         $scope.Status = null;

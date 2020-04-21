@@ -514,3 +514,7 @@ SOI STYLE
 .s-div-btn {
     padding: 0 2px;
 }
+
+.s-left-holight:hover {
+    background: #72cccc;
+}
