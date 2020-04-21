@@ -15,14 +15,15 @@ function DanhSachThietBiHetHan() {
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
             DSHetHan = data.Result;
-            console.log(DSHetHan);
-            if (DSHetHan.length > 0) {
+
+            if (DSHetHan != null) {
                 var _tb = '';
                 var trangthai = '';
                 for (var i = 0, j = 1; i < DSHetHan.length; i++) {
                     ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
                     ngayHienTai = new Date();
-                    hiệu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
+                    hieu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
+                   
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
@@ -35,7 +36,7 @@ function DanhSachThietBiHetHan() {
                             ' </tr>';
                         j++;
                     }
-                    else if ((hiệu) <= 5) // hiệu của 2 ngày <= 5 
+                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5 
                     {
                         trangthai = 'Sắp hết hạn';
                         _tb +=
@@ -48,19 +49,26 @@ function DanhSachThietBiHetHan() {
                             ' </tr>';
                         j++;
                     }
-                    else if (hiệu > 5) {
-                        trangthai = 'Còn lâu lắm mới hết hạn';
+                    else if (hieu > 5) {
+                        trangthai = 'Chưa hết hạn';
                         _tb += '';
+
+                        document.getElementById('thongbaohangloi').style.display = '';
+                        document.getElementById('error').innerHTML = "Chưa có thiết bị hết hạn !";
                     }
-                   
                 }
                 $("#body_dv_exp").html(_tb);
-
-
+            }
+            
+            else {
+                document.getElementById('thongbaohangloi').style.display = '';
+                document.getElementById('error').innerHTML = "không có dữ liệu !";
             }
         }
     });
 }
+
+
 function ListSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);

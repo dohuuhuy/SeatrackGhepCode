@@ -45,9 +45,10 @@ function DanhSachThietBiHetHan() {
                         j++;
                     }
                     else if (hiệu > 5) {
-                        //tr[i].style.display = 'none';
                         trangthai = 'Còn lâu lắm mới hết hạn';
-                        _tb += '';
+                        //_tb += '';
+                        document.getElementById('thongbaohangloi').style.display = '';
+                        document.getElementById('error').innerHTML = "Chưa có thiết bị hết hạn !";
                     }
 
                 }
