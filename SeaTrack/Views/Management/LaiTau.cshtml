@@ -95,7 +95,7 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="Xem">
+                        <form class="form-horizontal row" name="xem">
                             <div class="col col-md-12">
                                 <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice()"><i class="fa fa-plus-circle" style="color:black"></i></a>
                                 <label class="control-label"> Danh sách thiết bị </label>
@@ -174,26 +174,28 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="Them">
+                        <form class="form-horizontal row" name="them">
 
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên lái tàu </label>
-                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
+                                    <input required class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
                                
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Driver.Phone" type="text" maxlength="30" />
+                                    <input require class="form-control" name="Phone" ng-model="Driver.Phone" ng-pattern="/^[0-9]{10}$/" type="text" maxlength="10" />
+                                    <span style="color:Red" ng-show="them.Phone.$error.pattern">Số điện thoại không phải là số hoặc ngắn hơn 10 ký tự</span>
+
                                 </div>
                                
                                 <div class="form-group">
                                     <label class="control-label"> Chứng minh thư </label>
-                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" ng-blur="CheckCMND(Driver.CMND)"
-                                           ng-pattern="/^[0-9]{0,11}$/"
-                                           type="text">
+                                    <input require class="form-control" id="CMND" name="CMND" ng-model="Driver.CMND" ng-blur="CheckCMND(Driver.CMND)"
+                                           ng-pattern="/^[0-9]{9}$/" onkeyup="this.value = this.value.toLowerCase();"
+                                           type="text" required maxlength="9" min="1" >
                                     <label ng-if="CMNDexists != 'OK' && CMNDexists != null" style="color:red">Chứng minh thư đã tồn tại </label>
-                                    <span style="color:Red" ng-show="Them.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
+                                    <span style="color:Red" ng-show="them.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>
@@ -209,11 +211,12 @@
 
                                 <div class="form-group">
                                     <label class="control-label"> Giấy phép lái tàu </label>
-                                    <input class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" maxlength="10" />
+                                    <input require class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" maxlength="10" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Hạng lái tàu</label>
                                     <select class="form-control" name="Rank" ng-model="Driver.Rank">
+                                        <option value="" selected>Chọn hạng </option>
                                         <option value="1"> Hạng nhất </option>
                                         <option value="2"> Hạng nhì </option>
                                         <option value="3"> Hạng ba </option>
@@ -222,11 +225,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ngày cấp GPLT </label>
-                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT" type="date" />
+                                    <input require class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT" type="date" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ngày hêt hạn GPLT </label>
-                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date" />
+                                    <input require class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Nơi cấp GPLT </label>
@@ -237,7 +240,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="Them.$invalid" ng-click="Save()">Lưu</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="them.$invalid" ng-click="Save()">Lưu</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
@@ -247,20 +250,22 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" ng-show="Driver.DriverID != '' ">
                     <div class="modal-header">
-                        <h3 class="text-info">Xem Thông Tin Chi Tiết Của Lái Tàu</h3>
+                        <h3 class="text-info">Sửa Thông Tin Lái Tàu</h3>
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="Xem">
+                        <form class="form-horizontal row" name="sua">
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên lái tàu </label>
                                     {{Driver.DriverName}}
-                                    <input class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
+                                    <input required class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Driver.Phone" type="text" maxlength="30" />
+                                    <input require class="form-control" name="Phone" ng-model="Driver.Phone" ng-pattern="/^[0-9]{10}$/" type="text" maxlength="10" />
+                                    <span style="color:Red" ng-show="sua.Phone.$error.pattern">Số điện thoại không phải là số hoặc ngắn hơn 10 ký tự</span>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> địa chỉ </label>
@@ -275,11 +280,13 @@
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Chứng minh thư </label>
-                                    <input class="form-control" name="CMND" ng-model="Driver.CMND" type="text" maxlength="10" />
+                                    <input require  class="form-control" name="CMND" ng-model="Driver.CMND" ng-pattern="/^[0-9]{9}$/" type="text" maxlength="9" />
+                                    <span style="color:Red" ng-show="sua.CMND.$error.pattern">Chứng minh thư không phải là số hoặc ngắn hơn 8 ký tự</span>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Giấy phép lái tàu </label>
-                                    <input class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" maxlength="10" />
+                                    <input require class="form-control" name="GPLT" ng-model="Driver.GPLT" type="text" maxlength="10" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Hạng lái tàu </label>
@@ -294,11 +301,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ngày cấp GPLT </label>
-                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT " type="date" rows="3">
+                                    <input require class="form-control" name="CreateDateGPLT" ng-model="Driver.CreateDateGPLT " type="date" rows="3">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ngày hêt hạn GPLT </label>
-                                    <input class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date" rows="3">
+                                    <input require class="form-control" name="CreateDateGPLT" ng-model="Driver.ExpriseDateGPLT" type="date" rows="3">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Nơi cấp </label>
@@ -308,7 +315,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Cập nhật</button>
+                        <button type="submit" class="btn btn-primary" id="btnSave" ng-disabled="sua.$invalid" data-dismiss="modal" ng-click="update()">Cập nhật</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>

@@ -32,7 +32,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         });
     }
     $scope.loading = function (id) {
-        fetchdata(id);
+      
     }
     $scope.ClearSearch = function () {
         $scope.SearchKey = "";
