@@ -670,7 +670,10 @@ namespace SeaTrack.Lib.Service
             return false;
         }
 
-
+        public static int CheckExpired()
+        {
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_CheckExpired");
+        }
         #endregion
     }
 }

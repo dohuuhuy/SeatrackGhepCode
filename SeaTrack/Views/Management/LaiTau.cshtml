@@ -59,7 +59,7 @@
                                         <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
                                             <td>{{$index + (currentPage-1)*10+1}}</td>
                                             <td>
-                                                <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
+                                                <a ng-click="View(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#XemThongTinLaiTau">
                                                     <i class="fa fa-list-ul" style="color:#15b4c4"></i>
                                                 </a>
                                                 <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
@@ -91,7 +91,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" >
                     <div class="modal-header">
-                        <h3 class="text-info">Cấp Thiết Bị Cho Lái Tàu</h3>
+                        <h3 class="text-info">Cấp Thiết Bị Cho Lái Tàu h3>
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
@@ -133,7 +133,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="text-info">Danh sách thiết bị</h3>
+                        <h3 class="text-info">Danh sách thiết bị {{Driver.DriverID}}</h3>
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
@@ -161,7 +161,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn" ng-click="fetchData(Driver.DriverID)">Đóng</a>
+                        <a href="#" data-dismiss="modal" class="btn" ng-click="SaveDevice(Driver.DriverID)">Đóng</a>
                     </div>
                 </div>
             </div>

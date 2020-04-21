@@ -264,7 +264,9 @@ App.controller('Controller', function ($scope, $http, Service) {
         $scope.Devices.push(DeviceToAdd);
         fetchData(id);
     }
-
+    $scope.SaveDevice = function (id) {
+        fetchData(id);
+    }
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
     function GetListDeviceOfCustomer() {
         $http({

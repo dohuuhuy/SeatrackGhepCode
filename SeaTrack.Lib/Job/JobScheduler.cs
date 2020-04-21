@@ -44,5 +44,22 @@ namespace SeaTrack.Lib.Job
                 .Build();
             scheduler.ScheduleJob(job, trigger);
         }
+        public static void StarJobCheckExpired()
+        {
+            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+            scheduler.Start();
+
+            IJobDetail job = JobBuilder.Create<JobCheckExpired>().Build();
+
+            ITrigger trigger = TriggerBuilder.Create()
+                .WithDailyTimeIntervalSchedule
+                  (s =>
+                     s.WithIntervalInHours(12)
+                     .OnEveryDay()
+                     .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
+                  )
+                .Build();
+            scheduler.ScheduleJob(job, trigger);
+        }
     }
 }

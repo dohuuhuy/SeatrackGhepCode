@@ -58,6 +58,7 @@
     <Compile Include="DTO\Driver.cs" />
     <Compile Include="DTO\Users.cs" />
     <Compile Include="DTO\User_Device.cs" />
+    <Compile Include="Job\JobCheckExpired.cs" />
     <Compile Include="Job\JobInfo.cs" />
     <Compile Include="Job\JobScheduler.cs" />
     <Compile Include="Job\JobSOS.cs" />

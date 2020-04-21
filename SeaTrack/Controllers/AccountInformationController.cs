@@ -56,50 +56,50 @@ namespace SeaTrack.Controllers
             }
             return RedirectToAction("Login", "Home", new { area = "" });
         }
-        [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file)
-        {
-            var ErrorMessage = "";
-            if (file != null && file.ContentLength > 1 * 1024 * 1024)
-            {
+        //[HttpPost]
+        //public ActionResult Upload(HttpPostedFileBase file)
+        //{
+        //    var ErrorMessage = "";
+        //    if (file != null && file.ContentLength > 1 * 1024 * 1024)
+        //    {
 
-                Users user = (Users)Session["User"];
-                var filename = user.Username + ".jpg";
-                var path = Path.Combine(Server.MapPath("~/Content/images/UserAvatar"), filename);
-                file.SaveAs(path);
-                AdminService.UpdateAvatar(user.UserID, filename);
-                TempData["uploadresult"] = "ok";
-            }
-            try
-            {
+        //        Users user = (Users)Session["User"];
+        //        var filename = user.Username + ".jpg";
+        //        var path = Path.Combine(Server.MapPath("~/Content/images/UserAvatar"), filename);
+        //        file.SaveAs(path);
+        //        AdminService.UpdateAvatar(user.UserID, filename);
+        //        TempData["uploadresult"] = "ok";
+        //    }
+        //    try
+        //    {
                
-                var supportedTypes = new[] { "png", "gif", "jpg" };
-                var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
-                if (!supportedTypes.Contains(fileExt))
-                {
-                    ErrorMessage = "File Extension Is InValid - Only Upload WORD/PDF/EXCEL/TXT File";
+        //        var supportedTypes = new[] { "png", "gif", "jpg" };
+        //        var fileExt = System.IO.Path.GetExtension(file.FileName).Substring(1);
+        //        if (!supportedTypes.Contains(fileExt))
+        //        {
+        //            ErrorMessage = "File Extension Is InValid - Only Upload WORD/PDF/EXCEL/TXT File";
                  
-                }
-                else if (file.ContentLength > (filesize * 1024))
-                {
-                    ErrorMessage = "File size Should Be UpTo " + filesize + "KB";
+        //        }
+        //        else if (file.ContentLength > (filesize * 1024))
+        //        {
+        //            ErrorMessage = "File size Should Be UpTo " + filesize + "KB";
                   
-                }
-                else
-                {
-                    ErrorMessage = "File Is Successfully Uploaded";
+        //        }
+        //        else
+        //        {
+        //            ErrorMessage = "File Is Successfully Uploaded";
                  
-                }
-            }
-            catch (Exception )
-            {
-                ErrorMessage = "Upload Container Should Not Be Empty or Contact Admin";
+        //        }
+        //    }
+        //    catch (Exception )
+        //    {
+        //        ErrorMessage = "Upload Container Should Not Be Empty or Contact Admin";
                
-            }
+        //    }
 
-            //return RedirectToAction("AccountInfo");
+        //    //return RedirectToAction("AccountInfo");
 
-        }
+        //}
 
         [HttpPost]
         public ActionResult ChangePassword(Users user)
