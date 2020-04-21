@@ -31,7 +31,9 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             $scope.UsernameCheck = response.data;
         });
     }
-
+    $scope.loading = function (id) {
+        fetchdata(id);
+    }
     $scope.ClearSearch = function () {
         $scope.SearchKey = "";
         $scope.Status = null;
@@ -204,7 +206,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
 
         $scope.Devices.splice(index, 1);
         $scope.DevicesNotUsed.push(DeviceToRemove);
-        fetchData(id);
+      //  fetchData(id);
     }
     // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
     $scope.AddDeviceToUser = function (index) {
@@ -221,7 +223,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
-        fetchData(id);
+    //    fetchData(id);
     }
 
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
