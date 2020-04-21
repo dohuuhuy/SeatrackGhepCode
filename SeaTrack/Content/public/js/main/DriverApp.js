@@ -7,6 +7,11 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.namesData = [];
     LoadDriver();
     $scope.loadMessage = updateInfo();
+
+    $scope.loading = function (id) {
+        console.log('--------------: ' + id);
+        //fetchdata(id);
+    }
     function updateInfo() {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
@@ -89,7 +94,7 @@ App.controller('Controller', function ($scope, $http, Service) {
             CreateDate: new Date(parseInt(data.CreateDate.substr(6))),
 
         };
-        console.log('i am inside view()' + JSON.stringify($scope.Driver));
+        console.log('i am inside view()' + JSON.stringify($scope.Driver.DriverID));
 
         fetchData($scope.Driver.DriverID);
 
@@ -227,6 +232,9 @@ App.controller('Controller', function ($scope, $http, Service) {
         $scope.name = name;
 
     }
+    $scope.DevicesNotUsed = [];
+    $scope.AddDeviceToUser = [];
+
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
     $scope.AddDevice = function () {
         GetListDeviceOfCustomer();
@@ -241,17 +249,18 @@ App.controller('Controller', function ($scope, $http, Service) {
             url: '/Management/RemoveDeviceFromUserWithDriver/',
             data: RemoveModel
         }).then(function (response) {
-
+            
         });
 
         $scope.Devices.splice(index, 1);
         $scope.DevicesNotUsed.push(DeviceToRemove);
-        fetchData(id);
+        //fetchData(id);
     }
     // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
     $scope.AddDeviceToUser = function (index) {
         DeviceToAdd = $scope.DevicesNotUsed[index];
         id = $scope.Driver.DriverID;
+        console.log(id);
         var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
         $http({
             method: "POST",
@@ -262,7 +271,7 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
-        fetchData(id);
+        //fetchData(id);
     }
 
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
@@ -285,8 +294,8 @@ App.controller('Controller', function ($scope, $http, Service) {
             method: "GET",
             url: '/Management/GetListDeviceByDriverID/' + DriverID
         }).then(function (response) {
-            console.log(response, 'res');
-            $scope.Devices = response.data;
+            console.log(response, 'resi');
+            if (response != '') { $scope.Devices = response.data; }
         }, function (error) {
             console.log(error, 'can not get data.');
         });
