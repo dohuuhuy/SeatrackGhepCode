@@ -1,6 +1,9 @@
 ﻿var DeviceApp = angular.module("DeviceApp", ['angularUtils.directives.dirPagination']);
 
-DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService) {
+DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 100);
+
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     $scope.namesData = [];
@@ -21,7 +24,6 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         console.log('date' + dateExpire);
         dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
         console.log('new date' + dateExpire);
-        //$scope.Device.ExpireDate = new Date(dateExpire);
         $scope.Device.DateExpired = new Date(dateExpire);
     }
     $scope.ClearSearch = function () {
@@ -184,7 +186,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             $scope.namesData = d.data;
             for (var i = 0; i < $scope.namesData.length; i++) {
                 $scope.namesData[i]["DateExpired"] = new Date(parseInt($scope.namesData[i]["DateExpired"].substr(6)))
-                console.log($scope.namesData[i]["DateExpired"]);
+                //console.log($scope.namesData[i]["DateExpired"]);
             }
         }, function () {
             alert('Không tìm thấy dữ liệu !!!');

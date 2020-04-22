@@ -1,6 +1,8 @@
 ﻿var app = angular.module("App", []);
 
-app.controller("Controller", function ($scope, $http) {
+app.controller("Controller", function ($scope, $http, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 1000);
     $scope.UserID = function (id, role, managey) {
         $scope.role = role;
         $scope.id = id;

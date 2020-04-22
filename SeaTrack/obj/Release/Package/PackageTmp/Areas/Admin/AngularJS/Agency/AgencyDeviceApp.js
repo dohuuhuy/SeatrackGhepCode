@@ -1,6 +1,8 @@
 ﻿var DeviceApp = angular.module("AgencyDeviceApp", ['angularUtils.directives.dirPagination']);
 
-DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService) {
+DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 100);
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     $scope.namesData = [];
