@@ -223,6 +223,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdSOSController.cs" />
     <Compile Include="Areas\Admin\Controllers\AgencyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeviceController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Areas\Admin\AngularJS\Agency\DetailApp.js" />
     <Content Include="Areas\Admin\AngularJS\Device\DeviceApp.js" />
     <Content Include="Areas\Admin\AngularJS\PaginationSearch.js" />
+    <Content Include="Areas\Admin\AngularJS\SOSapp.js" />
     <Content Include="Areas\Admin\Pagination JS\dirPagination.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -504,6 +506,7 @@
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Views\AdSOS\ListSOS.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
