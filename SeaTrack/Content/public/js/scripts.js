@@ -25,6 +25,21 @@
 
 
 $(document).ready(function () {
+
+   
+    var wait = function () {
+        console.log("helo");
+        $(document).ajaxStart(function () {
+            $("#main-wait").css("display", "block");
+        });
+        $(document).ajaxComplete(function () {
+            $("#main-wait").css("display", "none");
+        });
+
+    };
+    setTimeout(wait(), 2000);
+
+
     $('[data-toggle="tooltip"]').tooltip();
     var actions = $("table td:last-child").html();
     // Append table with add row form on add new button click

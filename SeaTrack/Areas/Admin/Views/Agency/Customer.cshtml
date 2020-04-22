@@ -4,138 +4,141 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAgency.cshtml";
 }
 
-<div class="container-fluid" ng-app="AgencyModule" ng-controller="AgencyController" ng-init="Role(3)">
-    <h1 class="mt-4">Quản lý khách hàng</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active">Quản lý khách hàng</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <strong class="card-title">Vùng Tìm Kiếm</strong>
-        </div>
-        <div class="card-body">
-            <div class="col col-md-12">
-                <div class="input-group">
-                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                    @*<div class="input-group-btn">
-                        <button class="btn btn-primary" ng-click="ClearSearch()">
-                            <i class="fa fa-search"></i> Search
-                        </button>
-                    </div>*@
+    <div class="container-fluid" ng-app="AgencyModule" ng-controller="AgencyController" ng-init="Role(3)">
+        @Html.Partial("../Shared/_loading")
+        <div ng-cloak="" ng-show="loaded">
+            <h1 class="mt-4">Quản lý khách hàng</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Quản lý khách hàng</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <strong class="card-title">Vùng Tìm Kiếm</strong>
                 </div>
-                <br />
-                @*<div class="input-group ">
-                    <label for="radio1" class="form-check-label col-md-4 ">
-                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
-                    </label>
-                    <label for="radio2" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
-                    </label>
-                </div>*@
-            </div>
+                <div class="card-body">
+                    <div class="col col-md-12">
+                        <div class="input-group">
+                            <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                            @*<div class="input-group-btn">
+                                <button class="btn btn-primary" ng-click="ClearSearch()">
+                                    <i class="fa fa-search"></i> Search
+                                </button>
+                            </div>*@
+                        </div>
+                        <br />
+                        @*<div class="input-group ">
+                            <label for="radio1" class="form-check-label col-md-4 ">
+                                <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                            </label>
+                            <label for="radio2" class="form-check-label col-md-4  ">
+                                <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                            </label>
+                        </div>*@
+                    </div>
 
-        </div>
-
-
-    </div>
-    <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>Danh sách khách hàng</div>
-        <div class="card-body">
-            <button type="button" class="btn btn-primary" data-target="#AddNew" data-toggle="modal" ng-click="AddCustomer()">
-                Thêm mới
-            </button>
-            <label>Tổng: {{Customers.length}}</label>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Thao tác</th>
-                            <th>Tên tài khoản</th>
-                            <th>Họ tên</th>
-                            <th>Ngày tạo</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
-                            <td width="5%">{{$index+1}}</td>
-                            <td width="10%">
-                                <a href="#" data-ng-href="@Url.Action("Detail", "Agency")/{{c.UserID}}" title="Chi tiết khách hàng"><i class="fa fa-eye" style="color:black"></i></a>
-                                <a ng-if="c.Status==1" ng-click="LockUser(c.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
-                                <a ng-if="c.Status==-1" ng-click="UnLockUser(c.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
-                                <a ng-click="DeleteUser(c.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
-
-                            </td>
-                            <td width="15%">{{c.Username}}</td>
-                            <td width="20%">{{c.Fullname}}</td>
-                            <td width="15%">{{c.CreateDate|date: "yyyy-MM-ddTHH:mm:ss"}}</td>
-                            <td width="20%" ng-if="c.Status==-1"><p style="color:red">Tạm khóa</p></td>
-                            <td width="20%" ng-if="c.Status==1"><p style="color:green">Kích hoạt</p></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-center">
-                    <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
                 </div>
 
+
             </div>
-        </div>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Danh sách khách hàng</div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary" data-target="#AddNew" data-toggle="modal" ng-click="AddCustomer()">
+                        Thêm mới
+                    </button>
+                    <label>Tổng: {{Customers.length}}</label>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-        <div class="modal" id="AddNew" role="dialog" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="text-info">Thêm khách hàng</h3>
-                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Resetsave()">x</button>
-                    </div>
-                    <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal" name="AddNewForm">
-                            <div class="form-group">
-                                <label class="control-label"> Tên tài khoản</label>
-                                <input class="form-control" name="Username" ng-model="Username" ng-blur="UsernameExist(Username)" ng-pattern="/^[a-z0-9]\S{5,20}$/" onkeyup="this.value = this.value.toLowerCase();" type="text" placeholder="Username" required maxlength="50" />
-                                <label ng-if="UsernameCheck != 'OK' && UsernameCheck != null" style="color:red">Tên tài khoản đã tồn tại </label>
-                                <span style="color:Red" ng-show="AddNewForm.Username.$error.pattern">Tên tài khoản không phù hợp</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label"> Mật khẩu</label>
-                                <input class="form-control" name="Password" ng-model="Password" ng-pattern="/^[a-z0-9 ]{5,30}$/" type="password" placeholder="password" required maxlength="30" />
-                                <span style="color:Red" ng-show="AddNewForm.Password.$error.pattern">Mật khẩu không phù hợp</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label"> Họ tên</label>
-                                <input class="form-control" name="Fullname" ng-model="Fullname" type="text" placeholder="Fullname" required maxlength="50" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label"> Số điện thoại</label>
-                                <input class="form-control" name="Phone" ng-model="Phone" type="text" ng-pattern="/^[0-9]{0,11}$/" placeholder="Phone" required maxlength="10" />
-                                <span style="color:Red" ng-show="AddNewForm.Phone.$error.pattern">Số điện thoại không đúng</span>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Thao tác</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                                    <td width="5%">{{$index+1}}</td>
+                                    <td width="10%">
+                                        <a href="#" data-ng-href="@Url.Action("Detail", "Agency")/{{c.UserID}}" title="Chi tiết khách hàng"><i class="fa fa-eye" style="color:black"></i></a>
+                                        <a ng-if="c.Status==1" ng-click="LockUser(c.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
+                                        <a ng-if="c.Status==-1" ng-click="UnLockUser(c.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
+                                        <a ng-click="DeleteUser(c.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
 
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label"> Địa chỉ</label>
-                                <input class="form-control" name="Address" ng-model="Address" type="text" placeholder="Address" required maxlength="200" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid || UsernameCheck != 'OK'" ng-click="save()">Lưu</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Resetsave()">Đóng</button>
+                                    </td>
+                                    <td width="15%">{{c.Username}}</td>
+                                    <td width="20%">{{c.Fullname}}</td>
+                                    <td width="15%">{{c.CreateDate|date: "yyyy-MM-ddTHH:mm:ss"}}</td>
+                                    <td width="20%" ng-if="c.Status==-1"><p style="color:red">Tạm khóa</p></td>
+                                    <td width="20%" ng-if="c.Status==1"><p style="color:green">Kích hoạt</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                        </div>
+
                     </div>
                 </div>
+
+                <div class="modal" id="AddNew" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="text-info">Thêm khách hàng</h3>
+                                <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Resetsave()">x</button>
+                            </div>
+                            <div class="modal-body" style="margin-left:20px">
+                                <form class="form-horizontal" name="AddNewForm">
+                                    <div class="form-group">
+                                        <label class="control-label"> Tên tài khoản</label>
+                                        <input class="form-control" name="Username" ng-model="Username" ng-blur="UsernameExist(Username)" ng-pattern="/^[a-z0-9]\S{5,20}$/" onkeyup="this.value = this.value.toLowerCase();" type="text" placeholder="Username" required maxlength="50" />
+                                        <label ng-if="UsernameCheck != 'OK' && UsernameCheck != null" style="color:red">Tên tài khoản đã tồn tại </label>
+                                        <span style="color:Red" ng-show="AddNewForm.Username.$error.pattern">Tên tài khoản không phù hợp</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Mật khẩu</label>
+                                        <input class="form-control" name="Password" ng-model="Password" ng-pattern="/^[a-z0-9 ]{5,30}$/" type="password" placeholder="password" required maxlength="30" />
+                                        <span style="color:Red" ng-show="AddNewForm.Password.$error.pattern">Mật khẩu không phù hợp</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Họ tên</label>
+                                        <input class="form-control" name="Fullname" ng-model="Fullname" type="text" placeholder="Fullname" required maxlength="50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Số điện thoại</label>
+                                        <input class="form-control" name="Phone" ng-model="Phone" type="text" ng-pattern="/^[0-9]{0,11}$/" placeholder="Phone" required maxlength="10" />
+                                        <span style="color:Red" ng-show="AddNewForm.Phone.$error.pattern">Số điện thoại không đúng</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label"> Địa chỉ</label>
+                                        <input class="form-control" name="Address" ng-model="Address" type="text" placeholder="Address" required maxlength="200" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="AddNewForm.$invalid || UsernameCheck != 'OK'" ng-click="save()">Lưu</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Resetsave()">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            </div>
+            <script src="~/Scripts/angular.js"></script>
+            <script src="~/Content/public/js/jquery.min.js"></script>
+            <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+            <script src="~/Areas/Admin/AngularJS/Agency/AgencyModule.js"></script>
+            <script src="~/Areas/Admin/AngularJS/Agency/AgencyService.js"></script>
+            <script src="~/Areas/Admin/AngularJS/Agency/AgencyController.js"></script>
+            <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
+
         </div>
-
-    </div>
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Content/public/js/jquery.min.js"></script>
-    <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="~/Areas/Admin/AngularJS/Agency/AgencyModule.js"></script>
-    <script src="~/Areas/Admin/AngularJS/Agency/AgencyService.js"></script>
-    <script src="~/Areas/Admin/AngularJS/Agency/AgencyController.js"></script>
-    <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
-
-</div>
 

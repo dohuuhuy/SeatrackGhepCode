@@ -1,4 +1,7 @@
-﻿myapp.controller('AdminController', function ($scope, $window, AdminService) {
+﻿myapp.controller('AdminController', function ($scope, $window, AdminService, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 100);
+
     $scope.Role = function (role) {
         $scope.currentPage = 1;
         $scope.pageSize = 10;

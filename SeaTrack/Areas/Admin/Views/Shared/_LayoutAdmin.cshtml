@@ -28,19 +28,19 @@
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
             @*<li class="nav-item">
-                <a class="nav-link">
-                    <i class="fas fa-bell fa-fw"></i>
-                    <span class="count">&nbsp;</span>
-                </a>
-                <div class="noti-content">
-                    <div class="noti-top-arrow">3</div>
-                    <ul id="notiContent"></ul>
-                </div>
-            </li>*@
+                    <a class="nav-link">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <span class="count">&nbsp;</span>
+                    </a>
+                    <div class="noti-content">
+                        <div class="noti-top-arrow">3</div>
+                        <ul id="notiContent"></ul>
+                    </div>
+                </li>*@
             <li class="nav-item">
                 <a class="nav-link">
                     @{var user = Session["User"] as SeaTrack.Lib.DTO.Users;}
-                    @user.FullName là 
+                    @user.FullName là
                     @user.Username
                 </a>
             </li>
@@ -101,7 +101,7 @@
                 </div>
             </nav>
         </div>
-        <div id="layoutSidenav_content">
+        <div id="layoutSidenav_content" >
             <main>
                 @RenderBody()
             </main>
@@ -119,12 +119,14 @@
             </footer>
         </div>
     </div>
+
+
+    <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/jquery.js"></script>
-    @*<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>*@
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Content/public/js/scripts.js"></script>
     <script src="~/Handlers/keepAlive.js"></script>
-
 </body>
 </html>
 

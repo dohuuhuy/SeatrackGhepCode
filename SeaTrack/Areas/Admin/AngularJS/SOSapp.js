@@ -1,6 +1,8 @@
 ﻿var myapp = angular.module('SOSapp', ['angularUtils.directives.dirPagination']);
 
-myapp.controller('SOSctrl', function ($scope, $http, SV) {
+myapp.controller('SOSctrl', function ($scope, $http, SV, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 100);
     LoadSOS();
     $scope.currentPage = 1;
     $scope.pageSize = 10;
@@ -18,7 +20,6 @@ myapp.controller('SOSctrl', function ($scope, $http, SV) {
 
     $scope.XuLy = function (id) { // xử lý chuyển status về -1
         if (confirm("Bạn chắn xóa ?")) {
-            console.log("helo! tao chưa có làm " + id);
             $http({
                 method: 'GET',
                 url: '/Admin/AdSOS/ChangeStatusSOS/' + id
@@ -37,7 +38,6 @@ myapp.controller('SOSctrl', function ($scope, $http, SV) {
                 $scope.namesData[i]["DateRequest"] = new Date(parseInt($scope.namesData[i]["DateRequest"].substr(6)));
             }
             if ($scope.namesData.length <= 0) {
-                console.log('helo')
             }
 
         }, function () {
