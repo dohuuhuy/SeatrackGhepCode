@@ -99,10 +99,10 @@ namespace SeaTrack.Lib.Service
                             IssuedBy = reader["IssuedBy"].ToString(),
                             Note = reader["IssuedBy"].ToString(),
                             ManageBy = reader["ManageBy"].ToString(),
-                            CreateDate = Convert.ToDateTime(reader["CreateDate"].ToString()),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
                             Status = Convert.ToInt16(reader["Status"]),
-                            CreateDateGPLT = Convert.ToDateTime(reader["CreateDateGPLT"].ToString()),
-                            ExpriseDateGPLT = Convert.ToDateTime(reader["ExpriseDateGPLT"].ToString()),
+                            CreateDateGPLT = Convert.ToDateTime(reader["CreateDateGPLT"]),
+                            ExpriseDateGPLT = Convert.ToDateTime(reader["ExpriseDateGPLT"]),
 
                         };
                         drivers.Add(data);

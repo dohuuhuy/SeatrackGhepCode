@@ -1,47 +1,4 @@
-﻿@*<style>
-        #menubar ul li {
-            border: 1.2px solid ;
-            margin-left: 2px;
-            font-weight: bold;
-            border-radius: 5px;
-            padding: 0px 5px;
-            /*padding-left: 5px;
-            padding-right: 5px;*/
-        }
-
-        #menubar ul #a {
-            border: 1.2px solid #0026ff;
-
-            color: #0026ff;
-        }
-        #menubar ul #a a{
-            color: #0026ff;
-        }
-        #menubar ul #a {
-            border: 1.2px solid #0026ff;
-            color: #0026ff;
-        }
-        #menubar ul #a a {
-
-            color: #0026ff;
-        }
-        #menubar ul #b {
-            border: 1.2px solid #15b4c4;
-            color: #15b4c4;
-        }
-
-        #menubar ul #b a{
-            color: #15b4c4;
-        }
-        #menubar ul #c {
-            border: 1.2px solid #00ff21;
-            color: #00ff21;
-        }
-        #menubar ul #c a {
-            color: #00ff21;
-        }
-    </style>*@
-<nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
+﻿<nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
     <button type="button" id="sidebarCollapse" class="btn btn-info">
         <i class="fas fa-align-left"></i>
         <span>Menu</span>
@@ -57,151 +14,77 @@
     </button>
 
     <div class="collapse navbar-collapse d-none" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item active" onclick="win_reload();" id="a">
-            <a id="linkmenu" href="~/Home/Route">
-                <button onclick="win_reload();" type="button"
-                        class="btn btn-outline-primary">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active" onclick="win_reload();">
+                <a id="a" href="~/Home/Route" onclick="win_reload();" type="button"
+                   class="btn btn-outline-primary">
                     <i class="fas fa-location-arrow"></i>
                     Giám sát
+                </a>
+            </li>
+            <li class="nav-item dropdown" >
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-chart-bar"></i>
+                    Báo cáo
                 </button>
-            </a>
-        </li>
-        <li class="nav-item dropdown" id="a">
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-chart-bar"></i>
-                Báo cáo
-            </button>
-            <div class="dropdown-menu">
-                <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
-                <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
+                <div class="dropdown-menu">
+                    <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
+                    <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
 
-            </div>
-        </li>
-        <li class="nav-item dropdown" id="a">
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-users-cog"></i>
-                Quản trị
-            </button>
-            <div class="dropdown-menu">
-                <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
-                <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị</a>
-                <a id="show_device" class="dropdown-item" href="~/Management/Driver">Lái tàu</a>
-            </div>
-        </li>
-        <li class="nav-item" id="b">
-            <a id="linkmenu" href="~/Utilities/Index">
-                <button id="show_tienich" type="button" class="btn btn-outline-info">
+                </div>
+            </li>
+            <li class="nav-item dropdown" >
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-users-cog"></i>
+                    Quản trị
+                </button>
+                <div class="dropdown-menu">
+                    <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
+                    <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị</a>
+                    <a id="show_device" class="dropdown-item" href="~/Management/Driver">Lái tàu</a>
+                </div>
+            </li>
+            <li class="nav-item" >
+
+                <a id="b" href="~/Utilities/Index" type="button" class="btn btn-outline-info">
                     <i class="fas fa-tasks"></i>
                     Tiện ích
+                </a>
+            </li>
+            <li class="nav-item" >
 
-                </button>
-            </a>
-        </li>
-        <li class="nav-item" id="b">
-            <a id="linkmenu" href="~/FeedBack/Index">
-                <button id="show_comment" type="button" class="btn btn-outline-info">
+                <a id="b" href="~/FeedBack/Index" class="btn btn-outline-info">
                     <i class="fas fa-comments"></i>
                     Phản hồi
+                </a>
+
+            </li>
+            <li class="nav-item dropdown" id="b">
+                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-question"></i>
+                    Hướng dẫn
                 </button>
-            </a>
-        </li>
-        <li class="nav-item dropdown" id="b">
-            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-question"></i>
-                Hướng dẫn
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
-            </div>
-        </li>
-        <li class="nav-item dropdown" id="c">
-            <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-user"></i>
-                Tài khoản
-            </button>
-            <div class="dropdown-menu">
-                <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                <a id="show_info_device_exp" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
-            </div>
-        </li>
-        <li class="nav-item" id="d">
-            <a id="linkmenu" href="~/Home/Logout">
-                <button type="button" class="btn btn-outline-dark" title="Đăng xuất">
-                    <i class="fas fa-sign-out-alt"></i>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" id="c">
+                <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-user"></i>
+                    Tài khoản
                 </button>
-            </a>
-        </li>
-
-
-
-
-    </ul>
+                <div class="dropdown-menu">
+                    <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
+                    <a id="" onlick="abc()" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
+                </div>
+            </li>
+            <li class="nav-item" id="d">
+                <a href="~/Home/Logout" type="button" class="btn btn-outline-dark" title="Đăng xuất">
+                    <i class="fa fa-sign-out-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
-<style>
-    #menubar ul li {
-
-        margin-left: 2px;
-      
-    }
-    .btn.btn-info {
-        margin: 0px 0;
-    }
-
-    .navbar-toggler {
-        padding: .25rem .3rem;
-        margin: 5px 0;
-    }
-    @@media only screen and (max-width : 1120px) {
-
-    
 
 
-      
-
-        #menubar ul li {
-            margin-top: 10px;
-        }
-
-        #menubar ul button {
-            width: 100%;
-        }
-
-        #menubar ul li a {
-            width: 100%;
-        }
-    }
-
-    @@media only screen and (max-width : 480px) {
-
-        #SOS {
-            display: none
-        }
-
-        #War {
-            display: none
-        }
-
-
-        #sidebarCollapse span {
-            display: none;
-        }
-        #menubar ul li {
-            margin-top: 2px;
-
-        }
-            #menubar ul button {
-                width: 100%;
-            }
-        #menubar ul li a {
-            width: 100%;
-        }
-          
-    }
-</style>

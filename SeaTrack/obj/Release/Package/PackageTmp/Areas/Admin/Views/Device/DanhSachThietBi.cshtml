@@ -117,6 +117,12 @@
                                 <label class="control-label"> Phiên bản </label>
                                 <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceVersion" type="text" disabled maxlength="50" />
                             </div>
+                            <div class="form-group">
+                                <label class="control-label"> Loại tàu </label>
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==1" type="text" disabled maxlength="50" value="Tàu dưới 12m"/>
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==2" type="text" disabled maxlength="50" value="Tàu từ 12m - 15m" />
+                                <input class="form-control" name="TypeShip" ng-if="Device.TypeShip==3" type="text" disabled maxlength="50" value="Tàu trên 15m" />
+                            </div>
                         </div>
                         <div class="col col-md-6">
                             <div class="form-group">
@@ -164,8 +170,14 @@
                                 <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceVersion" type="text" placeholder="Phiên bản ..." required maxlength="50" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Nhóm thiết bị </label>
-                                <input class="form-control" name="DeviceVersion" ng-model="Device.DeviceGroup" type="text" placeholder="Nhóm ..." required maxlength="50" />
+                                <label class="control-label"> Loại tàu </label>
+                                <select class="form-control" name="TypeShip" ng-model="Device.TypeShip" required>
+                                    <option value="">Chọn loại tàu</option>
+                                    <option value="1">Tàu dưới 12m</option>
+                                    <option value="2">Tàu từ 12m - 15m</option>
+                                    <option value="3">Tàu trên 15m</option>
+                                </select>
+                                @*<input class="form-control" name="TypeShip" ng-model="Device.TypeShip" type="text" placeholder="Loại tàu ..." required maxlength="50" />*@
                             </div>
                         </div>
                         <div class="col col-md-6">
@@ -229,8 +241,14 @@
                                 <label ng-if="ImeiCheck == Device.DeviceImei" style="color:red">Imei đã tồn tại</label>
                             </div>
                             <div class="form-group">
-                                <label class="control-label"> Nhóm thiết bị </label>
-                                <input class="form-control" name="DeviceGroup" ng-model="Device.DeviceGroup" type="text" placeholder="Nhóm ..." required />
+                                <label class="control-label"> Loại tàu </label>
+                                <select class="form-control" name="TypeShip" ng-model="Device.TypeShip" required>
+                                    <option value="">Chọn loại tàu</option>
+                                    <option value="1">Tàu dưới 12m</option>
+                                    <option value="2">Tàu từ 12m - 15m</option>
+                                    <option value="3">Tàu trên 15m</option>
+                                </select>
+                                @*<input class="form-control" name="TypeShip" ng-model="Device.TypeShip" type="text" placeholder="Loại tàu ..." required />*@
                             </div>
 
                             <div class="form-group">

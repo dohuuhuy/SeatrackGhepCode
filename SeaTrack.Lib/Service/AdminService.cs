@@ -346,18 +346,18 @@ namespace SeaTrack.Lib.Service
                 device.DeviceVersion, device.DeviceImei, device.TypeShip, device.DateExpired, device.DeviceNote);
         }
 
-        public static List<DeviceViewModel> GetListDevice()
+        public static List<Device> GetListDevice()
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDevice"))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    lst = new List<Device>();
 
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
@@ -366,10 +366,10 @@ namespace SeaTrack.Lib.Service
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
-                            ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
-                            ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
+                            //ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
+                            //ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
 
 
 
@@ -381,16 +381,16 @@ namespace SeaTrack.Lib.Service
             return lst;
         }//Lấy danh sách tất cả device
 
-        public static DeviceViewModel GetDeviceByID(int deviceID)
+        public static Device GetDeviceByID(int deviceID)
         {
-            DeviceViewModel device = null;
+            Device device = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDeviceByID", deviceID))
             {
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
@@ -400,8 +400,8 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
-                            ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
+                            //ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString())
 
                         };
                         device = data;
@@ -412,18 +412,18 @@ namespace SeaTrack.Lib.Service
         }//Lấy device theo ID
 
         //Lấy danh sách device theo UserID
-        public static List<DeviceViewModel> GetListDeviceByUserID(int UserID)
+        public static List<Device> GetListDeviceByUserID(int UserID)
         {
-            List<DeviceViewModel> lst = new List<DeviceViewModel>();
+            List<Device> lst = new List<Device>();
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceByUserID", UserID))
             {
                 if (reader.HasRows)
                 {
-                    //lst = new List<DeviceViewModel>();
+                    //lst = new List<Device>();
 
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
@@ -433,10 +433,10 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
-                            ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
-                            ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
+                            //ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
+                            //ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1,
                           
                         };
                         lst.Add(data);
@@ -445,18 +445,18 @@ namespace SeaTrack.Lib.Service
             }
             return lst;
         }
-        public static List<DeviceViewModel> GetListDeviceByDriverID(int UserID)
+        public static List<Device> GetListDeviceByDriverID(int UserID)
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = new List<Device>();
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceByDriverID", UserID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    //lst = new List<Device>();
 
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             TypeShip = Convert.ToInt32(reader["TypeShip"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
@@ -466,10 +466,10 @@ namespace SeaTrack.Lib.Service
                             DeviceVersion = reader["DeviceVersion"].ToString(),
                             //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
-                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
-                            ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
-                            ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1
+                            //ExpireDate = Convert.ToDateTime(reader["DateExpired"].ToString()),
+                            //ExpireStatus = DateTime.Compare(Convert.ToDateTime(reader["DateExpired"]), DateTime.Now) > 0 ? 1 : -1
                         };
                         lst.Add(data);
                     }
@@ -479,23 +479,23 @@ namespace SeaTrack.Lib.Service
         }
         //Username != null, Lấy danh sách thiết bị thuộc về Username nhưng chưa được gán cho người dùng khác
         //Username == null, lấy danh sách thiết bị chưa được gán cho bất kỳ người dùng
-        public static List<DeviceViewModel> GetListDeviceNotUsedByUser(string Username)
+        public static List<Device> GetListDeviceNotUsedByUser(string Username)
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceNotUsedByUser", Username))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    lst = new List<Device>();
 
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DateExpired = (Convert.ToDateTime(reader["DateExpired"]).ToString("dd/MM/yyyy")),
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                         };
                         lst.Add(data);
                     }
@@ -504,22 +504,22 @@ namespace SeaTrack.Lib.Service
             return lst;
         }
 
-        public static List<DeviceViewModel> GetListDeviceBelongToAgencyNotUsedByUser(int AgencyID, string Username)
+        public static List<Device> GetListDeviceBelongToAgencyNotUsedByUser(int AgencyID, string Username)
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceBelongToAgencyNotUsedByUser", AgencyID, Username))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    lst = new List<Device>();
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DateExpired = reader["DateExpired"].ToString()
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                         };
                         lst.Add(data);
                     }
@@ -530,22 +530,22 @@ namespace SeaTrack.Lib.Service
             return null;
         }
 
-        public static List<DeviceViewModel> GetListDeviceOfCustomer(string Username, int UserID)
+        public static List<Device> GetListDeviceOfCustomer(string Username, int UserID)
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceOfCustomer", Username, UserID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    lst = new List<Device>();
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DateExpired = reader["DateExpired"].ToString()
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                         };
                         lst.Add(data);
                     }
@@ -556,22 +556,22 @@ namespace SeaTrack.Lib.Service
             return null;
 
         }
-        public static List<DeviceViewModel> GetListDeviceOfCustomerWithDriver(string Username)
+        public static List<Device> GetListDeviceOfCustomerWithDriver(string Username)
         {
-            List<DeviceViewModel> lst = null;
+            List<Device> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceOfCustomerWithDriver", Username))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<DeviceViewModel>();
+                    lst = new List<Device>();
                     while (reader.Read())
                     {
-                        var data = new DeviceViewModel()
+                        var data = new Device()
                         {
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceNo = reader["DeviceNo"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DateExpired = reader["DateExpired"].ToString()
+                            DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                         };
                         lst.Add(data);
                     }

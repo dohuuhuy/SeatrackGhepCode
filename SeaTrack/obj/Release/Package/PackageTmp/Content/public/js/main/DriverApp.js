@@ -5,12 +5,37 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.currentPage = 1;
     $scope.pageSize = 5;
     $scope.namesData = [];
+    $scope.DevicesNotUsed = [];
+    $scope.AddDeviceToUser = [];
     LoadDriver();
     $scope.loadMessage = updateInfo();
+
+    $scope.loading = function (id) {
+        console.log('--------------: ' + id);
+        //fetchdata(id);
+    }
     function updateInfo() {
         var today = new Date();
         return "Last updated " + today.toLocaleString() + ".";
     };
+
+   
+
+    $scope.CheckCMND = function (CMND) {
+        console.log('cmnd: ' + CMND);
+        $scope.CMNDexists = "OK";
+        var x = { CMND: CMND };
+        $http({
+            method: 'POST',
+            url: '/Management/CheckCMND',
+            data: x
+        }).then(function (response) {
+            console.log(response, 'kiểm tra tồn tại' );
+            $scope.CMNDexists = response.data;
+        });
+    }
+
+
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
@@ -18,6 +43,10 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
         return total;
     };
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.DeviceExtension = function (dateExpire, time) {
         console.log('date' + dateExpire);
         dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
@@ -67,7 +96,7 @@ App.controller('Controller', function ($scope, $http, Service) {
             CreateDate: new Date(parseInt(data.CreateDate.substr(6))),
 
         };
-        console.log('i am inside view()' + JSON.stringify($scope.Driver));
+        console.log('i am inside view()' + JSON.stringify($scope.Driver.DriverID));
 
         fetchData($scope.Driver.DriverID);
 
@@ -119,7 +148,7 @@ App.controller('Controller', function ($scope, $http, Service) {
             Service.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
-                alert('Unable to Get Data !!!');
+                alert('Không có dữ liệu !!!');
             });
             $scope.Clear();
             alert(" Updated Successfully !!!");
@@ -168,13 +197,15 @@ App.controller('Controller', function ($scope, $http, Service) {
     $scope.Lock = function (index) {
 
         console.log('i am inside khóa funcr' + JSON.stringify($scope.Driver));
-        $http({
-            method: 'GET',
-            url: '/Management/LockDriver/' + $scope.namesData[index].DriverID
-        }).then(function (response) {
-            LoadDriver();
-            alert(response.data);
-        });
+        if (confirm("Bạn có muốn Khóa lái tàu ?", "thông báo")) {
+            $http({
+                method: 'GET',
+                url: '/Management/LockDriver/' + $scope.namesData[index].DriverID
+            }).then(function (response) {
+                LoadDriver();
+                alert(response.data);
+            });
+        }
     };
     $scope.Unlock = function (index) {
 
@@ -192,7 +223,7 @@ App.controller('Controller', function ($scope, $http, Service) {
         Service.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
         }, function () {
-            alert('Unable to Get Data !!!');
+            alert('Không có dữ liệu !!!');
         });
 
     }
@@ -203,6 +234,8 @@ App.controller('Controller', function ($scope, $http, Service) {
         $scope.name = name;
 
     }
+
+
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
     $scope.AddDevice = function () {
         GetListDeviceOfCustomer();
@@ -217,17 +250,18 @@ App.controller('Controller', function ($scope, $http, Service) {
             url: '/Management/RemoveDeviceFromUserWithDriver/',
             data: RemoveModel
         }).then(function (response) {
-
+            
         });
 
         $scope.Devices.splice(index, 1);
         $scope.DevicesNotUsed.push(DeviceToRemove);
-        fetchData(id);
+        //fetchData(id);
     }
     // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
     $scope.AddDeviceToUser = function (index) {
         DeviceToAdd = $scope.DevicesNotUsed[index];
         id = $scope.Driver.DriverID;
+        console.log(id);
         var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
         $http({
             method: "POST",
@@ -238,9 +272,11 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
+        //fetchData(id);
+    }
+    $scope.SaveDevice = function (id) {
         fetchData(id);
     }
-
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
     function GetListDeviceOfCustomer() {
         $http({
@@ -261,8 +297,9 @@ App.controller('Controller', function ($scope, $http, Service) {
             method: "GET",
             url: '/Management/GetListDeviceByDriverID/' + DriverID
         }).then(function (response) {
-            console.log(response, 'res');
-            $scope.Devices = response.data;
+            console.log(response, 'resi');
+            if (response != '')
+                $scope.Devices = response.data;
         }, function (error) {
             console.log(error, 'can not get data.');
         });

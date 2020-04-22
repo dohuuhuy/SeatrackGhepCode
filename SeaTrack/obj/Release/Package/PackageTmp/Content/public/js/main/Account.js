@@ -7,7 +7,10 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     //$scope.loadMessage = updateInfo();
     LoadAccounts();
 
-
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.total = function () {
         var total = 0;
         angular.forEach($scope.namesData, function (item) {
@@ -16,6 +19,21 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         return total;
     };
 
+    $scope.CheckUsername = function (Username) {
+        $scope.UsernameCheck = "OK";
+        var User = { Username: Username };
+        $http({
+            method: 'POST',
+            url: '/Management/CheckUsername',
+            data: User
+        }).then(function (response) {
+            console.log(response, 'kiểm tra tồn tại' + $scope.Account.FullName);
+            $scope.UsernameCheck = response.data;
+        });
+    }
+    $scope.loading = function (id) {
+      
+    }
     $scope.ClearSearch = function () {
         $scope.SearchKey = "";
         $scope.Status = null;
@@ -62,13 +80,13 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
                 // $scope.namesData.push(response.data);
                 LoadAccounts();
                 $scope.Clear();
-                alert(" Added Successfully !!!");
+                alert(" Thêm mới thành công !!!");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
         }
         else {
-            alert('Please Enter All the Values !!');
+            alert('Hãy chắc chắn rằng bạn đã nhập đủ các trường !!');
         }
     };
     $scope.update = function () {
@@ -85,10 +103,10 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             AccountService.GetAllRecords().then(function (d) {
                 $scope.namesData = d.data;
             }, function () {
-                alert('Unable to Get Data !!!');
+                alert('Không có dữ liệu !!!');
             });
             $scope.Clear();
-            alert(" Updated Successfully !!!");
+            alert(" Cập nhật thành công !!!");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -131,13 +149,16 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
     $scope.Lock = function (index) {
 
         console.log('i am inside khóa funcr' + JSON.stringify($scope.Account));
-        $http({
-            method: 'GET',
-            url: '/Management/LockUsers/' + $scope.namesData[index].UserID
-        }).then(function (response) {
-            LoadAccounts();
-            alert(response.data);
-        });
+        if (confirm("Bạn có muốn khóa người dùng ?", "thông báo")) {
+            $http({
+                method: 'GET',
+                url: '/Management/LockUsers/' + $scope.namesData[index].UserID
+            }).then(function (response) {
+                LoadAccounts();
+                alert(response.data);
+            });
+        }
+
     };
     $scope.Unlock = function (index) {
 
@@ -155,13 +176,13 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         AccountService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
         }, function () {
-            alert('Unable to Get Data !!!');
+            alert('Không có dữ liệu !!!');
         });
 
     }
     // -------------------------- Cấp thiết bị   ------------------------------------------------//
     $scope.UserID = function (name) {
-   
+
         $scope.name = name;
 
     }
@@ -185,10 +206,10 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
 
         $scope.Devices.splice(index, 1);
         $scope.DevicesNotUsed.push(DeviceToRemove);
-        fetchData(id);
+      //  fetchData(id);
     }
     // cấp thiết bị cho người dùng và xóa thiết bị ra khỏi list thiết bị không sử dụng
-    $scope.AddDeviceToUser = function(index) {
+    $scope.AddDeviceToUser = function (index) {
         DeviceToAdd = $scope.DevicesNotUsed[index];
         id = $scope.Account.UserID;
         var Model = { UserID: id, DeviceID: DeviceToAdd.DeviceID };
@@ -202,7 +223,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
-        fetchData(id);
+    //    fetchData(id);
     }
 
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
@@ -214,23 +235,23 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;
         }, function (error) {
-            console.log(error, 'can not get data.');
+            console.log(error, 'Không có dữ liệu.');
         });
-        };
+    };
 
-        // lấy danh sach thiết bị của người dùng theo id trong list của khách hàng
-        // oke chạy
-        function fetchData(UserID) {
-            $http({
-                method: "GET",
-                url: '/Management/GetListDeviceByUserID/' + UserID
-            }).then(function (response) {
-                console.log(response, 'res');
-                $scope.Devices = response.data;
-            }, function (error) {
-                console.log(error, 'can not get data.');
-            });
-        };
+    // lấy danh sach thiết bị của người dùng theo id trong list của khách hàng
+    // oke chạy
+    function fetchData(UserID) {
+        $http({
+            method: "GET",
+            url: '/Management/GetListDeviceByUserID/' + UserID
+        }).then(function (response) {
+            console.log(response, 'res');
+            $scope.Devices = response.data;
+        }, function (error) {
+            console.log(error, 'Không có dữ liệu.');
+        });
+    };
 });
 
 AccountApp.factory('AccountService', function ($http) {

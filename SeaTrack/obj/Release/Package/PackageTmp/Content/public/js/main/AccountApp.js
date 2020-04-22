@@ -2,13 +2,14 @@
 
 AccountApp.controller('Controller', function ($scope, $http, Service) {
     LoadUser();
-    $scope.ChangePassword = function(){
-    $scope.Status = !$scope.Status;
-    //$scope.User.CreateDate = new Date(parseInt($scope.User.CreateDate.substr(6)));
-}
-
+//    $scope.ChangePassword = function(){
+//    $scope.Status = !$scope.Status;
+//}
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.update = function () {
-        //nếu không trường nào bị null
         
             console.log('i am inside update funcr ' +
                 JSON.stringify($scope.User));
@@ -19,7 +20,6 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
             }).then(function successCallback(response) {
                 LoadUser();
                 $scope.Clear();
-                alert(response.data);
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });

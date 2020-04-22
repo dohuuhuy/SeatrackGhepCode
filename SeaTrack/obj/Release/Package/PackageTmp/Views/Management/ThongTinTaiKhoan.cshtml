@@ -6,16 +6,12 @@
 
 }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 <div id="content-taikhoan" class="main contaner-fuild" ng-app="AccountApp" ng-controller="AccountCtrl" ng-init="UserID( '@user.Username')">
     <div class="wrapper">
-        @Html.Partial("_MenuThietBiVaLaiTau");
-
-
+        @Html.Partial("_MenuThietBiVaLaiTau")
         <div id="content-taikhoan-body" class="content">
-            <div class="container-fluid">
-                <div id="signupbox" class="mainbox">
+                          <div id="signupbox" class="mainbox">
                     <div class="panel panel-primary">
                         <div class="jumbotron ">
                             <h2>Thông Tin Tài Khoản</h2>
@@ -27,10 +23,10 @@
                             <div class="card-body">
                                 <div class="col col-md-12">
                                     <div class="input-group">
-                                        <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
+                                        <input require  type="text" name="input1-group2" ng-model="SearchKey" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListSearch('SearchKey','data')"><br />
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" ng-click="ClearSearch()">
-                                                <i class="fa fa-search"></i> Search
+                                                <i class="fa fa-search"></i> Làm mới
                                             </button>
                                         </div>
                                     </div>
@@ -93,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+           
         </div>
 
         <div class="modal fade" id="XemThongTin" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
@@ -105,31 +101,31 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="XemThongTin">
+                        <form class="form-horizontal row" name="xem">
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text" disabled maxlength="50" />
+                                    <input require  class="form-control" name="Username" ng-model="Account.Username" type="text" disabled maxlength="50" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" disabled maxlength="30" />
+                                    <input require  class="form-control" name="FullName" ng-model="Account.FullName" type="text" disabled maxlength="30" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" disabled maxlength="50" />
+                                    <input require  class="form-control" name="Phone" ng-model="Account.Phone" type="text" disabled maxlength="50" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Địa chỉ </label>
-                                    <input class="form-control" name="Address" ng-model="Account.Address" type="text" disabled maxlength="10" />
+                                    <input require  class="form-control" name="Address" ng-model="Account.Address" type="text" disabled maxlength="10" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Người tạo </label>
-                                    <input class="form-control" name="CreatBy" ng-model="Account.CreateBy" type="text" disabled maxlength="200" />
+                                    <input require  class="form-control" name="CreatBy" ng-model="Account.CreateBy" type="text" disabled maxlength="200" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Người quản lý </label>
-                                    <input class="form-control" name="ManageBy" ng-model="Account.ManageBy" type="text" disabled maxlength="200" />
+                                    <input require  class="form-control" name="ManageBy" ng-model="Account.ManageBy" type="text" disabled maxlength="200" />
                                 </div>
                             </div>
                             <div class="col col-md-6">
@@ -159,7 +155,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -172,21 +168,27 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="AddNewForm">
-                            <div class="col col-md-6">
+                        <form class="form-horizontal row" name="them">
+                            <div class="col col-md-12">
                                 <div class="form-group">
                                     <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text" placeholder="Tên tài khoản ..."
-                                           required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
-                                    @*<label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>*@
+
+                                    <input require  class="form-control" name="Username" ng-model="Account.Username" ng-blur="CheckUsername(Account.Username)"
+                                           ng-pattern="/^[a-z0-9]\S{5,20}$/" onkeyup="this.value = this.value.toLowerCase();"
+                                           type="text" required maxlength="50" placeholder="Tên tài khoản ..."/>
+                                    <label ng-if="UsernameCheck != 'OK' && UsernameCheck != null" style="color:red">Tên tài khoản đã tồn tại </label>
+                                    <span style="color:Red" ng-show="them.Username.$error.pattern">Tên tài khoản không phù hợp</span>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text" placeholder="Họ và tên ..." required maxlength="30" />
+                                    <input require  class="form-control" name="FullName" ng-model="Account.FullName" type="text" placeholder="Họ và tên ..." required maxlength="30" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text" placeholder="Số điện thoại ..." required maxlength="50" />
+                                    <input require class="form-control" ng-pattern="/^[0-9]{10}$/" name="Phone" ng-model="Account.Phone" type="text" placeholder="Số điện thoại ..." required maxlength="10" />
+                                    <span style="color:Red" ng-show="them.Phone.$error.pattern">Số điện thoại không phù hợp</span>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Địa chỉ </label>
@@ -198,8 +200,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="Save()">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="them.$invalid" ng-click="Save()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
                     </div>
                 </div>
             </div>
@@ -213,24 +215,25 @@
                         <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
                     </div>
                     <div class="modal-body" style="margin-left:20px">
-                        <form class="form-horizontal row" name="UpdateForm">
+                        <form class="form-horizontal row" name="sua">
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên tài khoản </label>
-                                    <input class="form-control" name="Username" ng-model="Account.Username" type="text"
+                                    <input require  class="form-control" name="Username" ng-model="Account.Username" type="text"
                                            required maxlength="50" ng-blur="NoAccountExist(Account.Username)" />
                                     <label ng-if="NoCheck == Account.Username" style="color:red">Số hiệu đã tồn tại</label>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Họ và tên </label>
-                                    <input class="form-control" name="FullName" ng-model="Account.FullName" type="text"
+                                    <input require  class="form-control" name="FullName" ng-model="Account.FullName" type="text"
                                            required maxlength="30" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Số điện thoại </label>
-                                    <input class="form-control" name="Phone" ng-model="Account.Phone" type="text"
-                                           required maxlength="50" />
+                                    <input require class="form-control" ng-pattern="/^[0-9]{10}$/" name="Phone" ng-model="Account.Phone" type="text" placeholder="Số điện thoại ..." required maxlength="10" />
+                                    <span style="color:Red" ng-show="sua.Phone.$error.pattern">Số điện thoại không phù hợp</span>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Địa chỉ </label>
@@ -265,8 +268,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-click="update()">Update</button>
-                        <a href="#" data-dismiss="modal" class="btn" ng-click="Clear()">Close</a>
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="sua.$invalid" ng-click="update()">Cập nhật</button>
+                        <a href="#" data-dismiss="modal" class="btn" ng-click="Clear()">Đóng</a>
                     </div>
                 </div>
             </div>
@@ -303,25 +306,10 @@
 
                     </div>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn" ng-click="fetchData(Account.UserID)">Close</a>
+                        <a href="#" data-dismiss="modal" class="btn" ng-click="loading(Account.UserID)">Dóng</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Content/public/js/main/Account.js"></script>
-<script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
-<style>
-    #dataTable th {
-        background-color: #15b4c4;
-        color: white;
-        padding: 15px;
-
-    }
-    #dataTable td {
-        vertical-align: inherit;
-        padding: 15px;
-    }
-</style>
