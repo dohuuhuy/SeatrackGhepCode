@@ -770,7 +770,6 @@ function getInfoWindow(_dv, n) {
             strStatus += 'Tên thiết bị: <b>' + _dv["DeviceName"] + '</b><br>';
 
         strStatus += 'Thời gian: <b>' + dte + '</b><br>'
-            + 'Trạng thái: <b>' + _stt_[_dv["Status"]]["name"] + '</b><br>'
             + 'Toạ độ: <b>' + _dv["Latitude"] + ' (' + _dv["DirectionSN"]
             + ')</b> - <b>' + _dv["Longitude"] + ' (' + _dv["DirectionEW"] + ')</b><br>'
             + '</div>';
@@ -821,7 +820,7 @@ function SOS() {
     //     markerSOS[i].setMap(null);
     // }
     _arSOSMarker = [];
-    _SOSInfo = [];
+//    _SOSInfo = [];
     $.ajax({
         type: 'GET',
         url: '/SOS/GetSOS',
@@ -843,35 +842,15 @@ function SOS() {
                     icon: "/Content/images/tau/tau-do.png",
                     map:map
                 });
-                //marker.setMap(map);
-
-
-                var SOinfo = new google.maps.InfoWindow({
-                    content: 'Đang cập nhật dữ liệu!',
-                });
-
-                SOinfo.setContent(getInfoWindow(_listSOS[i], 2));
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
-
                     return function () {
                         infowindow.setContent(getInfoWindow(_listSOS[i], 2));
                         infowindow.open(map, marker);
                     }
-
-                })(marker, i));
-               
-                // marker.addListener('click', function () {
-                //     clearInfoWin();
-                //     console.log(marker);
-                //     console.log(SOinfo);
-                //     SOinfo.open(map, marker);
-                // });
+                })(marker, i));           
                 _arSOSMarker.push(marker);
                 //_SOSInfo.push(SOinfo);
-
-
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
-                //console.log(date);
                 var dte = date.getDate() + '/' + (date.getMonth() + 1) + '/'
                     + date.getFullYear() + ' ' + date.getHours() + ':'
                     + date.getMinutes();
@@ -888,14 +867,6 @@ function SOS() {
                     + _listSOS[i]["Longitude"] + "." + _listSOS[i]["DirectionEW"]
                     + '</td></tr>';
             } $("#SOSData").html(_tb);
-            //for(var i = 0; i<_SOSInfo.length;i++){
-            //    _arSOSMarker[i].addListener('click', function(){
-            //        console.log(i);
-            //        //var SOSIn = _SOSInfo[i]
-            //        //SOSIn.open(map, __arSOSMarker[i]);
-            //    })
-            //}
-
         }
     });
 }

@@ -1,4 +1,11 @@
-﻿function GetInfo_User() {
+﻿var _SOSInfo = new Array();
+var _arSOSMarker = new Array();
+
+
+
+
+
+function GetInfo_User() {
 
     $.ajax({
         type: 'GET',
@@ -45,7 +52,7 @@ function DanhSachThietBiHetHan() {
                 var _tb = '';
                 var trangthai = '';
                 for (var i = 0, j = 1; i < DSHetHan.length; i++) {
-                    ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
+                    ngayHetHan = new Date(parseInt(DSHetHan[i]['DateExpired'].substr(6)));
                     ngayHienTai = new Date();
                     hiệu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
@@ -763,7 +770,6 @@ function getInfoWindow(_dv, n) {
             strStatus += 'Tên thiết bị: <b>' + _dv["DeviceName"] + '</b><br>';
 
         strStatus += 'Thời gian: <b>' + dte + '</b><br>'
-            + 'Trạng thái: <b>' + _stt_[_dv["Status"]]["name"] + '</b><br>'
             + 'Toạ độ: <b>' + _dv["Latitude"] + ' (' + _dv["DirectionSN"]
             + ')</b> - <b>' + _dv["Longitude"] + ' (' + _dv["DirectionEW"] + ')</b><br>'
             + '</div>';
@@ -814,7 +820,7 @@ function SOS() {
     //     markerSOS[i].setMap(null);
     // }
     _arSOSMarker = [];
-    _SOSInfo = [];
+//    _SOSInfo = [];
     $.ajax({
         type: 'GET',
         url: '/SOS/GetSOS',
@@ -827,37 +833,24 @@ function SOS() {
             if (_listSOS != null || _listSOS.length > 0) {
                 document.getElementById("SOS").style.display = "block";
             }
+            var infowindow = new google.maps.InfoWindow();
             for (var i = 0; i < _listSOS.length; i++) {
                 var p = new google.maps.LatLng(_listSOS[i]["Latitude"], _listSOS[i]["Longitude"]);
 
                 var marker = new google.maps.Marker({
                     position: p,
                     icon: "/Content/images/tau/tau-do.png",
+                    map:map
                 });
-                marker.setMap(map);
-
-                var SOinfo = new google.maps.InfoWindow({
-                    content: 'Đang cập nhật dữ liệu!',
-                });
-
-                SOinfo.setContent(getInfoWindow(_listSOS[i], 2));
-
-                marker.addListener('click', function () {
-                    clearInfoWin();
-                    SOinfo.open(map, marker);
-                });
-                // marker.addListener('click', function () {
-                //     clearInfoWin();
-                //     console.log(marker);
-                //     console.log(SOinfo);
-                //     SOinfo.open(map, marker);
-                // });
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(getInfoWindow(_listSOS[i], 2));
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));           
                 _arSOSMarker.push(marker);
-                _SOSInfo.push(SOinfo);
-
-
+                //_SOSInfo.push(SOinfo);
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
-                //console.log(date);
                 var dte = date.getDate() + '/' + (date.getMonth() + 1) + '/'
                     + date.getFullYear() + ' ' + date.getHours() + ':'
                     + date.getMinutes();
