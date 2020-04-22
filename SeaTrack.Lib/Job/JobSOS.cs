@@ -43,7 +43,7 @@ namespace SeaTrack.Lib.Job
                         if (rs.StatusCode == HttpStatusCode.OK)
                         {
                             item.Status = 2;
-                            SOSService.UpdateStatusSOSbyID(item);
+                            SOSService.UpdateStatusSOSbyID((int)item.SOSID, 2);
                         }
                     }
                     catch (Exception)
