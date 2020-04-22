@@ -33,7 +33,7 @@ namespace SeaTrack.Lib.Service
                             SOSID = Convert.ToInt32(reader["SOSID"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceName = reader["DeviceName"].ToString(),
-                            DeviceImei = reader["DeviceID"].ToString(),
+                            DeviceImei = reader["DeviceImei"].ToString(),
                             Latitude = Convert.ToDecimal(reader["Latitude"]),
                             Longitude = Convert.ToDecimal(reader["Longitude"]),
                             DirectionSN = reader["DirectionSN"].ToString(),
