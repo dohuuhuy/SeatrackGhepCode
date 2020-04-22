@@ -71,7 +71,7 @@
                             </td>
                             <td>{{u.Username}}</td>
                             <td>{{u.Fullname}}</td>
-                            <td>{{u.CreateDate}}</td>
+                            <td>{{u.CreateDate | date:"dd/MM/yyyy"}}</td>
                             <td>{{u.ManageBy}}</td>
                             <td ng-if="u.Status==-1"><p style="color:red">Tạm khóa</p></td>
                             <td ng-if="u.Status==1"><p style="color:green">kích hoạt</p></td>

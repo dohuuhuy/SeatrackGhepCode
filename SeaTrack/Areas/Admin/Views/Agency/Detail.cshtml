@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAgency.cshtml";
 }
 
-@model SeaTrack.Lib.DTO.Admin.UserViewModel
+@model SeaTrack.Lib.DTO.Admin.UserInfoDTO
 
     <div class="container-fluid" ng-app="App" ng-controller="Controller" ng-init="UserID('@Model.UserID','@Model.RoleID','@Model.ManageBy')">
         <h1 class="mt-4">Thông tin chi tiết</h1>

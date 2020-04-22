@@ -18,6 +18,10 @@
         var lstAg = AdminService.ListUser(2)
         lstAg.then(function (d) {
             $scope.Agencys = d.data;
+            for (var i = 0; i < $scope.Agencys.length; i++) {
+                $scope.Agencys[i]["CreateDate"] = new Date(parseInt($scope.Agencys[i]["CreateDate"].substr(6)))
+                console.log($scope.Agencys[i]["CreateDate"]);
+            }
         },
             function () {
                 alert("Không thể load danh sách đại lý")
@@ -27,6 +31,10 @@
         var lstAg = AdminService.ListUser(3)
         lstAg.then(function (d) {
             $scope.Customers = d.data;
+            for (var i = 0; i < $scope.Customers.length; i++) {
+                $scope.Customers[i]["CreateDate"] = new Date(parseInt($scope.Customers[i]["CreateDate"].substr(6)))
+                console.log($scope.Customers[i]["CreateDate"]);
+            }
         },
             function () {
                 alert("Không thể load danh sách đại lý")
@@ -36,6 +44,10 @@
         var lstAg = AdminService.ListUser(4)
         lstAg.then(function (d) {
             $scope.Users = d.data;
+            for (var i = 0; i < $scope.Users.length; i++) {
+                $scope.Users[i]["CreateDate"] = new Date(parseInt($scope.Users[i]["CreateDate"].substr(6)))
+                console.log($scope.Users[i]["CreateDate"]);
+            }
         },
             function () {
                 alert("Không thể load danh sách đại lý")

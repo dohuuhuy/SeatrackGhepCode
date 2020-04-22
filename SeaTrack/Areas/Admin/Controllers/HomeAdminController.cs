@@ -106,7 +106,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             {
                 ViewBag.EditResult = TempData["EditResult"].ToString();
             }
-            UserViewModel us = new UserViewModel();
+            UserInfoDTO us = new UserInfoDTO();
             us = AdminService.GetUserByID(id);
             return View(us);
         }
@@ -125,39 +125,27 @@ namespace SeaTrack.Areas.Admin.Controllers
             var u = Session["User"] as Users;
             try
             {
-                UserViewModel us = AdminService.GetUserByID(user.UserID);
-                UserInfoDTO UserEdit = new UserInfoDTO();
-                UserEdit.UserID = us.UserID;
-                UserEdit.Username = us.Username;
-                UserEdit.Status = us.Status;
-                UserEdit.CreateBy = us.CreateBy;
-                UserEdit.CreateDate = Convert.ToDateTime(us.CreateDate);
-                UserEdit.RoleID = us.RoleID;
-                UserEdit.Password = user.Password;
-                UserEdit.Fullname = user.Fullname;
-                UserEdit.Phone = user.Phone;
-                UserEdit.Address = user.Address;
-                UserEdit.UpdateBy = "admin";
-                UserEdit.ManageBy = user.ManageBy;
-                UserEdit.LastUpdateDate = DateTime.Now;
-                bool res = AdminService.EditUser(UserEdit);
+                user.UpdateBy = u.Username;
+                //UserEdit.ManageBy = user.ManageBy;
+                user.LastUpdateDate = DateTime.Now;
+                bool res = AdminService.EditUser(user);
                 if (res)
                 {
                     TempData["EditResult"] = "Cập nhật thành công";
                     if (u.RoleID==2)
                     {
-                        return RedirectToAction("Detail", "Agency", new { id = us.UserID });
+                        return RedirectToAction("Detail", "Agency", new { id = user.UserID });
                     }
-                    return RedirectToAction("Detail", "HomeAdmin",new { id = us.UserID });
+                    return RedirectToAction("Detail", "HomeAdmin",new { id = user.UserID });
                 }
                 else
                 {
                     TempData["EditResult"] = "Chưa được cập nhật";
                     if (u.RoleID == 2)
                     {
-                        return RedirectToAction("Detail", "Agency", new { id = us.UserID });
+                        return RedirectToAction("Detail", "Agency", new { id = user.UserID });
                     }
-                    return RedirectToAction("Detail", "HomeAdmin", new { id = us.UserID });
+                    return RedirectToAction("Detail", "HomeAdmin", new { id = user.UserID });
                 }
             }
             catch (Exception)

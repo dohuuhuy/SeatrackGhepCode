@@ -71,7 +71,7 @@
                             </td>
                             <td width="15%">{{c.Username}}</td>
                             <td width="20%">{{c.Fullname}}</td>
-                            <td width="15%">{{c.CreateDate|date: "yyyy-MM-ddTHH:mm:ss"}}</td>
+                            <td width="15%">{{c.CreateDate | date:"dd/MM/yyyy"}}</td>
                             <td width="20%" ng-if="c.Status==-1"><p style="color:red">Tạm khóa</p></td>
                             <td width="20%" ng-if="c.Status==1"><p style="color:green">Kích hoạt</p></td>
                         </tr>

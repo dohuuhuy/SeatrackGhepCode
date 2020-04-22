@@ -18,6 +18,10 @@
         var lstAg = AgencyService.ListUser(3)
         lstAg.then(function (d) {
             $scope.Customers = d.data;
+            for (var i = 0; i < $scope.Customers.length; i++) {
+                $scope.Customers[i]["CreateDate"] = new Date(parseInt($scope.Customers[i]["CreateDate"].substr(6)))
+                console.log($scope.Customers[i]["CreateDate"]);
+            }
         },
             function () {
                 alert("Không thể load danh sách đại lý")
@@ -27,6 +31,10 @@
         var lstAg = AgencyService.GetListUserOfAgency()
         lstAg.then(function (d) {
             $scope.Users = d.data;
+            for (var i = 0; i < $scope.Users.length; i++) {
+                $scope.Users[i]["CreateDate"] = new Date(parseInt($scope.Users[i]["CreateDate"].substr(6)))
+                console.log($scope.Users[i]["CreateDate"]);
+            }
         },
             function () {
                 alert("Không thể load danh sách đại lý")

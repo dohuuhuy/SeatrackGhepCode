@@ -74,7 +74,7 @@
                             </td>
                             <td>{{c.Username}}</td>
                             <td>{{c.Fullname}}</td>
-                            <td>{{c.CreateDate|date: "yyyy-MM-ddTHH:mm:ss"}}</td>
+                            <td>{{c.CreateDate | date:"dd/MM/yyyy"}}</td>
                             <td>{{c.ManageBy}}</td>
                             <td ng-if="c.Status==-1"><p style="color:red">Tạm khóa</p></td>
                             <td ng-if="c.Status==1"><p style="color:green">kích hoạt</p></td>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Đại lý</label>
-                                <select name="ManageBySelect" id="ManageBySelect" ng-model="ManageBy">
+                                <select class="form-control" name="ManageBySelect" id="ManageBySelect" ng-model="ManageBy">
                                     <option value="">Chọn đại lý</option>
                                     <option ng-repeat="a in Agencys" value="{{a.Username}}">{{a.Username}}</option>
                                 </select>
