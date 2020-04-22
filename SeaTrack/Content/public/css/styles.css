@@ -10248,6 +10248,7 @@ body {
 
 table.table {
     table-layout: inherit;
+    text-align: center;
 }
 
     table.table tr th, table.table tr td {

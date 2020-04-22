@@ -6,7 +6,9 @@
         url: '/Home/UserInfo',
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
+            data = data.Result;
             console.log('---------------: ' + data);
+
             if (data != null) {
 
 
@@ -26,12 +28,9 @@
         }
     });
 };
-
-
 function hide(n) {
     document.getElementById(n).style.display = "none";
 }
-
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {
     var DSHetHan = [];
@@ -92,8 +91,6 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
-
-
 function fetchdata() {
     //win_reload();
     updateListDeviceStatus();
@@ -116,7 +113,6 @@ function loadSpeedLimit() {
         console.log(data);
     });
 }
-
 bo = [
     {
         lat: 23.280141,
@@ -445,8 +441,6 @@ var bolong = [];
 var vungbo;
 var vungbolong;
 var vunglong;
-
-
 slider.oninput = function () { }
 function setRange(a) {
     $("#myRange").attr("max", a);
@@ -883,7 +877,6 @@ function SOS() {
         }
     });
 }
-
 function Warning() {
     for (var i = 0; i < _listDeviceStatus.length; i++) {
         var dv = _listDeviceStatus[i];
@@ -972,7 +965,6 @@ function Distance(lat1, lon1, lat2, lon2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
-
 function TimMin(lat, lng, biengioi) {
     if (biengioi.length > 0) {
         var min1 = 0;
@@ -993,8 +985,6 @@ function TimMin(lat, lng, biengioi) {
         return ar;
     }
 }
-
-
 function setup_DataTable() {
     //if(_listDeviceStatus.length <= 0) updateListDeviceStatus();
     var _tb = "";
@@ -1059,9 +1049,7 @@ function ListDeviceSearch(id_search, list_result) {
         }
     }
 }
-
 // select option giám sát tàu
-
 function createTable(selectState, list_result) { // list_result = tbl_tablebody từ vùng kêt quả
     var _selectState, _list_result;
     _selectState = document.getElementById(selectState).value; // lây value option
@@ -1095,7 +1083,6 @@ var drawLineInterval;
 function liveshowLo() {
     animateCircle(_flightPath[0]);
 }
-
 $("#myRange").change(function () {
     var kin = $("#myRange");
     if (_flightPath.length > 0) {
@@ -1163,7 +1150,6 @@ function interval_draw() {
     _intervalSOS = setInterval(function () { SOS() }, 120000);
     //_intervalWaning = setInterval(function () {Warning()},12000);
 }
-
 function Taomang() {
     for (i = 2; i < 20; i++) {
         bolong.push(bo[i]);
@@ -1185,10 +1171,6 @@ function Taomang() {
         paths: long
     });
 }
-
-
-
-
 $(document).ready(function () {
     setupMap(_def_Lat, _def_Lng, _def_zoom);
     updateListDeviceStatus();

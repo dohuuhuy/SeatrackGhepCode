@@ -200,8 +200,5 @@ DeviceApp.factory('DeviceService', function ($http) {
     fac.GetAllRecords = function () {
         return $http.get('/Admin/Device/GetListDevice');
     };
-
-    console.log('i am inside Service ');
-
     return fac;
 });

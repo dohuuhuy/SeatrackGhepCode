@@ -365,7 +365,6 @@ namespace SeaTrack.Lib.Service
                             DeviceName = reader["DeviceName"].ToString(),
                             DeviceImei = reader["DeviceImei"].ToString(),
                             DeviceVersion = reader["DeviceVersion"].ToString(),
-                            //DeviceGroup = Convert.ToInt32(reader["DeviceGroup"]),
                             DeviceNote = reader["DeviceNote"].ToString(),
                             DateExpired = Convert.ToDateTime(reader["DateExpired"]),
                             StatusDevice = Convert.ToInt32(reader["StatusDevice"]),
