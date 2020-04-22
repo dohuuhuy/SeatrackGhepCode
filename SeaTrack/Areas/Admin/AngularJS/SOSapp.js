@@ -3,6 +3,7 @@
 myapp.controller('SOSctrl', function ($scope, $http, SV, $timeout) {
     $scope.loaded = false;
     $timeout(function () { $scope.loaded = true; }, 100);
+
     LoadSOS();
     $scope.currentPage = 1;
     $scope.pageSize = 10;
