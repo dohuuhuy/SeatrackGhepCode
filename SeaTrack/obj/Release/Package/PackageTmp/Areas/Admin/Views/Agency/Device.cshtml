@@ -17,12 +17,7 @@
         <div class="card-body">
             <div class="col col-md-12">
                 <div class="input-group">
-                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary" ng-click="ClearSearch()">
-                            <i class="fa fa-search"></i> Search
-                        </button>
-                    </div>
+                    <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListDeviceSearch('SearchKey', 'S-table')"><br />
                 </div>
                 <br />
             </div>
@@ -44,7 +39,7 @@
                 <table id="dataTable" class="table table-bordered table-striped text-center">
                     <thead>
                         <tr>
-                            <th width="5%">#</th>
+                            <th>#</th>
                             <th>Thao tác</th>
                             <th>Số hiệu</th>
                             <th>Tên thiết bị</th>
@@ -54,8 +49,8 @@
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr dir-paginate="a in namesData | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                    <tbody id="S-table">
+                        <tr dir-paginate="a in namesData | itemsPerPage: 10" current-page="currentPage">
                             <td>{{$index + (currentPage-1)*10 +1}}</td>
                             <td>
                                 <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
@@ -70,11 +65,10 @@
                             <td>{{a.DeviceName}}</td>
                             <td>{{a.DeviceVersion}}</td>
                             <td>{{a.DeviceImei}}</td>
-                            <td ng-if="a.ExpireStatus == -1"><p style="color:gold">{{a.DateExpired}}</p></td>
-                            <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
+                            <td><p>{{a.DateExpired | date:"dd/MM/yyyy"}}</p></td>
                             <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                             <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
-                            <td ng-if="a.StatusDevice == 0"><p style="color:red">Đã hết hạn</p></td>
+                            <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -124,7 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Ngày hết hạn </label>
-                                <input class="form-control" name="DateExpired" ng-model="Device.DateExpired" type="text" disabled maxlength="200" />
+                                <input class="form-control" name="DateExpired" value='{{Device.DateExpired | date:"dd/MM/yyyy"}}' type="text" disabled maxlength="200" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Ghi chú </label>
@@ -247,18 +241,18 @@
 
                             <div class="form-group">
                                 <label class="control-label"> Ngày hết hạn </label>
-                                <input class="form-control" id="datefield1" name="DateExpired" ng-model="Device.ExpireDate" type="date" data-date-format="dd-MM-yyyy HH:mm:ss"/>
+                                <input class="form-control" id="datefield1" name="DateExpired" ng-model="Device.DateExpired" type="date" />
                                 <span ng-if="UpdateForm.DateExpired.$invalid">Error</span>
                                 <br />
                                 <div class="row text-center">
                                     <div class="form-group col-md-6">
-                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,1)">Gia hạn 1 tháng</button>
+                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.DateExpired,1)">Gia hạn 1 tháng</button>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,3)">Gia hạn 3 tháng</button>
+                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.DateExpired,3)">Gia hạn 3 tháng</button>
                                     </div>
                                     <div class="form-group col-md-6 offset-md-3">
-                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,6)">Gia hạn 6 tháng</button>
+                                        <button class="btn btn-primary" ng-click="DeviceExtension(Device.DateExpired,6)">Gia hạn 6 tháng</button>
                                     </div>
                                     @*<div class="form-group col-md-6">
                                         <button class="btn btn-primary" ng-click="DeviceExtension(Device.ExpireDate,12)">Gia hạn 12 tháng</button>
@@ -277,10 +271,8 @@
             </div>
         </div>
     </div>
-
+    <script src="~/Areas/Admin/AngularJS/PaginationSearch.js"></script>
     <script src="~/Scripts/angular.js"></script>
-    <script src="~/Content/public/js/jquery.min.js"></script>
-    <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="~/Areas/Admin/AngularJS/Agency/AgencyDeviceApp.js"></script>
     <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
     <script>

@@ -21,7 +21,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         console.log('date' + dateExpire);
         dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
         console.log('new date' + dateExpire);
-        $scope.Device.ExpireDate = new Date(dateExpire);
+        //$scope.Device.ExpireDate = new Date(dateExpire);
         $scope.Device.DateExpired = new Date(dateExpire);
     }
     $scope.ClearSearch = function () {
@@ -114,11 +114,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             data: JSON.stringify($scope.Device)
         }).then(function successCallback(response) {
             $scope.namesData = null;
-            DeviceService.GetAllRecords().then(function (d) {
-                $scope.namesData = d.data;
-            }, function () {
-                alert('Không tìm thấy dữ liệu !!!');
-            });
+            LoadDevice();
             $scope.Clear();
             alert(" Cập nhật mới thành công !!!");
         }, function errorCallback(response) {
@@ -138,7 +134,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             TypeShip: data.TypeShip,
             DateExpired: data.DateExpired,
             DeviceNote: data.DeviceNote,
-            ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
+            //ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
 
 
         };
@@ -186,6 +182,10 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     function LoadDevice() {
         DeviceService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.namesData[i]["DateExpired"] = new Date(parseInt($scope.namesData[i]["DateExpired"].substr(6)))
+                console.log($scope.namesData[i]["DateExpired"]);
+            }
         }, function () {
             alert('Không tìm thấy dữ liệu !!!');
         });
@@ -200,8 +200,5 @@ DeviceApp.factory('DeviceService', function ($http) {
     fac.GetAllRecords = function () {
         return $http.get('/Admin/Device/GetListDevice');
     };
-
-    console.log('i am inside Service ');
-
     return fac;
 });

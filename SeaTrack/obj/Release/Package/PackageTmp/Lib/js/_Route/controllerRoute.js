@@ -6,7 +6,9 @@
         url: '/Home/UserInfo',
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
+            data = data.Result;
             console.log('---------------: ' + data);
+
             if (data != null) {
 
 
@@ -26,12 +28,9 @@
         }
     });
 };
-
-
 function hide(n) {
     document.getElementById(n).style.display = "none";
 }
-
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {
     var DSHetHan = [];
@@ -92,8 +91,6 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
-
-
 function fetchdata() {
     //win_reload();
     updateListDeviceStatus();
@@ -116,7 +113,6 @@ function loadSpeedLimit() {
         console.log(data);
     });
 }
-
 bo = [
     {
         lat: 23.280141,
@@ -445,8 +441,6 @@ var bolong = [];
 var vungbo;
 var vungbolong;
 var vunglong;
-
-
 slider.oninput = function () { }
 function setRange(a) {
     $("#myRange").attr("max", a);
@@ -820,17 +814,17 @@ function SOS() {
     //     markerSOS[i].setMap(null);
     // }
     _arSOSMarker = [];
+    _SOSInfo = [];
     $.ajax({
         type: 'GET',
         url: '/SOS/GetSOS',
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
-            _listSOS = data;
+            _listSOS = data.slice();
             console.log(_listSOS);
             //console.log(_listSOS);
             var _tb = "";
-            if (_listSOS != null) {
-                console.log("None");
+            if (_listSOS != null || _listSOS.length > 0) {
                 document.getElementById("SOS").style.display = "block";
             }
             for (var i = 0; i < _listSOS.length; i++) {
@@ -841,27 +835,26 @@ function SOS() {
                     icon: "/Content/images/tau/tau-do.png",
                 });
                 marker.setMap(map);
-                console.log(marker);
-                
-                var SOSInfo = new google.maps.InfoWindow({
+
+                var SOinfo = new google.maps.InfoWindow({
                     content: 'Đang cập nhật dữ liệu!',
                 });
 
-                SOSInfo.setContent(getInfoWindow(_listSOS[i], 2));
-                console.log(SOSInfo);
-                google.maps.event.addListener(marker, 'click', function () {
+                SOinfo.setContent(getInfoWindow(_listSOS[i], 2));
+
+                marker.addListener('click', function () {
                     clearInfoWin();
-                    SOSInfo.open(map, marker);
+                    SOinfo.open(map, marker);
                 });
                 // marker.addListener('click', function () {
                 //     clearInfoWin();
                 //     console.log(marker);
-                //     console.log(SOSInfo);
-                //     SOSInfo.open(map, marker);
+                //     console.log(SOinfo);
+                //     SOinfo.open(map, marker);
                 // });
                 _arSOSMarker.push(marker);
-                _SOSInfo.push(SOSInfo);
-                
+                _SOSInfo.push(SOinfo);
+
 
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
                 //console.log(date);
@@ -883,9 +876,7 @@ function SOS() {
             } $("#SOSData").html(_tb);
         }
     });
-    //console.log("done");
 }
-
 function Warning() {
     for (var i = 0; i < _listDeviceStatus.length; i++) {
         var dv = _listDeviceStatus[i];
@@ -974,7 +965,6 @@ function Distance(lat1, lon1, lat2, lon2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
-
 function TimMin(lat, lng, biengioi) {
     if (biengioi.length > 0) {
         var min1 = 0;
@@ -995,8 +985,6 @@ function TimMin(lat, lng, biengioi) {
         return ar;
     }
 }
-
-
 function setup_DataTable() {
     //if(_listDeviceStatus.length <= 0) updateListDeviceStatus();
     var _tb = "";
@@ -1061,9 +1049,7 @@ function ListDeviceSearch(id_search, list_result) {
         }
     }
 }
-
 // select option giám sát tàu
-
 function createTable(selectState, list_result) { // list_result = tbl_tablebody từ vùng kêt quả
     var _selectState, _list_result;
     _selectState = document.getElementById(selectState).value; // lây value option
@@ -1097,7 +1083,6 @@ var drawLineInterval;
 function liveshowLo() {
     animateCircle(_flightPath[0]);
 }
-
 $("#myRange").change(function () {
     var kin = $("#myRange");
     if (_flightPath.length > 0) {
@@ -1165,7 +1150,6 @@ function interval_draw() {
     _intervalSOS = setInterval(function () { SOS() }, 120000);
     //_intervalWaning = setInterval(function () {Warning()},12000);
 }
-
 function Taomang() {
     for (i = 2; i < 20; i++) {
         bolong.push(bo[i]);
@@ -1187,10 +1171,6 @@ function Taomang() {
         paths: long
     });
 }
-
-
-
-
 $(document).ready(function () {
     setupMap(_def_Lat, _def_Lng, _def_zoom);
     updateListDeviceStatus();
