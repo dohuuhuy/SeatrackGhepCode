@@ -1,4 +1,6 @@
-﻿myapp.controller('AgencyController', function ($scope, $window, AgencyService) {
+﻿myapp.controller('AgencyController', function ($scope, $window, AgencyService, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 1000);
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     $scope.Role = function (role) {
