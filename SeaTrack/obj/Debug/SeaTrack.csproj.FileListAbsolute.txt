@@ -498,3 +498,5 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.xml

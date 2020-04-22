@@ -52,7 +52,7 @@
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th width="10%">Thao tác</th>
+                            <th width="15%">Thao tác</th>
                             <th width="15%">Tên tài khoản</th>
                             <th width="15%">Họ tên</th>
                             <th width="20%">Ngày tạo</th>
@@ -67,6 +67,7 @@
                                 <a href="#" data-ng-href="@Url.Action("Detail", "HomeAdmin")/{{u.UserID}}" title="Chi tiết người dùng"><i class="fa fa-eye" style="color:black"></i></a>
                                 <a ng-if="u.Status==1" ng-click="LockUser(u.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
                                 <a ng-if="u.Status==-1" ng-click="UnLockUser(u.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
+                                <a ng-click="DeleteUser(u.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
                             </td>
                             <td>{{u.Username}}</td>
                             <td>{{u.Fullname}}</td>

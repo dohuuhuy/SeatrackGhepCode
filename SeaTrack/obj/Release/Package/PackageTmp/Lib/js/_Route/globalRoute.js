@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     setupMap(_def_Lat, _def_Lng, _def_zoom);
 
-
+	DanhSachThietBiHetHan();
 
 	$('#SOS').draggable({
 		scroll: true,
@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 
 	$('#menu2').on('click', function () {
-		if ($('#menubar').hasClass('active')) {
+		if ($('#menubar').hasClass('active')) { // nếu đóng rồi
 
 			$('#s-sidebar').toggleClass('active');
 			$('.s-sidebar').toggleClass('active');
@@ -35,9 +35,10 @@ $(document).ready(function () {
 			$('#s-logo-menu').toggleClass('d-none');
 			$("#sidebarCollapse").addClass("d-none");
 			$("#giamsat_toggle").removeClass("d-none");
+			$("#navbarSupportedContent").addClass("d-none");
 
 		} else {
-			$("#navbarSupportedContent").removeClass("d-none");
+			$("#navbarSupportedContent").removeClass("d-none"); 
 		}
 	});
 
@@ -49,8 +50,8 @@ $(document).ready(function () {
 		$('#s-logo-menu').toggleClass('d-none');
 		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").addClass("d-none");
-		if ($("#navbarSupportedContent").removeClass("d-none")) {
-			$("#navbarSupportedContent").addClass("d-none");
+		if ($("#navbarSupportedContent").removeClass("d-none")) { // chưa ẩn
+			$("#navbarSupportedContent").addClass("d-none"); // thì ẩn
         }
 	});
 

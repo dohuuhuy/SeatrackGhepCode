@@ -1,6 +1,148 @@
-/* ---------------------------------------------------
-  DEMO STYLE
-  ----------------------------------------------------- */
+﻿/* ---------------------------------------------------DEMO STYLE------------------ */
+#feedback_chude {
+    border: 0px;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+}
+    #menubar ul li {
+    margin-left: 2px;
+}
+#dataTable th {
+    background-color: #15b4c4;
+    color: white;
+    padding: 15px;
+}
+
+#dataTable td {
+    vertical-align: inherit;
+    padding: 0px;
+}
+/* ---------------------------------------------------chỉnh menu phía home------------------------------ */
+#menubar ul li {
+ 
+    font-family: sans-serif;
+}
+    #menubar ul li a {
+        padding: .375rem .75rem;
+    }
+    #menubar ul li #a {
+        color: #007bff;
+    }
+        #menubar ul li #a:hover {
+            color: white;
+            background-color: #007bff;
+        }
+
+    #menubar ul li #b {
+        color: #17a2b8;
+    }
+        #menubar ul li #b:hover {
+            color: white;
+            background-color: #17a2b8;
+        }
+      
+.dropdown-item {
+    font-weight: bolder;
+}
+
+#menubar ul li .dropdown-menu a {
+    padding: 10px 16px;
+}
+@media only screen and (max-width : 1120px) {
+    #menubar ul li {
+        margin-top: 10px;
+    }
+
+    #menubar ul button {
+        width: 100%;
+    }
+
+    #menubar ul li a {
+        width: 100%;
+    }
+}
+.navbar-toggler {
+    padding: .25rem .3rem;
+    margin: 5px 0;
+}
+@media only screen and (max-width : 480px) {
+
+    #SOS {
+        display: none
+    }
+
+    #War {
+        display: none
+    }
+
+
+    #sidebarCollapse span {
+        display: none;
+    }
+
+    #menubar ul li {
+        margin-top: 2px;
+    }
+
+    #menubar ul button {
+        width: 100%;
+    }
+
+    #menubar ul li a {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .si-sidebar {
+        margin-left: 0px;
+    }
+
+        .si-sidebar.active {
+            margin-left: 0;
+        }
+
+    .si-sidebarCollapse span {
+        display: none;
+    }
+}
+
+/*@media (max-width: 768px) {
+    .si-sidebar {
+        margin-left: -290px;
+    }
+
+        .si-sidebar.active {
+            margin-left: 0;
+        }
+
+
+
+    .si-sidebarCollapse span {
+        display: none;
+    }
+}*/
+
+    /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
+
+.btn {
+    font-weight: bolder;
+}
+
+#linkmenu {
+    padding: 0px;
+}
+
+#sub-sub-menu a img {
+    width: 24px;
+    height: 24px;
+}
+
+#sub-menu-1 img {
+    width: 24px;
+    height: 24px;
+}
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 /*
   body {
@@ -21,10 +163,10 @@
     transition: all 0.3s;
 }
 
+
 #body a {
     color: #000;
 }
-
 #rounded > a {
     color: #019CDE !important;
 }
@@ -160,7 +302,7 @@
 #menubar {
     transition: .75s;
     border-radius: 10px;
-    position: fixed;
+    position: absolute;
     z-index: 9;
     width: calc(100% - 20px);
     top: 5px;
@@ -236,12 +378,11 @@
 }
 
 .si-sidebar.active, .s-main-sidebar.active {
-    margin-left: -285px;
+    margin-left: -290px;
 }
 
 .si-sidebar .sidebar-header, .s-main-sidebar .sidebar-header {
     padding: 4%;
-    .background: #019CDE;
     background: #fff;
 }
 
@@ -268,7 +409,7 @@
 }
 
 .si-sidebar ul li.active > a,
-.s-main-sidebar ul li.active > a,,
+.s-main-sidebar ul li.active > a,
 a[aria-expanded="true"] {
     color: #fff !important;
     background: #019CDE;
@@ -284,11 +425,6 @@ a[data-toggle="collapse"] {
 }
 
 .dropdown-toggle::after {
-    .display: block;
-    .position: absolute;
-    .top: 50%;
-    .right: 20px;
-    .transform: translateY(-50%);
 }
 
 ul ul a {
@@ -331,19 +467,6 @@ a.article:hover {
 /* ---------------------------------------------------
   MEDIAQUERIES
   ----------------------------------------------------- */
-@media (max-width: 768px) {
-    .si-sidebar {
-        margin-left: -250px;
-    }
-
-    .si-sidebar.active {
-        margin-left: 0;
-    }
-
-    .si-sidebarCollapse span {
-        display: none;
-    }
-}
 
 #homeSubmenu li a, #pageSubmenu li a {
     color: #fff;

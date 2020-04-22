@@ -27,30 +27,30 @@ namespace SeaTrack.Areas.Admin.Controllers
             return View("DanhSachThietBi");
         }
      
-        [HttpPost]
-        public ActionResult Update(DeviceViewModel device)
-        {
-            if (CheckRole(1) == -1)
-            {
-                if (CheckRole(1) == 0)
-                {
-                    return RedirectToAction("Login", "Home", new { area = "" });
-                }
-                return RedirectToAction("ErrorView", "Home", new { area = "" });
-            }
+        //[HttpPost]
+        //public ActionResult Update(Device device)
+        //{
+        //    if (CheckRole(1) == -1)
+        //    {
+        //        if (CheckRole(1) == 0)
+        //        {
+        //            return RedirectToAction("Login", "Home", new { area = "" });
+        //        }
+        //        return RedirectToAction("ErrorView", "Home", new { area = "" });
+        //    }
 
-            Device dv = new Lib.DTO.Device();
-            dv.DeviceID = device.DeviceID;
-            dv.DeviceNo = device.DeviceNo;
-            dv.DeviceName = device.DeviceName;
-            dv.DeviceVersion = device.DeviceVersion;
-            dv.DeviceImei = device.DeviceImei;
-            dv.TypeShip = device.TypeShip;
-            dv.DeviceNote = device.DeviceNote;
-            dv.DateExpired = device.ExpireDate;
-            var res = AdminService.UpdateDevice(dv);
-            return RedirectToAction("Detail", new { id = dv.DeviceID });
-        }
+        //    Device dv = new Lib.DTO.Device();
+        //    dv.DeviceID = device.DeviceID;
+        //    dv.DeviceNo = device.DeviceNo;
+        //    dv.DeviceName = device.DeviceName;
+        //    dv.DeviceVersion = device.DeviceVersion;
+        //    dv.DeviceImei = device.DeviceImei;
+        //    dv.TypeShip = device.TypeShip;
+        //    dv.DeviceNote = device.DeviceNote;
+        //    dv.DateExpired = device.ExpireDate;
+        //    var res = AdminService.UpdateDevice(device);
+        //    return RedirectToAction("Detail", new { id = device.DeviceID });
+        //}
         [HttpGet]
         public ActionResult GetListDevice()
         {
@@ -157,7 +157,7 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
-            List<DeviceViewModel> data = new List<DeviceViewModel>();
+            List<Device> data = new List<Device>();
             if (Username != "")
             {
                 data = AdminService.GetListDeviceNotUsedByUser(Username);

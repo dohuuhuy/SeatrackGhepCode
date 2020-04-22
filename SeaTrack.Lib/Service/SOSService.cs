@@ -31,7 +31,7 @@ namespace SeaTrack.Lib.Service
                         var data = new SOSDTO()
                         {
                             SOSID = Convert.ToInt32(reader["SOSID"]),
-                            DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                            DeviceImei = reader["DeviceID"].ToString(),
                             Latitude = Convert.ToDecimal(reader["Latitude"]),
                             Longitude = Convert.ToDecimal(reader["Longitude"]),
                             DirectionSN = reader["DirectionSN"].ToString(),
@@ -60,7 +60,7 @@ namespace SeaTrack.Lib.Service
                         var data = new SOSDTO()
                         {
                             SOSID = Convert.ToInt32(reader["SOSID"]),
-                            DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                            DeviceImei = reader["DeviceID"].ToString(),
                             DeviceName = reader["DeviceName"].ToString(),
                             Latitude = Convert.ToDecimal(reader["Latitude"]),
                             Longitude = Convert.ToDecimal(reader["Longitude"]),

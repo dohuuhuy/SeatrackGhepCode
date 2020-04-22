@@ -3,7 +3,10 @@ var App = angular.module("App", []);
 
 App.controller('Controller', function ($scope, $http) {
 
-
+    $scope.ClearSearch = function () {
+        $scope.SearchKey = "";
+        $scope.Status = null;
+    }
     $scope.FeedBack = {
         FeedID: '',
         Name: '',

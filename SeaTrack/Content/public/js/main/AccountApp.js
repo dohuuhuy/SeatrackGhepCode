@@ -20,6 +20,7 @@ AccountApp.controller('Controller', function ($scope, $http, Service) {
             }).then(function successCallback(response) {
                 LoadUser();
                 $scope.Clear();
+                alert("Đã cập nhật")
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });

@@ -9,7 +9,7 @@ namespace SeaTrack.Lib.DTO
     public class SOSDTO
     {
         public Int64 SOSID { get; set; }
-        public Int64 DeviceID { get; set; }
+        public string DeviceImei { get; set; }
         public string DeviceName { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }

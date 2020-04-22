@@ -1,12 +1,8 @@
 ﻿
-var App = angular.module("App", []);
+var App = angular.module('FBApp', []);
 
-App.controller('Controller', function ($scope, $http) {
+App.controller('FBController', function ($scope, $http) {
 
-    $scope.ClearSearch = function () {
-        $scope.SearchKey = "";
-        $scope.Status = null;
-    }
     $scope.FeedBack = {
         FeedID: '',
         Name: '',
@@ -15,9 +11,12 @@ App.controller('Controller', function ($scope, $http) {
         Comment: '',
         Quality: ''
     };
-
+    $scope.Test = function () {
+        console.log("OK");
+    }
     $scope.Save = function () {
-        if ($scope.FeedBack.Name != "" && $scope.FeedBack.Title != "") {
+        console.log("OK");
+        if ($scope.FeedBack.Name != '' && $scope.FeedBack.Title != '') {
             console.log('i am inside save func' + JSON.stringify($scope.FeedBack));
             $http({
                 method: 'POST',

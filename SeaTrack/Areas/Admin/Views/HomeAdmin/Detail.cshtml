@@ -122,7 +122,7 @@
                             <tr ng-repeat="d in Devices">
                                 <th>{{$index + 1}}</th>
                                 <td>{{d.DeviceName}}</td>
-                                <td>{{d.DateExpired}}</td>
+                                <td>{{d.DateExpired | date:"dd/MM/yyyy"}}</td>
                                 <td align="center">
                                     <a ng-click="RemoveDeviceFromUser(id, $index)" title="Xóa"><i class="fa fa-trash"></i></a>
                                 </td>
@@ -155,7 +155,7 @@
                                 <tr ng-repeat="dv in DevicesNotUsed">
                                     <th>{{$index + 1}}</th>
                                     <td>{{dv.DeviceName}}</td>
-                                    <td>{{dv.DateExpired}}</td>
+                                    <td>{{dv.DateExpired | date:"dd/MM/yyyy"}}</td>
                                     <td align="center">
                                         <a ng-click="AddDeviceToUser(id, $index)" title="Thêm"><i class="fa fa-plus-circle"></i></a>
                                     </td>

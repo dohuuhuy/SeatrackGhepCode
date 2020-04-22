@@ -820,17 +820,17 @@ function SOS() {
     //     markerSOS[i].setMap(null);
     // }
     _arSOSMarker = [];
+    _SOSInfo = [];
     $.ajax({
         type: 'GET',
         url: '/SOS/GetSOS',
         data: {},
         success: function (data, txtStatus, XMLHttpRequest) {
-            _listSOS = data;
+            _listSOS = data.slice();
             console.log(_listSOS);
             //console.log(_listSOS);
             var _tb = "";
-            if (_listSOS != null) {
-                console.log("None");
+            if (_listSOS != null || _listSOS.length > 0) {
                 document.getElementById("SOS").style.display = "block";
             }
             for (var i = 0; i < _listSOS.length; i++) {
@@ -841,27 +841,26 @@ function SOS() {
                     icon: "/Content/images/tau/tau-do.png",
                 });
                 marker.setMap(map);
-                console.log(marker);
-                
-                var SOSInfo = new google.maps.InfoWindow({
+
+                var SOinfo = new google.maps.InfoWindow({
                     content: 'Đang cập nhật dữ liệu!',
                 });
 
-                SOSInfo.setContent(getInfoWindow(_listSOS[i], 2));
-                console.log(SOSInfo);
-                google.maps.event.addListener(marker, 'click', function () {
+                SOinfo.setContent(getInfoWindow(_listSOS[i], 2));
+
+                marker.addListener('click', function () {
                     clearInfoWin();
-                    SOSInfo.open(map, marker);
+                    SOinfo.open(map, marker);
                 });
                 // marker.addListener('click', function () {
                 //     clearInfoWin();
                 //     console.log(marker);
-                //     console.log(SOSInfo);
-                //     SOSInfo.open(map, marker);
+                //     console.log(SOinfo);
+                //     SOinfo.open(map, marker);
                 // });
                 _arSOSMarker.push(marker);
-                _SOSInfo.push(SOSInfo);
-                
+                _SOSInfo.push(SOinfo);
+
 
                 var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
                 //console.log(date);
@@ -883,7 +882,6 @@ function SOS() {
             } $("#SOSData").html(_tb);
         }
     });
-    //console.log("done");
 }
 
 function Warning() {
