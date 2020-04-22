@@ -261,8 +261,9 @@ namespace SeaTrack.Controllers
             {
                 
                var data = UsersService.CheckUsers(user.Username, user.Password);
-            } 
-            return Json("0001", JsonRequestBehavior.AllowGet);
+                return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
+            }
+            return Json("Không có dữ liệu", JsonRequestBehavior.AllowGet);
         }
     }
 }

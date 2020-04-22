@@ -12,10 +12,9 @@ namespace SeaTrack.Lib.Service
 {
     public class SOSService
     {
-        public static int UpdateStatusSOSbyID(SOSDTO sos)
+        public static int UpdateStatusSOSbyID(int id, int status )
         {
-            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_UpdateSOSStatus",
-                sos.SOSID, sos.Status);
+            return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_UpdateSOSStatus",id, status);
         }
         public static List<SOSDTO> GetSOSPending()
         {
@@ -30,8 +29,10 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new SOSDTO()
                         {
+                            Status = Convert.ToInt32(reader["Status"]),
                             SOSID = Convert.ToInt32(reader["SOSID"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                            DeviceName = reader["DeviceName"].ToString(),
                             Latitude = Convert.ToDecimal(reader["Latitude"]),
                             Longitude = Convert.ToDecimal(reader["Longitude"]),
                             DirectionSN = reader["DirectionSN"].ToString(),
@@ -59,6 +60,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new SOSDTO()
                         {
+                            Status = Convert.ToInt32(reader["Status"]),
                             SOSID = Convert.ToInt32(reader["SOSID"]),
                             DeviceID = Convert.ToInt32(reader["DeviceID"]),
                             DeviceName = reader["DeviceName"].ToString(),
