@@ -40,14 +40,16 @@
                                 <div class="col-md-5 clearfix">
                                     <select id="listDeviceNo" class="form-control select2 fl" style="width:100%"></select>
                                 </div>
-                                <div class="col-md-4 clearfix">
+                                <div class="xem col-md-4 clearfix">
                                     <input type="button" name="Signup" value="Xem" class="btn btn-primary btn" style="width:135px;" onclick="TongHopTheoTau();" />
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="p-10 table-responsive">
-                        <table id="table_bgt_tonghopxe" class="table  table-bordered text-center" style="width:100%">
+                        <button class="btn btn-secondary" onclick="exportTableToExcel('table_bgt_tonghoptau','BaoCaoTongHopTheoTau')">Export Excel</button>
+
+                        <table id="table_bgt_tonghoptau" class="table  table-bordered text-center" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="headerAlignCenter">STT</th>

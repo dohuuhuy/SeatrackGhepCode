@@ -8,12 +8,17 @@ $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
+
+	if (window.innerWidth < 1080) {
+		alert(window.innerWidth);
+	}
+
 	$('#sidebarCollapse').on('click', function () {
-		$('.si-sidebar').toggleClass('active');
-		$('#menubar').toggleClass('active');
-		$('#s-logo-menu').toggleClass('d-none');
-		$("#sidebarCollapse").addClass("d-none");
-		$("#giamsat_toggle").removeClass("d-none");
+		$('.si-sidebar').toggleClass('active'); // bên trái kích hoạt: 
+		$('#menubar').toggleClass('active'); // menu kích hoạt
+		$('#s-logo-menu').toggleClass('d-none'); // logon hiện
+		$("#sidebarCollapse").removeClass("d-none"); // nút menu hiển
+		$("#giamsat_toggle").addClass("d-none"); // nút giám sát ẩn
 
 	});
 

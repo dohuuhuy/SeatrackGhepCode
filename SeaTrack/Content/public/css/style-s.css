@@ -1,5 +1,10 @@
 ﻿/* ---------------------------------------------------DEMO STYLE------------------ */
-#feedback_chude {
+
+label {
+    display: flex;
+    margin-bottom: .5rem;
+}
+    #feedback_chude {
     border: 0px;
 }
 .form-control:disabled, .form-control[readonly] {
@@ -12,12 +17,12 @@
 #dataTable th {
     background-color: #15b4c4;
     color: white;
-    padding: 15px;
+    /*padding: 15px;*/
 }
 
 #dataTable td {
     vertical-align: inherit;
-    padding: 0px;
+  
 }
 /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
 #menubar ul li {
@@ -50,6 +55,24 @@
 #menubar ul li .dropdown-menu a {
     padding: 10px 16px;
 }
+
+#menubar {
+    transition: .75s;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 9;
+    width: calc(100% - 20px);
+    top: 5px;
+    left: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+    #menubar.active {
+
+        margin-left: 290px;
+        width: calc(100% - 325px);
+
+    }
 @media only screen and (max-width : 1120px) {
     #menubar ul li {
         margin-top: 10px;
@@ -93,22 +116,24 @@
     #menubar ul li a {
         width: 100%;
     }
+
+ 
 }
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .si-sidebar {
         margin-left: 0px;
     }
 
         .si-sidebar.active {
-            margin-left: 0;
+            margin-left: 290px;
         }
 
     .si-sidebarCollapse span {
         display: none;
     }
-}
+}*/
 
-/*@media (max-width: 768px) {
+@media (max-width: 768px) {
     .si-sidebar {
         margin-left: -290px;
     }
@@ -122,7 +147,7 @@
     .si-sidebarCollapse span {
         display: none;
     }
-}*/
+}
 
     /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
 
@@ -134,15 +159,9 @@
     padding: 0px;
 }
 
-#sub-sub-menu a img {
-    width: 24px;
-    height: 24px;
-}
 
-#sub-menu-1 img {
-    width: 24px;
-    height: 24px;
-}
+
+
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 /*
   body {
@@ -279,10 +298,7 @@
     height: 100vh;
 }
 
-#menubar.active {
-    margin-left: 290px;
-    width: calc(100% - 325px);
-}
+
 
 .s-main-sidebar.active {
     left: 0;
@@ -299,16 +315,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#menubar {
-    transition: .75s;
-    border-radius: 10px;
-    position: absolute;
-    z-index: 9;
-    width: calc(100% - 20px);
-    top: 5px;
-    left: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
 
 #sublefttab_4 {
     max-height: 380px;
