@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tables - SB Admin</title>
+    <title>SeaTrack - Admin</title>
     <link href="~/Content/public/css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
@@ -18,21 +18,39 @@
             <i class="fas fa-bars"></i>
         </button><!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            @*<div class="input-group">
-                    <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>*@
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Search" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
+            @*<li class="nav-item">
+                    <a class="nav-link">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <span class="count">&nbsp;</span>
+                    </a>
+                    <div class="noti-content">
+                        <div class="noti-top-arrow">3</div>
+                        <ul id="notiContent"></ul>
+                    </div>
+                </li>*@
+            <li class="nav-item">
+                <a class="nav-link">
+                    @{var user = Session["User"] as SeaTrack.Lib.DTO.Users;}
+                    @user.FullName là
+                    @user.Username
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" onclick="location.href='@Url.Action("AccountInfo","AccountInformation", new { area = "" })'">Cài Đăt</a><a class="dropdown-item" href="#">Nhật Ký</a>
+                    <a class="dropdown-item" href="~/AccountInformation/AccountInfo">Cài Đăt</a>
+                    <a class="dropdown-item" href="#">Nhật Ký</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" onclick="location.href='@Url.Action("logout","Home", new { area = "" })'">Đăng Xuất</a>
+                    <a class="dropdown-item" href="~/Home/logout">Đăng Xuất</a>
                 </div>
             </li>
         </ul>
@@ -43,55 +61,38 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Quản Trị</div>
-                        <a class="nav-link collapsed" href="#" onclick="location.href='@Url.Action("Index","HomeAdmin", new { area = "Admin" })'" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="~/Admin/HomeAdmin/Index" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Quản lý đại lý
                         </a>
-                        <a class="nav-link collapsed" href="#" onclick="location.href='@Url.Action("Customer","HomeAdmin", new { area = "Admin" })'" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="~/Admin/HomeAdmin/Customer" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Quản lý Khách hàng
                         </a>
-                        <a class="nav-link collapsed" href="#" onclick="location.href='@Url.Action("User","HomeAdmin", new { area = "Admin" })'" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="~/Admin/HomeAdmin/User" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Quản lý Người dùng
                         </a>
 
-                        <a class="nav-link collapsed" href="#" onclick="location.href='@Url.Action("Index","Device", new { area = "Admin" })'" aria-expanded="false" aria-controls="collapsePages">
+                        <a class="nav-link collapsed" href="~/Admin/Device/Index" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Quản lý thiết bị
                         </a>
-
-
-                        @*<div class="sb-sidenav-menu-heading">Phân Quyền</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Quản lý quyền
-                        </a><a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Quản lý chức năng
-                        </a>*@
-
-
-
                         <div class="sb-sidenav-menu-heading">Tiện Ích</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Hướng dẫn sử dụng
                         </a>
-                        @*<a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Quản Lý nhóm người dùng
+                        <a class="nav-link" href="~/Admin/AdSOS/Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            SOS
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Quản lý giám sát
-                        </a>*@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -100,8 +101,8 @@
                 </div>
             </nav>
         </div>
-        <div id="layoutSidenav_content">
-            <main class="container">
+        <div id="layoutSidenav_content" >
+            <main>
                 @RenderBody()
             </main>
             <footer class="py-4 bg-light mt-auto">
@@ -118,8 +119,11 @@
             </footer>
         </div>
     </div>
+
+
+    <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/jquery.js"></script>
-    @*<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>*@
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Content/public/js/scripts.js"></script>
     <script src="~/Handlers/keepAlive.js"></script>

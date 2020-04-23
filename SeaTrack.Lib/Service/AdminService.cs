@@ -89,18 +89,18 @@ namespace SeaTrack.Lib.Service
                  user.Username.Trim(), user.Password, user.Fullname.Trim(), user.Phone,
                  user.Address.Trim(), user.CreateBy, user.CreateDate, user.UpdateBy, RoleID, user.ManageBy, user.Status, user.LastUpdateDate);
         }
-        public static List<UserViewModel> GetListUser(int RoleID)
+        public static List<UserInfoDTO> GetListUser(int RoleID)
         {
-            List<UserViewModel> lst = null;
+            List<UserInfoDTO> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListUser", RoleID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<UserViewModel>();
+                    lst = new List<UserInfoDTO>();
 
                     while (reader.Read())
                     {
-                        var data = new UserViewModel()
+                        var data = new UserInfoDTO()
                         {
                             UserID = Convert.ToInt32(reader["UserID"]),
                             Username = reader["Username"].ToString(),
@@ -108,7 +108,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -118,17 +118,17 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
-        public static UserViewModel GetUserByID(int UserID)
+        public static UserInfoDTO GetUserByID(int UserID)
         {
-            UserViewModel user = null;
+            UserInfoDTO user = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetUserByID", UserID))
             {
                 if (reader.HasRows)
                 {
-                    user = new UserViewModel();
+                    user = new UserInfoDTO();
                     while (reader.Read())
                     {
-                        var data = new UserViewModel()
+                        var data = new UserInfoDTO()
                         {
                             UserID = Convert.ToInt16(reader["UserID"]),
                             Username = reader["Username"].ToString(),
@@ -138,9 +138,9 @@ namespace SeaTrack.Lib.Service
                             Address = reader["Address"].ToString(),
                             Status = Convert.ToInt16(reader["Status"]),
                             CreateBy = reader["CreateBy"].ToString(),
-                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
                             UpdateBy = reader["UpdateBy"].ToString(),
-                            LastUpdateDate = Convert.ToDateTime(reader["LastUpdateDate"]).ToString("dd/MM/yyyy"),
+                            LastUpdateDate = Convert.ToDateTime(reader["LastUpdateDate"]),
                             RoleID = Convert.ToInt16(reader["RoleID"]),
                             ManageBy = reader["ManageBy"].ToString(),
                             Image = reader["Image"].ToString()
@@ -154,18 +154,18 @@ namespace SeaTrack.Lib.Service
             return null;
         } //Lấy đối tượng user theo UserID
 
-        public static List<UserViewModel> GetListUserByUserID(string Username, int RoleID) //Lấy danh sách user được quản lý bởi Username
+        public static List<UserInfoDTO> GetListUserByUserID(string Username, int RoleID) //Lấy danh sách user được quản lý bởi Username
         {
-            List<UserViewModel> lst = null;
+            List<UserInfoDTO> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListUserByUserID", Username, RoleID))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<UserViewModel>();
+                    lst = new List<UserInfoDTO>();
 
                     while (reader.Read())
                     {
-                        var data = new UserViewModel()
+                        var data = new UserInfoDTO()
                         {
                             UserID = Convert.ToInt32(reader["UserID"]),
                             Username = reader["Username"].ToString(),
@@ -173,7 +173,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -183,18 +183,18 @@ namespace SeaTrack.Lib.Service
             }
             return null;
         }
-        public static List<UserViewModel> GetListUserOfAgency(string Username)
+        public static List<UserInfoDTO> GetListUserOfAgency(string Username)
         {
-            List<UserViewModel> lst = null;
+            List<UserInfoDTO> lst = null;
             using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListUserOfAgency", Username))
             {
                 if (reader.HasRows)
                 {
-                    lst = new List<UserViewModel>();
+                    lst = new List<UserInfoDTO>();
 
                     while (reader.Read())
                     {
-                        var data = new UserViewModel()
+                        var data = new UserInfoDTO()
                         {
                             UserID = Convert.ToInt32(reader["UserID"]),
                             Username = reader["Username"].ToString(),
@@ -202,7 +202,7 @@ namespace SeaTrack.Lib.Service
                             Fullname = reader["Fullname"].ToString(),
                             Phone = reader["Phone"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
-                            CreateDate = Convert.ToDateTime(reader["CreateDate"]).ToString("dd/MM/yyyy"),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
                             ManageBy = reader["ManageBy"].ToString()
                         };
                         lst.Add(data);
@@ -216,7 +216,8 @@ namespace SeaTrack.Lib.Service
         {
             try
             {
-                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_EditUser", user.UserID, user.Username, user.Password, user.Fullname.Trim(), user.Phone, user.Address.Trim(), user.Status, user.UpdateBy, user.LastUpdateDate, user.RoleID);
+                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_EditUser", user.UserID, user.Username, user.Password, 
+                    user.Fullname.Trim(), user.Phone, user.Address.Trim(), user.Status, user.UpdateBy, user.LastUpdateDate, user.RoleID);
                 if (res == 0)
                 {
                     return false;

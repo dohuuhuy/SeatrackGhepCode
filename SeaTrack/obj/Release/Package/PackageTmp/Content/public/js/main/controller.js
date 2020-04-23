@@ -15,7 +15,7 @@
                     $("#item-taikhoan-sua").hide()
                     $("#item-taikhoan-xoa").hide()
                     $("#item-taikhoan-status").show()
-                   
+
                 }
 
 
@@ -42,33 +42,34 @@ function DanhSachThietBiHetHan() {
                 var _tb = '';
                 var trangthai = '';
                 for (var i = 0, j = 1; i < DSHetHan.length; i++) {
-                    ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
+                    ngayHetHan = new Date(parseInt(DSHetHan[i]['DateExpired'].substr(6)));
+                    var _ngayHetHan = ngayHetHan.getDate() + '/' + (ngayHetHan.getMonth() + 1) + '/' + ngayHetHan.getFullYear()
                     ngayHienTai = new Date();
                     hieu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
 
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
-                            ' <tr>' +
-                            '<td>' + (j) + '</td> ' +
-                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
-                            '<td style="color:red">' + trangthai + '</td>' +
-                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                            ' </tr>';
+                        ' <tr>' +
+                        '<td>' + (j) + '</td> ' +
+                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                        '<td>' + _ngayHetHan + '</td>' +
+                        '<td style="color:red">' + trangthai + '</td>' +
+                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                        ' </tr>';
                         j++;
                     }
-                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5 
+                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5
                     {
                         trangthai = 'Sắp hết hạn';
                         _tb +=
-                            ' <tr>' +
-                            '<td>' + (j) + '</td> ' +
-                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
-                            '<td style="color:orange">' + trangthai + '</td>' +
-                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                            ' </tr>';
+                        ' <tr>' +
+                        '<td>' + (j) + '</td> ' +
+                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                        '<td>' + _ngayHetHan + '</td>' +
+                        '<td style="color:orange">' + trangthai + '</td>' +
+                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                        ' </tr>';
                         j++;
                     }
                     else if (hieu > 5) {
@@ -89,7 +90,6 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
-
 
 function ListSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
@@ -532,21 +532,24 @@ function BaoCaoHanhTrinhTauChay() {
                     for (var i = 0; i < list_lin.length; i++) {
                         var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
                         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
+                        + ' ' + dt.getHours() + ':' + dt.getMinutes();
                         var speed = toHaily(list_lin[i]["Speed"]);
+                        var _speed = '';
                         var status = "";
-                        if (speed <= 2.5) {
+                        if (speed <= 3) {
                             status = "Tàu dừng";
+                            _speed = 0;
                         }
                         else {
                             status = "Tàu chạy";
+                            _speed = speed;
                         };
                         _tbl +=
-                            '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
-                            + dte + '</td><td>' + speed + '</td ><td>' + status + '</td ><td>'
-                            + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
-                            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
-                            + '</td></tr>';
+                        '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
+                        + dte + '</td><td>' + _speed + '</td ><td>' + status + '</td ><td>'
+                        + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + ' '
+                        + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
+                        + '</td></tr>';
 
                     }
                     $("#tbody_bgt_hanhtrinh").html(_tbl);
@@ -554,8 +557,7 @@ function BaoCaoHanhTrinhTauChay() {
             }
         },
     }, "json");
-}
-// danh sách tìm kiếm thiết bị 
+}// danh sách tìm kiếm thiết bị 
 function ListDeviceSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);

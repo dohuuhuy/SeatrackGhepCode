@@ -1,6 +1,8 @@
 ﻿var app = angular.module("App", []);
 
-app.controller("Controller", function ($scope, $http) {
+app.controller("Controller", function ($scope, $http, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 1000);
     $scope.UserID = function (id, role, managey) {
         $scope.role = role;
         $scope.id = id;
@@ -67,8 +69,13 @@ app.controller("Controller", function ($scope, $http) {
             url: '/Admin/Device/GetListDeviceNotUsedByUser?Username='+Username
         }).then(function (response) {
             console.log(response, 'res');
-            $scope.DevicesNotUsed = response.data;
-        }, function (error) {
+            if (response != '') {
+                $scope.DevicesNotUsed = (response.data);
+                for (var i = 0; i < $scope.DevicesNotUsed.length; i++) {
+                    $scope.DevicesNotUsed[i]["DateExpired"] = new Date(parseInt($scope.DevicesNotUsed[i]["DateExpired"].substr(6)))
+                    console.log($scope.DevicesNotUsed[i]["DateExpired"]);
+                }
+            }        }, function (error) {
             console.log(error, 'can not get data.');
         });
     };
@@ -80,7 +87,13 @@ app.controller("Controller", function ($scope, $http) {
             data: user
         }).then(function (response) {
             console.log(response, 'res');
-            $scope.DevicesNotUsed = response.data;
+            if (response != '') {
+                $scope.DevicesNotUsed = (response.data);
+                for (var i = 0; i < $scope.DevicesNotUsed.length; i++) {
+                    $scope.DevicesNotUsed[i]["DateExpired"] = new Date(parseInt($scope.DevicesNotUsed[i]["DateExpired"].substr(6)))
+                    console.log($scope.DevicesNotUsed[i]["DateExpired"]);
+                }
+            }
         }, function (error) {
             console.log(error, 'can not get data.');
         });
@@ -92,8 +105,14 @@ app.controller("Controller", function ($scope, $http) {
             url: '/Admin/Device/GetListDeviceByUserID/' + UserID
         }).then(function (response) {
             console.log(response.data);
-            if(response!= '')
-                $scope.Devices=(response.data);
+            if (response != '') {
+                $scope.Devices = (response.data);
+                for (var i = 0; i < $scope.Devices.length; i++) {
+                    $scope.Devices[i]["DateExpired"] = new Date(parseInt($scope.Devices[i]["DateExpired"].substr(6)))
+                    console.log($scope.Devices[i]["DateExpired"]);
+                }
+            }
+                
         }, function (error) {
             console.log(error, 'can not get data.');
         });

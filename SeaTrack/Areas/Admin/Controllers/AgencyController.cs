@@ -74,7 +74,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             {
                 ViewBag.EditResult = TempData["EditResult"].ToString();
             }
-            UserViewModel us = new UserViewModel();
+            UserInfoDTO us = new UserInfoDTO();
             us = AdminService.GetUserByID(id);
             if (us.ManageBy == user.Username || AdminService.CheckUserManage(id, user.Username))
             {

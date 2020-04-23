@@ -21,5 +21,6 @@ namespace SeaTrack.Lib.DTO.Admin
         public DateTime? LastUpdateDate { get; set; }
         public int RoleID { get; set; }
         public string ManageBy { get; set; }
+        public string Image { get; set; }
     }
 }

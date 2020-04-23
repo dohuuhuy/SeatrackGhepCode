@@ -4,77 +4,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="container-fluid" ng-app="AdminModule" ng-controller="AdminController" ng-init="Role(3)">
-    <h1 class="mt-4">Quản lý khách hàng</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active">Quản lý khách hàng</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <strong class="card-title">Vùng Tìm Kiếm</strong>
-        </div>
-        <div class="card-body">
-            <div class="col col-md-12">
-                <div class="input-group">
-                    <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                    @*<div class="input-group-btn">
-                        <button class="btn btn-primary" ng-click="ClearSearch()">
-                            <i class="fa fa-search"></i> Search
-                        </button>
-                    </div>*@
+    <div class="container-fluid" ng-app="AdminModule" ng-controller="AdminController" ng-init="Role(3)">
+        @Html.Partial("../Shared/_loading")
+        <div ng-cloak="" ng-show="loaded">
+            <h1 class="mt-4">Quản lý khách hàng</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Quản lý khách hàng</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <strong class="card-title">Vùng Tìm Kiếm</strong>
                 </div>
-                <br />
-                @*<div class="input-group ">
-                    <label for="radio1" class="form-check-label col-md-4 ">
-                        <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
-                    </label>
-                    <label for="radio2" class="form-check-label col-md-4  ">
-                        <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
-                    </label>
-                </div>*@
+                <div class="card-body">
+                    <div class="col col-md-12">
+                        <div class="input-group">
+                            <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
+                            @*<div class="input-group-btn">
+                                <button class="btn btn-primary" ng-click="ClearSearch()">
+                                    <i class="fa fa-search"></i> Search
+                                </button>
+                            </div>*@
+                        </div>
+                        <br />
+                        @*<div class="input-group ">
+                            <label for="radio1" class="form-check-label col-md-4 ">
+                                <input type="radio" id="radio1" name="checkbox1" ng-model="Status" value="1" class="form-check-input">Kích hoạt
+                            </label>
+                            <label for="radio2" class="form-check-label col-md-4  ">
+                                <input type="radio" id="radio2" name="checkbox2" ng-model="Status" value="-1" class="form-check-input">Đã khóa
+                            </label>
+                        </div>*@
+                    </div>
+
+                </div>
+
+
             </div>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Danh sách khách hàng</div>
 
-        </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary" data-target="#AddNew" data-toggle="modal" ng-click="AddCustomer()">
+                        Thêm mới
+                    </button>
 
+                    <label>Tổng: {{Customers.length}}</label>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-    </div>
-    <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>Danh sách khách hàng</div>
-
-        <div class="card-body">
-            <button type="button" class="btn btn-primary" data-target="#AddNew" data-toggle="modal" ng-click="AddCustomer()">
-                Thêm mới
-            </button>
-
-            <label>Tổng: {{Customers.length}}</label>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                    <thead>
-                        <tr>
-                            <th width="5%">#</th>
-                            <th width="15%">Thao tác</th>
-                            <th width="15%">Tên tài khoản</th>
-                            <th width="15%">Họ tên</th>
-                            <th width="15%">Ngày tạo</th>
-                            <th width="15%">Đại lý</th>
-                            <th width="15%">Trạng thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
-                            <td>{{$index + (currentPage-1)*10+1}}</td>
-                            <td>
-                                <a href="#" data-ng-href="@Url.Action("Detail", "HomeAdmin")/{{c.UserID}}" title="Chi tiết người dùng"><i class="fa fa-eye" style="color:black"></i></a>
-                                <a ng-if="c.Status==1" ng-click="LockUser(c.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
-                                <a ng-if="c.Status==-1" ng-click="UnLockUser(c.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
-                                <a ng-click="DeleteUser(c.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Thao tác</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Đại lý</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="c in Customers | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                                    <td>{{$index + (currentPage-1)*10+1}}</td>
+                                    <td>
+                                        <a href="#" data-ng-href="@Url.Action("Detail", "HomeAdmin")/{{c.UserID}}" title="Chi tiết người dùng"><i class="fa fa-eye" style="color:black"></i></a>
+                                        <a ng-if="c.Status==1" ng-click="LockUser(c.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
+                                        <a ng-if="c.Status==-1" ng-click="UnLockUser(c.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
+                                        <a ng-click="DeleteUser(c.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
 
                             </td>
                             <td>{{c.Username}}</td>
                             <td>{{c.Fullname}}</td>
-                            <td>{{c.CreateDate|date: "yyyy-MM-ddTHH:mm:ss"}}</td>
+                            <td>{{c.CreateDate | date:"dd/MM/yyyy"}}</td>
                             <td>{{c.ManageBy}}</td>
                             <td ng-if="c.Status==-1"><p style="color:red">Tạm khóa</p></td>
                             <td ng-if="c.Status==1"><p style="color:green">kích hoạt</p></td>
@@ -119,7 +121,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Đại lý</label>
-                                <select name="ManageBySelect" id="ManageBySelect" ng-model="ManageBy">
+                                <select class="form-control" name="ManageBySelect" id="ManageBySelect" ng-model="ManageBy">
                                     <option value="">Chọn đại lý</option>
                                     <option ng-repeat="a in Agencys" value="{{a.Username}}">{{a.Username}}</option>
                                 </select>

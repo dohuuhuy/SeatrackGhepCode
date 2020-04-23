@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Quartz;
 using RestSharp;
 using SeaTrack.Lib.Service;
+using SeaTrack.Lib.Database;
 
 namespace SeaTrack.Lib.Job
 {
@@ -22,7 +23,7 @@ namespace SeaTrack.Lib.Job
                 {
                     try
                     {
-                        var client = new RestClient("http://hkt01.demowebmau.com");
+                        var client = new RestClient(ConnectData.URLSOS);
                         var request = new RestRequest("post/iridiums", Method.POST);
                         request.RequestFormat = DataFormat.Json;
                         request.AddJsonBody(new

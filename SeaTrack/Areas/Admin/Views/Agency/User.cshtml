@@ -51,40 +51,40 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Thao tác</th>
-                                    <th>Tên tài khoản</th>
-                                    <th>Họ tên</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Khách hàng</th>
-                                    <th>Trạng thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr dir-paginate="u in Users | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
-                                    <td>{{$index + (currentPage-1)*10+1}}</td>
-                                    <td>
-                                        <a href="#" data-ng-href="@Url.Action("Detail", "Agency")/{{u.UserID}}" title="Chi tiết người dùng"><i class="fa fa-eye" style="color:black"></i></a>
-                                        <a ng-if="u.Status==1" ng-click="LockUser(u.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
-                                        <a ng-if="u.Status==-1" ng-click="UnLockUser(u.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
-                                        <a ng-click="DeleteUser(u.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
-                                    </td>
-                                    <td>{{u.Username}}</td>
-                                    <td>{{u.Fullname}}</td>
-                                    <td>{{u.CreateDate}}</td>
-                                    <td>{{u.ManageBy}}</td>
-                                    <td ng-if="u.Status==-1"><p style="color:red">Tạm khóa</p></td>
-                                    <td ng-if="u.Status==1"><p style="color:green">kích hoạt</p></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
-                            <div class="text-center">
-                                <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
-                            </div>
-                        </div>
+                    <thead>
+                        <tr>
+                            <th >#</th>
+                            <th >Thao tác</th>
+                            <th >Tên tài khoản</th>
+                            <th >Họ tên</th>
+                            <th >Ngày tạo</th>
+                            <th >Khách hàng</th>
+                            <th >Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="u in Users | filter:SearchKey | itemsPerPage: 10" current-page="currentPage">
+                            <td>{{$index + (currentPage-1)*10+1}}</td>
+                            <td>
+                                <a href="#" data-ng-href="@Url.Action("Detail", "Agency")/{{u.UserID}}" title="Chi tiết người dùng"><i class="fa fa-eye" style="color:black"></i></a>
+                                <a ng-if="u.Status==1" ng-click="LockUser(u.UserID)" title="Khóa tài khoản"><i class="fa fa-lock" style="color:red"></i></a>
+                                <a ng-if="u.Status==-1" ng-click="UnLockUser(u.UserID)" title="Mở khóa tài khoản"><i class="fa fa-unlock" style="color:black"></i></a>
+                                <a ng-click="DeleteUser(u.UserID)" title="Xóa tài khoản"><i class="fa fa-trash" style="color:black"></i></a>
+                            </td>
+                            <td>{{u.Username}}</td>
+                            <td>{{u.Fullname}}</td>
+                            <td>{{u.CreateDate | date:"dd/MM/yyyy"}}</td>
+                            <td>{{u.ManageBy}}</td>
+                            <td ng-if="u.Status==-1"><p style="color:red">Tạm khóa</p></td>
+                            <td ng-if="u.Status==1"><p style="color:green">kích hoạt</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                    </div>
+                </div>
 
                     </div>
                 </div>

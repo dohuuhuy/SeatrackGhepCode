@@ -11,14 +11,14 @@ var point;
 var infowin;
 var _listDeviceStatus = [];
 var _listSOS = [];
-var _SOSInfo = [];
+
 var _drawingLinePoint = [];
 var _infowins = [];
 var _drawingMarker = [];
 var slider = $("myRange");
 var _c_marker = 0;
 var _intervalSOS;
-var _arSOSMarker = [];
+
 var _intervalWaning;
 var _intervalDeviceStatus;
 var _intervalDataline;

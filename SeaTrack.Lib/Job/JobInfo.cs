@@ -24,8 +24,21 @@ namespace SeaTrack.Lib.Job
             var lstDelayInfo = InfoService.GetAllDelayInfo();
             foreach (var item in lstDelayInfo)
             {
-                if (item.Time < (DateTime.Now - item.LastSend).TotalSeconds)
+                if (item.Time <= (DateTime.Now - item.LastSend).TotalSeconds)
                 {
+                    int time = InfoService.UpdateLastSend(item.ID, DateTime.Now);
+                    string filename = "E:/Website/Test/Log/log.txt";
+                    //string filename = "D:/Work/Publish/Log/log.txt";
+                    //FileStream fs = new FileStream(filename, FileMode.Append);
+                    using (StreamWriter sw = File.AppendText(filename))
+                    {
+                        sw.WriteLine(item.ID + " " + DateTime.Now.ToString() + Environment.NewLine);
+                    }
+                    
+
+
+                    //sw.Flush();
+                    //fs.Close();
                     var data = InfoService.GetDataByDelayTime(item.ID, item.MREF, item.Seqno);
                     if (data != null)
                     {
@@ -61,7 +74,6 @@ namespace SeaTrack.Lib.Job
                             //var rs = client.Execute(request);
                             //System.Diagnostics.Debug.WriteLine(rs.Content);
                         System.Diagnostics.Debug.WriteLine(DateTime.Now);
-                        InfoService.UpdateLastSend(item.ID, DateTime.Now);
 
                         }
 

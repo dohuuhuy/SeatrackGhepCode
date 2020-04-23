@@ -18,7 +18,7 @@ namespace SeaTrack.Lib.DTO
         public string ExpSN { get; set; }
         public decimal Longitude { get; set; }
         public string ExpEW { get; set; }
-        public int Speed { get; set; }
+        public double Speed { get; set; }
         public string DIR { get; set; }
         public string Date { get; set; }
     }

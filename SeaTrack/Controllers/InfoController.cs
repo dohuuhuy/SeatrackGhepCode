@@ -73,15 +73,15 @@ namespace SeaTrack.Controllers
                     returnInfo.ExpSN = item.DirectionSN;
                     returnInfo.Longitude = item.Longitude;
                     returnInfo.ExpEW = item.DirectionEW;
-                    returnInfo.Speed = item.Speed;
+                    returnInfo.Speed = item.Speed/1.83;
                     returnInfo.DIR = "";
                     returnInfo.Date = item.TransmitTime.ToString("dd/MM/yyyy");
                     return Request.CreateResponse(HttpStatusCode.OK, returnInfo);
                 }
-                Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Không tìm thấy thiết bị");
 
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "SecretCode không chính xác");
         }
 
         [HttpPost]
@@ -89,14 +89,19 @@ namespace SeaTrack.Controllers
         {
             if (info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
             {
+                if (AdminService.CheckDeviceExist(null, info.ID)==null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Không tìm thấy thiết bị" });
+                }
+                
                 if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay(info.ID).Time == info.Time)
                 {
 
                     return Request.CreateResponse(HttpStatusCode.OK, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "OK" });
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Fail" });
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Fail" });
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "SecretCode không đúng" });
         }
 
     }

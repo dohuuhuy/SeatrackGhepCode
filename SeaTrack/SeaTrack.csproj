@@ -456,6 +456,7 @@
     <Content Include="Lib\js\_Route\controllerRoute.js" />
     <Content Include="Lib\js\_Route\defaultRoute.js" />
     <Content Include="Lib\js\_Route\globalRoute.js" />
+    <Content Include="Log\log.txt" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angular.js" />
