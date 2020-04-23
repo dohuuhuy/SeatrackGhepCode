@@ -394,6 +394,8 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\S
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Primitives.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.xml
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.dll
+C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\ApplicationInsights.config
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\csc.exe
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -452,6 +454,7 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.WebPages.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.WebPages.Razor.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\WebGrease.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.dll
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.ApplicationBlocks.Data.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.dll
@@ -491,6 +494,7 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.Owin.Security.MicrosoftAccou
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.Owin.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.xml
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.pdb
@@ -498,7 +502,3 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.dll
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.xml
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.xml

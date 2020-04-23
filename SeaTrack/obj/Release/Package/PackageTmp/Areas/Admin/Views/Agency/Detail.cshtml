@@ -30,6 +30,8 @@
                                 <div class="col col-md-3"><label class="form-control-label">Tên tài khoản</label></div>
                                 <div class="col-12 col-md-9">
                                     @Html.HiddenFor(m => m.UserID)
+                                    @Html.HiddenFor(m => m.Status)
+                                    @Html.HiddenFor(m => m.RoleID)
                                     @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
                             </div>

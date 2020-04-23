@@ -61,7 +61,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2020 16:12:37</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Agency/Detail.cshtml">
-      <publishTime>04/22/2020 15:55:28</publishTime>
+      <publishTime>04/22/2020 17:22:41</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Agency/Device.cshtml">
       <publishTime>04/22/2020 16:11:42</publishTime>
@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:36</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>11/09/2019 00:56:44</publishTime>
+      <publishTime>09/11/2019 00:56:44</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>04/07/2020 17:12:36</publishTime>
@@ -964,7 +964,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2020 16:23:32</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>04/22/2020 11:26:10</publishTime>
+      <publishTime>04/22/2020 17:06:17</publishTime>
     </File>
     <File Include="Views/Home/Map.cshtml">
       <publishTime>04/16/2020 16:23:32</publishTime>
@@ -988,28 +988,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2020 17:22:20</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoChiTietHoatDong.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopHoatDong.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopPhamViHoatDong.cshtml">
       <publishTime>04/21/2020 15:18:11</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopTheoLaiTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopTheoTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/HanhTrinhTauChay.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/TocDoCuaTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/VuotPhamViDanhBat.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Views/Report/_MenuBaoCaoChoBo.cshtml">
       <publishTime>04/07/2020 17:12:33</publishTime>
