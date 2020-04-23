@@ -820,7 +820,7 @@ function cleanMap(a = 0) {
                 //     markerSOS[i].setMap(null);
                 // }
                 _arSOSMarker = [];
-                _SOSInfo = [];
+                //    _SOSInfo = [];
                 $.ajax({
                     type: 'GET',
                     url: '/SOS/GetSOS',
@@ -833,37 +833,24 @@ function cleanMap(a = 0) {
                         if (_listSOS != null || _listSOS.length > 0) {
                             document.getElementById("SOS").style.display = "block";
                         }
+                        var infowindow = new google.maps.InfoWindow();
                         for (var i = 0; i < _listSOS.length; i++) {
                             var p = new google.maps.LatLng(_listSOS[i]["Latitude"], _listSOS[i]["Longitude"]);
 
                             var marker = new google.maps.Marker({
                                 position: p,
                                 icon: "/Content/images/tau/tau-do.png",
+                                map:map
                             });
-                            marker.setMap(map);
-
-                            var SOinfo = new google.maps.InfoWindow({
-                                content: 'Đang cập nhật dữ liệu!',
-                            });
-
-                            SOinfo.setContent(getInfoWindow(_listSOS[i], 2));
-
-                            marker.addListener('click', function () {
-                                clearInfoWin();
-                                SOinfo.open(map, marker);
-                            });
-                            // marker.addListener('click', function () {
-                            //     clearInfoWin();
-                            //     console.log(marker);
-                            //     console.log(SOinfo);
-                            //     SOinfo.open(map, marker);
-                            // });
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    infowindow.setContent(getInfoWindow(_listSOS[i], 2));
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i));           
                             _arSOSMarker.push(marker);
-                            _SOSInfo.push(SOinfo);
-
-
+                            //_SOSInfo.push(SOinfo);
                             var date = new Date(parseInt(_listSOS[i]["DateRequest"].substr(6)));
-                            //console.log(date);
                             var dte = date.getDate() + '/' + (date.getMonth() + 1) + '/'
                                 + date.getFullYear() + ' ' + date.getHours() + ':'
                                 + date.getMinutes();
@@ -871,8 +858,7 @@ function cleanMap(a = 0) {
                             _tb += '<tr id="SOS' + _listSOS[i]["DeviceID"]
                                 + '" classname="groupXe" onclick="makePoint(' + i + ',2'
                                 + ');" data-toggle="" data-placement="right" data-html="true" class="tr_hover_select">'
-                                + '<td class="alignCenter">'
-                                + (i + 1) + '</td><td>'
+                                + '<td>'
                                 + '<img src="/Content/images/tau/tau-red.png">  '
                                 + _listSOS[i]["DeviceName"]
                                 + '</td><td>' + dte + '</td><td>'
