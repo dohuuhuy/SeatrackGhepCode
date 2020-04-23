@@ -218,25 +218,13 @@
 
                 </div>
             </nav>
-
-
-
-            <div id="style-selector-control" class="map-control">
-                <select id="style-selector" class="selector-control">
-                    <option value="default" selected>Mặc định</option>
-                    <option value="satellite">Vệ tinh</option>
-                    <option value="night">Đêm</option>
-                </select>
-            </div>
-
-            <div id="map" class="s-map s-full">
-            </div>
+         
+            <div id="map" class="s-map s-full"></div>
             <div id="WarningDiv" class="alert alert-danger alert-dismissible fade show" style="display:none;top:26%;right:5%;position:absolute">
                 <button type="button" class="close" onclick="hide('WarningDiv')">&times;</button>
                 <strong>Chú ý!</strong> <label id="warning">Tàu vi phạm vùng đánh bắt</label>.
             </div>
-            <div id="SOS" style="display:none;width:30%;background:#fff;position:absolute;right:35%;bottom:5%;text-align:center;border:0px;border-radius:5px;height:fit-content">
-                <label class="text-danger " style="font-size:15px;font-weight:bold">CẢNH BÁO KHẨN CẤP</label>
+            <div id="SOS">CẢNH BÁO KHẨN CẤP</label>
                 <button type="button" class="close" onclick="hide('SOS')">&times;</button>
                 <table id="tbldata" class="table-bordered table table-sm text-center" style="padding:0px">
                     <thead style="white-space:nowrap;">

@@ -45,45 +45,47 @@ function DanhSachThietBiHetHan() {
                 var _tb = '';
                 var trangthai = '';
                 for (var i = 0, j = 1; i < DSHetHan.length; i++) {
-                    ngayHetHan = new Date(parseInt(DSHetHan[i]['ExpireDate'].substr(6)));
+                    ngayHetHan = new Date(parseInt(DSHetHan[i]['DateExpired'].substr(6)));
+                    var _ngayHetHan = ngayHetHan.getDate() + '/' + (ngayHetHan.getMonth() + 1) + '/' + ngayHetHan.getFullYear()
                     ngayHienTai = new Date();
-                    hiệu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
+                    hieu = Math.floor((ngayHetHan - ngayHienTai) / 1000 / 60 / 60 / 24);
+
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
                             ' <tr>' +
                             '<td>' + (j) + '</td> ' +
                             '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
                             '<td style="color:red">' + trangthai + '</td>' +
                             '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
                             ' </tr>';
                         j++;
                     }
-                    else if ((hiệu) <= 5) // hiệu của 2 ngày <= 5 
+                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5 
                     {
                         trangthai = 'Sắp hết hạn';
                         _tb +=
                             ' <tr>' +
                             '<td>' + (j) + '</td> ' +
                             '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                            '<td>' + DSHetHan[i]['DateExpired'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
                             '<td style="color:orange">' + trangthai + '</td>' +
                             '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
                             ' </tr>';
                         j++;
                     }
-                    else if (hiệu > 5) {
+                    else if (hieu > 5) {
                         trangthai = 'Chưa hết hạn';
-                        //_tb += '';
+                        _tb += '';
+
                         document.getElementById('thongbaohangloi').style.display = '';
                         document.getElementById('error').innerHTML = "Chưa có thiết bị hết hạn !";
                     }
-
                 }
                 $("#body_dv_exp").html(_tb);
-             
             }
+
             else {
                 document.getElementById('thongbaohangloi').style.display = '';
                 document.getElementById('error').innerHTML = "không có dữ liệu !";
@@ -91,6 +93,7 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
+
 function fetchdata() {
     //win_reload();
     updateListDeviceStatus();

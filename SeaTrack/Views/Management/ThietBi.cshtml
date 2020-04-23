@@ -62,16 +62,13 @@
                                                     <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
                                                         <i class="fa fa-eye" style="color:black"></i>
                                                     </a>
-                                                    @*<a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
-                                                        <a ng-click="Delete($index + (currentPage-1)*10)" ng-if="a.StatusDevice == 1"><i class="fa fa-lock"></i></a>
-                                                        <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.StatusDevice == -1"><i class="fa fa-unlock"></i></a>*@
                                                 </td>
                                                 <td>{{a.DeviceNo}}</td>
                                                 <td>{{a.DeviceName}}</td>
                                                 <td>{{a.DeviceVersion}}</td>
                                                 <td>{{a.DeviceImei}}</td>
-                                                <td ng-if="a.ExpireStatus == -1"><p style="color:red">{{a.DateExpired}}</p></td>
-                                                <td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired}}</p></td>
+                                                <td>{{a.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
+                                                @*<td ng-if="a.ExpireStatus == 1"><p style="color:forestgreen">{{a.DateExpired | date:"dd/MM/yyyy HH:mm"}}</p></td>*@
                                                 <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
                                                 <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
                                                 <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
@@ -136,7 +133,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ngày hết hạn </label>
-                                    <input class="form-control" name="DateExpired" ng-model="Device.DateExpired" type="text" disabled maxlength="200" />
+                                    <input class="form-control" name="DateExpired" value='{{Device.DateExpired | date:"dd/MM/yyyy HH:mm"}}' type="text" disabled maxlength="200" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Ghi chú </label>

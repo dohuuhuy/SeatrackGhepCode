@@ -12,12 +12,12 @@
 #dataTable th {
     background-color: #15b4c4;
     color: white;
-    padding: 15px;
+    /*padding: 15px;*/
 }
 
 #dataTable td {
     vertical-align: inherit;
-    padding: 0px;
+  
 }
 /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
 #menubar ul li {

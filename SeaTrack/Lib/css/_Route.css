@@ -1,4 +1,20 @@
 ﻿
+#SOS{
+    display:none;
+    width:30%;
+    background:#fff;
+    position:absolute;
+    right:35%;bottom:5%;
+    text-align:center;
+    border:0px;
+    border-radius:5px;
+    height:fit-content;
+
+}
+    #SOS .text-danger {
+        font-size: 15px;
+        font-weight: bold
+    }
 #menubar ul li {
     margin-left: 2px;
 }
@@ -57,8 +73,18 @@
     #War {
         display: none
     }
+    .gmnoprint{
+        display:none;
 
+    }
+    #tbldata {
+        overscroll-behavior: auto;
+    }
 
+    #SOS {
+        right: 7%;
+        width: 85%;
+    }
     #sidebarCollapse span {
         display: none;
     }
