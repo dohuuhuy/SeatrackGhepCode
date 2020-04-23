@@ -20,7 +20,7 @@ namespace SeaTrack
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             JobScheduler.StarJobCheckExpired();
-            JobScheduler.StartJobInfo();
+            //JobScheduler.StartJobInfo();
             //JobScheduler.StartJobSOS();
         }
     }
