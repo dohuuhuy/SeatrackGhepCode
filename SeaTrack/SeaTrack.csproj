@@ -318,6 +318,7 @@
     <Content Include="Content\images\icon\Info-icon.png" />
     <Content Include="Content\images\icon\phamvi.png" />
     <Content Include="Content\images\icon\speed vin.png" />
+    <None Include="Content\images\icon\iconmenu" />
     <Content Include="Content\images\icon\vuotphamvi.png" />
     <Content Include="Content\images\icon\waiting.gif" />
     <Content Include="Content\images\icon\waiting2.gif" />
