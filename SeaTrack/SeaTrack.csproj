@@ -574,6 +574,7 @@
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
     <Content Include="Views\Home\Demo.cshtml" />
+    <Content Include="Views\Shared\_NavbarHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

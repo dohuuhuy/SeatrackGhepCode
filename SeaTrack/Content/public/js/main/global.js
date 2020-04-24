@@ -4,6 +4,7 @@ $(document).ready(function () {
 	DanhSachThietBiHetHan();
 	interval_SOS();
 
+	
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
@@ -18,7 +19,7 @@ $(document).ready(function () {
 		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
 		$('#s-logo-menu').toggleClass('d-none');
-		$("#sidebarCollapse").addClass("d-none");
+		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").removeClass("d-none");
 
 	});
@@ -101,7 +102,7 @@ $(document).ready(function () {
 
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
-
+	if ($(window).width() < 481) { $("#sidebarCollapse").click(); }
 });
 
 
