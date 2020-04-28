@@ -1,18 +1,55 @@
 $(document).ready(function () {
 
 	setup_selectDeviceNo();
-	//interval_SOS();
+	DanhSachThietBiHetHan();
+	interval_SOS();
+
+	
 
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
+	if (window.innerWidth < 475) {
+	//	$('#menubar').removeClass('active'); // bỏ kích hoạt
+		$('#s-logo-menu').toggleClass('d-none'); // cho hiện logon
+		$('#txtgiamsat').toggleClass('d-none');
+    }
+
 	$('#sidebarCollapse').on('click', function () {
-		$('#s-sidebar').toggleClass('active');
-		$('.s-sidebar').toggleClass('active');
+		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
 		$('#s-logo-menu').toggleClass('d-none');
-		$("#sidebarCollapse").addClass("d-none");
+		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").removeClass("d-none");
+
+	});
+
+
+	$('#menu2').on('click', function () { // nhấn menu
+
+		if ($('#menubar').hasClass('active')) { // nếu menu thay đổi
+
+			$('.si-sidebar').toggleClass('active'); // bên trái
+			$('#menubar').toggleClass('active'); // nguyên menu
+			$('#s-logo-menu').addClass('d-none'); // cho hiện
+			$("#sidebarCollapse").removeClass("d-none"); // cho hiện menu
+			$("#giamsat_toggle").addClass("d-none"); // giám sát ẩn
+
+		} else {
+			$("#navbarSupportedContent").removeClass("d-none"); // ẩn danh sách
+		}
+	});
+
+	$('#giamsat_toggle').on('click', function () { // 
+
+		$('.si-sidebar').toggleClass('active');
+		$('#menubar').toggleClass('active');
+		$('#s-logo-menu').removeClass('d-none');
+		$("#sidebarCollapse").removeClass("d-none");
+		$("#giamsat_toggle").addClass("d-none");
+		if ($("#navbarSupportedContent").removeClass("d-none")) {
+			$("#navbarSupportedContent").addClass("d-none");
+		}
 	});
 
 	$('input[name="datefilter"]').daterangepicker({
@@ -65,7 +102,7 @@ $(document).ready(function () {
 
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
-
+	if ($(window).width() < 481) { $("#sidebarCollapse").click(); }
 });
 
 

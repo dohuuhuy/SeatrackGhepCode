@@ -47,23 +47,23 @@
                     </div>
                     <div class="p-10 table-responsive">
                         <button class="btn btn-secondary" onclick="exportTableToExcel('table_bgt_tocdo','BaoCaoTocDo')">Export Excel</button>
+                            <table id="dataTable" class="table table-bordered table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="headerAlignCenter">STT</th>
+                                        <th class="headerAlignCenter">Từ ngày</th>
+                                        <th class="headerAlignCenter">Đến ngày</th>
+                                        <th class="headerAlignCenter">Vận tốc trung bình <br /> (Hải lý/Giờ)</th>
+                                        <th class="headerAlignCenter">Vận tốc tối đa  <br /> (Hải lý/Giờ)</th>
+                                        <th class="headerAlignCenter">Quảng đường  <br /> (Hải lý)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_tocdocuatau"></tbody>
+                            </table>
+                        </div>
 
-                        <table id="table_bgt_tocdo" class="table table-bordered text-center" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="headerAlignCenter">STT</th>
-                                    <th class="headerAlignCenter">Từ ngày</th>
-                                    <th class="headerAlignCenter">Đến ngày</th>
-                                    <th class="headerAlignCenter">Vận tốc trung bình <br /> (Hải lý/Giờ)</th>
-                                    <th class="headerAlignCenter">Vận tốc tối đa  <br /> (Hải lý/Giờ)</th>
-                                    <th class="headerAlignCenter">Quảng đường  <br /> (Hải lý)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody_tocdocuatau"></tbody>
-                        </table>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

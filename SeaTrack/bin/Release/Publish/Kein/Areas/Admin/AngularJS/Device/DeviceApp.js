@@ -1,6 +1,9 @@
 ﻿var DeviceApp = angular.module("DeviceApp", ['angularUtils.directives.dirPagination']);
 
-DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService) {
+DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService, $timeout) {
+    $scope.loaded = false;
+    $timeout(function () { $scope.loaded = true; }, 100);
+
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     $scope.namesData = [];
@@ -21,7 +24,6 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         console.log('date' + dateExpire);
         dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
         console.log('new date' + dateExpire);
-        $scope.Device.ExpireDate = new Date(dateExpire);
         $scope.Device.DateExpired = new Date(dateExpire);
     }
     $scope.ClearSearch = function () {
@@ -35,11 +37,13 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         DeviceName: '',
         DeviceImei: '',
         DeviceVersion: '',
-        DeviceGroup: '',
+        TypeShip: '',
         DateExpired: '',
         DeviceNote: ''
 
     };
+
+
 
     $scope.View = function (data) {
         console.log('i am inside view() + ');
@@ -49,7 +53,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             DeviceName: data.DeviceName,
             DeviceImei: data.DeviceImei,
             DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
+            TypeShip: data.TypeShip,
             DateExpired: data.DateExpired,
             DeviceNote: data.DeviceNote
 
@@ -93,13 +97,13 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
                 LoadDevice();
                 //$scope.namesData.push(response.data);
                 $scope.Clear();
-                alert(" Added Successfully !!!");
+                alert(" Thêm mới thành công !!!");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
         }
         else {
-            alert('Please Enter All the Values !!');
+            alert('Hãy chắc rằng bạn đã nhập đầy đủ !!');
         }
     };
     $scope.update = function () {
@@ -112,13 +116,9 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             data: JSON.stringify($scope.Device)
         }).then(function successCallback(response) {
             $scope.namesData = null;
-            DeviceService.GetAllRecords().then(function (d) {
-                $scope.namesData = d.data;
-            }, function () {
-                alert('Unable to Get Data !!!');
-            });
+            LoadDevice();
             $scope.Clear();
-            alert(" Updated Successfully !!!");
+            alert(" Cập nhật mới thành công !!!");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -133,10 +133,10 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
             DeviceName: data.DeviceName,
             DeviceImei: data.DeviceImei,
             DeviceVersion: data.DeviceVersion,
-            DeviceGroup: data.DeviceGroup,
+            TypeShip: data.TypeShip,
             DateExpired: data.DateExpired,
             DeviceNote: data.DeviceNote,
-            ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
+            //ExpireDate: new Date(parseInt(data.ExpireDate.substr(6)))
 
 
         };
@@ -147,7 +147,7 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
         $scope.Device.DeviceName = '',
         $scope.Device.DeviceImei = '',
         $scope.Device.DeviceVersion = '',
-        $scope.Device.DeviceGroup = '',
+        $scope.Device.TypeShip = '',
         $scope.Device.DateExpired = '',
         $scope.Device.DeviceNote = ''
 
@@ -184,8 +184,12 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService)
     function LoadDevice() {
         DeviceService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.namesData[i]["DateExpired"] = new Date(parseInt($scope.namesData[i]["DateExpired"].substr(6)))
+                //console.log($scope.namesData[i]["DateExpired"]);
+            }
         }, function () {
-            alert('Unable to Get Data !!!');
+            alert('Không tìm thấy dữ liệu !!!');
         });
 
     }
@@ -198,8 +202,5 @@ DeviceApp.factory('DeviceService', function ($http) {
     fac.GetAllRecords = function () {
         return $http.get('/Admin/Device/GetListDevice');
     };
-
-    console.log('i am inside Service ');
-
     return fac;
 });

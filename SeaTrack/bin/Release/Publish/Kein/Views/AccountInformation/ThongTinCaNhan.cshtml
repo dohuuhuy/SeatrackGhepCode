@@ -5,7 +5,6 @@
     if (user.RoleID == 1)
     {
         Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-
     }
     else if (user.RoleID == 2)
     {
@@ -14,135 +13,181 @@
     else
     {
         Layout = "~/Views/Shared/_LayoutInfo.cshtml";
-
     }
+
 }
+
+@if (ViewBag.uploadresult == 1)
+{
+    <script>alert("Thay đổi ảnh đại diện thành công !")</script>
+}
+@if (ViewBag.uploadresult == -1)
+{
+    <script>alert("Kích thước quá 1MB !")</script>
+}
+
 <script src="~/Scripts/angular.js"></script>
 <script src="~/Content/public/js/main/AccountApp.js"></script>
-
-
-<div class="row" ng-app="App" ng-controller="Controller" ng-init="Status = false">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <strong ng-if="@user.RoleID==4">Thông Tin Người Dùng </strong>
-                <strong ng-if="@user.RoleID==3">Thông Tin Khách Hàng </strong>
-                <strong ng-if="@user.RoleID==2">Thông Tin Đại Lý </strong>
-                <strong ng-if="@user.RoleID==1">Thông tin Quản Trị  </strong>
-            </div>
-            <div class="card-body card-block">
-                <div class="row form-group">
-                    <div class="col col-md-3"><label class="form-control-label">Username</label></div>
-                    <div class="col-12 col-md-9">
-                        <input class="form-control" readonly type="text" ng-model="User.Username" />
-                    </div>
+<div class="container">
+    <div class="row" ng-app="App" ng-controller="Controller" ng-init="Status = false">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong ng-if="@user.RoleID==4">Thông Tin Người Dùng </strong>
+                    <strong ng-if="@user.RoleID==3">Thông Tin Khách Hàng </strong>
+                    <strong ng-if="@user.RoleID==2">Thông Tin Đại Lý </strong>
+                    <strong ng-if="@user.RoleID==1">Thông tin Quản Trị  </strong>
                 </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="text-input" class="form-control-label">Họ tên</label></div>
-                    <div class="col-12 col-md-9">
-                        <input class="form-control" placeholder="Họ tên..." type="text" required maxlength="50" ng-model="User.FullName" />
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="text-input" class="form-control-label">Số điện thoại</label></div>
-                    <div class="col-12 col-md-9">
-                        <input class="form-control" placeholder="Số điện thoại..." type="text" required maxlength="10" ng-model="User.Phone" ng-pattern="/^[0-9]+$/" />
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="text-input" class="form-control-label">Địa chỉ</label></div>
-                    <div class="col-12 col-md-9">
-                        <input class="form-control" placeholder="Địa chỉ..." type="text" required maxlength="200" ng-model="User.Address" />
-                    </div>
-                </div>
-                <div class="row form-group" ng-if="User.ManageBy != null">
-                    <div class="col col-md-3"><label class="form-control-label">Manage By: </label></div>
-                    <div class="col-12 col-md-9">
-                        <p>{{User.ManageBy}}</p>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary btn-sm" ng-click="update()">
-                        <i class="fa fa-dot-circle-o"></i> Submit
-                    </button>
-                    <button data-toggle="modal" data-target="#ChangePassword" class="btn btn-primary btn-sm" style="padding-right:4%">
-                        Đổi mật khẩu
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="ChangePassword" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="text-info">Thêm thiết bị</h3>
-                    <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
-                </div>
-                <div class="modal-body" style="margin-left:20px">
-                    <form class="form-horizontal " name="ChangePasswordForm">
-                        <div class="row form-group ">
-                            <div class="col col-md-4"><label class="control-label"> Mật khẩu cũ </label></div>
-                            <div class="col-12 col-md-8">
-                                <input class="form-control" name="OldPassword" ng-model="OldPassword" type="password" placeholder="Mật khẩu cũ ..." required maxlength="50" />
-                                <label ng-if="OldPassword != User.Password && OldPassword !=null" style="color:red">Mật khẩu không đúng</label>
-                            </div>
+                <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label class="form-control-label">Username</label></div>
+                        <div class="col-12 col-md-9">
+                            <input class="form-control" readonly type="text" ng-model="User.Username" />
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-4"><label class="control-label"> Mật khẩu mới </label></div>
-                            <div class="col-12 col-md-8">
-                                <input class="form-control" name="NewPassword" ng-model="NewPassword" type="text" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[# $^+=!*()%&]).{6,30}$/" />
-                                <label ng-if="ChangePasswordForm.NewPassword.$invalid" style="color:red">Mật khẩu không phù hợp</label>
-                            </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Họ tên</label></div>
+                        <div class="col-12 col-md-9">
+                            <input class="form-control" placeholder="Họ tên..." type="text" required maxlength="50" ng-model="User.FullName" />
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-4"><label class="control-label"> Xác nhận mật khẩu </label></div>
-                            <div class="col-12 col-md-8">
-                                <input class="form-control" name="ConfirmPassword" ng-model="ConfirmPassword" type="text" placeholder="Xác nhận mật khẩu ..." required maxlength="50" />
-                                <label ng-if="ConfirmPassword != NewPassword && ConfirmPassword != null" style="color:red">Mật khẩu không chính xác</label>
-                            </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Số điện thoại</label></div>
+                        <div class="col-12 col-md-9">
+                            <input class="form-control" placeholder="Số điện thoại..." type="text" required maxlength="10" ng-model="User.Phone" ng-pattern="/^[0-9]+$/" />
                         </div>
-                        <div class="text-danger">
-                            <small>- Mật khẩu từ 6 - 30 ký tự</small><br />
-                            <small>- Mật khẩu không chứa các ký tự Unicode</small><br />
-                            <small>- Mật khẩu chứa cả ký tự hoa và thường</small><br />
-                            <small>- Mật khẩu chứa ít nhất 1 ký tự đặc biệt</small><br />
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class="form-control-label">Địa chỉ</label></div>
+                        <div class="col-12 col-md-9">
+                            <input class="form-control" placeholder="Địa chỉ..." type="text" required maxlength="200" ng-model="User.Address" />
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="Change()">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
+                    <div class="row form-group" ng-if="User.ManageBy != null">
+                        <div class="col col-md-3"><label class="form-control-label">Quản lý : </label></div>
+                        <div class="col-12 col-md-9">
+                            <input class="form-control" type="text" required maxlength="200" ng-model=" User.ManageBy" readonly />
 
-
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-picture"></i><strong class="card-title pl-2">Hình Đại Diện</strong>
-            </div>
-            <div class="card-body">
-                <div class="mx-auto d-block">
-                    <img ng-if="User.Image != ''" class="rounded-circle mx-auto d-block" width:"167px" height:"158px" src="~/Content/images/UserAvatar/{{User.Image}}" alt="Card image cap">
-                    <img ng-if="User.Image == ''" class="rounded-circle mx-auto d-block" src="~/Content/images/UserAvatar/daily01.jpg" alt="Card image cap">
-
-                    <h5 class="text-sm-center mt-2 mb-1">{{User.FullName}}</h5>
-                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {{User.Address}}</div>
-                </div>
-                <hr>
-                <div class="card-text text-sm-center">
-                    <form action="Upload" method="post" enctype="multipart/form-data" name="UpLoad">
-                        <input type="file" name="file" id="file" accept="image/*" onchange="validateAndUpload(this);" class="btn btn-light" />
-                        <button type="submit" class="btn btn-primary btn-sm" ng-if="UpLoad.file.$invalid">
-                            <i class="fa fa-dot-circle-o"></i> Lưu
+                           
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-sm" ng-click="update()">
+                            <i class="fa fa-dot-circle-o"></i> Cập nhật
                         </button>
-                    </form>
+                        <button data-toggle="modal" data-target="#ChangePassword" class="btn btn-primary btn-sm" style="padding-right:4%">
+                            Đổi mật khẩu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="ChangePassword" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Đổi Mật Khẩu</h3>
+                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        <form class="form-horizontal " name="ChangePasswordForm">
+                            <div class="row form-group ">
+                                <div class="col col-md-4"><label class="control-label"> Mật khẩu cũ </label></div>
+                                <div class="col-12 col-md-8">
+                                    <input class="form-control" name="OldPassword" ng-model="OldPassword" type="password" placeholder="Mật khẩu cũ ..." required maxlength="50" />
+                                    <label ng-if="OldPassword != User.Password && OldPassword !=null" style="color:red">Mật khẩu không đúng</label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label class="control-label"> Mật khẩu mới </label></div>
+                                <div class="col-12 col-md-8">
+                                    <input class="form-control" name="NewPassword" ng-model="NewPassword" type="password" placeholder="Mật khẩu mới ..." maxlength="30" ng-pattern="/^[a-zA-Z0-9]{6,30}$/" />
+                                    <label ng-if="ChangePasswordForm.NewPassword.$invalid" style="color:red">Mật khẩu không phù hợp</label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-4"><label class="control-label"> Xác nhận mật khẩu </label></div>
+                                <div class="col-12 col-md-8">
+                                    <input class="form-control" name="ConfirmPassword" ng-model="ConfirmPassword" type="password" placeholder="Xác nhận mật khẩu ..." required maxlength="50" />
+                                    <label ng-if="ConfirmPassword != NewPassword && ConfirmPassword != null" style="color:red">Mật khẩu không chính xác</label>
+                                </div>
+                            </div>
+                            <div class="text-danger">
+                                <small>- Mật khẩu từ 6 - 30 ký tự</small><br />
+                                <small>- Mật khẩu không chứa các ký tự đặc biệt</small><br />
+                                @*<small>- Mật khẩu chứa cả ký tự hoa và thường</small><br />*@
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSave" data-dismiss="modal" ng-disabled="ChangePasswordForm.$invalid || OldPassword != User.Password || ConfirmPassword != NewPassword" ng-click="ChangePassword()">Lưu</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-image"></i><strong class="card-title pl-2">Hình Đại Diện</strong>
+                </div>
+                <div class="card-body">
+                    <div class="mx-auto d-block">
+                        <img id="output" ng-if="User.Image != ''" class="rounded-circle mx-auto d-block" width="167" height="158" src="~/Content/images/UserAvatar/{{User.Image}}" alt="Card image cap">
+                        <img id="output" ng-if="User.Image == ''" class="rounded-circle mx-auto d-block" 
+                             width="167" height="158" src="~/Content/images/UserAvatar/daily01.jpg" alt="Card image cap">
+
+                        <h5 class="text-sm-center mt-2 mb-1">{{User.FullName}}</h5>
+                        <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {{User.Address}}</div>
+                    </div>
+                    <hr>
+                    <div class="card-text text-sm-center">
+                        <form action="Upload" method="post" enctype="multipart/form-data" name="UpLoad">
+                            <input type="file" required name="file" id="file" accept="image/*" onchange="loadFile(event);" class="btn btn-light" />
+
+                            <button type="submit" ng-click="LoadUser()" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Lưu
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+
+<script>
+
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+        fileValidation()
+    };
+
+    function fileValidation() {
+        var formData = new FormData();
+        var file = document.getElementById("file").files[0];
+        formData.append("Filedata", file);
+        var t = file.type.split('/').pop().toLowerCase();
+        if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+            alert('Chỉ nhận tệp hình ảnh: jpeg, jpg, png, bmp, gif');
+            document.getElementById("file").value = '';
+            return false;
+        }
+        if (file.size > 1024000) {
+            alert('Kích thước tối đa 1Mb');
+
+            document.getElementById("file").value = '';
+            return false;
+        }
+        return true;
+    }
+</script>

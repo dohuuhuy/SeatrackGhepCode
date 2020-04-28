@@ -46,23 +46,22 @@
                         </form>
                     </div>
                     <div class="p-10 table-responsive">
-                        <button class="btn btn-secondary" onclick="exportTableToExcel('table_bgt_laitau','BaoCaoTongHopTheoLaiTau')">Export Excel</button>
-
-                        <table id="table_bgt_laitau" class="table  table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="headerAlignCenter" style="width:25px">STT</th>
-                                    <th class="headerAlignCenter">Từ ngày</th>
-                                    <th class="headerAlignCenter">Đến ngày</th>
-                                    <th class="headerAlignCenter">Thuyền trưởng</th>
-                                    <th class="headerAlignCenter">Lộ trình</th>
-                                </tr>
-                            </thead>
-                            <tbody id="BaoCaoTheoLaiTau"></tbody>
-                        </table>
+                        <button class="btn btn-secondary" onclick="exportTableToExcel('dataTable','BaoCaoTongHopTheoLaiTau')">Export Excel</button>
+                            <table id="dataTable" class="table table-bordered table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="headerAlignCenter" style="width:25px">STT</th>
+                                        <th class="headerAlignCenter">Từ ngày</th>
+                                        <th class="headerAlignCenter">Đến ngày</th>
+                                        <th class="headerAlignCenter">Thuyền trưởng</th>
+                                        <th class="headerAlignCenter">Lộ trình</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="BaoCaoTheoLaiTau"></tbody>
+                            </table>
                     </div>
-                </div>
             </div>
+                </div>
         </div>
     </div>
 </div>

@@ -143,7 +143,7 @@
                                         <tr ng-repeat="d in Devices">
                                             <th>{{$index + 1}}</th>
                                             <td>{{d.DeviceName}}</td>
-                                            <td>{{d.DateExpired}}</td>
+                                            <td>{{d.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
                                             <td align="center">
                                                 <a ng-click="RemoveDeviceFromUser($index)"><i class="fa fa-trash"></i></a>
                                             </td>
@@ -257,7 +257,7 @@
                                         <tr ng-repeat="d in Devices">
                                             <th>{{$index + 1}}</th>
                                             <td>{{d.DeviceName}}</td>
-                                            <td>{{d.DateExpired}}</td>
+                                            <td>{{d.DateExpired | date:"dd/MM/yyyy HH:mm" }}</td>
                                             <td align="center">
                                                 <a ng-click="RemoveDeviceFromUser($index)"><i class="fa fa-trash"></i></a>
                                             </td>
@@ -295,7 +295,7 @@
                                 <tr ng-repeat="dv in DevicesNotUsed">
                                     <th>{{$index + 1}}</th>
                                     <td>{{dv.DeviceName}}</td>
-                                    <td>{{dv.DateExpired}}</td>
+                                    <td>{{dv.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
                                     <td align="center">
                                         <a ng-click="AddDeviceToUser($index)"><i class="fa fa-plus-circle"></i></a>
                                     </td>
@@ -306,7 +306,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" class="btn" ng-click="loading(Account.UserID)">Dóng</a>
+                        <a href="#" data-dismiss="modal" class="btn" ng-click="loading(Account.UserID)">Đóng</a>
                     </div>
                 </div>
             </div>

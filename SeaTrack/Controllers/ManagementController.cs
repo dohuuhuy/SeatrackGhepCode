@@ -32,9 +32,13 @@ namespace SeaTrack.Controllers
         }
         public ActionResult Account()
         {
-            if (Session["User"] == null)
+            if (CheckRole(3) != 1)
             {
-                return RedirectToAction("Login", "Home");
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
             return View("ThongTinTaiKhoan");
         }
@@ -96,10 +100,16 @@ namespace SeaTrack.Controllers
         }
         public ActionResult Device()
         {
-            if (Session["User"] == null)
+
+            if (CheckRole(3) != 1)
             {
-                return RedirectToAction("Login", "Home");
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
+
             return View("ThietBi");
         }
 
@@ -198,9 +208,14 @@ namespace SeaTrack.Controllers
         }
         public ActionResult Driver()
         {
-            if (Session["User"] == null)
+
+            if (CheckRole(3) != 1)
             {
-                return RedirectToAction("Login", "Home");
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
             return View("LaiTau");
         }
@@ -248,6 +263,18 @@ namespace SeaTrack.Controllers
             var data = AdminService.UpdateStatusDriver(id, 1);
             return Json("Đã mở khóa", JsonRequestBehavior.AllowGet);
         }
-
+        public int CheckRole(int role)
+        {
+            var user = (Users)Session["User"];
+            if (user != null)
+            {
+                if (user.RoleID != role)
+                {
+                    return -1; //sai quyền
+                }
+                return 1; //Hợp lệ
+            }
+            return 0; //Chưa đăng nhập
+        }
     }
 }

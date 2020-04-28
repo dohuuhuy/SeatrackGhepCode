@@ -23,17 +23,17 @@
         <div class="collapse navbar-collapse d-none" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item active" onclick="win_reload();">
-                    <a id="a" href="~/Home/Route" onclick="win_reload();" type="button"
-                       class="btn btn-outline-primary">
+                    <a id="" href="~/Home/Route" onclick="win_reload();" role="button"
+                       class="btn btn-outline-primary text-primary hover">
                         <i class="fas fa-location-arrow"></i>
                         Giám sát
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <a role="button" class="btn btn-outline-primary text-primary dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-chart-bar"></i>
                         Báo cáo
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
                         <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
@@ -42,10 +42,10 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <a role="button" class="btn btn-outline-primary text-primary dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-users-cog"></i>
                         Quản trị
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
                         <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị</a>
@@ -54,36 +54,36 @@
                 </li>
                 <li class="nav-item">
 
-                    <a id="b" href="~/Utilities/Index" type="button" class="btn btn-outline-info">
+                    <a id="" href="~/Utilities/Index" type="button" class="btn btn-outline-info text-info">
                         <i class="fas fa-tasks"></i>
                         Tiện ích
                     </a>
                 </li>
                 <li class="nav-item">
 
-                    <a id="b" href="~/FeedBack/Index" class="btn btn-outline-info">
+                    <a id="" href="~/FeedBack/Index" class="btn btn-outline-info text-info">
                         <i class="fas fa-comments"></i>
                         Phản hồi
                     </a>
 
                 </li>
                 <li class="nav-item dropdown" id="b">
-                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                    <a role="button" class="btn btn-outline-info dropdown-toggle text-info" data-toggle="dropdown">
                         <i class="fas fa-question"></i>
                         Hướng dẫn
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" id="c">
-                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
+                    <a role="button" class="btn btn-outline-success text-success dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-user"></i>
                         Tài khoản
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                        <a id="" onlick="abc()" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
+                        <a id=""  onclick="" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
                     </div>
                 </li>
                 <li class="nav-item" id="d">
@@ -95,6 +95,7 @@
         </div>
     </nav>
 }
+
 
 
 

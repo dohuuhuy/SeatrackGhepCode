@@ -12,27 +12,7 @@
     <link href="~/Content/login-css/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/login-css/vinasia.css" rel="stylesheet" />
 
-    <script type="text/javascript">
-
-        var countload = 0;
-        function ajaxGetdata(idlang) {
-            //deviceID
-            // var idlang = document.getElementById('idlang').value;
-            if (countload == 0) {
-                countload += 1;
-                window.location = "Home/Change?languageFlag=" + idlang;
-            }
-            else {
-                window.location = "Change?languageFlag=" + idlang;
-            }
-
-        };
-        function SubmitForm() {
-            setInterval(function () {
-                document.getElementById("loginform").submit();
-            }, 3000);
-        }
-    </script>
+    
 </head>
 <body id="login">
     <div class="s-conten container">
@@ -71,9 +51,9 @@
                 </div>
 
                 <div id="newAccountPanel" class="s-container">
-                    <div class="content s-cla-cont">
+                    <div class="content s-cla-cont" >
                         <p>Nếu chưa có tài khoản bạn vui lòng tạo tài khoản Vinasia mới</p>
-                        <a href="#" class="btn btn-primary">Tạo tài khoản</a>
+                        @*<a href="#" class="btn btn-primary d-none">Tạo tài khoản</a>*@
                     </div>
                 </div>
 

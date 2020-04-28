@@ -126,13 +126,13 @@ App.controller('Controller', function ($scope, $http, Service) {
                 LoadDriver();
                 //$scope.namesData.push(response.data);
                 $scope.Clear();
-                alert(" Thêm thành công !");
+                alert(" Thêm mới thành công !");
             }, function errorCallback(response) {
                 alert("Error : " + response.data.ExceptionMessage);
             });
         }
         else {
-            alert('Please Enter All the Values !!');
+            alert('Hãy nhập đủ thông tin !!');
         }
     };
     $scope.update = function () {
@@ -151,7 +151,7 @@ App.controller('Controller', function ($scope, $http, Service) {
                 alert('Không có dữ liệu !!!');
             });
             $scope.Clear();
-            alert(" Updated Successfully !!!");
+            alert(" Cập nhật thành công !!!");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -285,8 +285,11 @@ App.controller('Controller', function ($scope, $http, Service) {
         }).then(function (response) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.DevicesNotUsed[i]["DateExpired"] = new Date(parseInt($scope.DevicesNotUsed[i]["DateExpired"].substr(6)));
+            }
         }, function (error) {
-            console.log(error, 'can not get data.');
+            console.log(error, 'Không có dữ liệu.');
         });
     };
 
@@ -298,10 +301,14 @@ App.controller('Controller', function ($scope, $http, Service) {
             url: '/Management/GetListDeviceByDriverID/' + DriverID
         }).then(function (response) {
             console.log(response, 'resi');
-            if (response != '')
+            if (response != '') {
                 $scope.Devices = response.data;
+                for (var i = 0; i < $scope.namesData.length; i++) {
+                    $scope.Devices[i]["DateExpired"] = new Date(parseInt($scope.Devices[i]["DateExpired"].substr(6)));
+                }
+            } 
         }, function (error) {
-            console.log(error, 'can not get data.');
+            console.log(error, 'Không có dữ liệu');
         });
     };
 });

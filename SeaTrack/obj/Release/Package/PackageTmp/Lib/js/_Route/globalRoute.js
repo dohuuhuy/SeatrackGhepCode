@@ -14,6 +14,13 @@ $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
+	//if (window.innerWidth < 1080) {
+	//	alert(window.innerWidth);
+	//	if ($('#s-sidebar').hasClass('active')) {
+	//		$("#sidebarCollapse").addClass("d-none");
+ //       }
+ //   }
+
 	$('#sidebarCollapse').on('click', function () {
 		$('#s-sidebar').toggleClass('active');
 		$('.s-sidebar').toggleClass('active');
@@ -23,6 +30,7 @@ $(document).ready(function () {
 		$("#giamsat_toggle").removeClass("d-none");
 	
 	});
+
 	
 
 

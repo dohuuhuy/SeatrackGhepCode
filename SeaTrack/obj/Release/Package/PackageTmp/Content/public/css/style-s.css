@@ -2,13 +2,16 @@
 #feedback_chude {
     border: 0px;
 }
+
 .form-control:disabled, .form-control[readonly] {
     background-color: transparent;
     opacity: 1;
 }
-    #menubar ul li {
+
+#menubar ul li {
     margin-left: 2px;
 }
+
 #dataTable th {
     background-color: #15b4c4;
     color: white;
@@ -20,15 +23,17 @@
 }
 /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
 #menubar ul li {
- 
     font-family: sans-serif;
 }
+
     #menubar ul li a {
         padding: .375rem .75rem;
     }
+
     #menubar ul li #a {
         color: #007bff;
     }
+
         #menubar ul li #a:hover {
             color: white;
             background-color: #007bff;
@@ -37,11 +42,12 @@
     #menubar ul li #b {
         color: #17a2b8;
     }
+
         #menubar ul li #b:hover {
             color: white;
             background-color: #17a2b8;
         }
-      
+
 .dropdown-item {
     font-weight: bolder;
 }
@@ -49,6 +55,7 @@
 #menubar ul li .dropdown-menu a {
     padding: 10px 16px;
 }
+
 @media only screen and (max-width : 1120px) {
     #menubar ul li {
         margin-top: 10px;
@@ -62,10 +69,12 @@
         width: 100%;
     }
 }
+
 .navbar-toggler {
     padding: .25rem .3rem;
     margin: 5px 0;
 }
+
 @media only screen and (max-width : 480px) {
 
     #SOS {
@@ -93,8 +102,13 @@
         width: 100%;
     }
 }
+
 @media (max-width: 768px) {
-    .si-sidebar {
+    label {
+        display: flex;
+        margin-bottom: .5rem;
+    }
+        .si-sidebar {
         margin-left: 0px;
     }
 
@@ -123,7 +137,7 @@
     }
 }*/
 
-    /* ---------------------------------------------------chỉnh menu phía home------------------------------ */
+/* ---------------------------------------------------chỉnh menu phía home------------------------------ */
 
 .btn {
     font-weight: bolder;
@@ -142,6 +156,7 @@
     width: 24px;
     height: 24px;
 }
+
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 /*
   body {
@@ -166,6 +181,7 @@
 #body a {
     color: #000;
 }
+
 #rounded > a {
     color: #019CDE !important;
 }
@@ -376,48 +392,48 @@
     transition: all 0.3s;
 }
 
-.si-sidebar.active, .s-main-sidebar.active {
-    margin-left: -290px;
-}
+    .si-sidebar.active, .s-main-sidebar.active {
+        margin-left: -290px;
+    }
 
-.si-sidebar .sidebar-header, .s-main-sidebar .sidebar-header {
-    padding: 4%;
-    background: #fff;
-}
+    .si-sidebar .sidebar-header, .s-main-sidebar .sidebar-header {
+        padding: 4%;
+        background: #fff;
+    }
 
-.si-sidebar ul.components, .s-main-sidebar ul.components {
-    padding: 0 0;
-    border-bottom: 1px solid #47748b;
-}
+    .si-sidebar ul.components, .s-main-sidebar ul.components {
+        padding: 0 0;
+        border-bottom: 1px solid #47748b;
+    }
 
-.si-sidebar ul p, .s-main-sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
+    .si-sidebar ul p, .s-main-sidebar ul p {
+        color: #fff;
+        padding: 10px;
+    }
 
-.si-sidebar ul li a, .s-main-sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-}
+    .si-sidebar ul li a, .s-main-sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+    }
 
-.si-sidebar ul li a:hover, .s-main-sidebar ul li a:hover {
-    color: #019CDE;
-    background: #fff;
-    text-decoration: none;
-}
+        .si-sidebar ul li a:hover, .s-main-sidebar ul li a:hover {
+            color: #019CDE;
+            background: #fff;
+            text-decoration: none;
+        }
 
-.si-sidebar ul li.active > a,
-.s-main-sidebar ul li.active > a,
-a[aria-expanded="true"] {
-    color: #fff !important;
-    background: #019CDE;
-}
+    .si-sidebar ul li.active > a,
+    .s-main-sidebar ul li.active > a,
+    a[aria-expanded="true"] {
+        color: #fff !important;
+        background: #019CDE;
+    }
 
-a[aria-expanded="true"]:hover {
-    color: #fff !important;
-    background: #019CDE !important;
-}
+        a[aria-expanded="true"]:hover {
+            color: #fff !important;
+            background: #019CDE !important;
+        }
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -436,13 +452,13 @@ ul.CTAs {
     padding: 20px;
 }
 
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
+    ul.CTAs a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
 
 a.download {
     background: #fff;

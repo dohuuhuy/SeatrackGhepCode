@@ -1,4 +1,32 @@
-﻿function GetInfo_User() {
+﻿function exportTableToExcel(tableID, filename = '') {
+    var downloadLink;
+
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+
+    filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if (navigator.msSaveOrOpenBlob) {
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        downloadLink.download = filename;
+
+        downloadLink.click();
+    }
+}
+
+function GetInfo_User() {
 
     $.ajax({
         type: 'GET',
@@ -27,7 +55,6 @@
     });
 };
 
-
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {
     var DSHetHan = [];
@@ -50,26 +77,26 @@ function DanhSachThietBiHetHan() {
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
-                        ' <tr>' +
-                        '<td>' + (j) + '</td> ' +
-                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                        '<td>' + _ngayHetHan + '</td>' +
-                        '<td style="color:red">' + trangthai + '</td>' +
-                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                        ' </tr>';
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
+                            '<td style="color:red">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
                         j++;
                     }
-                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5
+                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5 
                     {
                         trangthai = 'Sắp hết hạn';
                         _tb +=
-                        ' <tr>' +
-                        '<td>' + (j) + '</td> ' +
-                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                        '<td>' + _ngayHetHan + '</td>' +
-                        '<td style="color:orange">' + trangthai + '</td>' +
-                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                        ' </tr>';
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
+                            '<td style="color:orange">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
                         j++;
                     }
                     else if (hieu > 5) {
@@ -90,7 +117,7 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
-
+// tim kiem
 function ListSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
@@ -532,7 +559,7 @@ function BaoCaoHanhTrinhTauChay() {
                     for (var i = 0; i < list_lin.length; i++) {
                         var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
                         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                        + ' ' + dt.getHours() + ':' + dt.getMinutes();
+                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
                         var speed = toHaily(list_lin[i]["Speed"]);
                         var _speed = '';
                         var status = "";
@@ -545,11 +572,11 @@ function BaoCaoHanhTrinhTauChay() {
                             _speed = speed;
                         };
                         _tbl +=
-                        '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
-                        + dte + '</td><td>' + _speed + '</td ><td>' + status + '</td ><td>'
-                        + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + ' '
-                        + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
-                        + '</td></tr>';
+                            '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
+                            + dte + '</td><td>' + _speed + '</td ><td>' + status + '</td ><td>'
+                            + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
+                            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
+                            + '</td></tr>';
 
                     }
                     $("#tbody_bgt_hanhtrinh").html(_tbl);
@@ -557,7 +584,8 @@ function BaoCaoHanhTrinhTauChay() {
             }
         },
     }, "json");
-}// danh sách tìm kiếm thiết bị 
+}
+// danh sách tìm kiếm thiết bị 
 function ListDeviceSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
