@@ -8,42 +8,42 @@ $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
-
-	if (window.innerWidth < 1080) {
-		alert(window.innerWidth);
-	}
+	if (window.innerWidth < 475) {
+	//	$('#menubar').removeClass('active'); // bỏ kích hoạt
+		$('#s-logo-menu').toggleClass('d-none'); // cho hiện logon
+		$('#txtgiamsat').toggleClass('d-none');
+    }
 
 	$('#sidebarCollapse').on('click', function () {
-		$('.si-sidebar').toggleClass('active'); // bên trái kích hoạt: 
-		$('#menubar').toggleClass('active'); // menu kích hoạt
-		$('#s-logo-menu').toggleClass('d-none'); // logon hiện
-		$("#sidebarCollapse").removeClass("d-none"); // nút menu hiển
-		$("#giamsat_toggle").addClass("d-none"); // nút giám sát ẩn
-
-	});
-
-
-
-	$('#menu2').on('click', function () {
-
-		if ($('#menubar').hasClass('active')) {
-
-			$('.si-sidebar').toggleClass('active');
-			$('#menubar').toggleClass('active');
-			$('#s-logo-menu').toggleClass('d-none');
-			$("#sidebarCollapse").addClass("d-none");
-			$("#giamsat_toggle").removeClass("d-none");
-
-		} else {
-			$("#navbarSupportedContent").removeClass("d-none");
-		}
-	});
-
-	$('#giamsat_toggle').on('click', function () {
-
 		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
 		$('#s-logo-menu').toggleClass('d-none');
+		$("#sidebarCollapse").addClass("d-none");
+		$("#giamsat_toggle").removeClass("d-none");
+
+	});
+
+
+	$('#menu2').on('click', function () { // nhấn menu
+
+		if ($('#menubar').hasClass('active')) { // nếu menu thay đổi
+
+			$('.si-sidebar').toggleClass('active'); // bên trái
+			$('#menubar').toggleClass('active'); // nguyên menu
+			$('#s-logo-menu').addClass('d-none'); // cho hiện
+			$("#sidebarCollapse").removeClass("d-none"); // cho hiện menu
+			$("#giamsat_toggle").addClass("d-none"); // giám sát ẩn
+
+		} else {
+			$("#navbarSupportedContent").removeClass("d-none"); // ẩn danh sách
+		}
+	});
+
+	$('#giamsat_toggle').on('click', function () { // 
+
+		$('.si-sidebar').toggleClass('active');
+		$('#menubar').toggleClass('active');
+		$('#s-logo-menu').removeClass('d-none');
 		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").addClass("d-none");
 		if ($("#navbarSupportedContent").removeClass("d-none")) {
