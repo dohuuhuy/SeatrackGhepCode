@@ -19,10 +19,10 @@ namespace SeaTrack.Controllers
     public class HomeController : Controller
     {
 
-        public ActionResult ErrorView()
-        {
-            return View("404");
-        }
+        //public ActionResult ErrorView()
+        //{
+        //    return View("404");
+        //}
        
         public ActionResult Route()
         {

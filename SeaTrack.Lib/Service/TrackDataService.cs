@@ -72,20 +72,22 @@ namespace SeaTrack.Lib.Service
                             data.Speed = -1;
                         }
                         else { data.Speed = Convert.ToInt32(reader["Speed"]); }
-                        //var data = new DeviceStatus()
-                        //{
-                        //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
-                        //    DeviceName = reader["DeviceName"].ToString(),
-                        //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
-                        //    Latitude = Convert.ToDecimal(reader["Latitude"]),
-                        //    Longitude = Convert.ToDecimal(reader["Longitude"]),
-                        //    DirectionSN = reader["DirectionSN"].ToString(),
-                        //    DirectionEW = reader["DirectionEW"].ToString(),
-                        //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
-                        //    Speed = Convert.ToInt16(reader["Speed"]),
 
-                        //};
-                        lst.Add(data);
+                        data.State = Convert.ToInt16(reader["StatusDeVice"]).ToString();
+                    //var data = new DeviceStatus()
+                    //{
+                    //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                    //    DeviceName = reader["DeviceName"].ToString(),
+                    //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
+                    //    Latitude = Convert.ToDecimal(reader["Latitude"]),
+                    //    Longitude = Convert.ToDecimal(reader["Longitude"]),
+                    //    DirectionSN = reader["DirectionSN"].ToString(),
+                    //    DirectionEW = reader["DirectionEW"].ToString(),
+                    //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                    //    Speed = Convert.ToInt16(reader["Speed"]),
+
+                    //};
+                    lst.Add(data);
                     }
                 }
             }

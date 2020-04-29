@@ -273,6 +273,7 @@ App.controller('Controller', function ($scope, $http, Service) {
         });
         $scope.DevicesNotUsed.splice(index, 1);
         $scope.Devices.push(DeviceToAdd);
+
         //fetchData(id);
     }
     $scope.SaveDevice = function (id) {

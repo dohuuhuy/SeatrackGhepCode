@@ -64,7 +64,7 @@ namespace SeaTrack.Controllers
         public ActionResult Upload(HttpPostedFileBase file)
         {
 
-            if (file != null && file.ContentLength < 1024000)
+            if (file != null && file.ContentLength < 3024000)
             {
                 
                 Users user = (Users)Session["User"];

@@ -20,12 +20,12 @@
                 <div class="card-body">
                     <div class="col col-md-12">
                         <div class="input-group">
-                            <input type="text" id="input1-group2" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" ng-model="SearchKey"><br />
-                            @*<div class="input-group-btn">
+                            <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." ng-model="SearchKey" class="form-control" id="SearchKey" onkeyup="ListDeviceSearch('SearchKey', 'dataTable')"><br />
+                            <div class="input-group-btn">
                                 <button class="btn btn-primary" ng-click="ClearSearch()">
-                                    <i class="fa fa-search"></i> Search
+                                    <i class="fa fa-search"></i> Làm mới
                                 </button>
-                            </div>*@
+                            </div>
                         </div>
                         <br />
                         @*<div class="input-group ">

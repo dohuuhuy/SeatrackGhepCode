@@ -568,9 +568,10 @@ function cleanMap(a = 0) {
         var lasted;
         var _device;
         _device = checkDevice(id, n);
+        console.log(_device)
         if (n == 1) {
             icon = "/Content/images/tau/" + _stt_[_device.Status]["polycon"];
-            if (_device != 0 && _device.Latitude != -1 && _device.Longitude != -1) {
+            if (_device.State != "0" && _device.Latitude != -1 && _device.Longitude != -1) {
                 point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
                 marker = new google.maps.Marker({
                     position: point,
