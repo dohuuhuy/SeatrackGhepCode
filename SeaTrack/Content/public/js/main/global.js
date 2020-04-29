@@ -61,6 +61,9 @@ $(document).ready(function () {
 		$("#navbarSupportedContent").removeClass("d-none");
 	});
 
+	if ($(window).width() <= 768) { $("#sidebarCollapse").click(); }
+
+
 	$('input[name="datefilter"]').daterangepicker({
 		autoUpdateInput: true,
 		locale: {
@@ -111,7 +114,6 @@ $(document).ready(function () {
 
 	$("#player").disabled = true;
 	$("#speed").disabled = true;
-	if ($(window).width() < 481) { $("#sidebarCollapse").click(); }
 });
 
 

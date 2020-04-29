@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "BaoCaoSOS";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
-    
+
 }
-@model IEnumerable <SeaTrack.Lib.DTO.SOSDTO>
+@model IEnumerable<SeaTrack.Lib.DTO.SOSDTO>
 
 <div class="main" id="list_business">
     <div class="wrapper">
@@ -55,16 +55,22 @@
                                     <th> Số Hiệu</th>
                                     <th> Thời Gian</th>
                                     <th> Vị Trí</th>
-                                    <th> Xử Lý</th>
+                                    @*<th> Xử Lý</th>*@
                                 </tr>
                             </thead>
                             <tbody id="tbody_dn_chitiet">
 
-                               @foreach (var item in Model)
-                               {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>1 </td>
+                                        <td>@item.DeviceName </td>
+                                        <td>@item.DateRequest </td>
+                                        <td>@(item.DirectionEW + '.' + item.Latitude + '-' + item.DirectionSN + '.' + item.Longitude )</td>
 
-                               }
 
+                                    </tr>
+                                }
                             </tbody>
 
 
