@@ -490,6 +490,11 @@ a[data-toggle="collapse"] {
 }
 
 .dropdown-toggle::after {
+    .display: block;
+    .position: absolute;
+    .top: 50%;
+    .right: 20px;
+    .transform: translateY(-50%);
 }
 
 ul.CTAs {
@@ -527,6 +532,19 @@ a.article:hover {
 /* ---------------------------------------------------
   MEDIAQUERIES
   ----------------------------------------------------- */
+@media (max-width: 768px) {
+    .si-sidebar {
+        margin-left: -250px;
+    }
+
+        .si-sidebar.active {
+            margin-left: 0;
+        }
+
+    .si-sidebarCollapse span {
+        display: none;
+    }
+}
 
 /* ---------------------------------------------------
   LIST REPORT
@@ -646,13 +664,14 @@ p {
 }
 
 .navbar {
+    .overflow: hidden;
     margin: 0;
 }
 
     .navbar a {
         float: left;
         text-align: center;
-        padding: 7px 16px;
+        padding: 10px 16px;
         text-decoration: none;
     }
 
@@ -784,7 +803,9 @@ p {
     display: block;
     position: absolute;
     left: 48%;
+    : 40%;
     width: 40px;
+    : 40px;
     border-style: solid;
     border-color: black;
     border-top-color: transparent;
@@ -1030,7 +1051,4 @@ legend.groupbox-border {
     width: 100% !important;
     height: 100% !important;
     border: groove;
-}
-@media(max-width: 480){
-
 }

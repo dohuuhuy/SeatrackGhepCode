@@ -47,23 +47,22 @@
                         </form>
                     </div>
                     <div class="p-10 table-responsive">
-                        <button class="btn btn-secondary" onclick="exportTableToExcel('table_bgt_tonghoptau','BaoCaoTongHopTheoTau')">Export Excel</button>
-
-                        <table id="table_bgt_tonghoptau" class="table  table-bordered text-center" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th class="headerAlignCenter">STT</th>
-                                    <th class="headerAlignCenter">Thời gian bắt đầu</th>
-                                    <th class="headerAlignCenter">Thời gian kết thúc</th>
-                                    <th class="headerAlignCenter">Quảng đường <br /> (Hải lý)</th>
-                                    <th class="headerAlignCenter">Tốc độ trung bình <br /> (Hải lý/Giờ)</th>
-                                    <th class="headerAlignCenter">Tốc độ tối đa <br /> (Hải lý/Giờ)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tonghoptheotau"></tbody>
-                        </table>
+                        <button class="btn btn-secondary" onclick="exportTableToExcel('dataTable','BaoCaoTongHopTheoTau')">Export Excel</button>
+                            <table id="dataTable" class="table table-bordered table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="headerAlignCenter">STT</th>
+                                        <th class="headerAlignCenter">Thời gian bắt đầu</th>
+                                        <th class="headerAlignCenter">Thời gian kết thúc</th>
+                                        <th class="headerAlignCenter">Quảng đường <br /> (Hải lý)</th>
+                                        <th class="headerAlignCenter">Tốc độ trung bình <br /> (Hải lý/Giờ)</th>
+                                        <th class="headerAlignCenter">Tốc độ tối đa <br /> (Hải lý/Giờ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tonghoptheotau"></tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

@@ -79,5 +79,36 @@ namespace SeaTrack.Lib.Service
             return lst;
         }
 
+        public static List<SOSDTO> GetSOSByUserID(int UserID)
+        {
+            List<SOSDTO> lst = null;
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_getSOSByUserID", UserID))
+            {
+                if (reader.HasRows)
+                {
+                    lst = new List<SOSDTO>();
+
+                    while (reader.Read())
+                    {
+                        var data = new SOSDTO()
+                        {
+                            Status = Convert.ToInt32(reader["Status"]),
+                            SOSID = Convert.ToInt32(reader["SOSID"]),
+                            DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                            DeviceName = reader["DeviceName"].ToString(),
+                            Latitude = Convert.ToDecimal(reader["Latitude"]),
+                            Longitude = Convert.ToDecimal(reader["Longitude"]),
+                            DirectionSN = reader["DirectionSN"].ToString(),
+                            DirectionEW = reader["DirectionEW"].ToString(),
+                            DateRequest = Convert.ToDateTime(reader["DateRequest"]),
+                            GMT = reader["GMT"].ToString(),
+                        };
+                        lst.Add(data);
+                    }
+                }
+            }
+            return lst;
+        }
+
     }
 }

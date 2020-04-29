@@ -417,5 +417,3 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Extensions.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Net.Http.Primitives.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.xml
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.dll
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.xml

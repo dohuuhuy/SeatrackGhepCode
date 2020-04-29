@@ -3,6 +3,15 @@
     ViewBag.Title = "Detail";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAgency.cshtml";
 }
+@if (ViewBag.EditResult == 1)
+{
+    <script>alert("Cập nhật thành công")</script>
+}
+@if (ViewBag.EditResult == -1)
+{
+    <script>alert("Xảy ra lỗi trong quá trình cập nhật")</script>
+}
+
 
 @model SeaTrack.Lib.DTO.Admin.UserInfoDTO
 

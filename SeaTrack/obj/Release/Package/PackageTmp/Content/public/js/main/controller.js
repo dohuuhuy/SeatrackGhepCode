@@ -1,5 +1,32 @@
-﻿function GetInfo_User() {
+﻿function exportTableToExcel(tableID, filename = '') {
+var downloadLink;
 
+var dataType = 'application/vnd.ms-excel';
+var tableSelect = document.getElementById(tableID);
+var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+
+filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+downloadLink = document.createElement("a");
+
+document.body.appendChild(downloadLink);
+
+if (navigator.msSaveOrOpenBlob) {
+    var blob = new Blob(['\ufeff', tableHTML], {
+        type: dataType
+    });
+    navigator.msSaveOrOpenBlob(blob, filename);
+} else {
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+    downloadLink.download = filename;
+
+    downloadLink.click();
+}
+}
+
+function GetInfo_User() {
     $.ajax({
         type: 'GET',
         dataType: "json",
@@ -27,7 +54,6 @@
     });
 };
 
-
 // danh sach thiết bị đã và sặp hết hạn
 function DanhSachThietBiHetHan() {
     var DSHetHan = [];
@@ -50,26 +76,26 @@ function DanhSachThietBiHetHan() {
                     if ((ngayHetHan >= ngayHienTai) == false) { //ngày hết hạn >= ngày hiện tại
                         trangthai = 'Hết hạn';
                         _tb +=
-                        ' <tr>' +
-                        '<td>' + (j) + '</td> ' +
-                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                        '<td>' + _ngayHetHan + '</td>' +
-                        '<td style="color:red">' + trangthai + '</td>' +
-                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                        ' </tr>';
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
+                            '<td style="color:red">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
                         j++;
                     }
-                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5
+                    else if ((hieu) <= 5) // hieu của 2 ngày <= 5 
                     {
                         trangthai = 'Sắp hết hạn';
                         _tb +=
-                        ' <tr>' +
-                        '<td>' + (j) + '</td> ' +
-                        '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
-                        '<td>' + _ngayHetHan + '</td>' +
-                        '<td style="color:orange">' + trangthai + '</td>' +
-                        '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
-                        ' </tr>';
+                            ' <tr>' +
+                            '<td>' + (j) + '</td> ' +
+                            '<td>' + DSHetHan[i]['DeviceName'] + '</td>' +
+                            '<td>' + _ngayHetHan + '</td>' +
+                            '<td style="color:orange">' + trangthai + '</td>' +
+                            '<td>' + DSHetHan[i]['DeviceNote'] + '</td>' +
+                            ' </tr>';
                         j++;
                     }
                     else if (hieu > 5) {
@@ -90,7 +116,7 @@ function DanhSachThietBiHetHan() {
         }
     });
 }
-
+// tim kiem
 function ListSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
@@ -120,7 +146,6 @@ function win_reload() {
 }
 // tính hải lý sang km
 function toHaily(a) {
-
     return (Math.round((a * 0.53996) * 10) / 10);
 }
 // kiểm tra thiết bị
@@ -156,6 +181,8 @@ function setup_selectDeviceNo() {
 }
 // tốc độ của tàu chạy 
 function TocDoCuaTau() {
+    runWaiting();
+
     var id = $("#listDeviceNo").val();
     var date = $("#datefilter").val();
     var datetime = date.split(" - ");
@@ -177,6 +204,7 @@ function TocDoCuaTau() {
             DS_diem = data.Result;
             if (DS_diem == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+                downWaiting();
             } else {
                 if (DS_diem.length > 0) {
                     var speed = toHaily(DS_diem[0]["Speed"]);
@@ -215,16 +243,17 @@ function TocDoCuaTau() {
                     else {
                         DS_tong.push(DS_diemnammotcho);
                     }
-
-
                 }
                 ShowTable_BaoCaoTocDo(DS_tong);
+                downWaiting();
             }
         }
     });
 }
 // tổng hợp theo tàu
 function TongHopTheoTau() {
+    runWaiting();
+
     var id = $("#listDeviceNo").val();
     var date = $("#datefilter").val();
     var datetime = date.split(" - ");
@@ -246,6 +275,7 @@ function TongHopTheoTau() {
             DS_diem = data.Result;
             if (DS_diem == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+                downWaiting();
             } else {
                 if (DS_diem.length > 0) {
                     var speed = toHaily(DS_diem[0]["Speed"]);
@@ -288,12 +318,15 @@ function TongHopTheoTau() {
 
                 }
                 ShowTable_TongHopTheoTau(DS_tong);
+                downWaiting();
             }
         }
     });
+
 }
 // báo cáo theo lái tàu
 function TongHopTheoLaiTau() {
+    runWaiting();
     var id = $("#listDeviceNo").val();
     var date = $("#datefilter").val();
     var datetime = date.split(" - ");
@@ -315,6 +348,8 @@ function TongHopTheoLaiTau() {
             DS_diem = data.Result;
             if (DS_diem == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+                downWaiting();
+
             } else {
                 if (DS_diem.length > 0) {
                     var speed = toHaily(DS_diem[0]["Speed"]);
@@ -354,9 +389,12 @@ function TongHopTheoLaiTau() {
                     }
                 }
                 ShowTable_TongHopTheoLaiTau(DS_tong);
+                downWaiting();
+
             }
         }
     });
+
 }
 // báo cáo tốc độ
 function ShowTable_BaoCaoTocDo(list) {
@@ -380,6 +418,7 @@ function ShowTable_BaoCaoTocDo(list) {
             '</tr>';
         $("#tbody_tocdocuatau").html(_tbl);
     }
+
 }
 // tổng hợp theo tàu
 function ShowTable_TongHopTheoTau(list) {
@@ -407,7 +446,28 @@ function ShowTable_TongHopTheoTau(list) {
 }
 // tổng hợp theo lái tàu
 function ShowTable_TongHopTheoLaiTau(list) {
+    console.log(list);
     var _tbl = "";
+    var listID = [];
+    var listName = [];
+    for (var j = 0; j < list.length; j++) {
+        listID.push({ID: list[j][0]["ID"]});
+    }
+    console.log(listID);
+    listID = JSON.stringify({'list':listID});
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        url: '/Home/CheckDriver',
+        traditional: true,
+        async: false,
+        datatype: "json",
+        data: listID,
+        success: function (data, txtStatus, XMLHttpRequest) {
+            listName = data.Result;
+            console.log(listName)
+        }
+    });
     for (var i = 0; i < list.length; i++) {
         var startdate = new Date(parseInt(list[i][0]["TransmitTime"].substr(6)));
         var TuNgay = startdate.getDate() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getFullYear() + ' ' + startdate.getHours() + ':' + startdate.getMinutes();
@@ -415,20 +475,18 @@ function ShowTable_TongHopTheoLaiTau(list) {
         var DenNgay = fishdate.getDate() + '/' + (fishdate.getMonth() + 1) + '/' + fishdate.getFullYear() + ' ' + fishdate.getHours() + ':' + fishdate.getMinutes();
 
         var quangduong = TinhQuangDuong(list[i]);
-        var laitau = list[i][0]["DriverName"];
-
+        var laitau = listName[i];
         _tbl +=
-            '<tr>' +
-            '<td>' + (i) + '</td>' + // số thứ tự
-            '<td>' + TuNgay + '</td>' + // từ ngày
-            '<td>' + DenNgay + '</td>' + // đến ngày 
-            '<td>' + laitau + '</td>' + // thuyền trưởng
-            '<td>' + quangduong + '</td>' + // quảng đường
-
-
-            '</tr>';
+        '<tr>' +
+        '<td>' + (i) + '</td>' + // số thứ tự
+        '<td>' + TuNgay + '</td>' + // từ ngày
+        '<td>' + DenNgay + '</td>' + // đến ngày 
+        '<td>' + laitau + '</td>' + // thuyền trưởng
+        '<td>' + quangduong + '</td>' + // quảng đường
+        '</tr>';
         $("#BaoCaoTheoLaiTau").html(_tbl);
     }
+
 }
 // tính quảng đường trong 1 khoảng thời gian
 function TinhQuangDuong(list) {
@@ -504,6 +562,7 @@ function TinhVanTocTrungBinh(list) {
 }
 // báo cáo hành trình tàu chạy
 function BaoCaoHanhTrinhTauChay() {
+    runWaiting();
     var id = $("#listDeviceNo").val();
     var date = $("#datefilter").val();
     var datetime = date.split(" - ");
@@ -524,6 +583,8 @@ function BaoCaoHanhTrinhTauChay() {
             list_lin = data.Result;
             if (list_lin == null) {
                 alert("Chưa có dữ liệu cho phạm vi thời gian đã chọn");
+                downWaiting();
+
             } else {
 
 
@@ -532,7 +593,7 @@ function BaoCaoHanhTrinhTauChay() {
                     for (var i = 0; i < list_lin.length; i++) {
                         var dt = new Date(parseInt(list_lin[i]["TransmitTime"].substr(6)));
                         var dte = dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + dt.getFullYear()
-                        + ' ' + dt.getHours() + ':' + dt.getMinutes();
+                            + ' ' + dt.getHours() + ':' + dt.getMinutes();
                         var speed = toHaily(list_lin[i]["Speed"]);
                         var _speed = '';
                         var status = "";
@@ -545,19 +606,22 @@ function BaoCaoHanhTrinhTauChay() {
                             _speed = speed;
                         };
                         _tbl +=
-                        '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
-                        + dte + '</td><td>' + _speed + '</td ><td>' + status + '</td ><td>'
-                        + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + ' '
-                        + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
-                        + '</td></tr>';
+                            '<tr id="tr' + list_lin[i]["DeviceID"] + i + '"><td> ' + (i + 1) + '</td ><td>'
+                            + dte + '</td><td>' + _speed + '</td ><td>' + status + '</td ><td>'
+                            + list_lin[i]["Latitude"] + '.' + list_lin[i]["DirectionEW"] + '  '
+                            + list_lin[i]["Longitude"] + '.' + list_lin[i]["DirectionSN"]
+                            + '</td></tr>';
 
                     }
                     $("#tbody_bgt_hanhtrinh").html(_tbl);
+                    downWaiting();
+
                 }
             }
         },
     }, "json");
-}// danh sách tìm kiếm thiết bị 
+}
+// danh sách tìm kiếm thiết bị 
 function ListDeviceSearch(id_search, list_result) {
     var _id_search, _list_result, filter, tr, td;
     _id_search = document.getElementById(id_search);
@@ -599,7 +663,6 @@ function setDate() {
     var curentMinute = currentdate.getMinutes() < 10 ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
     var curentSecond = currentdate.getSeconds() < 10 ? "0" + currentdate.getSeconds() : currentdate.getSeconds();
     var datetimeF = curentdate + "-" + +curentMonth + "-" + currentdate.getFullYear();
-
     document.getElementById("date_form_h").value = "00:00";
     document.getElementById("date_form_d").value = datetimeF;
     document.getElementById("date_t_h").value = "23:59";

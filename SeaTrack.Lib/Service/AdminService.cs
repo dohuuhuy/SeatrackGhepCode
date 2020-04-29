@@ -557,10 +557,10 @@ namespace SeaTrack.Lib.Service
             return null;
 
         }
-        public static List<Device> GetListDeviceOfCustomerWithDriver(string Username)
+        public static List<Device> GetListDeviceOfCustomerWithDriver(string Username, int DriverID)
         {
             List<Device> lst = null;
-            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceOfCustomerWithDriver", Username))
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListDeviceOfCustomerWithDriver", Username, DriverID))
             {
                 if (reader.HasRows)
                 {

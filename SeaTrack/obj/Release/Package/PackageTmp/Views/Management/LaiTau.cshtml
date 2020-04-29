@@ -45,14 +45,14 @@
                                 <table id="dataTable" class="table table-bordered table-striped text-center">
                                     <thead>
                                         <tr>
-                                            <th width="5%"> #</th>
+                                            <th> #</th>
                                             <th> Thao tác</th>
                                             <th> Tên lái tàu</th>
                                             <th> Số điện thoại</th>
                                             <th> Giấy Phép Lái Tàu </th>
                                             <th> Hạng</th>
                                             <th> Nơi Cấp</th>
-                                            <th> Trạng thái</th>
+                                            @*<th> Trạng thái</th>*@
                                         </tr>
                                     </thead>
                                     <tbody id="data">
@@ -62,17 +62,18 @@
                                                 <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
                                                     <i class="fa fa-list-ul" style="color:#15b4c4"></i>
                                                 </a>
+                                                &nbsp;&nbsp;
                                                 <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
-                                                <a ng-click="Lock($index + (currentPage-1)*10)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
-                                                <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>
+                                                @*<a ng-click="Lock($index + (currentPage-1)*10)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
+                                                <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>*@
                                             </td>
                                             <td>{{a.DriverName}}</td>
                                             <td>{{a.Phone}}</td>
                                             <td>{{a.GPLT}}</td>
                                             <td>{{a.Rank}}</td>
                                             <td>{{a.IssuedBy}}</td>
-                                            <td ng-if="a.Status == 1"><p style="color:forestgreen">Kích hoạt</p></td>
-                                            <td ng-if="a.Status == -1"><p style="color:red">Tạm khóa</p></td>
+                                            @*<td ng-if="a.Status == 1"><p style="color:forestgreen">Kích hoạt</p></td>
+                                            <td ng-if="a.Status == -1"><p style="color:red">Tạm khóa</p></td>*@
                                         </tr>
                                     </tbody>
                                 </table>
@@ -97,7 +98,7 @@
                     <div class="modal-body" style="margin-left:20px">
                         <form class="form-horizontal row" name="xem">
                             <div class="col col-md-12">
-                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice()"><i class="fa fa-plus-circle" style="color:black"></i></a>
+                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice(Driver.DriverID)"><i class="fa fa-plus-circle" style="color:black"></i></a>
                                 <label class="control-label"> Danh sách thiết bị </label>
                                 <table class="table table-bordered text-center">
                                     <thead>
@@ -105,17 +106,17 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Tên thiết bị</th>
                                             <th scope="col">Ngày hết hạn</th>
-                                            <th scope="col">Thao tác</th>
+                                            @*<th scope="col">Thao tác</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="d in Devices">
                                             <th>{{$index + 1}}</th>
                                             <td>{{d.DeviceName}}</td>
-                                            <td>{{d.DateExpired}}</td>
-                                            <td align="center">
+                                            <td>{{d.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
+                                            @*<td align="center">
                                                 <a ng-click="RemoveDeviceFromUser($index)"><i class="fa fa-trash"></i></a>
-                                            </td>
+                                            </td>*@
                                         </tr>
                                     </tbody>
                                 </table>
@@ -150,7 +151,7 @@
                                 <tr ng-repeat="dv in DevicesNotUsed">
                                     <th>{{$index + 1}}</th>
                                     <td>{{dv.DeviceName}}</td>
-                                    <td>{{dv.DateExpired}}</td>
+                                    <td>{{dv.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
                                     <td align="center">
                                         <a ng-click="AddDeviceToUser($index)"><i class="fa fa-plus-circle"></i></a>
                                     </td>
@@ -258,7 +259,6 @@
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Tên lái tàu </label>
-                                    {{Driver.DriverName}}
                                     <input required class="form-control" name="DriverName" ng-model="Driver.DriverName" type="text" maxlength="50" />
                                 </div>
                                 <div class="form-group">

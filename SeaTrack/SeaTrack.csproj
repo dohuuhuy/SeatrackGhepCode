@@ -576,11 +576,13 @@
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
     <Content Include="Views\Home\Demo.cshtml" />
+    <Content Include="Views\Home\ErrorView.cshtml" />
+    <Content Include="Views\Shared\_NavbarHome.cshtml" />
+    <Content Include="Views\SOS\BaoCaoCanhBaoSOS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\public\img\tau\" />
-    <Folder Include="Views\SOS\" />
     <Folder Include="Views\UserGuide\" />
   </ItemGroup>
   <ItemGroup>

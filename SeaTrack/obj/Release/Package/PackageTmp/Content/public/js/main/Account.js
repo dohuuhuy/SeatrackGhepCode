@@ -234,6 +234,9 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         }).then(function (response) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.DevicesNotUsed[i]["DateExpired"] = new Date(parseInt($scope.DevicesNotUsed[i]["DateExpired"].substr(6)));
+            }
         }, function (error) {
             console.log(error, 'Không có dữ liệu.');
         });
@@ -248,6 +251,9 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         }).then(function (response) {
             console.log(response, 'res');
             $scope.Devices = response.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.Devices[i]["DateExpired"] = new Date(parseInt($scope.Devices[i]["DateExpired"].substr(6)));
+            }
         }, function (error) {
             console.log(error, 'Không có dữ liệu.');
         });

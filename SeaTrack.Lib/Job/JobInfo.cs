@@ -26,19 +26,11 @@ namespace SeaTrack.Lib.Job
             {
                 if (item.Time <= (DateTime.Now - item.LastSend).TotalSeconds)
                 {
-                    int time = InfoService.UpdateLastSend(item.ID, DateTime.Now);
                     string filename = "E:/Website/Test/Log/log.txt";
-                    //string filename = "D:/Work/Publish/Log/log.txt";
-                    //FileStream fs = new FileStream(filename, FileMode.Append);
                     using (StreamWriter sw = File.AppendText(filename))
                     {
                         sw.WriteLine(item.ID + " " + DateTime.Now.ToString() + Environment.NewLine);
                     }
-                    
-
-
-                    //sw.Flush();
-                    //fs.Close();
                     var data = InfoService.GetDataByDelayTime(item.ID, item.MREF, item.Seqno);
                     if (data != null)
                     {
@@ -73,10 +65,10 @@ namespace SeaTrack.Lib.Job
                             //request.AddJsonBody(new {MREF = i.MREF, Seqno = i.Seqno, ID = i.ID, Time = i.Time, Latitude = i.Latitude, ExpSN = i.ExpSN, Longitude = i.Longitude, ExpEW = i.ExpEW, Speed = i.Speed, DIR = "", Date = i.Date});
                             //var rs = client.Execute(request);
                             //System.Diagnostics.Debug.WriteLine(rs.Content);
-                        System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                            //System.Diagnostics.Debug.WriteLine(DateTime.Now);
 
                         }
-
+                        int time = InfoService.UpdateLastSend(item.ID, DateTime.Now);
                     }
                     //
                 }

@@ -12,6 +12,7 @@ App.controller('Controller', function ($scope, $http, Service) {
 
     $scope.loading = function (id) {
         console.log('--------------: ' + id);
+        $scope.DevicesNotUsed = [];
         //fetchdata(id);
     }
     function updateInfo() {
@@ -237,8 +238,8 @@ App.controller('Controller', function ($scope, $http, Service) {
 
 
     //Lấy danh sách thiết bị của khách hàng chưa được sử dụng
-    $scope.AddDevice = function () {
-        GetListDeviceOfCustomer();
+    $scope.AddDevice = function (DriverID) {
+        GetListDeviceOfCustomer(DriverID);
     }
     // xóa thiết bị được cấp và thêm vào list thiết bị không sử dụng
     $scope.RemoveDeviceFromUser = function (index) {
@@ -278,14 +279,14 @@ App.controller('Controller', function ($scope, $http, Service) {
         fetchData(id);
     }
     // lấy danh sách thiết bị chưa được sử dụng của người dùng --> 
-    function GetListDeviceOfCustomer() {
+    function GetListDeviceOfCustomer(DriverID) {
         $http({
             method: "GET",
-            url: '/Management/GetListDeviceOfCustomerWithDriver'
+            url: '/Management/GetListDeviceOfCustomerWithDriver/' + DriverID
         }).then(function (response) {
             console.log(response, 'res');
             $scope.DevicesNotUsed = response.data;
-            for (var i = 0; i < $scope.namesData.length; i++) {
+            for (var i = 0; i < $scope.DevicesNotUsed.length; i++) {
                 $scope.DevicesNotUsed[i]["DateExpired"] = new Date(parseInt($scope.DevicesNotUsed[i]["DateExpired"].substr(6)));
             }
         }, function (error) {
@@ -303,7 +304,7 @@ App.controller('Controller', function ($scope, $http, Service) {
             console.log(response, 'resi');
             if (response != '') {
                 $scope.Devices = response.data;
-                for (var i = 0; i < $scope.namesData.length; i++) {
+                for (var i = 0; i < $scope.Devices.length; i++) {
                     $scope.Devices[i]["DateExpired"] = new Date(parseInt($scope.Devices[i]["DateExpired"].substr(6)));
                 }
             } 

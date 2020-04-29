@@ -58,10 +58,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2020 16:11:42</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Agency/Customer.cshtml">
-      <publishTime>04/22/2020 16:12:37</publishTime>
+      <publishTime>04/24/2020 13:54:19</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Agency/Detail.cshtml">
-      <publishTime>04/22/2020 17:22:41</publishTime>
+      <publishTime>04/24/2020 13:32:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Agency/Device.cshtml">
       <publishTime>04/22/2020 16:11:42</publishTime>
@@ -73,22 +73,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2020 16:13:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Device/DanhSachThietBi.cshtml">
-      <publishTime>04/22/2020 16:11:42</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HomeAdmin/Customer.cshtml">
       <publishTime>04/22/2020 16:14:08</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HomeAdmin/Detail.cshtml">
-      <publishTime>04/22/2020 16:06:51</publishTime>
+      <publishTime>04/24/2020 13:22:03</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HomeAdmin/Index.cshtml">
-      <publishTime>04/22/2020 16:14:43</publishTime>
+      <publishTime>04/24/2020 13:44:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/HomeAdmin/User.cshtml">
       <publishTime>04/22/2020 16:14:58</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_LayoutAdmin.cshtml">
-      <publishTime>04/22/2020 16:11:42</publishTime>
+      <publishTime>04/27/2020 08:07:53</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_LayoutAgency.cshtml">
       <publishTime>04/22/2020 16:11:42</publishTime>
@@ -313,10 +313,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:36</publishTime>
     </File>
     <File Include="bin/SeaTrack.dll">
-      <publishTime>04/23/2020 13:42:05</publishTime>
+      <publishTime>04/28/2020 10:08:44</publishTime>
     </File>
     <File Include="bin/SeaTrack.Lib.dll">
-      <publishTime>04/23/2020 13:41:59</publishTime>
+      <publishTime>04/25/2020 15:26:37</publishTime>
     </File>
     <File Include="bin/SeaTrack.Lib.dll.config">
       <publishTime>03/25/2020 13:55:14</publishTime>
@@ -559,10 +559,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:30</publishTime>
     </File>
     <File Include="Content/public/css/style-s.css">
-      <publishTime>04/21/2020 12:47:56</publishTime>
+      <publishTime>04/28/2020 10:07:13</publishTime>
     </File>
     <File Include="Content/public/css/stylemain.css">
-      <publishTime>04/20/2020 17:22:20</publishTime>
+      <publishTime>04/23/2020 17:12:44</publishTime>
     </File>
     <File Include="Content/public/css/stylemain_2.css">
       <publishTime>04/07/2020 17:12:30</publishTime>
@@ -640,43 +640,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:30</publishTime>
     </File>
     <File Include="Content/public/js/main/Account.js">
-      <publishTime>04/21/2020 17:06:29</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Content/public/js/main/AccountApp.js">
       <publishTime>04/22/2020 08:35:02</publishTime>
     </File>
     <File Include="Content/public/js/main/controller.js">
-      <publishTime>04/23/2020 08:43:14</publishTime>
+      <publishTime>04/27/2020 09:49:47</publishTime>
     </File>
     <File Include="Content/public/js/main/datatables-init.js">
       <publishTime>04/07/2020 17:12:30</publishTime>
     </File>
     <File Include="Content/public/js/main/default.js">
-      <publishTime>04/13/2020 11:37:15</publishTime>
+      <publishTime>04/25/2020 13:43:58</publishTime>
     </File>
     <File Include="Content/public/js/main/DeviceControllerJS.js">
       <publishTime>04/07/2020 17:12:30</publishTime>
     </File>
     <File Include="Content/public/js/main/DriverApp.js">
-      <publishTime>04/21/2020 15:38:29</publishTime>
+      <publishTime>04/25/2020 11:09:08</publishTime>
     </File>
     <File Include="Content/public/js/main/FeedBackApp.js">
       <publishTime>04/22/2020 09:17:14</publishTime>
     </File>
     <File Include="Content/public/js/main/global.js">
-      <publishTime>04/22/2020 11:26:10</publishTime>
+      <publishTime>04/28/2020 09:32:52</publishTime>
     </File>
     <File Include="Content/public/js/main/Map.js">
       <publishTime>04/10/2020 16:52:29</publishTime>
     </File>
     <File Include="Content/public/js/main/SOS.js">
-      <publishTime>04/21/2020 16:03:47</publishTime>
+      <publishTime>04/24/2020 15:16:18</publishTime>
     </File>
     <File Include="Content/public/js/main/testmap.js">
       <publishTime>04/17/2020 08:36:21</publishTime>
     </File>
     <File Include="Content/public/js/main/thietbiApp.js">
-      <publishTime>04/20/2020 17:22:20</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Content/public/js/main/ThietBiCuaKhachHangApp.js">
       <publishTime>04/10/2020 14:52:27</publishTime>
@@ -769,7 +769,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:32</publishTime>
     </File>
     <File Include="Lib/css/_Route.css">
-      <publishTime>04/21/2020 12:47:56</publishTime>
+      <publishTime>04/28/2020 09:32:18</publishTime>
     </File>
     <File Include="Lib/js/datatables/datatables.css">
       <publishTime>04/07/2020 17:12:32</publishTime>
@@ -877,13 +877,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:32</publishTime>
     </File>
     <File Include="Lib/js/_Route/controllerRoute.js">
-      <publishTime>04/23/2020 13:17:00</publishTime>
+      <publishTime>04/27/2020 10:30:07</publishTime>
     </File>
     <File Include="Lib/js/_Route/defaultRoute.js">
       <publishTime>04/22/2020 13:47:58</publishTime>
     </File>
     <File Include="Lib/js/_Route/globalRoute.js">
-      <publishTime>04/22/2020 11:26:10</publishTime>
+      <publishTime>04/28/2020 09:32:05</publishTime>
     </File>
     <File Include="Log/log.txt">
       <publishTime>04/23/2020 11:28:52</publishTime>
@@ -958,16 +958,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:33</publishTime>
     </File>
     <File Include="Views/AccountInformation/ThongTinCaNhan.cshtml">
-      <publishTime>04/21/2020 15:18:11</publishTime>
+      <publishTime>04/28/2020 10:06:55</publishTime>
     </File>
     <File Include="Views/Feedback/PhanHoi.cshtml">
-      <publishTime>04/22/2020 09:17:30</publishTime>
+      <publishTime>04/28/2020 10:03:05</publishTime>
     </File>
     <File Include="Views/Home/Demo.cshtml">
       <publishTime>04/16/2020 16:23:32</publishTime>
     </File>
+    <File Include="Views/Home/ErrorView.cshtml">
+      <publishTime>04/27/2020 08:40:33</publishTime>
+    </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>04/22/2020 17:06:17</publishTime>
+      <publishTime>04/24/2020 13:49:56</publishTime>
     </File>
     <File Include="Views/Home/Map.cshtml">
       <publishTime>04/16/2020 16:23:32</publishTime>
@@ -976,19 +979,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2020 17:12:33</publishTime>
     </File>
     <File Include="Views/Home/Route.cshtml">
-      <publishTime>04/23/2020 13:12:26</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Management/LaiTau.cshtml">
-      <publishTime>04/21/2020 17:06:55</publishTime>
+      <publishTime>04/27/2020 09:21:50</publishTime>
     </File>
     <File Include="Views/Management/ThietBi.cshtml">
-      <publishTime>04/21/2020 13:03:26</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Management/ThongTinTaiKhoan.cshtml">
-      <publishTime>04/21/2020 17:06:29</publishTime>
+      <publishTime>04/27/2020 09:22:14</publishTime>
     </File>
     <File Include="Views/Management/_MenuThietBiVaLaiTau.cshtml">
-      <publishTime>04/20/2020 17:22:20</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoChiTietHoatDong.cshtml">
       <publishTime>04/18/2020 19:54:00</publishTime>
@@ -1000,25 +1003,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2020 15:18:11</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopTheoLaiTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/BaoCaoTongHopTheoTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/HanhTrinhTauChay.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/TocDoCuaTau.cshtml">
-      <publishTime>04/18/2020 19:54:00</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/VuotPhamViDanhBat.cshtml">
       <publishTime>04/18/2020 19:54:00</publishTime>
     </File>
     <File Include="Views/Report/_MenuBaoCaoChoBo.cshtml">
-      <publishTime>04/07/2020 17:12:33</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Report/_MenuBaoCaoChoDoanhNghiep.cshtml">
-      <publishTime>04/07/2020 17:12:33</publishTime>
+      <publishTime>04/23/2020 16:47:52</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/07/2020 17:12:33</publishTime>
@@ -1027,19 +1030,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2020 16:23:32</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutHome.cshtml">
-      <publishTime>04/20/2020 17:22:20</publishTime>
+      <publishTime>04/28/2020 09:39:16</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutInfo.cshtml">
-      <publishTime>04/21/2020 09:10:42</publishTime>
+      <publishTime>04/28/2020 09:55:44</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutTienIch.cshtml">
-      <publishTime>04/20/2020 17:22:20</publishTime>
+      <publishTime>04/28/2020 09:39:25</publishTime>
     </File>
     <File Include="Views/Shared/_LoadingModal.cshtml">
-      <publishTime>04/22/2020 11:49:22</publishTime>
+      <publishTime>04/25/2020 08:24:32</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
-      <publishTime>04/22/2020 11:26:10</publishTime>
+      <publishTime>04/27/2020 09:30:50</publishTime>
+    </File>
+    <File Include="Views/Shared/_NavbarHome.cshtml">
+      <publishTime>04/28/2020 09:31:26</publishTime>
     </File>
     <File Include="Views/Shared/_Route.cshtml">
       <publishTime>04/17/2020 16:51:06</publishTime>
@@ -1072,7 +1078,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2020 16:11:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/23/2020 10:21:27</publishTime>
+      <publishTime>04/25/2020 15:26:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

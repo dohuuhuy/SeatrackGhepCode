@@ -3,7 +3,6 @@ var positionView = 0;
 var _def_Lat = 13.2000472;
 var _def_Lng = 109.1243889;
 var _def_zoom = 6;
-
 var _armarker = [];
 var _flightPath = [];
 var _SOS;

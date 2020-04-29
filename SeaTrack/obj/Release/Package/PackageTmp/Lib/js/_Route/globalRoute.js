@@ -14,33 +14,57 @@ $(document).ready(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
+	//if (window.innerWidth < 1080) {
+	//	alert(window.innerWidth);
+	//	if ($('#s-sidebar').hasClass('active')) {
+	//		$("#sidebarCollapse").addClass("d-none");
+ //       }
+ ////   }
+	//if ($(window).width > 480) {
+
+	//	$('#menubar').toggleClass('active');
+
+	//}
+	//else
+	//{
+	//	$('#menubar').removeClass('active');
+
+	//	$('#menubar').addClass('active1');
+	//	$('#menu2').addClass("d-none");
+
+	//}
+
+
+
 	$('#sidebarCollapse').on('click', function () {
+
 		$('#s-sidebar').toggleClass('active');
-		$('.s-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
-		$('#s-logo-menu').toggleClass('d-none');
-		$("#sidebarCollapse").addClass("d-none");
-		$("#giamsat_toggle").removeClass("d-none");
-	
+		$('#s-logo-menu').addClass('d-none');
+		$("#sidebarCollapse").removeClass("d-none");
+		$("#giamsat_toggle").addClass("d-none");
+
+		if ($(window).width() <= 480) {
+			if ($('#sidebarCollapse').hasClass('key')) {
+				$('#menu2').addClass("d-none");
+				$('#sidebarCollapse').removeClass('key')
+
+			} else {
+				$('#menu2').removeClass("d-none");
+				$('#sidebarCollapse').addClass('key')
+			}
+		}
+
+		if (!($("#navbarSupportedContent").hasClass("d-none"))) {
+			$("#navbarSupportedContent").addClass("d-none");
+		}
 	});
-	
 
 
 	$('#menu2').on('click', function () {
-		if ($('#menubar').hasClass('active')) { // nếu đóng rồi
-
-			$('#s-sidebar').toggleClass('active');
-			$('.s-sidebar').toggleClass('active');
-			$('#menubar').toggleClass('active');
-			$('#s-logo-menu').toggleClass('d-none');
-			$("#sidebarCollapse").addClass("d-none");
-			$("#giamsat_toggle").removeClass("d-none");
-			$("#navbarSupportedContent").addClass("d-none");
-
-		} else {
+	
 			$("#navbarSupportedContent").removeClass("d-none"); 
-		}
-	});
+});
 
 	$('#giamsat_toggle').on('click', function () {
 

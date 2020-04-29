@@ -4,7 +4,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @model SeaTrack.Lib.DTO.Admin.UserInfoDTO
-
+    @if (ViewBag.EditResult == 1)
+    {
+        <script>alert("Cập nhật thành công")</script>
+    }
+    @if (ViewBag.EditResult == -1)
+    {
+        <script>alert("Xảy ra lỗi trong quá trình cập nhật")</script>
+    }
     <div class="container-fluid" ng-app="App" ng-controller="Controller" ng-init="UserID('@Model.UserID','@Model.RoleID','@Model.ManageBy')">
         <h1 class="mt-4">Thông tin chi tiết</h1>
         <ol class="breadcrumb mb-4">

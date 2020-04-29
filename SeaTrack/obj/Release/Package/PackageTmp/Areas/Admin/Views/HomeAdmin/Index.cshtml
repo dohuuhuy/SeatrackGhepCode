@@ -4,6 +4,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@if(ViewBag.EditResult == 0)
+{
+    <script>alert("Không tìm thấy tài khoản")</script>
+}
     <div class="container-fluid" ng-app="AdminModule" ng-controller="AdminController" ng-init="Role(2)">
         @Html.Partial("../Shared/_loading")
         <div ng-cloak="" ng-show="loaded">

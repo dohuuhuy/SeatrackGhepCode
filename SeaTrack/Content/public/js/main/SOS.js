@@ -1,7 +1,7 @@
 
 function interval_SOS(){
                     
-    _SOS = setInterval(function () { SOS() },60000);
+    _SOS = setInterval(function () { SOS() },180000);
 }
 function SOS(){
     var SOS = [];
