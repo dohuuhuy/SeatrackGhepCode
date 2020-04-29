@@ -2,87 +2,91 @@
 
     var user = Session["User"] as SeaTrack.Lib.DTO.Users;
 }
-@if (user.RoleID == 3)
-{
+ 
     <nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
         <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-left"></i>
             <span id="txtmenu">Menu</span>
         </button>
-        <button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
+        @*<button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
             <i class="fas fa-indent"></i>
             <span id="txtgiamsat" style="font-weight:bolder">Giám sát</span>
-        </button>
+        </button>*@
         <img id="s-logo-menu" src="~/Content/images/logo/logo-vinasia.png" class="s-logo-menu d-none">
 
-        <button id="menu2" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+        <button id="menu2" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse d-none" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item active" onclick="win_reload();">
-                    <a id="a" href="~/Home/Route" onclick="win_reload();" type="button"
-                       class="btn btn-outline-primary">
+                    <a id="" href="~/Home/Route" onclick="win_reload();" role="button"
+                       class="btn btn-outline-primary  hover">
                         <i class="fas fa-location-arrow"></i>
                         Giám sát
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" role="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-chart-bar"></i>
                         Báo cáo
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
                         <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
 
                     </div>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-users-cog"></i>
-                        Quản trị
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
-                        <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị</a>
-                        <a id="show_device" class="dropdown-item" href="~/Management/Driver">Lái tàu</a>
-                    </div>
-                </li>
+                @if (user.RoleID == 3)
+                {
+                    <li class="nav-item dropdown">
+                        <a href="#" role="button" class="btn btn-outline-primary  dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-users-cog"></i>
+                            Quản trị
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="show_manage" class="dropdown-item" href="~/Management/Account">Tài khoản</a>
+                            <a id="show_device" class="dropdown-item" href="~/Management/Device">Thiết bị</a>
+                            <a id="show_device" class="dropdown-item" href="~/Management/Driver">Lái tàu</a>
+                        </div>
+                    </li>
+                }
                 <li class="nav-item">
 
-                    <a id="b" href="~/Utilities/Index" type="button" class="btn btn-outline-info">
+                    <a id="" href="~/Utilities/Index" type="button" class="btn btn-outline-info ">
                         <i class="fas fa-tasks"></i>
                         Tiện ích
                     </a>
                 </li>
                 <li class="nav-item">
 
-                    <a id="b" href="~/FeedBack/Index" class="btn btn-outline-info">
+                    <a id="" href="~/FeedBack/Index" class="btn btn-outline-info ">
                         <i class="fas fa-comments"></i>
                         Phản hồi
                     </a>
 
                 </li>
                 <li class="nav-item dropdown" id="b">
-                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" role="button" class="btn btn-outline-info dropdown-toggle " data-toggle="dropdown">
                         <i class="fas fa-question"></i>
                         Hướng dẫn
-                    </button>
+                    </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" id="c">
-                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" role="button" class="btn btn-outline-success  dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-user"></i>
-                        Tài khoản
-                    </button>
+                      Tài khoản
+                    </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"> @user.FullName </a>
                         <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                        <a id="" onclick="DanhSachThietBiHetHan()" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
+                        <a id="" onclick="" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
+
                     </div>
                 </li>
                 <li class="nav-item" id="d">
@@ -93,90 +97,6 @@
             </ul>
         </div>
     </nav>
-}
 
-@if (user.RoleID == 4)
-
-{
-    <nav id="menubar" class="active navbar navbar-expand-lg navbar-light bg-light s-menu-run">
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-align-left"></i>
-            <span>Menu</span>
-        </button>
-        <button type="button" id="giamsat_toggle" class="btn btn-danger d-none">
-            <i class="fas fa-indent"></i>
-            <span style="font-weight:bolder">Giám sát</span>
-        </button>
-        <img id="s-logo-menu" src="~/Content/images/logo/logo-vinasia.png" class="s-logo-menu d-none">
-
-        <button id="menu2" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse d-none" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item active" onclick="win_reload();">
-                    <a id="a" href="~/Home/Route" onclick="win_reload();" type="button"
-                       class="btn btn-outline-primary">
-                        <i class="fas fa-location-arrow"></i>
-                        Giám sát
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_bgt" class="dropdown-item" href="~/Report/Ministry">Báo cáo Bộ NN & PTNT</a>
-                        <a id="show_business" class="dropdown-item" href="~/Report/Business">Báo cáo Doanh nghiệp</a>
-
-                    </div>
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a id="b" href="~/Utilities/Index" type="button" class="btn btn-outline-info">
-                        <i class="fas fa-tasks"></i>
-                        Tiện ích
-                    </a>
-                </li>
-                <li class="nav-item">
-
-                    <a id="b" href="~/FeedBack/Index" class="btn btn-outline-info">
-                        <i class="fas fa-comments"></i>
-                        Phản hồi
-                    </a>
-
-                </li>
-                <li class="nav-item dropdown" id="b">
-                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-question"></i>
-                        Hướng dẫn
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#mi-modal">Hướng dẫn sử dụng</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" id="c">
-                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-user"></i>
-                        Tài khoản
-                    </button>
-                    <div class="dropdown-menu">
-                        <a id="show_admin" class="dropdown-item" href="~/AccountInformation/AccountInfo">Thông tin Tài khoản</a>
-                        <a id="" onlick="abc()" data-toggle="modal" data-target="#exampleModalCenter" class="dropdown-item">Dịch vụ hết hạn</a>
-                    </div>
-                </li>
-                <li class="nav-item" id="d">
-                    <a href="~/Home/Logout" type="button" class="btn btn-outline-dark" title="Đăng xuất">
-                        <i class="fa fa-sign-out-alt"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-}
 
 

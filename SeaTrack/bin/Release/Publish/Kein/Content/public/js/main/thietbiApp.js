@@ -17,13 +17,7 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
         });
         return total;
     };
-    $scope.DeviceExtension = function (dateExpire, time) {
-        console.log('date' + dateExpire);
-        dateExpire.setDate(dateExpire.getDate() + time * 30); // Set now + 30 days as the new date
-        console.log('new date' + dateExpire);
-        $scope.Device.ExpireDate = new Date(dateExpire);
-        $scope.Device.DateExpired = new Date(dateExpire);
-    }
+
     $scope.ClearSearch = function () {
         $scope.SearchKey = "";
         $scope.Status = null;
@@ -57,11 +51,11 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
             DeviceNote: data.DeviceNote,
             TypeShip: data.TypeShip
         };
-        $scope.Device.TypeShip = {
-            1: "Tàu nhỏ hơn 12 mét",
-            2: "Tàu từ 12 mét đến 15 mét",
-            3: "Tàu lớn hơn 15 mét"
-        }
+        //$scope.Device.TypeShip = {
+        //    '1': "Tàu nhỏ hơn 12 mét",
+        //    '2': "Tàu từ 12 mét đến 15 mét",
+        //    '3': "Tàu lớn hơn 15 mét"
+        //}
     };
 
   
@@ -69,6 +63,12 @@ DeviceApp.controller('Controller', function ($scope, $http, DeviceService) {
     function LoadDevice() {
         DeviceService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
+            for (var i = 0; i < $scope.namesData.length; i++) {
+                $scope.namesData[i]["DateExpired"] = new Date(parseInt($scope.namesData[i]["DateExpired"].substr(6)))
+                console.log($scope.namesData[i]["DateExpired"]);
+            }
+            console.log('i am inside load() ' + JSON.stringify($scope.namesData));
+
         }, function () {
             alert('Unable to Get Data !!!');
         });

@@ -4,61 +4,52 @@ $(document).ready(function () {
 	DanhSachThietBiHetHan();
 	interval_SOS();
 
+	
+
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
 
-
-	//if ($(window).width() <= 1024) {
-	//	if (!($('.si-sidebar').hasClass('active')))
-	//	{
-	//		$('.si-sidebar').addClass('active');
-	//		$('#menubar').removeClass('active');
-	//		$('#s-logo-menu').removeClass('d-none');
-	//		$('.navbar-nav').addClass('d-none');
-			
- //       }
-	//}
-
-
+	if (window.innerWidth < 475) {
+	//	$('#menubar').removeClass('active'); // bỏ kích hoạt
+		$('#s-logo-menu').toggleClass('d-none'); // cho hiện logon
+		$('#txtgiamsat').toggleClass('d-none');
+    }
 
 	$('#sidebarCollapse').on('click', function () {
+		$('.si-sidebar').toggleClass('active');
+		$('#menubar').toggleClass('active');
+		$('#s-logo-menu').toggleClass('d-none');
+		$("#sidebarCollapse").removeClass("d-none");
+		$("#giamsat_toggle").removeClass("d-none");
 
+	});
+
+
+	$('#menu2').on('click', function () { // nhấn menu
+
+		if ($('#menubar').hasClass('active')) { // nếu menu thay đổi
+
+			$('.si-sidebar').toggleClass('active'); // bên trái
+			$('#menubar').toggleClass('active'); // nguyên menu
+			$('#s-logo-menu').addClass('d-none'); // cho hiện
+			$("#sidebarCollapse").removeClass("d-none"); // cho hiện menu
+			$("#giamsat_toggle").addClass("d-none"); // giám sát ẩn
+
+		} else {
+			$("#navbarSupportedContent").removeClass("d-none"); // ẩn danh sách
+		}
+	});
+
+	$('#giamsat_toggle').on('click', function () { // 
 
 		$('.si-sidebar').toggleClass('active');
 		$('#menubar').toggleClass('active');
-		$('#s-logo-menu').addClass('d-none');
+		$('#s-logo-menu').removeClass('d-none');
 		$("#sidebarCollapse").removeClass("d-none");
 		$("#giamsat_toggle").addClass("d-none");
-
-		if ($('#content').hasClass('huy')) {
-
-			$('#content').removeClass('huy')
-		} else {
-			$('#content').addClass('huy')
-        }
-
-		if ($(window).width() <= 480) {
-			if ($('#sidebarCollapse').hasClass('key')) {
-				$('#menu2').addClass("d-none");
-				$('#sidebarCollapse').removeClass('key')
-
-			} else {
-				$('#menu2').removeClass("d-none");
-				$('#sidebarCollapse').addClass('key')
-			}
-		}
-
-		if (!($("#navbarSupportedContent").hasClass("d-none"))) {
+		if ($("#navbarSupportedContent").removeClass("d-none")) {
 			$("#navbarSupportedContent").addClass("d-none");
 		}
-});
-
-	
-	
-	$('#menu2').on('click', function () {
-
-		//$('.navbar-nav').toggleClass('d-none');
-		$("#navbarSupportedContent").removeClass("d-none");
 	});
 
 	$('input[name="datefilter"]').daterangepicker({

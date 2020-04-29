@@ -1,0 +1,29 @@
+﻿<div id="main-wait" ng-hide="loaded">
+    <div id="wait">
+        Đang cập nhật dữ liệu, vui lòng chờ giây lát ... <br />
+        <img src="~/Content/images/icon/waiting4.gif" width="200" height="200" />
+    </div>
+</div>
+<style>
+    #main-wait {
+    
+        display: block;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 2px;
+        background-color: #fff;
+        z-index:9;
+        opacity:0.8;
+        font-size:20px;
+
+    }
+    #wait {
+        margin-top: 20%;
+        margin-left: 15%;
+    }
+
+</style>

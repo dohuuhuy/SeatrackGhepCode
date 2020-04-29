@@ -1,4 +1,48 @@
 ﻿
+.popUpBox_theMeaningOfIcon {
+    position: absolute;
+    top: 125px;
+    left: 295px;
+    z-index: 10010;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #ccc;
+    padding: 10px;
+    background: url(/Content/public/img/bg/transparentBg.png);
+    width: 250px;
+    display: none;
+}
+
+    .popUpBox_theMeaningOfIcon .content {
+        background-color: #fff;
+        font-family: Tahoma;
+        font-size: 11px;
+        text-align: left;
+        vertical-align: top;
+        padding: 5px;
+    }
+
+#rounded ul li a {
+    color: black !important;
+}
+
+.form_time {
+    padding: 0px 5px;
+}
+
+.headerAlignCenter {
+    text-align: center !important;
+    vertical-align: middle !important;
+    font-size: 12px;
+    background-color: #15b4c4;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+html{
+    font-size:12px !important;
+}
+
 #SOS {
     display: none;
     width: 30%;
@@ -9,7 +53,7 @@
     text-align: center;
     border: 0px;
     border-radius: 5px;
-    /*height:fit-content;*/
+    height:fit-content;
 }
 
     #SOS .text-danger {
@@ -209,7 +253,7 @@
 }
 
 #body a {
-    color: #000;
+    text-decoration:none;
 }
 
 #rounded > a {
@@ -357,11 +401,11 @@
 
 
 #sublefttab_4 {
-    max-height: 380px;
+    max-height: 280px;
     overflow: auto;
+    margin-bottom: 5px;
     background: #fff;
 }
-
 #sublefttab_1 {
     max-height: 400px;
     overflow: auto;
@@ -403,11 +447,6 @@
     text-transform: uppercase;
 }
 
-
-
-/* ---------------------------------------------------
-  SIDEBAR STYLE
-  ----------------------------------------------------- */
 .wrapper {
     display: flex;
     width: 100%;
@@ -501,25 +540,17 @@ a.article:hover {
     background: #019CDE !important;
     color: #fff !important;
 }
-/* ---------------------------------------------------
-  CONTENT STYLE
-  ----------------------------------------------------- */
+
 #content {
     width: 100%;
     padding: 0;
     min-height: 100vh;
     transition: all 0.3s;
 }
-/* ---------------------------------------------------
-  MEDIAQUERIES
-  ----------------------------------------------------- */
 
 #homeSubmenu li a, #pageSubmenu li a {
     color: #fff;
 }
-/* ---------------------------------------------------
-SOI STYLE
------------------------------------------------------ */
 
 .s-full {
     width: 100%;

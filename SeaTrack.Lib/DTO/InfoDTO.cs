@@ -31,7 +31,7 @@ namespace SeaTrack.Lib.DTO
             if (this.Seqno == null) return false;
             if (this.SecretCode == null) return false;
             if (this.OpCode == null) return false;
-            if (this.Time == null) return false;
+            //if (this.Time == null) return false;
             return true;
         }
     }

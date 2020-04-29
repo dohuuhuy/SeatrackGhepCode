@@ -3,10 +3,11 @@
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/public/img/logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="vi" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Test</title>
+    <title>SeaTracking VINASIA</title>
 
 
     <link href="~/Content/public/css/stylemain.css" rel="stylesheet" />
@@ -26,7 +27,7 @@
 <body id="body" class="class_body_t">
     <div class="body-content">
         <div class="wrapper ">
-            @Html.Partial("_Navbar")
+            @Html.Partial("_NavbarHome")
             <div id="content" class="s-relative main show">
                 @RenderBody()
                 @Html.Partial("_LoadingModal")
@@ -34,33 +35,7 @@
         </div>
     </div>
     @Html.Partial("../_Waiting")
-    <style>
-        html {
-            font-family: sans-serif;
-        }
 
-        .dropdown-item {
-            font-weight: bolder;
-        }
-
-        .btn {
-            font-weight: bolder;
-        }
-
-        #linkmenu {
-            padding: 0px;
-        }
-
-        #sub-sub-menu a img {
-            width: 24px;
-            height: 24px;
-        }
-
-        #sub-menu-1 img {
-            width: 24px;
-            height: 24px;
-        }
-    </style>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/Content/public/js/moment.min.js"></script>
@@ -71,6 +46,22 @@
     <script src="~/Scripts/graham_scan.js"></script>
     <script src="~/Content/public/js/main/SOS.js"></script>
     <script src="~/Handlers/keepAlive.js"></script>
+
+    @* angular  *@
+    <script src="~/Scripts/angular.js"></script>
+    @* thiết bị *@
+    <script src="~/Content/public/js/main/thietbiApp.js"></script>
+    @* tài khoản *@
+    <script src="~/Content/public/js/main/Account.js"></script>
+    @* Lái tàu *@
+    <script src="~/Content/public/js/main/DriverApp.js"></script>
+    @* Phản hồi *@
+    <script src="~/Content/public/js/main/FeedBackApp.js"></script>
+    @* Thông tin cá nhân *@
+    <script src="~/Content/public/js/main/AccountApp.js"></script>
+    @* phân trang *@
+    <script src="~/Areas/Admin/Pagination JS/dirPagination.js"></script>
+
 </body>
 </html>
 

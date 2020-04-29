@@ -13,10 +13,21 @@
         return request;
     }
     this.LockUser = function (UserID) {
-    return $http.get('/Admin/HomeAdmin/LockUser/' + UserID)
+        return $http.get('/Admin/HomeAdmin/LockUser/' + UserID);
     }
     this.UnLockUser = function (UserID) {
-    return $http.get('/Admin/HomeAdmin/UnLockUser/' + UserID)
+        return $http.get('/Admin/HomeAdmin/UnLockUser/' + UserID);
     }
-
+    this.DeleteUser = function (UserID) {
+        return $http.get('/Admin/HomeAdmin/DeleteUser/' + UserID);
+    }
+    this.CheckUsername = function (Username) {
+        var User = { Username: Username };
+        var request = $http({
+            method: 'POST',
+            url: '/Admin/HomeAdmin/CheckUsername',
+            data: User
+        });
+        return request;
+    }
 })
