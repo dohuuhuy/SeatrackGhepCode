@@ -251,7 +251,7 @@ AccountApp.controller('AccountCtrl', function ($scope, $http, AccountService) {
         }).then(function (response) {
             console.log(response, 'res');
             $scope.Devices = response.data;
-            for (var i = 0; i < $scope.namesData.length; i++) {
+            for (var i = 0; i < $scope.Devices.length; i++) {
                 $scope.Devices[i]["DateExpired"] = new Date(parseInt($scope.Devices[i]["DateExpired"].substr(6)));
             }
         }, function (error) {
