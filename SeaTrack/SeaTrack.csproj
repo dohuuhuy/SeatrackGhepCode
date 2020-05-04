@@ -573,9 +573,9 @@
     <Content Include="Views\Utilities\Dangkiem.cshtml" />
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
-    <Content Include="Views\Home\404.cshtml" />
     <Content Include="Views\Report\BaoCaoCanhBaoSOS.cshtml" />
     <Content Include="Views\_BackTo.cshtml" />
+    <Content Include="Views\Home\ErrorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
