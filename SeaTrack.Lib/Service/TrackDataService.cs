@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.ApplicationBlocks.Data;
 using SeaTrack.Lib.Database;
 using SeaTrack.Lib.DTO;
+using SeaTrack.Lib.DTO.Admin;
 
 namespace SeaTrack.Lib.Service
 {
@@ -39,19 +40,22 @@ namespace SeaTrack.Lib.Service
                         if (TypeShip == DBNull.Value)
                         {
                             data.TypeShip = -1;
-                        }else { data.TypeShip = Convert.ToInt32(reader["TypeShip"]); }
+                        }
+                        else { data.TypeShip = Convert.ToInt32(reader["TypeShip"]); }
 
                         object Latitude = reader["Latitude"];
                         if (Latitude == DBNull.Value)
                         {
                             data.Latitude = -1;
-                        }else { data.Latitude = Convert.ToDecimal(reader["Latitude"]); }
+                        }
+                        else { data.Latitude = Convert.ToDecimal(reader["Latitude"]); }
 
                         object Longitude = reader["Longitude"];
                         if (Longitude == DBNull.Value)
                         {
                             data.Longitude = -1;
-                        }else { data.Longitude = Convert.ToDecimal(reader["Longitude"]); }
+                        }
+                        else { data.Longitude = Convert.ToDecimal(reader["Longitude"]); }
                         data.DirectionSN = reader["DirectionSN"].ToString();
                         data.DirectionEW = reader["DirectionEW"].ToString();
 
@@ -59,7 +63,8 @@ namespace SeaTrack.Lib.Service
                         if (TransmitTime == DBNull.Value)
                         {
                             data.TransmitTime = Convert.ToDateTime(reader["DateCreate"]);
-                        }else { data.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]); }
+                        }
+                        else { data.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]); }
 
                         object Speed = reader["Speed"];
                         if (Speed == DBNull.Value)
@@ -67,20 +72,22 @@ namespace SeaTrack.Lib.Service
                             data.Speed = -1;
                         }
                         else { data.Speed = Convert.ToInt32(reader["Speed"]); }
-                        //var data = new DeviceStatus()
-                        //{
-                        //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
-                        //    DeviceName = reader["DeviceName"].ToString(),
-                        //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
-                        //    Latitude = Convert.ToDecimal(reader["Latitude"]),
-                        //    Longitude = Convert.ToDecimal(reader["Longitude"]),
-                        //    DirectionSN = reader["DirectionSN"].ToString(),
-                        //    DirectionEW = reader["DirectionEW"].ToString(),
-                        //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
-                        //    Speed = Convert.ToInt16(reader["Speed"]),
 
-                        //};
-                        lst.Add(data);
+                        data.State = Convert.ToInt16(reader["StatusDeVice"]).ToString();
+                    //var data = new DeviceStatus()
+                    //{
+                    //    DeviceID = Convert.ToInt32(reader["DeviceID"]),
+                    //    DeviceName = reader["DeviceName"].ToString(),
+                    //    TypeShip = Convert.ToInt32(reader["DeviceGroup"]),
+                    //    Latitude = Convert.ToDecimal(reader["Latitude"]),
+                    //    Longitude = Convert.ToDecimal(reader["Longitude"]),
+                    //    DirectionSN = reader["DirectionSN"].ToString(),
+                    //    DirectionEW = reader["DirectionEW"].ToString(),
+                    //    TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
+                    //    Speed = Convert.ToInt16(reader["Speed"]),
+
+                    //};
+                    lst.Add(data);
                     }
                 }
             }
@@ -193,6 +200,7 @@ namespace SeaTrack.Lib.Service
                     {
                         var data = new TrackDataAndDriver()
                         {
+                            ID = Convert.ToInt64(reader["ID"]),
                             DeviceID = deviceID,
                             DirectionSN = Convert.ToString(reader["DirectionSN"]),
                             DirectionEW = Convert.ToString(reader["DirectionEW"]),
@@ -201,7 +209,7 @@ namespace SeaTrack.Lib.Service
                             TransmitTime = Convert.ToDateTime(reader["TransmitTime"]),
                             Speed = Convert.ToInt16(reader["Speed"]),
 
-                            DriverName = reader["DriverName"].ToString(),
+                            //DriverName = reader["DriverName"].ToString(),
                         };
                         lst.Add(data);
                     }
@@ -212,7 +220,7 @@ namespace SeaTrack.Lib.Service
 
         public static List<TrackData> GetDataByDelayTime(string DeviceImei)
         {
-            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataByDelayTime",DeviceImei))
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetDataByDelayTime", DeviceImei))
             {
                 List<TrackData> data = new List<TrackData>();
                 while (reader.Read())
@@ -255,6 +263,35 @@ namespace SeaTrack.Lib.Service
             }
             return lst;
         }
+
+        public static List<DataDriver> CheckDriver(long ID)
+        {
+            List<DataDriver> data = new List<DataDriver>();
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_CheckDriver", ID))
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var d = new DataDriver();
+
+                        d.DriverName = reader["DriverName"].ToString();
+                        d.TuNgay = Convert.ToDateTime(reader["TuNgay"]);
+                        object DenNgay = reader["DenNgay"];
+                        if (DenNgay == DBNull.Value)
+                        {
+                            d.DenNgay = DateTime.Now;
+                        }
+                        else { d.DenNgay = Convert.ToDateTime(reader["DenNgay"]); }
+                        d.TransmitTime = Convert.ToDateTime(reader["TransmitTime"]);
+                        data.Add(d);
+                    }
+                    return data;
+                }
+                return data;
+            }
+        }
+
         public static int AddMessage(string id, string Message)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_AddMessage", id, Message);

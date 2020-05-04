@@ -18,12 +18,12 @@
             <i class="fas fa-bars"></i>
         </button><!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
+            @*<div class="input-group">
                 <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Search" aria-describedby="basic-addon2" />
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                 </div>
-            </div>
+            </div>*@
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
@@ -40,8 +40,8 @@
             <li class="nav-item">
                 <a class="nav-link">
                     @{var user = Session["User"] as SeaTrack.Lib.DTO.Users;}
-                    @user.FullName là
-                    @user.Username
+                    @user.FullName @*là
+                    @user.Username*@
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -85,11 +85,11 @@
                             Quản lý thiết bị
                         </a>
                         <div class="sb-sidenav-menu-heading">Tiện Ích</div>
-                        <a class="nav-link" href="">
+                        <a class="nav-link collapsed" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Hướng dẫn sử dụng
                         </a>
-                        <a class="nav-link" href="~/Admin/AdSOS/Index">
+                        <a class="nav-link collapsed" href="~/Admin/AdSOS/Index">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             SOS
                         </a>

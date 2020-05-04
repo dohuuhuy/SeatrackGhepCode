@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="row form-group" ng-if="User.ManageBy != null">
-                        <div class="col col-md-3"><label class="form-control-label">Quản lý : </label></div>
+                        <div class="col col-md-3"><label class="form-control-label">Quản lý </label></div>
                         <div class="col-12 col-md-9">
                             <input class="form-control" type="text" required maxlength="200" ng-model=" User.ManageBy" readonly />
 
@@ -148,7 +148,7 @@
                         <form action="Upload" method="post" enctype="multipart/form-data" name="UpLoad">
                             <input type="file" required name="file" id="file" accept="image/*" onchange="loadFile(event);" class="btn btn-light" />
 
-                            <button type="submit" ng-click="LoadUser()" class="btn btn-primary btn-sm">
+                            <button id="luu" type="submit" ng-click="LoadUser()" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Lưu
                             </button>
                         </form>
@@ -182,8 +182,8 @@
             document.getElementById("file").value = '';
             return false;
         }
-        if (file.size > 1024000) {
-            alert('Kích thước tối đa 1Mb');
+        if (file.size > 3024000) {
+            alert('Kích thước tối đa 3Mb');
 
             document.getElementById("file").value = '';
             return false;

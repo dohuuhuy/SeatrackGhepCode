@@ -22,6 +22,10 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
+            if (TempData["EditResult"] != null)
+            {
+                ViewBag.EditResult = 0;
+            }
             return View();
         }
 
@@ -104,11 +108,17 @@ namespace SeaTrack.Areas.Admin.Controllers
             }
             if (TempData["EditResult"] != null)
             {
-                ViewBag.EditResult = TempData["EditResult"].ToString();
+                ViewBag.EditResult = TempData["EditResult"];
             }
             UserInfoDTO us = new UserInfoDTO();
             us = AdminService.GetUserByID(id);
-            return View(us);
+            if (us != null)
+            {
+                return View(us);
+
+            }
+            TempData["EditResult"] = 0;
+            return RedirectToAction("Index", "HomeAdmin");
         }
 
         [HttpPost]
@@ -131,7 +141,7 @@ namespace SeaTrack.Areas.Admin.Controllers
                 bool res = AdminService.EditUser(user);
                 if (res)
                 {
-                    TempData["EditResult"] = "Cập nhật thành công";
+                    TempData["EditResult"] = 1;
                     if (u.RoleID==2)
                     {
                         return RedirectToAction("Detail", "Agency", new { id = user.UserID });
@@ -140,7 +150,7 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 else
                 {
-                    TempData["EditResult"] = "Chưa được cập nhật";
+                    TempData["EditResult"] = -1;
                     if (u.RoleID == 2)
                     {
                         return RedirectToAction("Detail", "Agency", new { id = user.UserID });
@@ -150,7 +160,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                TempData["EditResult"] = "Xảy ra lỗi trong quá trình cập nhật";
+                TempData["EditResult"] = 0;
                 if (u.RoleID == 2)
                 {
                     return RedirectToAction("Detail", "Agency", new { id = user.UserID });

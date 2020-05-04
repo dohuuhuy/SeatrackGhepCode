@@ -12,16 +12,17 @@ using SeaTrack.Lib.DTO;
 using SeaTrack.Lib.Service;
 using SeaTrack.Models;
 using SeaTrack.Lib.Database;
+using SeaTrack.Lib.DTO.Admin;
 
 namespace SeaTrack.Controllers
 {
     public class HomeController : Controller
     {
 
-        public ActionResult ErrorView()
-        {
-            return View("404");
-        }
+        //public ActionResult ErrorView()
+        //{
+        //    return View("404");
+        //}
        
         public ActionResult Route()
         {
@@ -158,18 +159,33 @@ namespace SeaTrack.Controllers
         [HttpGet]
         public ActionResult GetLastedLocation(int deviceID)
         {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             TrackData data = TrackDataService.GetLastedLocation(deviceID);
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult GetRoadmap(int deviceID)
         {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             List<TrackData> data = TrackDataService.GetRoadmap(deviceID);
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult GetRoadmapByDateTime(int deviceID, string From, string To)
         {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             DateTime fromtime = Convert.ToDateTime(DateTime.ParseExact(From, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
             DateTime totime = Convert.ToDateTime(DateTime.ParseExact(To, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
 
@@ -181,6 +197,11 @@ namespace SeaTrack.Controllers
         }
         public ActionResult GetRoadmapByDateTimeAndDriver(int deviceID, string From, string To)
         {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             DateTime fromtime = Convert.ToDateTime(DateTime.ParseExact(From, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
             DateTime totime = Convert.ToDateTime(DateTime.ParseExact(To, "dd-M-yyyy HH:mm", CultureInfo.InvariantCulture));
 
@@ -192,76 +213,45 @@ namespace SeaTrack.Controllers
         }
         public ActionResult GetListDevice()
         {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
             List<Device> data = TrackDataService.GetListDevice();
             return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
-        public JsonResult PostCurrentLocation(InfoDTO info)
+        public ActionResult CheckDriver(List<TrackData> list)
         {
-            if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
+            var user = (Users)Session["User"];
+            if (user == null)
             {
-                var item = TrackDataService.GetLastedLocationByImei(info.ID);
-                RequestInfo returnInfo = new RequestInfo();
-                returnInfo.MREF = info.MREF;
-                returnInfo.Seqno = info.Seqno;
-                returnInfo.ID = info.ID;
-                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
-                returnInfo.State = "A";
-                returnInfo.Latitude = item.Latitude;
-                returnInfo.ExpSN = item.DirectionSN;
-                returnInfo.Longitude = item.Longitude;
-                returnInfo.ExpEW = item.DirectionEW;
-                returnInfo.Speed = item.Speed;
-                returnInfo.DIR = "";
-                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
-                return Json(returnInfo, JsonRequestBehavior.AllowGet);
+                RedirectToAction("Login", "Home");
             }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
-        [HttpGet]
-        public JsonResult GetCurrentLocation(InfoDTO info)
-        {
-            if (info.SecretCode == ConnectData.SecretCode && info.CheckNull())
+            List<string> Names = new List<string>();
+            foreach (var i in list)
             {
-                var item = TrackDataService.GetLastedLocationByImei(info.ID);
-                RequestInfo returnInfo = new RequestInfo();
-                returnInfo.MREF = info.MREF;
-                returnInfo.Seqno = info.Seqno;
-                returnInfo.ID = info.ID;
-                returnInfo.Time = item.TransmitTime.ToString("HHMMss");
-                returnInfo.State = "A";
-                returnInfo.Latitude = item.Latitude;
-                returnInfo.ExpSN = item.DirectionSN;
-                returnInfo.Longitude = item.Longitude;
-                returnInfo.ExpEW = item.DirectionEW;
-                returnInfo.Speed = item.Speed;
-                returnInfo.DIR = "";
-                returnInfo.Date = item.TransmitTime.ToString("ddMMyy");
-                return Json(returnInfo, JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
-
-
-        [HttpPost]
-        public JsonResult SetUpDelay(InfoDTO info)
-        {
-            if (info.SecretCode == ConnectData.SecretCode && info.CheckNullDelay())
-            {
-                if (InfoService.AddInfoDelay(info) == 1 && InfoService.GetInfoDelay(info.ID).Time == info.Time)
+                List<DataDriver> data = TrackDataService.CheckDriver(i.ID);
+                foreach (var item in data)
                 {
-
-                    return Json(new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "OK" });
+                    if (item.TuNgay < item.TransmitTime && item.TransmitTime < item.DenNgay)
+                    {
+                        Names.Add(item.DriverName);
+                    }
                 }
-                return Json(new { MREF = info.MREF, Seqno = info.Seqno, ID = info.ID, Result = "Fail" });
             }
-            return Json(null);
+            return Json( new { Result = Names }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult UserInfo()
         {
             var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
+
             if (user.Username != null && user.Password != null )
             {
                 
@@ -269,6 +259,11 @@ namespace SeaTrack.Controllers
                 return Json(new { Result = data }, JsonRequestBehavior.AllowGet);
             }
             return Json("Không có dữ liệu", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ErrorView()
+        {
+            return View();
         }
     }
 }

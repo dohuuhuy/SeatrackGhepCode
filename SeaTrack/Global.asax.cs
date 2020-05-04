@@ -21,7 +21,7 @@ namespace SeaTrack
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             JobScheduler.StarJobCheckExpired();
             //JobScheduler.StartJobInfo();
-            //JobScheduler.StartJobSOS();
+            //.StartJobSOS();
         }
     }
 }

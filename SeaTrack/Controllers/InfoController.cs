@@ -73,7 +73,7 @@ namespace SeaTrack.Controllers
                     returnInfo.ExpSN = item.DirectionSN;
                     returnInfo.Longitude = item.Longitude;
                     returnInfo.ExpEW = item.DirectionEW;
-                    returnInfo.Speed = item.Speed/1.83;
+                    returnInfo.Speed = item.Speed < 3 ? 0: (Math.Round((item.Speed* 0.53996) *10) / 10);
                     returnInfo.DIR = "";
                     returnInfo.Date = item.TransmitTime.ToString("dd/MM/yyyy");
                     return Request.CreateResponse(HttpStatusCode.OK, returnInfo);

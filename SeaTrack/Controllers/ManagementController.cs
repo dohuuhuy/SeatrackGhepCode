@@ -14,6 +14,15 @@ namespace SeaTrack.Controllers
 
         public ActionResult CheckUsername(Users user)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var res = AdminService.CheckUserExist(user.Username);
             if (res == null)
             {
@@ -23,6 +32,15 @@ namespace SeaTrack.Controllers
         }
         public ActionResult CheckCMND(Driver driver)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var res = AdminService.CheckCMND(driver.CMND);
             if (res == null)
             {
@@ -46,6 +64,15 @@ namespace SeaTrack.Controllers
         [HttpGet]
         public ActionResult GetListUserOfCus()
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var user = (Users)Session["User"];
             string name = user.Username;
             var data = UsersService.GetListUserOfCustomers(name);
@@ -54,6 +81,14 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult CreateUser(UserInfoDTO us)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
 
             var user = (Users)Session["User"];
             us.CreateBy = user.Username;
@@ -70,6 +105,14 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult EditUsers(UserInfoDTO us)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
 
             var user = (Users)Session["User"];
             us.CreateBy = user.Username;
@@ -86,8 +129,16 @@ namespace SeaTrack.Controllers
 
         [HttpGet]
         public ActionResult LockUsers(int id)
-
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var data = AdminService.UpdateStatusUser(id, -1);
             return Json("Đã khóa", JsonRequestBehavior.AllowGet);
         }
@@ -95,6 +146,15 @@ namespace SeaTrack.Controllers
         [HttpGet]
         public ActionResult UnlockUsers(int id)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var data = AdminService.UpdateStatusUser(id, 1);
             return Json("Đã mở khóa", JsonRequestBehavior.AllowGet);
         }
@@ -115,14 +175,32 @@ namespace SeaTrack.Controllers
 
         public ActionResult GetListDeviceOfCustomer(int id)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var user = (Users)Session["User"];
-            var data = AdminService.GetListDeviceOfCustomer(user.Username, id );
+            var data = AdminService.GetListDeviceOfCustomer(user.Username, id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetListDeviceOfCustomerWithDriver()
+        public ActionResult GetListDeviceOfCustomerWithDriver(int id)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var user = (Users)Session["User"];
-            var data = AdminService.GetListDeviceOfCustomerWithDriver(user.Username);
+            var data = AdminService.GetListDeviceOfCustomerWithDriver(user.Username, id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -130,6 +208,15 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult RemoveDeviceFromUser(User_Device ud)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var rs = AdminService.RemoveDeviceFromUser(ud.UserID, ud.DeviceID);
             return Json(new { success = true });
         }
@@ -137,12 +224,30 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult AddDeviceToUser(User_Device ud)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var rs = AdminService.AddDeviceToUser(ud.UserID, ud.DeviceID, "Admin");
             return Json(new { success = true });
         }
         [HttpPost]
         public ActionResult RemoveDeviceFromUserWithDriver(User_Device ud)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var rs = AdminService.RemoveDeviceFromUserWithDriver(ud.UserID, ud.DeviceID);
             return Json(new { success = true });
         }
@@ -150,13 +255,31 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult AddDeviceToUserWithDriver(User_Device ud)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var rs = AdminService.AddDeviceToUserWithDriver(ud.UserID, ud.DeviceID, "Admin");
             return Json(new { success = true });
         }
 
-    
+
         public ActionResult GetListDeviceByUserID(int? id)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             if (id == null)
             {
                 var user = (Users)Session["User"];
@@ -172,6 +295,15 @@ namespace SeaTrack.Controllers
 
         public ActionResult GetListDeviceByDriverID(int? id)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             if (id == null)
             {
                 var user = (Users)Session["User"];
@@ -187,6 +319,7 @@ namespace SeaTrack.Controllers
 
         public JsonResult CheckDeviceExist(Device device)
         {
+
             Device d = new Device();
             if (device.DeviceNo != null)
             {
@@ -221,6 +354,15 @@ namespace SeaTrack.Controllers
         }
         public ActionResult GetListDriverByUserID()
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
+
             var user = (Users)Session["User"];
 
             var data = UsersService.GetListDriverByUserID(user.Username);
@@ -229,6 +371,14 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult CreateDriver(Driver dr)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
 
             var user = (Users)Session["User"];
             dr.ManageBy = user.Username;
@@ -239,6 +389,14 @@ namespace SeaTrack.Controllers
         [HttpPost]
         public ActionResult EditDriver(Driver dr)
         {
+            if (CheckRole(3) != 1)
+            {
+                if (CheckRole(3) == 0)
+                {
+                    return RedirectToAction("Login", "Home", new { area = "" });
+                }
+                return RedirectToAction("ErrorView", "Home", new { area = "" });
+            }
 
             var user = (Users)Session["User"];
 
@@ -251,7 +409,6 @@ namespace SeaTrack.Controllers
 
         [HttpGet]
         public ActionResult LockDriver(int id)
-
         {
             var data = AdminService.UpdateStatusDriver(id, -1);
             return Json("Đã khóa", JsonRequestBehavior.AllowGet);

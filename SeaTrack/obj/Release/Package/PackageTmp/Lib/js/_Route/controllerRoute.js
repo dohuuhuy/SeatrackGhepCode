@@ -568,9 +568,10 @@ function cleanMap(a = 0) {
         var lasted;
         var _device;
         _device = checkDevice(id, n);
+        console.log(_device)
         if (n == 1) {
             icon = "/Content/images/tau/" + _stt_[_device.Status]["polycon"];
-            if (_device != 0 && _device.Latitude != -1 && _device.Longitude != -1) {
+            if (_device.State != "0" && _device.Latitude != -1 && _device.Longitude != -1) {
                 point = new window.google.maps.LatLng(_device.Latitude, _device.Longitude);
                 marker = new google.maps.Marker({
                     position: point,
@@ -812,6 +813,57 @@ function cleanMap(a = 0) {
 
                 return brng;
             }
+            function makeListStopPlus(list) {
+                var re = [];
+                for (var i = 0; i < list.length; i++) {
+                    re[i] = { lat: list[i].x, lng: list[i].y};
+                }
+                return re;
+            }
+            function TimPhamVi(list){
+                //var xmax = 0;
+                //var xmin = 0;
+                //var ymax = 0;
+                //var ymin = 0;
+                //var phamvi = [];
+                //for(var i=0; i< list.length; i++)
+                //{
+                //    if(list[i].lat > list[xmax].lat)
+                //    {
+                //        xmax = i;
+                //    }
+                //    if(list[i].lat < list[xmin].lat)
+                //    {
+                //        xmin = i;
+                //    }
+                //    if(list[i].lng > list[ymax].lng)
+                //    {
+                //        ymax = i;
+                //    }
+                //    if(list[i].lng < list[ymin].lng)
+                //    {
+                //        ymin = i;
+                //    }
+                //}
+                //console.log(xmax);
+                //console.log(xmin);
+                //console.log(ymax);
+                //console.log(ymin);
+                // phamvi.push(xmax);
+                // phamvi.push(xmin);
+                // phamvi.push(ymax);
+                // phamvi.push(ymin);
+                var convexHull = new ConvexHullGrahamScan();
+                list.forEach(element => {
+                    console.log(element);
+                    convexHull.addPoint(element.lat, element.lng);
+                });
+                var hullPoints = convexHull.getHull();
+                console.log(hullPoints)
+                var listHull = makeListStopPlus(hullPoints);
+                return listHull;   // return ListHull {lat: , lng: }
+            }
+
             function SOS() {
                 for (var i = 0; i < _arSOSMarker.length; i++) {
                     _arSOSMarker[i].setMap(null);
@@ -1137,10 +1189,17 @@ function cleanMap(a = 0) {
             function interval_draw() {
                 //if (_interval != null) clearInterval(_interval);
                 //_interval = setInterval(function () { setdrawingLinePoint() }, 120000);
-                _intervalDeviceStatus = setInterval(function () { updateListDeviceStatus() }, 120000);
-                _intervalDataline = setInterval(function () { setup_selectDataLine() }, 180000);
-                _intervalSOS = setInterval(function () { SOS() }, 120000);
-                //_intervalWaning = setInterval(function () {Warning()},12000);
+                if($(window).width<481){
+                    _intervalDeviceStatus = setInterval(function () { updateListDeviceStatus() }, 240000);
+                    _intervalDataline = setInterval(function () { setup_selectDataLine() }, 360000);
+                    _intervalSOS = setInterval(function () { SOS() },240000);
+                }
+                else{
+                    _intervalDeviceStatus = setInterval(function () { updateListDeviceStatus() }, 120000);
+                    _intervalDataline = setInterval(function () { setup_selectDataLine() }, 180000);
+                    _intervalSOS = setInterval(function () { SOS() }, 120000);
+                    //_intervalWaning = setInterval(function () {Warning()},12000);
+                }
             }
             function Taomang() {
                 for (i = 2; i < 20; i++) {

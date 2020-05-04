@@ -13,7 +13,13 @@ namespace SeaTrack.Controllers
         // GET: SOS
         public ActionResult Index()
         {
-            return View();
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                RedirectToAction("Login", "Home");
+            }
+            List<SOSDTO> data = SOSService.GetSOSByUserID(user.UserID);
+            return View("BaoCaoCanhBaoSOS", data);
         }
         public ActionResult GetSOS()
         {
@@ -23,6 +29,17 @@ namespace SeaTrack.Controllers
                 return RedirectToAction("Login", "Home", new { area = "" });
             }
             var data = SOSService.GetSOSPendingByUserID(user.UserID);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetSOSByID()
+        {
+            var user = (Users)Session["User"];
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home", new { area = "" });
+            }
+            var data = SOSService.GetSOSByUserID(user.UserID);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
     }

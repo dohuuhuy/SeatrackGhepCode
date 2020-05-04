@@ -62,6 +62,7 @@
                                                 <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Driver" data-toggle="modal" data-target="#XemThongTinLaiTau">
                                                     <i class="fa fa-list-ul" style="color:#15b4c4"></i>
                                                 </a>
+                                                &nbsp;&nbsp;
                                                 <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThongTinLaiTau"><i class="fa fa-edit">edit</i></a>
                                                 @*<a ng-click="Lock($index + (currentPage-1)*10)" ng-if="a.Status == 1"><i class="fa fa-lock color-red"></i></a>
                                                 <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.Status == -1"><i class="fa fa-unlock"></i></a>*@
@@ -97,7 +98,7 @@
                     <div class="modal-body" style="margin-left:20px">
                         <form class="form-horizontal row" name="xem">
                             <div class="col col-md-12">
-                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice()"><i class="fa fa-plus-circle" style="color:black"></i></a>
+                                <a href="#CapThietBi" data-toggle="modal" ng-click="AddDevice(Driver.DriverID)"><i class="fa fa-plus-circle" style="color:black"></i></a>
                                 <label class="control-label"> Danh sách thiết bị </label>
                                 <table class="table table-responsive table-bordered text-center">
                                     <thead>
@@ -105,7 +106,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Tên thiết bị</th>
                                             <th scope="col">Ngày hết hạn</th>
-                                            <th scope="col">Thao tác</th>
+                                            @*<th scope="col">Thao tác</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -113,9 +114,9 @@
                                             <th>{{$index + 1}}</th>
                                             <td>{{d.DeviceName}}</td>
                                             <td>{{d.DateExpired | date:"dd/MM/yyyy HH:mm"}}</td>
-                                            <td align="center">
+                                            @*<td align="center">
                                                 <a ng-click="RemoveDeviceFromUser($index)"><i class="fa fa-trash"></i></a>
-                                            </td>
+                                            </td>*@
                                         </tr>
                                     </tbody>
                                 </table>

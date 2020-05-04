@@ -22,6 +22,10 @@ namespace SeaTrack.Areas.Admin.Controllers
                 }
                 return RedirectToAction("ErrorView", "Home", new { area = "" });
             }
+            if (TempData["EditResult"] != null)
+            {
+                ViewBag.EditResult = TempData["EditResult"];
+            }
             return View();
         }
 
@@ -72,19 +76,16 @@ namespace SeaTrack.Areas.Admin.Controllers
             var user = (Users)Session["User"];
             if (TempData["EditResult"] != null)
             {
-                ViewBag.EditResult = TempData["EditResult"].ToString();
+                ViewBag.EditResult = TempData["EditResult"];
             }
             UserInfoDTO us = new UserInfoDTO();
             us = AdminService.GetUserByID(id);
-            if (us.ManageBy == user.Username || AdminService.CheckUserManage(id, user.Username))
+            if (us != null && us.ManageBy == user.Username || AdminService.CheckUserManage(id, user.Username))
             {
                 return View(us);
             }
-            if (us.RoleID == 3)
-            {
-                return RedirectToAction("Customer", "Agency");
-            }
-            return RedirectToAction("User", "Agency");
+            TempData["EditResult"] = 0;
+            return RedirectToAction("Customer", "Agency");
 
         }
         //[HttpPost]

@@ -2,7 +2,6 @@
 
 @media only screen and (max-width : 1024px) {
     #file, #luu {
-        display: none
     }
 
     #navbarSupportedContent ul li > * {
@@ -59,7 +58,6 @@
         }
 
         #file, #luu {
-            display: none
         }
 
 }

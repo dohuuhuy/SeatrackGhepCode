@@ -454,7 +454,6 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.WebPages.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.WebPages.Razor.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\WebGrease.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.dll
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.ApplicationBlocks.Data.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.dll
@@ -494,7 +493,6 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Microsoft.Owin.Security.MicrosoftAccou
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\System.Web.Http.Owin.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Quartz.xml
-D:\Work\git\SeatrackGhepCode\SeaTrack\bin\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.pdb

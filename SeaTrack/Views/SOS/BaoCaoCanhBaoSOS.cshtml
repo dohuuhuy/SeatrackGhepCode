@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoSOS";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+
+}
+@model IEnumerable<SeaTrack.Lib.DTO.SOSDTO>
+
+<div class="main" id="list_business">
+    <div class="wrapper">
+        @Html.Partial("../Report/_MenuBaoCaoChoDoanhNghiep")
+
+        <div id="content-dn-chitiet" class="content">
+            <div id="signupbox" class="mainbox">
+                <div class="panel panel-primary">
+                    <div class="jumbotron ">
+                        <h2>BÁO CÁO SOS</h2>
+                    </div>
+                    <div class="p-10 table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th> #</th>
+                                    <th> Số Hiệu</th>
+                                    <th> Thời Gian</th>
+                                    <th> Vị Trí</th>
+                                    @*<th> Xử Lý</th>*@
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_dn_chitiet">
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>1 </td>
+                                        <td>@item.DeviceName </td>
+                                        <td>@item.DateRequest </td>
+                                        <td>@(item.DirectionEW + '.' + item.Latitude + '-' + item.DirectionSN + '.' + item.Longitude )</td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

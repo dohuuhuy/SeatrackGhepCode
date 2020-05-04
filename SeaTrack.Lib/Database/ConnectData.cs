@@ -15,6 +15,8 @@ namespace SeaTrack.Lib.Database
         public static int TimeDelay = Int32.Parse(ConfigurationManager.AppSettings["TimeDelay"]);
         public static string URLBaoCaoDinhKy = ConfigurationManager.AppSettings["URLBaoCaoDinhKy"];
         public static string URLSOS = ConfigurationManager.AppSettings["URLSOS"];
+        public static string SOSResource = ConfigurationManager.AppSettings["SOSResource"];
+
 
         public static TrackData GetDataByDeviceID(int deviceID)
         {

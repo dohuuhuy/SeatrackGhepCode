@@ -61,7 +61,9 @@
                                                     <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Account" data-toggle="modal" data-target="#XemThongTin">
                                                         <i class="fa fa-eye" style="color:black"></i>
                                                     </a>
+                                                    &nbsp;&nbsp;
                                                     <a ng-click="Edit(namesData[$index + (currentPage-1)*10])" data-toggle="modal" data-target="#SuaThietBi"><i class="fa fa-edit">edit</i></a>
+                                                    &nbsp;&nbsp;
                                                     <a ng-click="Lock($index + (currentPage-1)*10)" ng-if="a.Status == 1"><i class="fa fa-lock"></i></a>
                                                     <a ng-click="Unlock($index + (currentPage-1)*10)" ng-if="a.Status == -1"><i style="color:red" class="fa fa-unlock"></i></a>
                                                 </td>
