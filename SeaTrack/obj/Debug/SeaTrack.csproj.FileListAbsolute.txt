@@ -497,6 +497,9 @@ D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.Core.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.pdb
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\Common.Logging.xml
-D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csprojResolveAssemblyReference.cache
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.dll
 D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.pdb
+D:\Work\git\SeatrackGhepCode\SeaTrack\bin\SeaTrack.Lib.dll.config
+D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csprojAssemblyReference.cache
+D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csproj.CoreCompileInputs.cache
+D:\Work\git\SeatrackGhepCode\SeaTrack\obj\Debug\SeaTrack.csproj.CopyComplete
