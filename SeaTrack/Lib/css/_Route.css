@@ -1,4 +1,20 @@
-﻿
+﻿.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.header-title {
+    padding: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+    .tr_hover_select:hover {
+    background-color: #58b680;
+    cursor: pointer;
+}
 .popUpBox_theMeaningOfIcon {
     position: absolute;
     top: 125px;
@@ -44,7 +60,6 @@ html{
 }
 
 #SOS {
-    display: none;
     width: 30%;
     background: #fff;
     position: absolute;
@@ -53,7 +68,7 @@ html{
     text-align: center;
     border: 0px;
     border-radius: 5px;
-    height:fit-content;
+    height: fit-content;
 }
 
     #SOS .text-danger {
@@ -100,13 +115,6 @@ html{
     padding: 10px 16px;
 }
 
-@media only screen and (min-width: 1026px) {
-    #navbarSupportedContent {
-        display: flex !important;
-        flex-basis: auto;
-    }
-}
-
 @media only screen and (max-width : 1024px) {
     #navbarSupportedContent ul li > * {
         font-size: 0.8em;
@@ -125,7 +133,8 @@ html{
     }
 }
 
-@media (max-width: 768px) {
+
+@media only screen and (max-width : 768px) {
     .si-sidebar {
         margin-left: -250px;
     }
@@ -137,10 +146,6 @@ html{
     .si-sidebarCollapse span {
         display: none;
     }
-}
-
-
-@media only screen and (max-width : 768px) {
     #menubar ul li {
         margin-top: 10px;
     }
@@ -163,13 +168,16 @@ html{
     width: calc(100% - 325px);
     
 }
-#menubar.active1 {
-    margin-left: 290px;
-    width: 50px;
-}
 @media only screen and (max-width : 480px) {
 
-    #SOS {
+    .s-over-width {
+        width: inherit !important;
+    }
+    .popUpBox_theMeaningOfIcon {
+        top: 90px;
+        left: 18px;
+    }
+        #SOS {
         display: none
     }
 
@@ -398,6 +406,7 @@ html{
     left: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 
 #sublefttab_4 {

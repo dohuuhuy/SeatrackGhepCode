@@ -1,4 +1,5 @@
 ﻿
+
 @media only screen and (max-width : 1024px) {
     #file, #luu {
         display: none
@@ -18,9 +19,26 @@
         margin-left: 25% !important;
         width: calc(100% - 28%) !important;
     }
+
+    element.style {
+        display: block;
+    }
+
+    #myBtnTop {
+        bottom: 20px !important;
+        right: 13px !important;
+        font-size: 14px !important;
+        padding: 10px !important;
+        border-radius: 10px !important;
+    }
 }
 
 @media only screen and (max-width : 480px) {
+    .col {
+        flex-basis: inherit !important;
+
+    }
+            
     #menubar.active {
         margin-left: 85% !important;
         width: calc(100% - 88%) !important;
@@ -107,8 +125,7 @@
 }
 
 /*-------------------------------------------------------------------------------------------------*/
-
-.s-just-center {
+        .s-just-center {
     justify-content: center;
 }
 
