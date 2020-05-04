@@ -254,6 +254,7 @@ a.download {
 
 #menubar ul li .dropdown-menu a {
     padding: 10px 16px;
+    text-align: center;
 }
 
 .navbar-toggler {
