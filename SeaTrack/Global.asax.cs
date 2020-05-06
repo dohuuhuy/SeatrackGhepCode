@@ -1,4 +1,5 @@
-﻿using SeaTrack.Lib.Job;
+﻿using SeaTrack.Lib.Database;
+using SeaTrack.Lib.Job;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,18 @@ namespace SeaTrack
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            JobScheduler.StarJobCheckExpired();
-            //JobScheduler.StartJobInfo();
-            //.StartJobSOS();
+            if (ConnectData.StartSOS == 1)
+            {
+                JobScheduler.StartJobSOS();
+            }
+            if (ConnectData.StartInfo == 1)
+            {
+                JobScheduler.StartJobInfo();
+            }
+            if (ConnectData.StartExpiredCheck == 1)
+            {
+                JobScheduler.StarJobCheckExpired();
+            }
         }
     }
 }

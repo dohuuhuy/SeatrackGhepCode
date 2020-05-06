@@ -191,7 +191,6 @@ DeviceApp.controller('DeviceController', function ($scope, $http, DeviceService,
         }, function () {
             alert('Không tìm thấy dữ liệu !!!');
         });
-
     }
 });
 

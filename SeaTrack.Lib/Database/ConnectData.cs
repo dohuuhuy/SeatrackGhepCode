@@ -16,6 +16,9 @@ namespace SeaTrack.Lib.Database
         public static string URLBaoCaoDinhKy = ConfigurationManager.AppSettings["URLBaoCaoDinhKy"];
         public static string URLSOS = ConfigurationManager.AppSettings["URLSOS"];
         public static string SOSResource = ConfigurationManager.AppSettings["SOSResource"];
+        public static int StartSOS = Convert.ToInt16(ConfigurationManager.AppSettings["StartSOS"]);
+        public static int StartInfo = Convert.ToInt16(ConfigurationManager.AppSettings["StartInfo"]);
+        public static int StartExpiredCheck = Convert.ToInt16(ConfigurationManager.AppSettings["StartExpiredCheck"]);
 
 
         public static TrackData GetDataByDeviceID(int deviceID)

@@ -30,17 +30,16 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tbody_dn_chitiet">
-
+                                    @{ int i = 1;}
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>1 </td>
+                                            <td>@i </td>
                                             <td>@item.DeviceName </td>
                                             <td>@item.DateRequest </td>
                                             <td>@(item.DirectionEW + '.' + item.Latitude + '-' + item.DirectionSN + '.' + item.Longitude )</td>
-
-
                                         </tr>
+                                        i++;
                                     }
                                 </tbody>
 

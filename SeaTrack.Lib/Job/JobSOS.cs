@@ -23,19 +23,42 @@ namespace SeaTrack.Lib.Job
             {
                 foreach (var i in lstSOS)
                 {
-                    
-                    var value = await Task.Run(() => JsonConvert.SerializeObject(i));
-                    var content = new StringContent(value, Encoding.UTF8, "application/json");
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var res = await client.PostAsync(ConnectData.URLSOS, content);
-                        var responseString = await res.Content.ReadAsStringAsync();
-                        if (res.StatusCode == HttpStatusCode.OK)
+                    HttpClient client = new HttpClient();
+                    var value = new Dictionary<string, string>
                         {
-                            SOSService.UpdateStatusSOSbyID((int)i.SOSID, 2);
-                        }
-
+                            {"MREF","SOS" },
+                            {"ID",i.DeviceImei },
+                            {"Space"," " },
+                            {"Latitude", i.Latitude.ToString() },
+                            {"ExpSN",i.DirectionSN },
+                            {"Longitude", i.Longitude.ToString() },
+                            {"ExpEW",i.DirectionEW },
+                            {"Date",i.DateRequest.ToString("dd/MM/yyyy") },
+                            {"Time",i.DateRequest.ToString("HH:mm:ss") },
+                            {"GMT",i.GMT },
+                        };
+                    var content = new FormUrlEncodedContent(value);
+                    //var emptyContent = new StringContent("{}", Encoding.UTF8, "application/json");
+                    var res = await client.PostAsync(ConnectData.URLSOS, content);
+                    //var res = await client.PostAsync("http://192.168.1.14:11413", emptyContent);
+                    var responseString = await res.Content.ReadAsStringAsync();
+                    if (res.StatusCode == HttpStatusCode.OK)
+                    {
+                        SOSService.UpdateStatusSOSbyID((int)i.SOSID, 2);
                     }
+
+                    //var value = await Task.Run(() => JsonConvert.SerializeObject(i));
+                    //var content = new StringContent(value, Encoding.UTF8, "application/json");
+                    //using (HttpClient client = new HttpClient())
+                    //{
+                    //    var res = await client.PostAsync(ConnectData.URLSOS, content);
+                    //    var responseString = await res.Content.ReadAsStringAsync();
+                    //    if (res.StatusCode == HttpStatusCode.OK)
+                    //    {
+                    //        SOSService.UpdateStatusSOSbyID((int)i.SOSID, 2);
+                    //    }
+
+                    //}
                 }
             }
             //    foreach (var item in lstSOS)

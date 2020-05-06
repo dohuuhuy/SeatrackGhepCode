@@ -26,11 +26,11 @@ namespace SeaTrack.Lib.Job
             {
                 if (item.Time <= (DateTime.Now - item.LastSend).TotalSeconds)
                 {
-                    string filename = "E:/Website/Test/Log/log.txt";
-                    using (StreamWriter sw = File.AppendText(filename))
-                    {
-                        sw.WriteLine(item.ID + " " + DateTime.Now.ToString() + Environment.NewLine);
-                    }
+                    //string filename = "E:/Website/Test/Log/log.txt";
+                    //using (StreamWriter sw = File.AppendText(filename))
+                    //{
+                    //    sw.WriteLine(item.ID + " " + DateTime.Now.ToString() + Environment.NewLine);
+                    //}
                     var data = InfoService.GetDataByDelayTime(item.ID, item.MREF, item.Seqno);
                     if (data != null)
                     {

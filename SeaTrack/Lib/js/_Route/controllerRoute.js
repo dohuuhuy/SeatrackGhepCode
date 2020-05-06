@@ -927,7 +927,7 @@ function cleanMap(a = 0) {
                     var warning = "";
                     var checkpoint = new google.maps.LatLng(dv.Latitude, dv.Longitude);
                     var biengioi;
-                    if (dv.Latitude == -1 && dv.Longitude == -1 && dv.Speed < 3) continue;
+                    if (dv.Latitude == -1 && dv.Longitude == -1 && dv.Speed > 3) continue;
                     if (dv.TypeShip == 1) {
                         if (google.maps.geometry.poly.containsLocation(checkpoint, vungbo) == true) {
                             biengioi = bo;
