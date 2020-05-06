@@ -26,9 +26,18 @@ namespace SeaTrack.Controllers
        
         public ActionResult Route()
         {
-            if (Session["User"] == null)
+            var User = (User)Session["User"];
+            if (User == null)
             {
                 return RedirectToAction("Login", "Home");
+            }
+            if (User.RoleID == 1)
+            {
+                return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+            }
+            if (User.RoleID == 2)
+            {
+                return RedirectToAction("Customer", "Agency", new { area = "Admin" });
             }
             return View("Route");
         }
