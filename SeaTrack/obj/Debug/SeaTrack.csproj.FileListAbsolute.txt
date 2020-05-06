@@ -394,8 +394,6 @@ C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\S
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Net.Http.Primitives.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.dll
 C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\System.Web.Http.xml
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.dll
-C:\Users\dohuu\Music\Sửa giao diện\SeaTrack_sửa giao diện\SeaTrack\bin\RestSharp.xml
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\ApplicationInsights.config
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\csc.exe
 D:\Work\git\SeatrackGhepCode\SeaTrack\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

@@ -12,6 +12,10 @@ namespace SeaTrack.Areas.Admin.Controllers
     public class HomeAdminController : Controller
     {
         // GET: Admin/HomeAdmin
+
+
+
+
         public ActionResult Index() //Quản lý đại lý
         {
             if (CheckRole(1) != 1)
