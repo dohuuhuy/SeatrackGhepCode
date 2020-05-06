@@ -60,6 +60,7 @@ html{
 }
 
 #SOS {
+    display:none;
     width: 30%;
     background: #fff;
     position: absolute;

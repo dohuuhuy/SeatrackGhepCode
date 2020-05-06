@@ -513,6 +513,8 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Areas\Admin\Views\AdSOS\ListSOS.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_loading.cshtml" />
+    <Content Include="File\HuongDan.docx" />
+    <Content Include="File\HuongDanQuanTri.docx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -576,14 +578,13 @@
     <Content Include="Views\Utilities\Dangkiem.cshtml" />
     <Content Include="Views\Utilities\Nangcap.cshtml" />
     <Content Include="Views\Utilities\_MenuTienIch.cshtml" />
-    <Content Include="Views\Report\BaoCaoCanhBaoSOS.cshtml" />
     <Content Include="Views\_BackTo.cshtml" />
     <Content Include="Views\Home\ErrorView.cshtml" />
+    <Content Include="Views\SOS\BaoCaoCanhBaoSOS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\public\img\tau\" />
-    <Folder Include="Views\SOS\" />
     <Folder Include="Views\UserGuide\" />
   </ItemGroup>
   <ItemGroup>

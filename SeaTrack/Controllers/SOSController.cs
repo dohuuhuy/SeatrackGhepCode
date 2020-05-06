@@ -16,7 +16,7 @@ namespace SeaTrack.Controllers
             var user = (Users)Session["User"];
             if (user == null)
             {
-                RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Home");
             }
             List<SOSDTO> data = SOSService.GetSOSByUserID(user.UserID);
             return View("BaoCaoCanhBaoSOS", data);

@@ -7,19 +7,19 @@ app.controller("Controller", function ($scope, $http, $timeout) {
         $scope.id = id;
         $scope.role = role;
         $scope.manageby = manageby;
-            fetchData(id);
-            if (role == 3) {
-    
-}
+        fetchData(id);
+        if (role == 3) {
+
+        }
 
         //GetListDeviceNotUsedByUser(id);
     }
     $scope.AddDevice = function (UserID, ManageBy) {
         if ($scope.role == 3) {
-        GetListDeviceNotUsedByUser(UserID);
+            GetListDeviceNotUsedByUser(UserID);
         }
         if ($scope.role == 4) {
-        GetListDeviceOfCustomer(ManageBy, UserID);
+            GetListDeviceOfCustomer(ManageBy, UserID);
         }
     }
     $scope.RemoveDeviceFromUser = function (UserID, index) {

@@ -1,10 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "BaoCaoSOS";
+    ViewBag.Title = "BaoCaoChiTietHoatDong";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
-    
 }
-@model IEnumerable <SeaTrack.Lib.DTO.SOSDTO>
+
 
 <div class="main" id="list_business">
     <div class="wrapper">
@@ -14,7 +13,7 @@
             <div id="signupbox" class="mainbox">
                 <div class="panel panel-primary">
                     <div class="jumbotron ">
-                        <h2>BÁO CÁO SOS</h2>
+                        <h2>BÁO CÁO CHI TIẾT HOẠT ĐỘNG</h2>
                     </div>
                     <div class="panel-body container">
                         <form method="post" action=".">
@@ -51,23 +50,15 @@
                         <table id="dataTable" class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th> #</th>
-                                    <th> Số Hiệu</th>
-                                    <th> Thời Gian</th>
-                                    <th> Vị Trí</th>
-                                    <th> Xử Lý</th>
+                                    <th class="headerAlignCenter">Thời gian bắt đầu</th>
+                                    <th class="headerAlignCenter">Thời gian kết thúc</th>
+                                    <th class="headerAlignCenter">Phạm vi hoạt động</th>
+                                    <th class="headerAlignCenter">Tốc độ tối đa</th>
+                                    <th class="headerAlignCenter">Địa điểm bắt đầu</th>
+                                    <th class="headerAlignCenter">Địa điểm kết thúc</th>
                                 </tr>
                             </thead>
-                            <tbody id="tbody_dn_chitiet">
-
-                               @foreach (var item in Model)
-                               {
-
-                               }
-
-                            </tbody>
-
-
+                            <tbody id="tbody_dn_chitiet"></tbody>
                         </table>
                     </div>
                 </div>
