@@ -21,7 +21,7 @@ namespace SeaTrack.Areas.Admin.Controllers
             if (id != null)
             {
 
-                var data = AdminService.UpdateStatusFeed((int)id);
+                var data = AdminService.ChangeStatusFeed((int)id);
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
             return Json("Không thành công !", JsonRequestBehavior.AllowGet);
