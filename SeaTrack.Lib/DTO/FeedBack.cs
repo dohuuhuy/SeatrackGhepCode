@@ -14,7 +14,9 @@ namespace SeaTrack.Lib.DTO
         public String Title { get; set; }
         public String Comment { get; set; }
         public int Quality { get; set; }
-        public DateTime CreateDatime { get; set; }
+        public int Status { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
 
     }

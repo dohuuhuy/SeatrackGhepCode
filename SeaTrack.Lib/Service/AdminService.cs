@@ -11,6 +11,54 @@ namespace SeaTrack.Lib.Service
 {
     public class AdminService
     {
+
+
+        public static bool ChangeStatusFeed(int id)
+        {
+            try
+            {
+                int res = SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_ChangeStatusFeed", id);
+                if (res == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public static List<FeedBack> GetListFeed()
+        {
+            List<FeedBack> lst = null;
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(ConnectData.ConnectionString, "sp_GetListFeed"))
+            {
+                if (reader.HasRows)
+                {
+                    lst = new List<FeedBack>();
+
+                    while (reader.Read())
+                    {
+                        var data = new FeedBack()
+                        {
+                            FeedID = Convert.ToInt32(reader["FeedID"]),
+                            Name = reader["Name"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            Title = reader["Title"].ToString(),
+                            Comment = reader["Comment"].ToString(),
+                            Status = Convert.ToInt32(reader["Status"]),
+                            CreateDate = Convert.ToDateTime(reader["CreateDate"]),
+                        };
+                        lst.Add(data);
+                    }
+                    return lst;
+                }
+            }
+            return null;
+        }
         public static int SaveFeedBack(FeedBack fb)
         {
             return SqlHelper.ExecuteNonQuery(ConnectData.ConnectionString, "sp_SaveFeedBack",

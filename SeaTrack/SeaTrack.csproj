@@ -223,6 +223,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeedBackController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdSOSController.cs" />
     <Compile Include="Areas\Admin\Controllers\AgencyController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeviceController.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Areas\Admin\AngularJS\Agency\AgencyService.js" />
     <Content Include="Areas\Admin\AngularJS\Agency\DetailApp.js" />
     <Content Include="Areas\Admin\AngularJS\Device\DeviceApp.js" />
+    <Content Include="Areas\Admin\AngularJS\Feed\FeedApp.js" />
     <Content Include="Areas\Admin\AngularJS\PaginationSearch.js" />
     <Content Include="Areas\Admin\AngularJS\SOSapp.js" />
     <Content Include="Areas\Admin\AngularJS\_loading.js" />
@@ -318,6 +320,7 @@
     <Content Include="Content\images\icon\Info-icon.png" />
     <Content Include="Content\images\icon\phamvi.png" />
     <Content Include="Content\images\icon\speed vin.png" />
+    <Content Include="Areas\Admin\Views\FeedBack\QuanLyPhanHoi.cshtml" />
     <None Include="Content\images\icon\iconmenu" />
     <Content Include="Content\images\icon\vuotphamvi.png" />
     <Content Include="Content\images\icon\waiting.gif" />
