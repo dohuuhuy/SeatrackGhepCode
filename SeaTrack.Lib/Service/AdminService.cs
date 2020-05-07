@@ -48,6 +48,7 @@ namespace SeaTrack.Lib.Service
                             Name = reader["Name"].ToString(),
                             Email = reader["Email"].ToString(),
                             Title = reader["Title"].ToString(),
+                            Quality = Convert.ToInt32(reader["Quality"]),
                             Comment = reader["Comment"].ToString(),
                             Status = Convert.ToInt32(reader["Status"]),
                             CreateDate = Convert.ToDateTime(reader["CreateDate"]),

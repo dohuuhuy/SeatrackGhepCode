@@ -2042,7 +2042,7 @@ pre code {
   opacity: 1;
 }
 .form-control:disabled, .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: transparent;
   opacity: 1;
 }
 

@@ -48,20 +48,21 @@ FeedApp.controller('FeedController', function ($scope, $http, FService, $timeout
           
 
         };
+        update($scope.Feed.FeedID);
     };
   
-    $scope.update = function (id) {
+    function update(id) {
        
         console.log('i am inside update funcr ' +
             JSON.stringify($scope.Customer));
         $http({
             method: 'POST',
-            url: '/Admin/Feed/ChangeStatusFeed ' + id,
+            url: '/Admin/FeedBack/ChangeStatusFeed/' + id,
             data: JSON.stringify($scope.Feed)
         }).then(function successCallback(response) {
             $scope.namesData = null;
             LoadFeed();
-            $scope.Clear();
+ 
          
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
@@ -80,7 +81,7 @@ FeedApp.controller('FeedController', function ($scope, $http, FService, $timeout
    
 
     function LoadFeed() {
-        DeviceService.GetAllRecords().then(function (d) {
+        FService.GetAllRecords().then(function (d) {
             $scope.namesData = d.data;
             for (var i = 0; i < $scope.namesData.length; i++) {
                 $scope.namesData[i]["CreateDate"] = new Date(parseInt($scope.namesData[i]["CreateDate"].substr(6)))

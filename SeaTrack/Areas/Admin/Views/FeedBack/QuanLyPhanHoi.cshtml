@@ -1,89 +1,147 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var user = Session["User"] as SeaTrack.Lib.DTO.Users;
+    if (user.RoleID == 1)
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else if (user.RoleID == 2)
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAgency.cshtml";
+    }
+
 }
 
-    <div class="container-fluid" ng-app="FeedApp" ng-controller="FeedController">
-      @Html.Partial("../Shared/_loading")
-        <div ng-cloak="" ng-show="loaded">
-            <h1 class="mt-4">Quản Lý Phản Hồi</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Quản Lý Phản Hồi</li>
-            </ol>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <strong class="card-title">Vùng Tìm Kiếm</strong>
-                </div>
-                <div class="card-body">
-                    <div class="col col-md-12">
-                        <div class="input-group">
-                            <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListDeviceSearch('SearchKey', 'S-table')"><br />
-                            <div class="input-group-btn">
-                                @*<button class="btn btn-primary" ng-click="ClearSearch()">
+<div class="container-fluid" ng-app="FeedApp" ng-controller="FeedController">
+    @Html.Partial("../Shared/_loading")
+    <div ng-cloak="" ng-show="loaded">
+        <h1 class="mt-4">Quản Lý Phản Hồi</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Quản Lý Phản Hồi</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong class="card-title">Vùng Tìm Kiếm</strong>
+            </div>
+            <div class="card-body">
+                <div class="col col-md-12">
+                    <div class="input-group">
+                        <input type="text" name="input1-group2" placeholder="Nhập từ khóa ..." class="form-control" id="SearchKey" onkeyup="ListDeviceSearch('SearchKey', 'S-table')"><br />
+                        <div class="input-group-btn">
+                            @*<button class="btn btn-primary" ng-click="ClearSearch()">
                                     <i class="fa fa-search"></i> Search
                                 </button>*@
-                            </div>
                         </div>
-                        <br />
-                        <div class="input-group ">
-            
-                        </div>
+                    </div>
+                    <br />
+                    <div class="input-group ">
+
                     </div>
                 </div>
             </div>
-            <div class="card mb-4">
-                <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
-                <div class="card-body">
-                   
-                    <label>Tổng: {{namesData.length}}</label>
-                    <div class="table-responsive">
-                        <table id="dataTable" class="table table-bordered table-striped text-center">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th> Thao tác</th>
-                                    <th> Họ Tên</th>
-                                    <th> Tiêu Đề</th>
-                                    <th> Đánh Giá</th>
-                                    <th> Ngày Gửi</th>
-                                    <th> Trạng thái</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="S-table">
-                                <tr dir-paginate="a in namesData | itemsPerPage: 10 track by $index" current-page="currentPage">
-                                    <td>{{$index + ((currentPage-1)* 10) +1}}</td>
-                                    <td>
-                                        <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Device" data-toggle="modal" data-target="#XemThietBi">
-                                            <i class="fa fa-eye" style="color:black"></i>
-                                        </a>
-                             
-                                    </td>
-                                    <td>{{a.Name}}</td>
-                                    <td>{{a.Title}}</td>
-                                    <td><p>{{a.CreateDate | date:"dd/MM/yyyy"}}</p></td>
-                                    <td ng-if="a.StatusDevice == 1"><p style="color:forestgreen">Kích hoạt</p></td>
-                                    <td ng-if="a.StatusDevice == -1"><p style="color:red">Tạm khóa</p></td>
-                                    <td ng-if="a.StatusDevice == 0"><p style="color:red">Hết hạn</p></td>
-
-                                </tr>
-                            </tbody>
-
-                        </table>
-                        <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
-                            <div class="text-center">
-                                <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
         </div>
+        <div class="card mb-4">
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Kết Quả Tìm Kiếm</div>
+            <div class="card-body">
+
+                <label>Tổng: {{namesData.length}}</label>
+                <div class="table-responsive">
+                    <table id="dataTable" class="table table-bordered table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th> Thao tác</th>
+                                <th> Họ Tên</th>
+                                <th> Tiêu Đề</th>
+                                <th> Đánh Giá</th>
+                                <th> Ngày Gửi</th>
+                                <th> Trạng thái</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="S-table">
+                            <tr dir-paginate="a in namesData | itemsPerPage: 10 track by $index" current-page="currentPage">
+                                <td>{{$index + ((currentPage-1)* 10) +1}}</td>
+                                <td>
+                                    <a ng-click="View(namesData[$index + (currentPage-1)*10])" ng-model="$scope.Feed" data-toggle="modal" data-target="#XemThietBi">
+                                        <i class="fa fa-eye" style="color:black"></i>
+                                    </a>
+
+                                </td>
+                                <td>{{a.Name}}</td>
+                                <td>{{a.Title}}</td>
+                                <td>{{a.Quality}}</td>
+                                <td><p>{{a.CreateDate | date:"dd/MM/yyyy"}}</p></td>
+                                <td ng-if="a.Status == 1"><p style="color:forestgreen">Chưa đọc</p></td>
+
+                                <td ng-if="a.Status == 0"><p style="color:red">Đã xem</p></td>
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="other-controller" style="border:1px solid #ccf; padding:5px; margin:3px">
+                        <div class="text-center">
+                            <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="XemThietBi" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" ng-show="Feed.FeedID != '' ">
+                    <div class="modal-header">
+                        <h3 class="text-info">Xem Chi Tiết Phản Hồi</h3>
+                        <button type="button" class="close" data-dismiss="modal" style="text-align:left" ng-click="Clear()">x</button>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        <form class="form-horizontal row" name="XemThietBi">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Họ và tên </label>
+                                    <input class="form-control" name="Name" ng-model="Feed.Name" type="text" disabled maxlength="50" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Đánh giá chất lượng </label>
+                                    <input class="form-control" name="Quality" ng-model="Feed.Quality" type="text" disabled maxlength="30" />
+                                </div>
+
+
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Email </label>
+                                    <input class="form-control" name="Email" ng-model="Feed.Email" type="text" disabled maxlength="10" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Ngày gửi </label>
+                                    <input class="form-control" name="CreateDate" value='{{Feed.CreateDate | date:"dd/MM/yyyy"}}' type="text" disabled maxlength="200" />
+                                </div>
+
+                            </div>
+                            <div class="col col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Nội dung
+                                    </label>
+                                    <textarea class="form-control" name="Comment" ng-model="Feed.Comment" type="text" disabled rows="3"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="Clear()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
 <script src="~/Areas/Admin/AngularJS/PaginationSearch.js"></script>
 <script src="~/Scripts/angular.js"></script>
